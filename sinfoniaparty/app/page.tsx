@@ -62,10 +62,10 @@ export default function Home() {
       {/* 1 & 2. Opening & Hero Section */}
       <section className="section-container">
         <div className="hero-content content-wrapper">
-          <h2 className="subheading mb-4">You are invited to</h2>
+          <h2 className="subheading mb-4">Trân trọng kính mời</h2>
           <h1 className={`${amsterdam.className} heading-xl mb-8 lowercase`}>The Sinfonia</h1>
           <p className="text-lg md:text-xl font-light max-w-2xl mx-auto">
-            A gathering of elegance and heritage for the wedding industry in Vietnam.
+            Nơi hội ngộ của sự sang trọng và di sản ngành cưới Việt Nam.
           </p>
         </div>
       </section>
@@ -73,19 +73,19 @@ export default function Home() {
       {/* 3. Time & Places */}
       <section className="section-container section-accent">
         <div className="content-wrapper">
-          <h2 className="heading-lg mb-16">Time & Places</h2>
+          <h2 className="heading-lg mb-16">Thời gian & Địa điểm</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 text-center">
             <div className="space-y-6">
-              <h3 className="subheading">The Date</h3>
+              <h3 className="subheading">Ngày diễn ra</h3>
               <div className="space-y-1">
-                <p className="text-3xl font-light">Tuesday & Wednesday</p>
-                <p className="text-4xl font-normal text-primary">02 & 03 June 2026</p>
+                <p className="text-3xl font-light">Thứ Ba & Thứ Tư</p>
+                <p className="text-4xl font-normal text-primary">02 & 03 Tháng 6, 2026</p>
               </div>
             </div>
 
             <div className="space-y-6">
-              <h3 className="subheading">The Venue</h3>
+              <h3 className="subheading">Địa điểm</h3>
               <div className="space-y-2">
                 <p className="text-3xl font-light leading-snug">Wyndham Sky Lake <br /> Resort & Villas</p>
               </div>
@@ -95,7 +95,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="inline-block mt-4 text-sm uppercase tracking-widest border-b border-primary pb-1 hover:opacity-60 transition-opacity"
               >
-                View on Google Maps
+                Xem trên Google Maps
               </a>
             </div>
           </div>
@@ -105,8 +105,8 @@ export default function Home() {
       {/* 4. Agendas */}
       <section className="section-container">
         <div className="content-wrapper">
-          <h2 className="heading-lg mb-6">Agendas</h2>
-          <p className="text-elegant">A curation of moments yet to be revealed.</p>
+          <h2 className="heading-lg mb-6">Chương trình</h2>
+          <p className="text-elegant">Những khoảnh khắc tuyệt vời đang chờ đón bạn.</p>
         </div>
       </section>
 
@@ -115,19 +115,19 @@ export default function Home() {
         <div className="content-wrapper max-w-2xl">
           <div className="mb-12">
             <h2 className="heading-lg mb-4">RSVP</h2>
-            <p className="text-elegant">Will you join us in this symphony of elegance?</p>
+            <p className="text-elegant">Bạn sẽ cùng chúng tôi hòa nhịp trong bản giao hưởng sang trọng này chứ?</p>
           </div>
 
           {formStatus === "success" ? (
             <div className="text-center py-12 space-y-4">
-              <h3 className="heading-md">Thank you for your response</h3>
-              <p className="text-elegant">We have received your details and look forward to seeing you.</p>
-              <button onClick={() => setFormStatus("idle")} className="text-sm underline opacity-60 hover:opacity-100">Send another response</button>
+              <h3 className="heading-md">Cảm ơn bạn đã phản hồi</h3>
+              <p className="text-elegant">Chúng tôi đã nhận được thông tin và rất mong được đón tiếp bạn.</p>
+              <button onClick={() => setFormStatus("idle")} className="text-sm underline opacity-60 hover:opacity-100">Gửi phản hồi khác</button>
             </div>
           ) : (
             <form className="space-y-8 text-left" onSubmit={handleSubmit}>
               <div className="space-y-2">
-                <label className="subheading block opacity-100">Your distinguished name</label>
+                <label className="subheading block opacity-100">Họ và tên</label>
                 <input
                   type="text"
                   name="name"
@@ -135,12 +135,12 @@ export default function Home() {
                   value={formData.name}
                   onChange={handleInputChange}
                   className="w-full bg-transparent border-b border-primary py-2 focus:outline-none placeholder:opacity-30"
-                  placeholder="Full name"
+                  placeholder="Nhập họ và tên"
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="subheading block opacity-100">You are representing</label>
+                <label className="subheading block opacity-100">Tên đơn vị / Thương hiệu</label>
                 <input
                   type="text"
                   name="business"
@@ -148,12 +148,12 @@ export default function Home() {
                   value={formData.business}
                   onChange={handleInputChange}
                   className="w-full bg-transparent border-b border-primary py-2 focus:outline-none placeholder:opacity-30"
-                  placeholder="Your business or brand"
+                  placeholder="Nhập tên doanh nghiệp"
                 />
               </div>
 
               <div className="space-y-4">
-                <label className="subheading block opacity-100">Will you grace us with your presence?</label>
+                <label className="subheading block opacity-100">Bạn sẽ tham dự cùng chúng tôi chứ?</label>
                 <div className="flex flex-col space-y-2">
                   <label className="flex items-center space-x-3 cursor-pointer group">
                     <input
@@ -165,7 +165,7 @@ export default function Home() {
                       onChange={handleInputChange}
                       className="w-4 h-4 accent-primary"
                     />
-                    <span className="font-light group-hover:opacity-100 opacity-70 transition-opacity">Absolutely! Can't wait.</span>
+                    <span className="font-light group-hover:opacity-100 opacity-70 transition-opacity">Chắc chắn rồi! Rất mong chờ.</span>
                   </label>
                   <label className="flex items-center space-x-3 cursor-pointer group">
                     <input
@@ -176,14 +176,14 @@ export default function Home() {
                       onChange={handleInputChange}
                       className="w-4 h-4 accent-primary"
                     />
-                    <span className="font-light group-hover:opacity-100 opacity-70 transition-opacity">Maybe next time.</span>
+                    <span className="font-light group-hover:opacity-100 opacity-70 transition-opacity">Hẹn dịp khác nhé.</span>
                   </label>
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="space-y-2">
-                  <label className="subheading block opacity-100">Number of attendants</label>
+                  <label className="subheading block opacity-100">Số lượng người tham dự</label>
                   <input
                     type="number"
                     name="attendants"
@@ -194,32 +194,32 @@ export default function Home() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="subheading block opacity-100">Meal preferences</label>
+                  <label className="subheading block opacity-100">Yêu cầu về thực đơn</label>
                   <input
                     type="text"
                     name="meal_preference"
                     value={formData.meal_preference}
                     onChange={handleInputChange}
                     className="w-full bg-transparent border-b border-primary py-2 focus:outline-none placeholder:opacity-30"
-                    placeholder="e.g. Vegetarian, Allergies..."
+                    placeholder="Dị ứng, ăn chay..."
                   />
                 </div>
               </div>
 
               <div className="space-y-2">
-                <label className="subheading block opacity-100">A note for the host</label>
+                <label className="subheading block opacity-100">Lời nhắn gửi đến Ban tổ chức</label>
                 <textarea
                   name="note"
                   rows={3}
                   value={formData.note}
                   onChange={handleInputChange}
                   className="w-full bg-transparent border-b border-primary py-2 focus:outline-none placeholder:opacity-30 resize-none"
-                  placeholder="Anything else you'd like to share?"
+                  placeholder="Bạn có muốn nhắn nhủ điều gì không?"
                 ></textarea>
               </div>
 
               {formStatus === "error" && (
-                <p className="text-red-800 text-sm italic">Something went wrong. Please try again or contact us directly.</p>
+                <p className="text-red-800 text-sm italic">Đã có lỗi xảy ra. Vui lòng thử lại hoặc liên hệ trực tiếp với chúng tôi.</p>
               )}
 
               <div className="text-center pt-8">
@@ -228,7 +228,7 @@ export default function Home() {
                   disabled={formStatus === "submitting"}
                   className="btn-secondary disabled:opacity-50"
                 >
-                  {formStatus === "submitting" ? "Sending..." : "Send Response"}
+                  {formStatus === "submitting" ? "Đang gửi..." : "Gửi phản hồi"}
                 </button>
               </div>
             </form>
@@ -239,32 +239,32 @@ export default function Home() {
       {/* 6. Dresscode */}
       <section className="section-container">
         <div className="content-wrapper">
-          <h2 className="heading-lg mb-6">Dresscode</h2>
+          <h2 className="heading-lg mb-6">Trang phục</h2>
           <p className="text-3xl font-light mb-4">European Vintage</p>
-          <p className="subheading">Elegance is the only beauty that never fades.</p>
+          <p className="subheading">Sự thanh lịch là vẻ đẹp không bao giờ phai nhạt.</p>
         </div>
       </section>
 
       {/* 7. Contact Us */}
       <section className="section-container section-accent">
         <div className="content-wrapper">
-          <h2 className="heading-lg mb-16">Contact Us</h2>
+          <h2 className="heading-lg mb-16">Liên hệ</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             <div className="flex flex-col items-center">
-              <h3 className="heading-md mb-2">Vendor Name 1</h3>
-              <p className="font-light text-lg">Representative 1</p>
+              <h3 className="heading-md mb-2">Đơn vị 1</h3>
+              <p className="font-light text-lg">Người đại diện 1</p>
               <a href="mailto:rep1@example.com" className="text-sm opacity-60 mt-2 hover:opacity-100 transition-opacity">rep1@example.com</a>
               <p className="text-sm opacity-60 mt-1">+84 123 456 789</p>
             </div>
             <div className="flex flex-col items-center">
-              <h3 className="heading-md mb-2">Vendor Name 2</h3>
-              <p className="font-light text-lg">Representative 2</p>
+              <h3 className="heading-md mb-2">Đơn vị 2</h3>
+              <p className="font-light text-lg">Người đại diện 2</p>
               <a href="mailto:rep2@example.com" className="text-sm opacity-60 mt-2 hover:opacity-100 transition-opacity">rep2@example.com</a>
               <p className="text-sm opacity-60 mt-1">+84 123 456 789</p>
             </div>
             <div className="flex flex-col items-center">
-              <h3 className="heading-md mb-2">Vendor Name 3</h3>
-              <p className="font-light text-lg">Representative 3</p>
+              <h3 className="heading-md mb-2">Đơn vị 3</h3>
+              <p className="font-light text-lg">Người đại diện 3</p>
               <a href="mailto:rep3@example.com" className="text-sm opacity-60 mt-2 hover:opacity-100 transition-opacity">rep3@example.com</a>
               <p className="text-sm opacity-60 mt-1">+84 123 456 789</p>
             </div>
@@ -275,9 +275,9 @@ export default function Home() {
       {/* 8. Thank you note */}
       <section className="py-32 section-accent border-t border-primary/10">
         <div className="content-wrapper">
-          <h2 className="heading-lg mb-6">Thank You</h2>
+          <h2 className="heading-lg mb-6">Cảm ơn bạn</h2>
           <p className="text-elegant max-w-lg mx-auto">
-            We look forward to sharing this elegant experience with you at The Sinfonia.
+            Chúng tôi rất mong được chia sẻ trải nghiệm tuyệt vời này cùng bạn tại The Sinfonia.
           </p>
         </div>
       </section>
