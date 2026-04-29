@@ -4,6 +4,7 @@
   --color-background: #fff8eb;
   --color-foreground: #222222;
   --color-primary: #4b5006;
+  --color-accent: #f3ede1;
   --font-sans: var(--font-montserrat);
   --font-display: var(--font-playfair);
   --font-brand: var(--font-amsterdam);
@@ -15,14 +16,66 @@ body {
   color: var(--color-foreground);
   font-family: var(--font-sans);
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
   color: var(--color-primary);
-  font-weight: normal;
+  font-weight: 400;
 }
 
-.font-brand {
+/* --- Typography System --- */
+
+@utility heading-xl {
+  @apply text-6xl md:text-8xl lg:text-9xl;
+}
+
+@utility heading-lg {
+  @apply text-5xl md:text-6xl;
+}
+
+@utility heading-md {
+  @apply text-3xl md:text-4xl;
+}
+
+@utility subheading {
+  @apply text-sm uppercase tracking-[0.3em] font-sans opacity-70;
+}
+
+@utility text-elegant {
+  @apply font-display italic text-lg;
+}
+
+/* Brand Font Utility */
+@utility font-brand {
   font-family: var(--font-brand) !important;
+}
+
+/* --- Button System --- */
+
+@utility btn-primary {
+  @apply px-10 py-4 bg-primary text-background border border-primary 
+         hover:bg-transparent hover:text-primary transition-all duration-500 
+         uppercase tracking-[0.2em] text-sm text-center inline-block;
+}
+
+@utility btn-secondary {
+  @apply px-10 py-4 border border-primary text-primary 
+         hover:bg-primary hover:text-background transition-all duration-500 
+         uppercase tracking-[0.2em] text-sm text-center inline-block;
+}
+
+/* --- Layout Utilities --- */
+
+@utility section-container {
+  @apply min-h-screen flex items-center justify-center py-24 px-6;
+}
+
+@utility section-accent {
+  @apply bg-[#f3ede1];
+}
+
+@utility content-wrapper {
+  @apply w-full max-w-5xl mx-auto text-center;
 }
