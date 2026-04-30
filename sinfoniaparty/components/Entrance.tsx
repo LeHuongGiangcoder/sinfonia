@@ -40,42 +40,56 @@ export default function Entrance({ onComplete }: { onComplete: () => void }) {
 
   const startSequence = () => {
     if (isCaptured) return; // Guard against multiple clicks
+    
+    // Fade out the interactive hint as soon as the user clicks
+    gsap.to(".pointing-hint", { opacity: 0, duration: 0.3 });
 
-    if (videoRef.current) {
-      // Fade out the interactive hint as soon as the user clicks
-      gsap.to(".pointing-hint", { opacity: 0, duration: 0.3 });
+    const tl = gsap.timeline({
+      onComplete: () => {
+        setIsCaptured(true);
+        runMainAnimation();
+      }
+    });
 
-      videoRef.current.play();
+    // 1. Subtle Shutter & Focus Motion
+    tl.to(cameraRef.current, {
+      scale: 1.03,
+      duration: 0.4,
+      ease: "power2.inOut",
+    })
+    // Mechanical shutter vibration (subtle shake)
+    .to(cameraRef.current, {
+      x: 1,
+      y: -1,
+      duration: 0.05,
+      repeat: 3,
+      yoyo: true,
+      ease: "none"
+    }, "-=0.1")
+    .to(cameraRef.current, {
+      scale: 1,
+      duration: 0.2,
+      ease: "power2.out",
+    });
 
-      videoRef.current.onended = () => {
-        const tl = gsap.timeline({
-          onComplete: () => {
-            setIsCaptured(true);
-            runMainAnimation();
-          }
-        });
+    // 2. The Flash (Triggered after the subtle motion)
+    tl.to(flashRef.current, {
+      opacity: 1,
+      duration: 0.1,
+      ease: "power2.in",
+    })
+    .to(flashRef.current, {
+      opacity: 0,
+      duration: 0.8,
+      ease: "power2.out",
+    });
 
-        // 2. The Flash (Instant capture immediately after breathing video ends)
-        tl.to(flashRef.current, {
-          opacity: 1,
-          duration: 0.1,
-          ease: "power2.in",
-        })
-          .to(flashRef.current, {
-            opacity: 0,
-            duration: 0.8,
-            ease: "power2.out",
-          });
-
-        // 3. Scale down and fade out camera as loading begins
-        tl.to(cameraRef.current, {
-          scale: 0.8,
-          opacity: 0,
-          duration: 0.5,
-          ease: "power2.in"
-        }, "-=0.4");
-      };
-    }
+    // 3. Fade out camera
+    tl.to(cameraRef.current, {
+      opacity: 0,
+      duration: 0.5,
+      ease: "power2.in"
+    }, "-=0.4");
   };
 
   const runMainAnimation = () => {
@@ -233,13 +247,10 @@ export default function Entrance({ onComplete }: { onComplete: () => void }) {
           className="relative z-20 flex items-center justify-center cursor-pointer -translate-y-6"
         >
           <div className="relative flex items-center justify-center group w-fit h-fit">
-            <video
-              ref={videoRef}
-              src="/assets/camera motion.mp4"
+            <img
+              src="/assets/camera.png"
+              alt="Vintage Camera"
               className="w-[90vw] md:w-[55rem] h-auto transition-transform duration-300 ease-out group-hover:scale-105"
-              muted
-              playsInline
-              preload="auto"
             />
 
             {/* Refined 1-Finger Pointing Hint - Positioned Near Right Corner */}
