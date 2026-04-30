@@ -17,7 +17,11 @@ export default function RootLayout({
       lang="en"
       className={`${montserrat.variable} ${playfair.variable} ${amsterdam.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans text-foreground bg-background">{children}</body>
+      <body className="min-h-full flex flex-col font-sans text-foreground bg-background">
+        {/* Cinematic Grain Overlay */}
+        <div className="grain-overlay" />
+        {children}
+      </body>
     </html>
   );
 }
