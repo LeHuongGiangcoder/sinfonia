@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import gsap from "gsap";
 import Image from "next/image";
+import { amsterdam } from "@/lib/fonts";
 
 const IMAGES = [
   "/assets/w7.jpeg",
@@ -28,12 +29,56 @@ const LOGOS = [
 
 export default function Entrance({ onComplete }: { onComplete: () => void }) {
   const [progress, setProgress] = useState(0);
+  const [isCaptured, setIsCaptured] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const imageContainerRef = useRef<HTMLDivElement>(null);
   const logoContainerRef = useRef<HTMLDivElement>(null);
   const messageRef = useRef<HTMLDivElement>(null);
+  const cameraRef = useRef<HTMLDivElement>(null);
+  const flashRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-  useEffect(() => {
+  const startSequence = () => {
+    if (isCaptured) return; // Guard against multiple clicks
+
+    if (videoRef.current) {
+      // Fade out the interactive hint as soon as the user clicks
+      gsap.to(".pointing-hint", { opacity: 0, duration: 0.3 });
+
+      videoRef.current.play();
+
+      videoRef.current.onended = () => {
+        const tl = gsap.timeline({
+          onComplete: () => {
+            setIsCaptured(true);
+            runMainAnimation();
+          }
+        });
+
+        // 2. The Flash (Instant capture immediately after breathing video ends)
+        tl.to(flashRef.current, {
+          opacity: 1,
+          duration: 0.1,
+          ease: "power2.in",
+        })
+          .to(flashRef.current, {
+            opacity: 0,
+            duration: 0.8,
+            ease: "power2.out",
+          });
+
+        // 3. Scale down and fade out camera as loading begins
+        tl.to(cameraRef.current, {
+          scale: 0.8,
+          opacity: 0,
+          duration: 0.5,
+          ease: "power2.in"
+        }, "-=0.4");
+      };
+    }
+  };
+
+  const runMainAnimation = () => {
     const progressProxy = { value: 0 };
     const tl = gsap.timeline({
       onUpdate: () => {
@@ -53,7 +98,6 @@ export default function Entrance({ onComplete }: { onComplete: () => void }) {
     const photoDuration = 0.3;
     const totalPhotoTime = IMAGES.length * photoDuration;
 
-    // Animate progress to 80 over the photo sequence
     tl.to(progressProxy, {
       value: 80,
       duration: totalPhotoTime,
@@ -101,11 +145,10 @@ export default function Entrance({ onComplete }: { onComplete: () => void }) {
         if (messageRef.current) messageRef.current.innerText = "Bạn gần tới rồi";
       }
     });
-    tl.to({}, { duration: 0.8 }); // Hold at 80%
+    tl.to({}, { duration: 0.8 });
     tl.to(messageRef.current, { opacity: 0, duration: 0.4 });
 
     // Phase 3: Logos (80 -> 99%)
-    // We start the progress animation and the logo sequence at the same time
     const logoSequenceStartTime = tl.duration();
 
     tl.to(progressProxy, {
@@ -114,7 +157,6 @@ export default function Entrance({ onComplete }: { onComplete: () => void }) {
       ease: "power1.inOut"
     }, logoSequenceStartTime);
 
-    // Show the showcase container
     tl.to("#logo-showcase-container", { display: "flex", opacity: 1, duration: 0.3 }, logoSequenceStartTime);
 
     LOGOS.forEach((src, index) => {
@@ -132,7 +174,6 @@ export default function Entrance({ onComplete }: { onComplete: () => void }) {
 
     // Final Grid Transition
     const finalGridStartTime = logoSequenceStartTime + 0.3 + (LOGOS.length * 0.25);
-
     tl.to("#logo-showcase-container", { opacity: 0, duration: 0.2 }, finalGridStartTime);
 
     tl.to(logoContainerRef.current, {
@@ -148,39 +189,94 @@ export default function Entrance({ onComplete }: { onComplete: () => void }) {
               <p class="subheading !opacity-100 text-primary tracking-[0.4em] uppercase text-sm opacity-0" id="final-text">Để cùng mang đến</p>
             </div>
           `;
-          
-          gsap.to(".logo-grid-item", { 
-            opacity: 1, 
-            duration: 0.8, 
-            stagger: 0.05, 
-            ease: "power2.out" 
+
+          gsap.to(".logo-grid-item", {
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.05,
+            ease: "power2.out"
           });
-          
-          gsap.to("#final-text", { 
-            opacity: 1, 
-            y: 0, 
-            duration: 1, 
-            delay: 0.5, 
-            ease: "power2.out" 
+
+          gsap.to("#final-text", {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            delay: 0.5,
+            ease: "power2.out"
           });
         }
       }
     }, finalGridStartTime + 0.2);
 
-    tl.to(progressProxy, { value: 100, duration: 0.4 }); // Hit 100 at the very end
+    tl.to(progressProxy, { value: 100, duration: 0.4 });
+    tl.to({}, { duration: 0.8 });
+  };
 
-    tl.to({}, { duration: 0.8 }); // Final breath
-
-    return () => {
-      tl.kill();
-    };
-  }, [onComplete]);
+  useEffect(() => {
+    // Initial camera entrance
+    gsap.fromTo(cameraRef.current,
+      { opacity: 0, scale: 0.8, y: 20 },
+      { opacity: 1, scale: 1, y: 0, duration: 1.2, ease: "power3.out" }
+    );
+  }, []);
 
   return (
     <div
       ref={containerRef}
       className="fixed inset-0 z-[9999] bg-[#fff8eb] flex flex-col items-center justify-center overflow-hidden"
     >
+      {/* Interactive Camera Section */}
+      {!isCaptured && (
+        <div
+          ref={cameraRef}
+          onClick={startSequence}
+          className="relative z-20 flex items-center justify-center cursor-pointer -translate-y-6"
+        >
+          <div className="relative flex items-center justify-center group w-fit h-fit">
+            <video
+              ref={videoRef}
+              src="/assets/camera motion.mp4"
+              className="w-[90vw] md:w-[55rem] h-auto transition-transform duration-300 ease-out group-hover:scale-105"
+              muted
+              playsInline
+              preload="auto"
+            />
+
+            {/* Refined 1-Finger Pointing Hint - Positioned Near Right Corner */}
+            <div className="pointing-hint absolute top-20 right-0 md:top-36 md:right-0 pointer-events-none animate-bounce-slow flex flex-col items-center gap-2">
+              <div className="relative w-12 h-12 md:w-20 md:h-20">
+                {/* Delicate Sparkle Lines at Fingertip */}
+                <div className="absolute -bottom-1 -left-1 flex gap-1 opacity-60 rotate-[225deg]">
+                  <div className="w-[1px] h-2 bg-primary rounded-full"></div>
+                  <div className="w-[1px] h-3 bg-primary rounded-full"></div>
+                  <div className="w-[1px] h-2 bg-primary rounded-full"></div>
+                </div>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full text-primary rotate-[225deg]">
+                  <path d="M12 10V4a2 2 0 0 0-2-2h0a2 2 0 0 0-2 2v7" />
+                  <path d="M12 10a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v4" />
+                  <path d="M16 12a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v4" />
+                  <path d="M20 14a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v4" />
+                  <path d="M12 22h4a8 8 0 0 0 8-8v-2" />
+                  <path d="M6 10l-3 3a2 2 0 0 0 0 2.8l4 4a8 8 0 0 0 5 2.2" />
+                </svg>
+              </div>
+              <p className="subheading !opacity-100 text-primary tracking-[0.4em] uppercase text-[10px] md:text-xs whitespace-nowrap">
+                Click to capture
+              </p>
+            </div>
+
+            {/* Pulsing Hint Overlay - Simplified */}
+            <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl pointer-events-none"></div>
+          </div>
+        </div>
+      )}
+
+      {/* Camera Flash */}
+      <div
+        ref={flashRef}
+        className="fixed inset-0 bg-white z-[100] opacity-0 pointer-events-none"
+      />
+
       <div ref={imageContainerRef} className="absolute inset-0 flex items-center justify-center">
         {/* Photo Stack */}
       </div>
@@ -201,14 +297,14 @@ export default function Entrance({ onComplete }: { onComplete: () => void }) {
       </div>
 
       {/* Progress Counter */}
-      <div className="absolute bottom-12 right-12 text-primary font-display text-6xl md:text-8xl opacity-10 select-none pointer-events-none tabular-nums flex items-baseline">
+      <div className={`absolute bottom-12 right-12 text-primary font-display text-6xl md:text-8xl select-none pointer-events-none tabular-nums flex items-baseline transition-opacity duration-500 ${isCaptured ? 'opacity-10' : 'opacity-0'}`}>
         {progress.toString().padStart(2, "0")}
         <span className="text-3xl md:text-4xl ml-2 opacity-60">%</span>
       </div>
 
       {/* Brand Name */}
-      <div className="absolute bottom-12 left-12 pointer-events-none">
-        <h1 className="font-brand text-4xl text-primary opacity-20 lowercase">The Sinfonia</h1>
+      <div className={`absolute bottom-12 left-12 pointer-events-none transition-opacity duration-500 ${isCaptured ? 'opacity-20' : 'opacity-0'}`}>
+        <h1 className="font-brand text-4xl text-primary lowercase">The Sinfonia</h1>
       </div>
     </div>
   );

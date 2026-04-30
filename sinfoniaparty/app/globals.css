@@ -79,3 +79,23 @@ h1, h2, h3, h4, h5, h6 {
 @utility content-wrapper {
   @apply w-full max-w-5xl mx-auto text-center;
 }
+
+/* --- Custom Animations --- */
+
+@keyframes scroll-down {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@utility animate-scroll-down {
+  animation: scroll-down 2s infinite ease-in-out;
+}
+
+@keyframes bounce-slow {
+  0%, 100% { transform: translate(0, 0) rotate(15deg); }
+  50% { transform: translate(-10px, -10px) rotate(5deg); }
+}
+
+@utility animate-bounce-slow {
+  animation: bounce-slow 3s infinite ease-in-out;
+}
