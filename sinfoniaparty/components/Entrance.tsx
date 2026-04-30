@@ -114,35 +114,32 @@ export default function Entrance({ onComplete }: { onComplete: () => void }) {
       ease: "power1.inOut"
     }, logoSequenceStartTime);
 
-    tl.set(logoContainerRef.current, { display: "flex", opacity: 0 }, logoSequenceStartTime);
-    tl.to(logoContainerRef.current, { opacity: 1, duration: 0.3 }, logoSequenceStartTime);
+    // Show the showcase container
+    tl.to("#logo-showcase-container", { display: "flex", opacity: 1, duration: 0.3 }, logoSequenceStartTime);
 
     LOGOS.forEach((src, index) => {
       tl.to({}, {
         duration: 0.25,
         onStart: () => {
-          if (logoContainerRef.current) {
-            logoContainerRef.current.innerHTML = `
-              <div class="flex flex-col items-center justify-center" id="logo-showcase-item">
-                <img src="${src}" class="h-32 md:h-48 w-auto object-contain" />
-                <p class="subheading mt-8 !opacity-100 text-primary tracking-[0.2em] uppercase text-xs">Chúng tôi là 1 đội</p>
-              </div>
-            `;
-            gsap.fromTo("#logo-showcase-item", { opacity: 0 }, { opacity: 1, duration: 0.15 });
+          const container = document.getElementById("active-logo-container");
+          if (container) {
+            container.innerHTML = `<img src="${src}" class="h-full w-auto object-contain" id="current-logo" style="opacity: 0;" />`;
+            gsap.to("#current-logo", { opacity: 1, duration: 0.15 });
           }
         }
-      }, logoSequenceStartTime + 0.2 + (index * 0.25));
+      }, logoSequenceStartTime + 0.3 + (index * 0.25));
     });
 
     // Final Grid Transition
-    const finalGridStartTime = logoSequenceStartTime + 0.2 + (LOGOS.length * 0.25);
+    const finalGridStartTime = logoSequenceStartTime + 0.3 + (LOGOS.length * 0.25);
 
-    tl.to("#logo-showcase-item", { opacity: 0, duration: 0.2 }, finalGridStartTime);
+    tl.to("#logo-showcase-container", { opacity: 0, duration: 0.2 }, finalGridStartTime);
 
     tl.to(logoContainerRef.current, {
       duration: 1.5,
       onStart: () => {
         if (logoContainerRef.current) {
+          logoContainerRef.current.style.display = "flex";
           logoContainerRef.current.innerHTML = `
             <div class="flex flex-col items-center gap-16 max-w-5xl px-8">
               <div class="grid grid-cols-3 gap-x-12 md:gap-x-20 gap-y-8 md:gap-y-12 items-center justify-items-center" id="final-grid">
@@ -151,20 +148,20 @@ export default function Entrance({ onComplete }: { onComplete: () => void }) {
               <p class="subheading !opacity-100 text-primary tracking-[0.4em] uppercase text-sm opacity-0" id="final-text">Để cùng mang đến</p>
             </div>
           `;
-
-          gsap.to(".logo-grid-item", {
-            opacity: 1,
-            duration: 0.8,
-            stagger: 0.05,
-            ease: "power2.out"
+          
+          gsap.to(".logo-grid-item", { 
+            opacity: 1, 
+            duration: 0.8, 
+            stagger: 0.05, 
+            ease: "power2.out" 
           });
-
-          gsap.to("#final-text", {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            delay: 0.5,
-            ease: "power2.out"
+          
+          gsap.to("#final-text", { 
+            opacity: 1, 
+            y: 0, 
+            duration: 1, 
+            delay: 0.5, 
+            ease: "power2.out" 
           });
         }
       }
@@ -192,13 +189,21 @@ export default function Entrance({ onComplete }: { onComplete: () => void }) {
         {/* "Bạn gần tới rồi" */}
       </div>
 
+      <div id="logo-showcase-container" className="hidden absolute inset-0 items-center justify-center opacity-0">
+        <div className="flex flex-col items-center justify-center">
+          <div id="active-logo-container" className="h-32 md:h-48 flex items-center justify-center"></div>
+          <p className="subheading mt-8 !opacity-100 text-primary tracking-[0.2em] uppercase text-xs">Chúng tôi là 1 đội</p>
+        </div>
+      </div>
+
       <div ref={logoContainerRef} className="hidden absolute inset-0 items-center justify-center">
-        {/* Logo Showcase */}
+        {/* Final Grid */}
       </div>
 
       {/* Progress Counter */}
-      <div className="absolute bottom-12 right-12 text-primary font-display text-8xl md:text-[10rem] opacity-5 select-none pointer-events-none tabular-nums">
-        {progress.toString().padStart(2, "0")}%
+      <div className="absolute bottom-12 right-12 text-primary font-display text-6xl md:text-8xl opacity-10 select-none pointer-events-none tabular-nums flex items-baseline">
+        {progress.toString().padStart(2, "0")}
+        <span className="text-3xl md:text-4xl ml-2 opacity-60">%</span>
       </div>
 
       {/* Brand Name */}
