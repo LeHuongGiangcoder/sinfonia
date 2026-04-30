@@ -104,9 +104,68 @@ export default function Home() {
 
       {/* 4. Agendas */}
       <section className="section-container">
-        <div className="content-wrapper">
-          <h2 className="heading-lg mb-6">Chương trình</h2>
-          <p className="text-elegant">Những khoảnh khắc tuyệt vời đang chờ đón bạn.</p>
+        <div className="content-wrapper max-w-4xl">
+          <h2 className="heading-lg mb-16">Chương trình</h2>
+          
+          <div className="space-y-0 border-t border-primary/20">
+            {[
+              { time: "12:00", title: "CHECK IN", location: "Lobby Lounge", details: [] },
+              { time: "14:30", title: "TEA BREAK", location: "Sinfonia Garden", details: [] },
+              { 
+                time: "15:00", 
+                title: "WELCOME + WORKSHOP", 
+                location: "Grand Ballroom", 
+                details: ["Khai mạc", "Workshop"] 
+              },
+              { 
+                time: "16:30", 
+                title: "CATCH THE SUN", 
+                location: "Sunset Terrace", 
+                details: ["Cocktail", "Live music"] 
+              },
+              { 
+                time: "18:30", 
+                title: "A SKY FULL OF STARS", 
+                location: "Starlight Dining", 
+                details: ["Dinner", "Drinking game"] 
+              },
+              { 
+                time: "20:30", 
+                title: "MIDNIGHT REVERIE", 
+                location: "Infinity Pool", 
+                details: ["Fireworks", "DJ", "Pool Party"] 
+              },
+            ].map((item, idx) => (
+              <div key={idx} className="grid grid-cols-1 md:grid-cols-2 py-8 border-b border-primary/10 gap-8 items-start hover:bg-primary/[0.02] transition-colors px-4">
+                <div className="flex items-baseline space-x-6">
+                  <span className="text-2xl font-light opacity-50 tabular-nums min-w-[70px]">{item.time}</span>
+                  <div className="space-y-2">
+                    <h3 className="text-xl font-medium tracking-wide text-left">{item.title}</h3>
+                    {item.details.length > 0 && (
+                      <ul className="space-y-1 text-left">
+                        {item.details.map((detail, dIdx) => (
+                          <li key={dIdx} className="text-sm opacity-60 font-light flex items-center">
+                            <span className="w-1 h-1 bg-primary rounded-full mr-2 opacity-40"></span>
+                            {detail}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </div>
+                <div className="md:text-right flex flex-col md:items-end justify-center h-full">
+                  <span className="subheading !opacity-100 mb-1">Địa điểm</span>
+                  <span className="text-lg font-light italic text-primary/80">{item.location}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-12 p-6 border border-primary/10 bg-primary/[0.02] text-center italic">
+            <p className="text-sm opacity-70">
+              * Thời gian thay đổi layout (trang phục, makeup) đã được tính toán và tích hợp sẵn trong agenda.
+            </p>
+          </div>
         </div>
       </section>
 
