@@ -1,14 +1,16 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { amsterdam } from "@/lib/fonts";
+import Entrance from "@/components/Entrance";
 
 gsap.registerPlugin(useGSAP);
 
 export default function Home() {
   const container = useRef<HTMLDivElement>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [formData, setFormData] = useState({
     name: "",
@@ -46,19 +48,31 @@ export default function Home() {
     }
   };
 
+  useEffect(() => {
+    if (isLoading) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isLoading]);
+
   useGSAP(() => {
-    // Initial hero fade in
-    gsap.from(".hero-content", {
-      y: 30,
-      opacity: 0,
-      duration: 1.5,
-      ease: "power3.out",
-      stagger: 0.2,
-    });
-  }, { scope: container });
+    if (!isLoading) {
+      // Initial hero fade in
+      gsap.from(".hero-content", {
+        y: 30,
+        opacity: 0,
+        duration: 1.5,
+        ease: "power3.out",
+        stagger: 0.2,
+      });
+    }
+  }, { scope: container, dependencies: [isLoading] });
 
   return (
-    <div ref={container} className="min-h-screen">
+    <>
+      {isLoading && <Entrance onComplete={() => setIsLoading(false)} />}
+      <div ref={container} className={`min-h-screen ${isLoading ? "opacity-0" : "opacity-100"} transition-opacity duration-1000`}>
       {/* 1 & 2. Opening & Hero Section */}
       <section className="section-container">
         <div className="hero-content content-wrapper">
@@ -394,6 +408,7 @@ export default function Home() {
           </p>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }
