@@ -297,10 +297,64 @@ export default function Home() {
 
       {/* 6. Dresscode */}
       <section className="section-container">
-        <div className="content-wrapper">
-          <h2 className="heading-lg mb-6">Trang phục</h2>
-          <p className="text-3xl font-light mb-4">European Vintage</p>
-          <p className="subheading">Sự thanh lịch là vẻ đẹp không bao giờ phai nhạt.</p>
+        <div className="content-wrapper max-w-4xl">
+          <h2 className="heading-lg mb-16">Trang phục</h2>
+          
+          <div className="border border-primary/10 rounded-sm overflow-hidden">
+            {/* Header Row */}
+            <div className="grid grid-cols-1 md:grid-cols-[1.5fr_2fr_2fr] bg-primary/[0.03] border-b border-primary/10">
+              <div className="p-6 hidden md:block"></div>
+              <div className="p-6 text-center border-l border-primary/10">
+                <h4 className="subheading !opacity-100 text-primary">Dành cho Nữ</h4>
+              </div>
+              <div className="p-6 text-center border-l border-primary/10">
+                <h4 className="subheading !opacity-100 text-primary">Dành cho Nam</h4>
+              </div>
+            </div>
+
+            {/* Activities Rows */}
+            {[
+              {
+                activity: "Đón khách",
+                eng: "Welcoming",
+                women: "Váy lụa màu Pastel (Pastel silk dress)",
+                men: "Vest hoặc Blazer (Đen hoặc có màu)"
+              },
+              {
+                activity: "Tiệc tối",
+                eng: "Dinner",
+                women: "Đầm dạ hội sang trọng (Tông màu Olive hoặc Đen)",
+                men: "Suit / Tuxedo lịch lãm (Tông màu Olive hoặc Đen)"
+              },
+              {
+                activity: "Tiệc hồ bơi",
+                eng: "After Party",
+                women: "Trang phục hồ bơi / Bikini (Pool Party Chic)",
+                men: "Quần short / Trang phục bơi thoải mái"
+              }
+            ].map((item, idx) => (
+              <div key={idx} className="grid grid-cols-1 md:grid-cols-[1.5fr_2fr_2fr] border-b last:border-b-0 border-primary/10 items-stretch">
+                <div className="p-6 bg-primary/[0.01] flex flex-col justify-center">
+                  <h3 className="text-xl font-medium">{item.activity}</h3>
+                  <p className="text-xs uppercase tracking-widest opacity-40 mt-1">{item.eng}</p>
+                </div>
+                
+                {/* Mobile Labels are shown only on small screens */}
+                <div className="p-8 border-t md:border-t-0 md:border-l border-primary/10 flex flex-col justify-center">
+                  <span className="md:hidden subheading mb-2 block">Nữ</span>
+                  <p className="font-light">{item.women}</p>
+                </div>
+                <div className="p-8 border-t md:border-t-0 md:border-l border-primary/10 flex flex-col justify-center">
+                  <span className="md:hidden subheading mb-2 block">Nam</span>
+                  <p className="font-light">{item.men}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-16 text-center">
+            <p className="text-elegant">"Sự thanh lịch là vẻ đẹp không bao giờ phai nhạt."</p>
+          </div>
         </div>
       </section>
 
