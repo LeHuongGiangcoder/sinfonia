@@ -119,7 +119,7 @@ export default function Entrance({ onComplete }: { onComplete: () => void }) {
 
     LOGOS.forEach((src, index) => {
       tl.to({}, {
-        duration: 0.4,
+        duration: 0.25,
         onStart: () => {
           if (logoContainerRef.current) {
             logoContainerRef.current.innerHTML = `
@@ -128,16 +128,16 @@ export default function Entrance({ onComplete }: { onComplete: () => void }) {
                 <p class="subheading mt-8 !opacity-100 text-primary tracking-[0.2em] uppercase text-xs">Chúng tôi là 1 đội</p>
               </div>
             `;
-            gsap.fromTo("#logo-showcase-item", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.3 });
+            gsap.fromTo("#logo-showcase-item", { opacity: 0 }, { opacity: 1, duration: 0.15 });
           }
         }
-      }, logoSequenceStartTime + 0.3 + (index * 0.4));
+      }, logoSequenceStartTime + 0.2 + (index * 0.25));
     });
 
     // Final Grid Transition
-    const finalGridStartTime = logoSequenceStartTime + 0.3 + (LOGOS.length * 0.4);
+    const finalGridStartTime = logoSequenceStartTime + 0.2 + (LOGOS.length * 0.25);
 
-    tl.to("#logo-showcase-item", { opacity: 0, y: -10, duration: 0.4 }, finalGridStartTime);
+    tl.to("#logo-showcase-item", { opacity: 0, duration: 0.2 }, finalGridStartTime);
 
     tl.to(logoContainerRef.current, {
       duration: 1.5,
@@ -198,7 +198,7 @@ export default function Entrance({ onComplete }: { onComplete: () => void }) {
 
       {/* Progress Counter */}
       <div className="absolute bottom-12 right-12 text-primary font-display text-8xl md:text-[10rem] opacity-5 select-none pointer-events-none tabular-nums">
-        {progress.toString().padStart(2, "0")}
+        {progress.toString().padStart(2, "0")}%
       </div>
 
       {/* Brand Name */}
