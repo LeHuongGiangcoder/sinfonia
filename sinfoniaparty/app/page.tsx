@@ -829,7 +829,7 @@ export default function Home() {
                 <p className="text-elegant opacity-60">Dấu ấn của những khoảnh khắc</p>
               </div>
 
-              <div className="flex flex-col lg:flex-row gap-16 items-stretch h-auto lg:h-[500px]">
+              <div className="flex flex-col lg:flex-row gap-16 items-stretch min-h-[500px] h-auto">
                 {/* Vertical Timeline Bar - Typographic Minimalist */}
                 <div className="w-full lg:w-64 relative flex flex-col order-2 lg:order-1 h-full">
                   {/* The items container itself will define the height for the line */}
@@ -1117,7 +1117,7 @@ export default function Home() {
                 <p className="text-elegant opacity-60">Trang phục phù hợp với Sinfonia</p>
               </div>
 
-              <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-stretch h-auto lg:h-[500px]">
+              <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-stretch min-h-[500px] h-auto">
                 {/* Left Timeline - Vertical Axis */}
                 <div className="w-full lg:w-48 relative flex flex-col h-full">
                   <div className="relative grid grid-rows-3 h-full pl-8 lg:pl-12">
@@ -1205,7 +1205,7 @@ export default function Home() {
         </div>
 
         {/* 7. Contact Us — Interactive Person Collage */}
-        <section className="h-screen flex items-center justify-center section-accent relative overflow-hidden" id="contact-section">
+        <section className="min-h-screen py-20 md:py-32 flex items-center justify-center section-accent relative overflow-hidden" id="contact-section">
           <div className="w-full max-w-6xl mx-auto px-4 md:px-12">
             <div className="mb-12 space-y-4 text-center">
               <h2 className="heading-lg">Contact</h2>
