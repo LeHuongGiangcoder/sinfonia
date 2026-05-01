@@ -77,6 +77,8 @@ export default function Home() {
       subtitle: "Đón khách",
       women: "Váy lụa",
       men: "Vest / Blazer",
+      womenImg: "/assets/women 1.png",
+      menImg: "/assets/men 2.png",
       palette: {
         women: ["#FCE4EC", "#FFF9C4", "#E1BEE7", "#FFFFFF"],
         men: ["#F5F5DC", "#D2B48C", "#4E342E", "#FFFFFF"]
@@ -87,6 +89,8 @@ export default function Home() {
       subtitle: "Tiệc tối",
       women: "Đầm dạ hội",
       men: "Suit / Tuxedo",
+      womenImg: "/assets/women 3.png",
+      menImg: "/assets/men 3.png",
       palette: {
         women: ["#556B2F", "#1A1A1A", "#8B4513", "#FFFFFF"],
         men: ["#556B2F", "#1A1A1A", "#333333", "#FFFFFF"]
@@ -97,6 +101,8 @@ export default function Home() {
       subtitle: "Tiệc hồ bơi",
       women: "Trang phục hồ bơi / Bikini",
       men: "Quần short / Trang phục bơi",
+      womenImg: "/assets/women 1.png",
+      menImg: "/assets/men 2.png",
       palette: {
         women: ["#B2EBF2", "#FFF9C4", "#FFCCBC", "#FFFFFF"],
         men: ["#E0F7FA", "#CFD8DC", "#FFAB91", "#FFFFFF"]
@@ -696,9 +702,9 @@ export default function Home() {
                   {/* Women Side */}
                   <div className="flex flex-col items-center space-y-4 animate-fade-in" key={`women-${activeDresscode}`}>
                     <div className="relative h-[250px] md:h-[350px] w-full flex items-center justify-center">
-                      <img
-                        src="/assets/women 1.png"
-                        alt="Women Dresscode"
+                      <img 
+                        src={dresscodeData[activeDresscode].womenImg} 
+                        alt="Women Dresscode" 
                         className="h-full object-contain"
                       />
                     </div>
@@ -721,9 +727,9 @@ export default function Home() {
                   {/* Men Side */}
                   <div className="flex flex-col items-center space-y-4 animate-fade-in" key={`men-${activeDresscode}`}>
                     <div className="relative h-[250px] md:h-[350px] w-full flex items-center justify-center">
-                      <img
-                        src="/assets/men 2.png"
-                        alt="Men Dresscode"
+                      <img 
+                        src={dresscodeData[activeDresscode].menImg} 
+                        alt="Men Dresscode" 
                         className="h-full object-contain"
                       />
                     </div>
