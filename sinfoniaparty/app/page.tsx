@@ -1094,9 +1094,9 @@ export default function Home() {
         <section className="h-screen flex items-center justify-center section-accent relative overflow-hidden" id="contact-section">
           <div className="w-full max-w-6xl mx-auto px-4 md:px-12">
             <div className="mb-12 space-y-4 text-center">
-              <h2 className="heading-lg">The Partners</h2>
+              <h2 className="heading-lg">Contact</h2>
               <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
-              <p className="text-elegant opacity-60">The team behind the moments</p>
+              <p className="text-elegant opacity-60">Main support contacts</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
