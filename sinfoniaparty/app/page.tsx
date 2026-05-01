@@ -565,7 +565,7 @@ export default function Home() {
         <section className="section-container section-accent relative overflow-hidden" id="details-section">
           <div className="content-wrapper max-w-6xl">
             <div className="mb-20 space-y-4">
-              <h2 className="heading-lg">Thời gian & Địa điểm</h2>
+              <h2 className="heading-lg">Time & Venue</h2>
               <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
               <p className="text-elegant opacity-60">Hành trình của những cảm xúc thăng hoa</p>
             </div>
@@ -710,7 +710,7 @@ export default function Home() {
           <section className="min-h-screen w-full flex flex-col justify-center overflow-hidden" id="agenda-section">
             <div className="w-full max-w-7xl mx-auto px-6">
               <div className="mb-12 space-y-4 text-center">
-                <h2 className="heading-lg">Chương trình</h2>
+                <h2 className="heading-lg">The Agenda</h2>
                 <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
                 <p className="text-elegant opacity-60">Dấu ấn của những khoảnh khắc</p>
               </div>
@@ -837,7 +837,7 @@ export default function Home() {
         <section className="section-container section-accent">
           <div className="content-wrapper max-w-2xl">
             <div className="mb-16 space-y-4">
-              <h2 className="heading-lg">Phản hồi</h2>
+              <h2 className="heading-lg">RSVP</h2>
               <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
               <p className="text-elegant opacity-60">Hãy để chúng tôi chuẩn bị tốt nhất cho bạn</p>
             </div>
@@ -998,7 +998,7 @@ export default function Home() {
           <section className="min-h-screen w-full flex flex-col justify-center overflow-hidden" id="dresscode-section">
             <div className="content-wrapper max-w-6xl">
               <div className="mb-10 space-y-4 text-center">
-                <h2 className="heading-lg">Quy chuẩn trang phục</h2>
+                <h2 className="heading-lg">Dress Code</h2>
                 <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
                 <p className="text-elegant opacity-60">Dresscode for an Elegant Atmosphere</p>
               </div>
@@ -1094,9 +1094,9 @@ export default function Home() {
         <section className="h-screen flex items-center justify-center section-accent relative overflow-hidden" id="contact-section">
           <div className="w-full max-w-6xl mx-auto px-4 md:px-12">
             <div className="mb-12 space-y-4 text-center">
-              <h2 className="heading-lg">Đồng hành cùng Sinfonia</h2>
+              <h2 className="heading-lg">The Partners</h2>
               <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
-              <p className="text-elegant opacity-60">Những con người tâm huyết kiến tạo nên khoảnh khắc</p>
+              <p className="text-elegant opacity-60">The team behind the moments</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
