@@ -275,6 +275,7 @@ function ContactCard({ images, unit, rep, role, phone, intro, link }: {
 
 // --- Sub-component: Navbar ---
 function Navbar({ scrolled }: { scrolled: boolean }) {
+  const [menuOpen, setMenuOpen] = useState(false);
   const navItems = [
     { name: "Venue", href: "#details-section" },
     { name: "Agenda", href: "#agenda-section" },
@@ -283,52 +284,89 @@ function Navbar({ scrolled }: { scrolled: boolean }) {
     { name: "RSVP", href: "#rsvp-section" },
   ];
 
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+
   return (
-    <nav className={`fixed top-0 left-0 w-full z-[100] transition-all duration-700 ${scrolled ? "bg-background/80 backdrop-blur-lg border-b border-primary/5 py-4" : "bg-transparent py-8"}`}>
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8 flex-1">
-          {navItems.slice(0, 2).map((item) => (
+    <>
+      <nav className={`fixed top-0 left-0 w-full z-[100] transition-all duration-700 ${scrolled || menuOpen ? "bg-background/90 backdrop-blur-lg py-4 shadow-sm" : "bg-transparent py-8"}`}>
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+          {/* Desktop Navigation Left */}
+          <div className="hidden md:flex items-center gap-8 flex-1">
+            {navItems.slice(0, 2).map((item) => (
+              <a 
+                key={item.name} 
+                href={item.href}
+                className={`text-[10px] uppercase tracking-[0.3em] font-medium transition-all hover:text-primary/100 ${scrolled ? "text-primary/70" : "text-white/70"}`}
+              >
+                {item.name}
+              </a>
+            ))}
+          </div>
+
+          {/* Brand Logo - Centered */}
+          <div className={`flex-none transition-all duration-700 ${scrolled || menuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"}`}>
+            <a href="#" className={`${purgatory.className} text-2xl md:text-3xl text-primary`}>
+              The Sinfonia
+            </a>
+          </div>
+
+          {/* Desktop Navigation Right */}
+          <div className="hidden md:flex items-center justify-end gap-8 flex-1">
+            {navItems.slice(2).map((item) => (
+              <a 
+                key={item.name} 
+                href={item.href}
+                className={`text-[10px] uppercase tracking-[0.3em] font-medium transition-all hover:text-primary/100 ${scrolled ? "text-primary/70" : "text-white/70"}`}
+              >
+                {item.name}
+              </a>
+            ))}
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
+            <button 
+              onClick={toggleMenu}
+              className={`${scrolled || menuOpen ? "text-primary" : "text-white"} transition-colors`}
+            >
+              {menuOpen ? (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-7 h-7">
+                  <path d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-7 h-7">
+                  <path d="M4 8h16M4 16h16" />
+                </svg>
+              )}
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Mobile Menu Overlay */}
+      <div className={`fixed inset-0 z-[90] bg-background flex flex-col items-center justify-center transition-all duration-700 md:hidden ${menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
+        <div className="space-y-12 text-center">
+          {navItems.map((item, i) => (
             <a 
               key={item.name} 
               href={item.href}
-              className={`text-[10px] uppercase tracking-[0.3em] font-medium transition-all hover:text-primary/100 ${scrolled ? "text-primary/70" : "text-white/70"}`}
+              onClick={() => setMenuOpen(false)}
+              className="block text-2xl font-display italic text-primary opacity-0 translate-y-8"
+              style={{ 
+                animation: menuOpen ? `hero-fade-up 0.8s ease-out ${0.1 + i * 0.1}s both` : "none" 
+              }}
             >
               {item.name}
             </a>
           ))}
         </div>
-
-        {/* Brand Logo - Centered (Only visible on scroll) */}
-        <div className={`flex-none transition-all duration-700 ${scrolled ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"}`}>
-          <a href="#" className={`${purgatory.className} text-2xl md:text-3xl text-primary`}>
-            The Sinfonia
-          </a>
-        </div>
-
-        {/* Desktop Navigation Right */}
-        <div className="hidden md:flex items-center justify-end gap-8 flex-1">
-          {navItems.slice(2).map((item) => (
-            <a 
-              key={item.name} 
-              href={item.href}
-              className={`text-[10px] uppercase tracking-[0.3em] font-medium transition-all hover:text-primary/100 ${scrolled ? "text-primary/70" : "text-white/70"}`}
-            >
-              {item.name}
-            </a>
-          ))}
-        </div>
-
-        {/* Mobile Menu Button - Minimalist */}
-        <div className="md:hidden">
-          <button className={`${scrolled ? "text-primary" : "text-white"} opacity-80`}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-6 h-6">
-              <path d="M4 8h16M4 16h16" />
-            </svg>
-          </button>
+        
+        {/* Decorative element for mobile menu */}
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 opacity-20">
+          <p className={`${purgatory.className} text-4xl text-primary`}>The Sinfonia</p>
         </div>
       </div>
-    </nav>
+    </>
   );
 }
 
@@ -556,9 +594,9 @@ export default function Home() {
               a party that never ends
             </p>
 
-            {/* Main Title — Still appears first for immediate impact */}
+            {/* Main Title — Now appears first for immediate impact */}
             <h1
-              className={`${purgatory.className} text-[4.5rem] md:text-[7rem] lg:text-[9rem] leading-none lowercase tracking-tight`}
+              className={`${purgatory.className} text-5xl md:text-7xl lg:text-9xl leading-none lowercase tracking-tight`}
               style={{
                 color: '#f3ede1',
                 opacity: 0,
@@ -791,7 +829,7 @@ export default function Home() {
                 <p className="text-elegant opacity-60">Dấu ấn của những khoảnh khắc</p>
               </div>
 
-              <div className="flex flex-col lg:flex-row gap-16 items-stretch h-[450px] md:h-[500px]">
+              <div className="flex flex-col lg:flex-row gap-16 items-stretch h-auto lg:h-[500px]">
                 {/* Vertical Timeline Bar - Typographic Minimalist */}
                 <div className="w-full lg:w-64 relative flex flex-col order-2 lg:order-1 h-full">
                   {/* The items container itself will define the height for the line */}
@@ -941,7 +979,7 @@ export default function Home() {
             ) : (
               <form className="max-w-2xl mx-auto space-y-12" onSubmit={handleSubmit}>
                 {/* Section: Name & Brand */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
                   <div className="space-y-3 group">
                     <label className="subheading block text-[10px] tracking-[0.25em] transition-colors group-focus-within:text-primary">Họ và tên</label>
                     <input
@@ -1079,7 +1117,7 @@ export default function Home() {
                 <p className="text-elegant opacity-60">Trang phục phù hợp với Sinfonia</p>
               </div>
 
-              <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-stretch h-[400px] md:h-[500px]">
+              <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-stretch h-auto lg:h-[500px]">
                 {/* Left Timeline - Vertical Axis */}
                 <div className="w-full lg:w-48 relative flex flex-col h-full">
                   <div className="relative grid grid-rows-3 h-full pl-8 lg:pl-12">
