@@ -12,8 +12,10 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
 export default function Home() {
   const container = useRef<HTMLDivElement>(null);
   const agendaTrigger = useRef<HTMLDivElement>(null);
+  const dresscodeTrigger = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [activeAgenda, setActiveAgenda] = useState<number>(0);
+  const [activeDresscode, setActiveDresscode] = useState<number>(0);
   const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [formData, setFormData] = useState({
     name: "",
@@ -67,6 +69,39 @@ export default function Home() {
       details: ["Fireworks", "DJ", "Pool Party"],
       coords: { x: 50, y: 77, scale: 2.5 }
     },
+  ];
+
+  const dresscodeData = [
+    {
+      title: "Welcoming",
+      subtitle: "Đón khách",
+      women: "Váy lụa",
+      men: "Vest / Blazer",
+      palette: {
+        women: ["#FCE4EC", "#FFF9C4", "#E1BEE7", "#FFFFFF"],
+        men: ["#F5F5DC", "#D2B48C", "#4E342E", "#FFFFFF"]
+      }
+    },
+    {
+      title: "Dinner",
+      subtitle: "Tiệc tối",
+      women: "Đầm dạ hội",
+      men: "Suit / Tuxedo",
+      palette: {
+        women: ["#556B2F", "#1A1A1A", "#8B4513", "#FFFFFF"],
+        men: ["#556B2F", "#1A1A1A", "#333333", "#FFFFFF"]
+      }
+    },
+    {
+      title: "After Party",
+      subtitle: "Tiệc hồ bơi",
+      women: "Trang phục hồ bơi / Bikini",
+      men: "Quần short / Trang phục bơi",
+      palette: {
+        women: ["#B2EBF2", "#FFF9C4", "#FFCCBC", "#FFFFFF"],
+        men: ["#E0F7FA", "#CFD8DC", "#FFAB91", "#FFFFFF"]
+      }
+    }
   ];
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -129,6 +164,21 @@ export default function Home() {
           // Segment progress into equal parts for each item
           const index = Math.min(Math.floor(progress * totalItems), totalItems - 1);
           setActiveAgenda(index);
+        }
+      });
+
+      // ScrollTrigger for Dresscode Pinning & State
+      ScrollTrigger.create({
+        trigger: dresscodeTrigger.current,
+        start: "top top",
+        end: "+=1500", // Smaller scroll distance for 3 items
+        pin: true,
+        scrub: true,
+        onUpdate: (self) => {
+          const totalItems = 3;
+          const progress = self.progress;
+          const index = Math.min(Math.floor(progress * totalItems), totalItems - 1);
+          setActiveDresscode(index);
         }
       });
     }
@@ -602,72 +652,102 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 6. Dresscode */}
-        <section className="section-container">
-          <div className="content-wrapper max-w-4xl">
-            <div className="mb-16 space-y-4">
-              <h2 className="heading-lg">Quy chuẩn trang phục</h2>
-              <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
-              <p className="text-elegant opacity-60">Dresscode for an Elegant Atmosphere</p>
-            </div>
+        {/* 6. Dresscode — Upgraded Timeline & Illustration View */}
+        <div ref={dresscodeTrigger} className="bg-background">
+          <section className="min-h-screen w-full flex flex-col justify-center overflow-hidden" id="dresscode-section">
+            <div className="content-wrapper max-w-6xl">
+              <div className="mb-10 space-y-4 text-center">
+                <h2 className="heading-lg">Quy chuẩn trang phục</h2>
+                <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
+                <p className="text-elegant opacity-60">Dresscode for an Elegant Atmosphere</p>
+              </div>
 
-            <div className="border border-primary/10 rounded-sm overflow-hidden">
-              {/* Header Row */}
-              <div className="grid grid-cols-1 md:grid-cols-[1.5fr_2fr_2fr] bg-primary/[0.03] border-b border-primary/10">
-                <div className="p-6 hidden md:block"></div>
-                <div className="p-6 text-center border-l border-primary/10">
-                  <h4 className="subheading !opacity-100 text-primary">Dành cho Nữ</h4>
+              <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-stretch h-[400px] md:h-[500px]">
+                {/* Left Timeline - Vertical Axis */}
+                <div className="w-full lg:w-48 relative flex flex-col h-full">
+                  <div className="relative grid grid-rows-3 h-full pl-8 lg:pl-12">
+                    {/* Vertical Axis Line */}
+                    <div className="absolute left-0 top-[15px] bottom-[15px] w-[1px] bg-primary/5 hidden lg:block"></div>
+
+                    {/* Vertical Progress Line */}
+                    <div
+                      className="absolute left-0 top-[15px] w-[1px] bg-primary/30 transition-all duration-1000 ease-in-out hidden lg:block"
+                      style={{
+                        height: `${(activeDresscode / (dresscodeData.length - 1)) * 100}%`,
+                      }}
+                    ></div>
+
+                    {dresscodeData.map((item, idx) => (
+                      <div
+                        key={idx}
+                        className={`flex flex-col justify-center relative z-10 transition-all duration-700 ${activeDresscode === idx ? 'opacity-100' : 'opacity-20'}`}
+                      >
+                        <h3 className={`text-sm md:text-base font-medium tracking-[0.1em] uppercase transition-colors ${activeDresscode === idx ? 'text-primary' : ''}`}>
+                          {item.title}
+                        </h3>
+                        <p className="text-[10px] uppercase tracking-widest opacity-40 mt-1">{item.subtitle}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="p-6 text-center border-l border-primary/10">
-                  <h4 className="subheading !opacity-100 text-primary">Dành cho Nam</h4>
+
+                {/* Right Illustration & Details */}
+                <div className="flex-1 grid grid-cols-2 gap-8 md:gap-16 items-center">
+                  {/* Women Side */}
+                  <div className="flex flex-col items-center space-y-4 animate-fade-in" key={`women-${activeDresscode}`}>
+                    <div className="relative h-[250px] md:h-[350px] w-full flex items-center justify-center">
+                      <img
+                        src="/assets/women 1.png"
+                        alt="Women Dresscode"
+                        className="h-full object-contain"
+                      />
+                    </div>
+                    <div className="text-center space-y-3">
+                      <p className="text-[10px] md:text-[11px] font-light max-w-[200px] mx-auto opacity-70 italic leading-relaxed">
+                        {dresscodeData[activeDresscode].women}
+                      </p>
+                      <div className="flex justify-center gap-3">
+                        {dresscodeData[activeDresscode].palette.women.map((color, i) => (
+                          <div
+                            key={i}
+                            className="w-4 h-4 md:w-5 md:h-5 rounded-full border border-primary/10 shadow-sm"
+                            style={{ backgroundColor: color }}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Men Side */}
+                  <div className="flex flex-col items-center space-y-4 animate-fade-in" key={`men-${activeDresscode}`}>
+                    <div className="relative h-[250px] md:h-[350px] w-full flex items-center justify-center">
+                      <img
+                        src="/assets/men 2.png"
+                        alt="Men Dresscode"
+                        className="h-full object-contain"
+                      />
+                    </div>
+                    <div className="text-center space-y-3">
+                      <p className="text-[10px] md:text-[11px] font-light max-w-[200px] mx-auto opacity-70 italic leading-relaxed">
+                        {dresscodeData[activeDresscode].men}
+                      </p>
+                      <div className="flex justify-center gap-3">
+                        {dresscodeData[activeDresscode].palette.men.map((color, i) => (
+                          <div
+                            key={i}
+                            className="w-4 h-4 md:w-5 md:h-5 rounded-full border border-primary/10 shadow-sm"
+                            style={{ backgroundColor: color }}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {/* Activities Rows */}
-              {[
-                {
-                  activity: "Đón khách",
-                  eng: "Welcoming",
-                  women: "Váy lụa màu Pastel (Pastel silk dress)",
-                  men: "Vest hoặc Blazer (Đen hoặc có màu)"
-                },
-                {
-                  activity: "Tiệc tối",
-                  eng: "Dinner",
-                  women: "Đầm dạ hội sang trọng (Tông màu Olive hoặc Đen)",
-                  men: "Suit / Tuxedo lịch lãm (Tông màu Olive hoặc Đen)"
-                },
-                {
-                  activity: "Tiệc hồ bơi",
-                  eng: "After Party",
-                  women: "Trang phục hồ bơi / Bikini (Pool Party Chic)",
-                  men: "Quần short / Trang phục bơi thoải mái"
-                }
-              ].map((item, idx) => (
-                <div key={idx} className="grid grid-cols-1 md:grid-cols-[1.5fr_2fr_2fr] border-b last:border-b-0 border-primary/10 items-stretch">
-                  <div className="p-6 bg-primary/[0.01] flex flex-col justify-center">
-                    <h3 className="text-xl font-medium">{item.activity}</h3>
-                    <p className="text-xs uppercase tracking-widest opacity-40 mt-1">{item.eng}</p>
-                  </div>
-
-                  {/* Mobile Labels are shown only on small screens */}
-                  <div className="p-8 border-t md:border-t-0 md:border-l border-primary/10 flex flex-col justify-center">
-                    <span className="md:hidden subheading mb-2 block">Nữ</span>
-                    <p className="font-light">{item.women}</p>
-                  </div>
-                  <div className="p-8 border-t md:border-t-0 md:border-l border-primary/10 flex flex-col justify-center">
-                    <span className="md:hidden subheading mb-2 block">Nam</span>
-                    <p className="font-light">{item.men}</p>
-                  </div>
-                </div>
-              ))}
             </div>
-
-            <div className="mt-16 text-center">
-              <p className="text-elegant">"Sự thanh lịch là vẻ đẹp không bao giờ phai nhạt."</p>
-            </div>
-          </div>
-        </section>
+          </section>
+        </div>
 
         {/* 7. Contact Us */}
         <section className="section-container section-accent">
