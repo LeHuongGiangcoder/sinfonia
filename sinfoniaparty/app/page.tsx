@@ -361,7 +361,7 @@ export default function Home() {
                 {/* Vertical Timeline Bar - Typographic Minimalist */}
                 <div className="w-full lg:w-64 relative flex flex-col order-2 lg:order-1 h-full">
                   {/* The items container itself will define the height for the line */}
-                  <div className="relative flex flex-row lg:flex-col justify-between h-full pl-8 lg:pl-12">
+                  <div className="relative grid grid-rows-6 h-full pl-8 lg:pl-12">
                     {/* Vertical Axis Line - Anchored to items container */}
                     <div className="absolute left-0 top-[8px] bottom-[8px] w-[1px] bg-primary/5 hidden lg:block"></div>
 
@@ -376,23 +376,27 @@ export default function Home() {
                     {agendaData.map((item, idx) => (
                       <div
                         key={idx}
-                        className={`flex lg:flex-row flex-col items-center lg:items-start group relative z-10 transition-all duration-700 ${activeAgenda === idx ? 'opacity-100' : 'opacity-20'}`}
+                        className={`flex flex-col justify-center relative z-10 transition-all duration-700 ${activeAgenda === idx ? 'opacity-100' : 'opacity-20'}`}
                       >
-                        {/* Time Label */}
-                        <div className="lg:w-16 lg:mr-8 mb-2 lg:mb-0">
-                          <span className={`text-xs md:text-sm font-light tabular-nums transition-colors duration-500 ${activeAgenda === idx ? 'text-primary' : ''}`}>
-                            {item.time}
-                          </span>
-                        </div>
+                        <div className="flex lg:flex-row flex-col items-center lg:items-start">
+                          {/* Time Label */}
+                          <div className="lg:w-16 lg:mr-8 mb-2 lg:mb-0 shrink-0">
+                            <span className={`text-xs md:text-sm font-light tabular-nums transition-colors duration-500 ${activeAgenda === idx ? 'text-primary' : ''}`}>
+                              {item.time}
+                            </span>
+                          </div>
 
-                        {/* Title */}
-                        <div className="transition-all duration-700">
-                          <h3 className={`text-[11px] md:text-xs font-medium tracking-[0.15em] uppercase transition-colors ${activeAgenda === idx ? 'text-primary' : ''}`}>
-                            {item.title}
-                          </h3>
-                          <p className={`text-[9px] md:text-[10px] font-light mt-1 transition-all duration-500 ${activeAgenda === idx ? 'opacity-60 block' : 'opacity-0 hidden'}`}>
-                            {item.location}
-                          </p>
+                          {/* Title */}
+                          <div className="transition-all duration-700">
+                            <h3 className={`text-[11px] md:text-xs font-medium tracking-[0.15em] uppercase transition-colors ${activeAgenda === idx ? 'text-primary' : ''}`}>
+                              {item.title}
+                            </h3>
+                            <div className="relative h-4 overflow-visible">
+                              <p className={`absolute top-1 left-0 text-[9px] md:text-[10px] font-light transition-all duration-500 whitespace-nowrap ${activeAgenda === idx ? 'opacity-60 block' : 'opacity-0 hidden'}`}>
+                                {item.location}
+                              </p>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     ))}
@@ -405,7 +409,7 @@ export default function Home() {
                   <img
                     src="/assets/map 2.png"
                     alt="Sinfonia Overview Map"
-                    className="w-full h-full object-cover opacity-80 saturate-[0.7]"
+                    className="w-full h-full object-cover object-top opacity-80 saturate-[0.7]"
                   />
 
                   {/* Spotlight Overlay */}
