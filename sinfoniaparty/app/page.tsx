@@ -32,13 +32,15 @@ function InstagramPost({ images }: { images: string[] }) {
     tl.set(heartRef.current, { scale: 0, opacity: 0, display: "flex" })
       .to(heartRef.current, { scale: 1.2, opacity: 0.9, duration: 0.3, ease: "back.out(1.7)" })
       .to(heartRef.current, { scale: 1, duration: 0.1 })
-      .to(heartRef.current, { opacity: 0, scale: 1.5, duration: 0.4, delay: 0.3, ease: "power2.in", onComplete: () => {
-        gsap.set(heartRef.current, { display: "none" });
-      }});
+      .to(heartRef.current, {
+        opacity: 0, scale: 1.5, duration: 0.4, delay: 0.3, ease: "power2.in", onComplete: () => {
+          gsap.set(heartRef.current, { display: "none" });
+        }
+      });
   };
 
   return (
-    <div 
+    <div
       ref={containerRef}
       className="relative aspect-square overflow-hidden bg-primary/5 cursor-pointer group"
       onMouseEnter={() => setIsHovered(true)}
@@ -56,7 +58,7 @@ function InstagramPost({ images }: { images: string[] }) {
       {/* Navigation Arrows */}
       {isHovered && images.length > 1 && (
         <>
-          <button 
+          <button
             onClick={prev}
             className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white z-10 hover:bg-white/40 transition-colors"
           >
@@ -65,7 +67,7 @@ function InstagramPost({ images }: { images: string[] }) {
               <path d="M15 18l-6-6 6-6" />
             </svg>
           </button>
-          <button 
+          <button
             onClick={next}
             className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white z-10 hover:bg-white/40 transition-colors"
           >
@@ -81,8 +83,8 @@ function InstagramPost({ images }: { images: string[] }) {
       {images.length > 1 && (
         <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
           {images.map((_, i) => (
-            <div 
-              key={i} 
+            <div
+              key={i}
               className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${i === index ? "bg-white scale-110" : "bg-white/40"}`}
             />
           ))}
@@ -156,12 +158,12 @@ function GalleryHint() {
 }
 
 // --- Sub-component: ContactCard (Instagram Style) ---
-function ContactCard({ images, unit, rep, role, phone, intro, link }: { 
-  images: string[]; 
-  unit: string; 
-  rep: string; 
+function ContactCard({ images, unit, rep, role, phone, intro, link }: {
+  images: string[];
+  unit: string;
+  rep: string;
   role: string;
-  phone: string; 
+  phone: string;
   intro: string;
   link?: string;
 }) {
@@ -185,13 +187,15 @@ function ContactCard({ images, unit, rep, role, phone, intro, link }: {
     tl.set(heartRef.current, { scale: 0, opacity: 0, display: "flex" })
       .to(heartRef.current, { scale: 1.2, opacity: 0.9, duration: 0.3, ease: "back.out(1.7)" })
       .to(heartRef.current, { scale: 1, duration: 0.1 })
-      .to(heartRef.current, { opacity: 0, scale: 1.5, duration: 0.4, delay: 0.3, ease: "power2.in", onComplete: () => {
-        gsap.set(heartRef.current, { display: "none" });
-      }});
+      .to(heartRef.current, {
+        opacity: 0, scale: 1.5, duration: 0.4, delay: 0.3, ease: "power2.in", onComplete: () => {
+          gsap.set(heartRef.current, { display: "none" });
+        }
+      });
   };
 
   return (
-    <div 
+    <div
       className="relative aspect-square md:aspect-[4/5] bg-white overflow-hidden group border border-primary/5 cursor-pointer"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -220,9 +224,9 @@ function ContactCard({ images, unit, rep, role, phone, intro, link }: {
           </p>
           {phone && <p className="text-base tracking-widest mb-8">{phone}</p>}
           {link && (
-            <a 
-              href={link} 
-              target="_blank" 
+            <a
+              href={link}
+              target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
               className="px-6 py-2.5 border border-white/30 text-white text-[10px] uppercase tracking-[0.2em] hover:bg-white hover:text-primary transition-all duration-500"
@@ -565,7 +569,7 @@ export default function Home() {
         <section className="section-container section-accent relative overflow-hidden" id="details-section">
           <div className="content-wrapper max-w-6xl">
             <div className="mb-20 space-y-4">
-              <h2 className="heading-lg">Time & Venue</h2>
+              <h2 className="heading-lg">Thời gian & Địa điểm</h2>
               <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
               <p className="text-elegant opacity-60">Hành trình của những cảm xúc thăng hoa</p>
             </div>
@@ -710,7 +714,7 @@ export default function Home() {
           <section className="min-h-screen w-full flex flex-col justify-center overflow-hidden" id="agenda-section">
             <div className="w-full max-w-7xl mx-auto px-6">
               <div className="mb-12 space-y-4 text-center">
-                <h2 className="heading-lg">The Agenda</h2>
+                <h2 className="heading-lg">Chương trình</h2>
                 <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
                 <p className="text-elegant opacity-60">Dấu ấn của những khoảnh khắc</p>
               </div>
@@ -837,7 +841,7 @@ export default function Home() {
         <section className="section-container section-accent">
           <div className="content-wrapper max-w-2xl">
             <div className="mb-16 space-y-4">
-              <h2 className="heading-lg">RSVP</h2>
+              <h2 className="heading-lg">Phản hồi</h2>
               <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
               <p className="text-elegant opacity-60">Hãy để chúng tôi chuẩn bị tốt nhất cho bạn</p>
             </div>
@@ -855,8 +859,8 @@ export default function Home() {
                   <h3 className="heading-md">Cảm ơn bạn đã phản hồi</h3>
                   <p className="text-elegant">Chúng tôi đã nhận được thông tin và rất mong được đón tiếp bạn.</p>
                 </div>
-                <button 
-                  onClick={() => setFormStatus("idle")} 
+                <button
+                  onClick={() => setFormStatus("idle")}
                   className="text-xs uppercase tracking-[0.2em] opacity-40 hover:opacity-100 transition-all hover:tracking-[0.3em] mt-4"
                 >
                   Gửi phản hồi khác
@@ -998,9 +1002,9 @@ export default function Home() {
           <section className="min-h-screen w-full flex flex-col justify-center overflow-hidden" id="dresscode-section">
             <div className="content-wrapper max-w-6xl">
               <div className="mb-10 space-y-4 text-center">
-                <h2 className="heading-lg">Dress Code</h2>
+                <h2 className="heading-lg">Quy chuẩn trang phục</h2>
                 <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
-                <p className="text-elegant opacity-60">Dresscode for an Elegant Atmosphere</p>
+                <p className="text-elegant opacity-60">Trang phục phù hợp với Sinfonia</p>
               </div>
 
               <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-stretch h-[400px] md:h-[500px]">
@@ -1037,9 +1041,9 @@ export default function Home() {
                   {/* Women Side */}
                   <div className="flex flex-col items-center space-y-4 animate-fade-in" key={`women-${activeDresscode}`}>
                     <div className="relative h-[250px] md:h-[350px] w-full flex items-center justify-center">
-                      <img 
-                        src={dresscodeData[activeDresscode].womenImg} 
-                        alt="Women Dresscode" 
+                      <img
+                        src={dresscodeData[activeDresscode].womenImg}
+                        alt="Women Dresscode"
                         className="h-full object-contain"
                       />
                     </div>
@@ -1062,9 +1066,9 @@ export default function Home() {
                   {/* Men Side */}
                   <div className="flex flex-col items-center space-y-4 animate-fade-in" key={`men-${activeDresscode}`}>
                     <div className="relative h-[250px] md:h-[350px] w-full flex items-center justify-center">
-                      <img 
-                        src={dresscodeData[activeDresscode].menImg} 
-                        alt="Men Dresscode" 
+                      <img
+                        src={dresscodeData[activeDresscode].menImg}
+                        alt="Men Dresscode"
                         className="h-full object-contain"
                       />
                     </div>
@@ -1094,13 +1098,13 @@ export default function Home() {
         <section className="h-screen flex items-center justify-center section-accent relative overflow-hidden" id="contact-section">
           <div className="w-full max-w-6xl mx-auto px-4 md:px-12">
             <div className="mb-12 space-y-4 text-center">
-              <h2 className="heading-lg">Contact</h2>
+              <h2 className="heading-lg">Đồng hành cùng Sinfonia</h2>
               <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
-              <p className="text-elegant opacity-60">Main support contacts</p>
+              <p className="text-elegant opacity-60">Những con người tâm huyết kiến tạo nên khoảnh khắc</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
-              <ContactCard 
+              <ContactCard
                 images={["ginale.jpg"]}
                 unit="Glow"
                 rep="Ms. Giang Le"
@@ -1109,7 +1113,7 @@ export default function Home() {
                 intro="Glow mang đến giải pháp kỹ thuật và thẩm mỹ số hóa, biến những ý tưởng bay bổng thành trải nghiệm tương tác mượt mà cho website của bạn."
                 link="https://www.facebook.com/profile.php?id=61560901527827"
               />
-              <ContactCard 
+              <ContactCard
                 images={["nhat linh.png"]}
                 unit="Fancy"
                 rep="Ms. Nhat Linh"
@@ -1118,7 +1122,7 @@ export default function Home() {
                 intro="Với Fancy, mỗi đám cưới là một tác phẩm nghệ thuật. Chúng tôi tận tâm kiến tạo không gian tiệc sang trọng, tinh tế và mang đậm dấu ấn cá nhân."
                 link="https://www.facebook.com/fancywedding2015"
               />
-              <ContactCard 
+              <ContactCard
                 images={["thomas.png"]}
                 unit="Wyndham"
                 rep="Mr. Thomas"
