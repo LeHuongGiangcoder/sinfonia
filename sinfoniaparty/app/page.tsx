@@ -43,6 +43,7 @@ function InstagramPost({ images }: { images: string[] }) {
       className="relative aspect-square overflow-hidden bg-primary/5 cursor-pointer group"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={() => setIndex((prev) => (prev + 1) % images.length)}
       onDoubleClick={handleDoubleClick}
     >
       {/* Images */}
@@ -149,6 +150,120 @@ function GalleryHint() {
         <p className="text-[11px] text-white font-medium uppercase tracking-[0.25em] bg-black/40 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20">
           Double tap to react
         </p>
+      </div>
+    </div>
+  );
+}
+
+// --- Sub-component: ContactCard (Instagram Style) ---
+function ContactCard({ images, unit, rep, role, phone, intro, link }: { 
+  images: string[]; 
+  unit: string; 
+  rep: string; 
+  role: string;
+  phone: string; 
+  intro: string;
+  link?: string;
+}) {
+  const [index, setIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const heartRef = useRef<HTMLDivElement>(null);
+
+  const next = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    setIndex((prev) => (prev + 1) % 2);
+  };
+
+  const prev = (e?: React.MouseEvent) => {
+    if (e) e.stopPropagation();
+    setIndex((prev) => (prev - 1 + 2) % 2);
+  };
+
+  const handleDoubleClick = () => {
+    if (!heartRef.current) return;
+    const tl = gsap.timeline();
+    tl.set(heartRef.current, { scale: 0, opacity: 0, display: "flex" })
+      .to(heartRef.current, { scale: 1.2, opacity: 0.9, duration: 0.3, ease: "back.out(1.7)" })
+      .to(heartRef.current, { scale: 1, duration: 0.1 })
+      .to(heartRef.current, { opacity: 0, scale: 1.5, duration: 0.4, delay: 0.3, ease: "power2.in", onComplete: () => {
+        gsap.set(heartRef.current, { display: "none" });
+      }});
+  };
+
+  return (
+    <div 
+      className="relative aspect-square md:aspect-[4/5] bg-white overflow-hidden group border border-primary/5 cursor-pointer"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={() => next()}
+      onDoubleClick={handleDoubleClick}
+    >
+      {/* Slides */}
+      <div className="absolute inset-0 flex transition-transform duration-500 ease-out" style={{ transform: `translateX(-${index * 100}%)` }}>
+        {/* Slide 1: Rep Photo */}
+        <div className="w-full h-full shrink-0 relative">
+          <img src={`/assets/${images[0]}`} className="w-full h-full object-cover" alt={rep} />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+          <div className="absolute bottom-6 left-6 right-6 text-left text-white">
+            <p className="text-[10px] uppercase tracking-[0.3em] opacity-70 mb-1">{unit}</p>
+            <h3 className="heading-md text-2xl !text-white">{rep}</h3>
+            <p className="text-xs font-light opacity-80 mt-1">{role}</p>
+          </div>
+        </div>
+
+        {/* Slide 2: Info & Link */}
+        <div className="w-full h-full shrink-0 flex flex-col items-center justify-center p-8 bg-primary text-center text-white">
+          <h3 className="heading-md text-2xl mb-2">{unit}</h3>
+          <div className="w-8 h-[1px] bg-white/20 mb-6"></div>
+          <p className="text-sm font-light leading-relaxed mb-8 opacity-90 italic">
+            "{intro}"
+          </p>
+          {phone && <p className="text-base tracking-widest mb-8">{phone}</p>}
+          {link && (
+            <a 
+              href={link} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="px-6 py-2.5 border border-white/30 text-white text-[10px] uppercase tracking-[0.2em] hover:bg-white hover:text-primary transition-all duration-500"
+            >
+              Ghé thăm Fanpage
+            </a>
+          )}
+        </div>
+      </div>
+
+      {/* Navigation Arrows */}
+      {isHovered && (
+        <>
+          <button onClick={prev} className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white z-10 hover:bg-white/40 transition-colors">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-4 h-4"><path d="M15 18l-6-6 6-6" /></svg>
+          </button>
+          <button onClick={next} className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white z-10 hover:bg-white/40 transition-colors">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-4 h-4"><path d="M9 18l6-6-6-6" /></svg>
+          </button>
+        </>
+      )}
+
+      {/* Indicators */}
+      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+        {[0, 1].map((i) => (
+          <div key={i} className={`w-1 h-1 rounded-full transition-all duration-300 ${i === index ? "bg-white scale-125" : "bg-white/40"}`} />
+        ))}
+      </div>
+
+      {/* Heart React Animation */}
+      <div ref={heartRef} className="absolute inset-0 hidden items-center justify-center pointer-events-none z-20">
+        <svg viewBox="0 0 24 24" fill="currentColor" className="w-20 h-20 text-white drop-shadow-2xl">
+          <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.5 3c1.557 0 3.046.716 3.99 1.954a4.41 4.41 0 01.101-.132C12.54 3.716 14.029 3 15.586 3 18.37 3 20.75 5.322 20.75 8.25c0 3.924-2.438 7.11-4.73 9.27a25.115 25.115 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+        </svg>
+      </div>
+
+      {/* Instagram Carousel Icon */}
+      <div className="absolute top-3 right-3 text-white z-10 drop-shadow-md opacity-70">
+        <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5">
+          <path d="M19 8H8a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2V10a2 2 0 00-2-2z" /><path d="M5 16H3a2 2 0 01-2-2V3a2 2 0 012-2h11a2 2 0 012 2v2" />
+        </svg>
       </div>
     </div>
   );
@@ -975,33 +1090,43 @@ export default function Home() {
           </section>
         </div>
 
-        {/* 7. Contact Us */}
-        <section className="section-container section-accent">
-          <div className="content-wrapper">
-            <div className="mb-16 space-y-4 text-center">
-              <h2 className="heading-lg">Liên hệ</h2>
+        {/* 7. Contact Us — Interactive Person Collage */}
+        <section className="h-screen flex items-center justify-center section-accent relative overflow-hidden" id="contact-section">
+          <div className="w-full max-w-6xl mx-auto px-4 md:px-12">
+            <div className="mb-12 space-y-4 text-center">
+              <h2 className="heading-lg">Đồng hành cùng Sinfonia</h2>
               <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
-              <p className="text-elegant opacity-60">Hỗ trợ thông tin trực tiếp</p>
+              <p className="text-elegant opacity-60">Những con người tâm huyết kiến tạo nên khoảnh khắc</p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-              <div className="flex flex-col items-center">
-                <h3 className="heading-md mb-2">Đơn vị 1</h3>
-                <p className="font-light text-lg">Người đại diện 1</p>
-                <a href="mailto:rep1@example.com" className="text-sm opacity-60 mt-2 hover:opacity-100 transition-opacity">rep1@example.com</a>
-                <p className="text-sm opacity-60 mt-1">+84 123 456 789</p>
-              </div>
-              <div className="flex flex-col items-center">
-                <h3 className="heading-md mb-2">Đơn vị 2</h3>
-                <p className="font-light text-lg">Người đại diện 2</p>
-                <a href="mailto:rep2@example.com" className="text-sm opacity-60 mt-2 hover:opacity-100 transition-opacity">rep2@example.com</a>
-                <p className="text-sm opacity-60 mt-1">+84 123 456 789</p>
-              </div>
-              <div className="flex flex-col items-center">
-                <h3 className="heading-md mb-2">Đơn vị 3</h3>
-                <p className="font-light text-lg">Người đại diện 3</p>
-                <a href="mailto:rep3@example.com" className="text-sm opacity-60 mt-2 hover:opacity-100 transition-opacity">rep3@example.com</a>
-                <p className="text-sm opacity-60 mt-1">+84 123 456 789</p>
-              </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
+              <ContactCard 
+                images={["ginale.jpg"]}
+                unit="Glow"
+                rep="Ms. Giang Le"
+                role="0857086906"
+                phone="Hỗ trợ kỹ thuật Website"
+                intro="Glow mang đến giải pháp kỹ thuật và thẩm mỹ số hóa, biến những ý tưởng bay bổng thành trải nghiệm tương tác mượt mà cho website của bạn."
+                link="https://www.facebook.com/profile.php?id=61560901527827"
+              />
+              <ContactCard 
+                images={["nhat linh.png"]}
+                unit="Fancy"
+                rep="Ms. Nhat Linh"
+                role="Hỗ trợ kế hoạch & Kỹ thuật"
+                phone=""
+                intro="Với Fancy, mỗi đám cưới là một tác phẩm nghệ thuật. Chúng tôi tận tâm kiến tạo không gian tiệc sang trọng, tinh tế và mang đậm dấu ấn cá nhân."
+                link="https://www.facebook.com/fancywedding2015"
+              />
+              <ContactCard 
+                images={["thomas.png"]}
+                unit="Wyndham"
+                rep="Mr. Thomas"
+                role="Hỗ trợ địa điểm & Tiệc"
+                phone=""
+                intro="Tận hưởng không gian nghỉ dưỡng tuyệt mỹ và dịch vụ đẳng cấp tại Wyndham Sky Lake, nơi khởi đầu cho những hành trình hạnh phúc."
+                link="https://www.facebook.com/WynhamSkyLake.ResortVillas"
+              />
             </div>
           </div>
         </section>
