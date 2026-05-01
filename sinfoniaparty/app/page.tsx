@@ -833,7 +833,7 @@ export default function Home() {
                 {/* Vertical Timeline Bar - Typographic Minimalist */}
                 <div className="w-full lg:w-64 relative flex flex-col order-2 lg:order-1 h-full">
                   {/* The items container itself will define the height for the line */}
-                  <div className="relative grid grid-rows-6 h-full pl-8 lg:pl-12">
+                  <div className="relative flex flex-col justify-between h-full pl-8 lg:pl-12 py-4 gap-y-10">
                     {/* Vertical Axis Line - Anchored to items container */}
                     <div className="absolute left-0 top-[8px] bottom-[8px] w-[1px] bg-primary/5 hidden lg:block"></div>
 
@@ -1120,7 +1120,7 @@ export default function Home() {
               <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-stretch min-h-[500px] h-auto">
                 {/* Left Timeline - Vertical Axis */}
                 <div className="w-full lg:w-48 relative flex flex-col h-full">
-                  <div className="relative grid grid-rows-3 h-full pl-8 lg:pl-12">
+                  <div className="relative flex flex-col justify-between h-full pl-8 lg:pl-12 py-8 gap-y-16">
                     {/* Vertical Axis Line */}
                     <div className="absolute left-0 top-[15px] bottom-[15px] w-[1px] bg-primary/5 hidden lg:block"></div>
 
