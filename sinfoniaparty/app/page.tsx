@@ -9,6 +9,151 @@ import Entrance from "@/components/Entrance";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
+// --- Sub-component: InstagramPost ---
+function InstagramPost({ images }: { images: string[] }) {
+  const [index, setIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const heartRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const next = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  const handleDoubleClick = () => {
+    if (!heartRef.current) return;
+    const tl = gsap.timeline();
+    tl.set(heartRef.current, { scale: 0, opacity: 0, display: "flex" })
+      .to(heartRef.current, { scale: 1.2, opacity: 0.9, duration: 0.3, ease: "back.out(1.7)" })
+      .to(heartRef.current, { scale: 1, duration: 0.1 })
+      .to(heartRef.current, { opacity: 0, scale: 1.5, duration: 0.4, delay: 0.3, ease: "power2.in", onComplete: () => {
+        gsap.set(heartRef.current, { display: "none" });
+      }});
+  };
+
+  return (
+    <div 
+      ref={containerRef}
+      className="relative aspect-square overflow-hidden bg-primary/5 cursor-pointer group"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onDoubleClick={handleDoubleClick}
+    >
+      {/* Images */}
+      <div className="absolute inset-0 flex transition-transform duration-500 ease-out" style={{ transform: `translateX(-${index * 100}%)` }}>
+        {images.map((src, i) => (
+          <img key={i} src={`/assets/${src}`} className="w-full h-full object-cover shrink-0" alt="Post" />
+        ))}
+      </div>
+
+      {/* Navigation Arrows */}
+      {isHovered && images.length > 1 && (
+        <>
+          <button 
+            onClick={prev}
+            className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white z-10 hover:bg-white/40 transition-colors"
+          >
+            <span className="sr-only">Previous</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-4 h-4">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+          <button 
+            onClick={next}
+            className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white z-10 hover:bg-white/40 transition-colors"
+          >
+            <span className="sr-only">Next</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-4 h-4">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
+        </>
+      )}
+
+      {/* Dots Indicator */}
+      {images.length > 1 && (
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+          {images.map((_, i) => (
+            <div 
+              key={i} 
+              className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${i === index ? "bg-white scale-110" : "bg-white/40"}`}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Heart React Animation */}
+      <div ref={heartRef} className="absolute inset-0 hidden items-center justify-center pointer-events-none z-20">
+        <svg viewBox="0 0 24 24" fill="currentColor" className="w-20 h-20 text-white drop-shadow-2xl">
+          <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.5 3c1.557 0 3.046.716 3.99 1.954a4.41 4.41 0 01.101-.132C12.54 3.716 14.029 3 15.586 3 18.37 3 20.75 5.322 20.75 8.25c0 3.924-2.438 7.11-4.73 9.27a25.115 25.115 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+        </svg>
+      </div>
+
+      {/* Instagram Carousel Icon (top right) */}
+      {images.length > 1 && (
+        <div className="absolute top-3 right-3 text-white z-10 drop-shadow-md">
+          <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+            <path d="M19 8H8a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2V10a2 2 0 00-2-2z" />
+            <path d="M5 16H3a2 2 0 01-2-2V3a2 2 0 012-2h11a2 2 0 012 2v2" />
+          </svg>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// --- Sub-component: GalleryHint ---
+function GalleryHint() {
+  const handRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    if (!containerRef.current || !handRef.current) return;
+
+    gsap.set(handRef.current, { opacity: 0, y: 30, scale: 0.8 });
+
+    ScrollTrigger.create({
+      trigger: containerRef.current,
+      start: "top 60%",
+      once: true,
+      onEnter: () => {
+        const tl = gsap.timeline({ delay: 0.5 });
+        tl.to(handRef.current, { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "power3.out" })
+          .to(handRef.current, { scale: 0.85, duration: 0.1, repeat: 1, yoyo: true }, "+=0.2")
+          .to(handRef.current, { x: 15, duration: 0.3, repeat: 1, yoyo: true, ease: "power2.inOut" }, "+=0.3")
+          .to(handRef.current, { opacity: 0, y: -20, duration: 0.6, ease: "power2.in" }, "+=1");
+      }
+    });
+  }, { scope: containerRef });
+
+  return (
+    <div ref={containerRef} className="absolute inset-0 pointer-events-none z-50 flex items-center justify-center">
+      <div ref={handRef} className="flex flex-col items-center gap-3">
+        <div className="relative">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" className="w-16 h-16 drop-shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+            <path d="M12 10V4a2 2 0 0 0-2-2h0a2 2 0 0 0-2 2v7" />
+            <path d="M12 10a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v4" />
+            <path d="M16 12a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v4" />
+            <path d="M20 14a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v4" />
+            <path d="M12 22h4a8 8 0 0 0 8-8v-2" />
+            <path d="M6 10l-3 3a2 2 0 0 0 0 2.8l4 4a8 8 0 0 0 5 2.2" />
+          </svg>
+          <div className="absolute top-0 right-0 w-6 h-6 border-2 border-white rounded-full animate-ping opacity-75"></div>
+        </div>
+        <p className="text-[11px] text-white font-medium uppercase tracking-[0.25em] bg-black/40 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20">
+          Double tap to react
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export default function Home() {
   const container = useRef<HTMLDivElement>(null);
   const agendaTrigger = useRef<HTMLDivElement>(null);
@@ -258,6 +403,48 @@ export default function Home() {
             </div>
           </div>
         </section>
+        {/* 2.5 Atmosphere Gallery — A cinematic journey through the day */}
+        <section className="p-[1px] md:p-[4px] bg-background relative overflow-hidden" id="gallery-section">
+          <div className="w-full">
+            {/* Interaction Hint */}
+            <div className="flex justify-center py-4 opacity-30 animate-pulse-slow">
+              <p className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary font-medium">
+                Double tap to react • Click arrows to explore
+              </p>
+            </div>
+            <div className="grid grid-cols-3 gap-[1px] md:gap-[4px]">
+              {/* Row 1: Garden & Sunset */}
+              {[
+                ["w7.jpeg", "w6.jpeg", "w1.jpeg"],
+                ["w11.jpeg", "w10.jpeg", "w8.jpeg"],
+                ["b1.jpg", "b4.jpg", "b10.jpg"]
+              ].map((images, idx) => (
+                <div key={`row1-${idx}`} className="relative">
+                  <InstagramPost images={images} />
+                  {idx === 1 && <GalleryHint />}
+                </div>
+              ))}
+
+              {/* Row 2: Dinner */}
+              {[
+                ["w9.jpg", "b14.jpg", "b11.jpg"],
+                ["b15.jpg", "b18.jpg", "b12.jpg"],
+                ["w12.jpeg", "w14.jpeg", "w15.jpeg"]
+              ].map((images, idx) => (
+                <InstagramPost key={`row2-${idx}`} images={images} />
+              ))}
+
+              {/* Row 3: Night Party */}
+              {[
+                ["w13.jpeg", "b5.jpg", "b16.jpg"],
+                ["b7.jpg", "b8.jpg", "b17.jpg"],
+                ["b9.jpg", "b6.jpg", "w18.jpeg"]
+              ].map((images, idx) => (
+                <InstagramPost key={`row3-${idx}`} images={images} />
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* 3. Time & Places - Redesigned for Premium Aesthetic */}
         <section className="section-container section-accent relative overflow-hidden" id="details-section">
@@ -308,8 +495,8 @@ export default function Home() {
                     </div>
 
                     <div className="grid grid-cols-7 gap-x-1 md:gap-x-4 gap-y-2 text-center px-2">
-                      {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(day => (
-                        <span key={day} className="text-[9px] font-bold opacity-30 tracking-[0.2em] mb-2">{day}</span>
+                      {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, idx) => (
+                        <span key={`day-${day}-${idx}`} className="text-[9px] font-bold opacity-30 tracking-[0.2em] mb-2">{day}</span>
                       ))}
 
                       <span className="text-sm opacity-10">31</span>

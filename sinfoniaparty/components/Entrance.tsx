@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useRef } from "react";
 import gsap from "gsap";
-import Image from "next/image";
 import { purgatory } from "@/lib/fonts";
 
 const IMAGES = [
@@ -27,21 +26,27 @@ const LOGOS = [
   "/assets/light_wedding_logo.jpg",
 ];
 
+interface PhotoItem {
+  id: number;
+  src: string;
+  rotation: number;
+}
+
 export default function Entrance({ onComplete }: { onComplete: () => void }) {
   const [progress, setProgress] = useState(0);
   const [isCaptured, setIsCaptured] = useState(false);
+  const [activePhotos, setActivePhotos] = useState<PhotoItem[]>([]);
+  const [activeLogo, setActiveLogo] = useState<string | null>(null);
+  const [showFinalGrid, setShowFinalGrid] = useState(false);
+  const [currentMessage, setCurrentMessage] = useState("");
+  
   const containerRef = useRef<HTMLDivElement>(null);
-  const imageContainerRef = useRef<HTMLDivElement>(null);
-  const logoContainerRef = useRef<HTMLDivElement>(null);
-  const messageRef = useRef<HTMLDivElement>(null);
   const cameraRef = useRef<HTMLDivElement>(null);
   const flashRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
 
   const startSequence = () => {
-    if (isCaptured) return; // Guard against multiple clicks
+    if (isCaptured) return;
     
-    // Fade out the interactive hint as soon as the user clicks
     gsap.to(".pointing-hint", { opacity: 0, duration: 0.3 });
 
     const tl = gsap.timeline({
@@ -51,13 +56,11 @@ export default function Entrance({ onComplete }: { onComplete: () => void }) {
       }
     });
 
-    // 1. Subtle Shutter & Focus Motion
     tl.to(cameraRef.current, {
       scale: 1.03,
       duration: 0.4,
       ease: "power2.inOut",
     })
-    // Mechanical shutter vibration (subtle shake)
     .to(cameraRef.current, {
       x: 1,
       y: -1,
@@ -72,7 +75,6 @@ export default function Entrance({ onComplete }: { onComplete: () => void }) {
       ease: "power2.out",
     });
 
-    // 2. The Flash (Triggered after the subtle motion)
     tl.to(flashRef.current, {
       opacity: 1,
       duration: 0.1,
@@ -84,7 +86,6 @@ export default function Entrance({ onComplete }: { onComplete: () => void }) {
       ease: "power2.out",
     });
 
-    // 3. Fade out camera
     tl.to(cameraRef.current, {
       opacity: 0,
       duration: 0.5,
@@ -122,45 +123,23 @@ export default function Entrance({ onComplete }: { onComplete: () => void }) {
       tl.to({}, {
         duration: photoDuration,
         onStart: () => {
-          if (imageContainerRef.current) {
-            const rotation = (Math.random() - 0.5) * 15;
-            const img = document.createElement("div");
-            img.className = "absolute inset-0 flex items-center justify-center pointer-events-none";
-            img.innerHTML = `<img src="${src}" class="w-[280px] md:w-[420px] aspect-[3/4] object-cover shadow-2xl border-[10px] border-white" style="transform: scale(0.5) rotate(${rotation}deg); opacity: 0;" />`;
-            imageContainerRef.current.appendChild(img);
-
-            gsap.to(img.querySelector("img"), {
-              scale: 1,
-              opacity: 1,
-              duration: 0.5,
-              ease: "back.out(1.4)",
-            });
-
-            if (imageContainerRef.current.children.length > 5) {
-              const oldImg = imageContainerRef.current.children[0];
-              gsap.to(oldImg, {
-                opacity: 0,
-                scale: 1.2,
-                duration: 0.4,
-                onComplete: () => oldImg.remove()
-              });
-            }
-          }
+          const rotation = (Math.random() - 0.5) * 15;
+          setActivePhotos(prev => {
+            const newList = [...prev, { id: Date.now() + index, src, rotation }];
+            return newList.length > 5 ? newList.slice(1) : newList;
+          });
         }
       }, index * photoDuration);
     });
 
     // Phase 2: Pause at 80% with Message
-    tl.to(imageContainerRef.current, { opacity: 0, scale: 1.2, duration: 0.6, ease: "power3.in" });
-    tl.to(messageRef.current, {
-      opacity: 1,
+    tl.to(".photo-stack-container", { opacity: 0, scale: 1.2, duration: 0.6, ease: "power3.in" });
+    tl.to({}, {
       duration: 0.8,
-      onStart: () => {
-        if (messageRef.current) messageRef.current.innerText = "Bạn gần tới rồi";
-      }
+      onStart: () => setCurrentMessage("Bạn gần tới rồi"),
+      onComplete: () => setCurrentMessage("")
     });
     tl.to({}, { duration: 0.8 });
-    tl.to(messageRef.current, { opacity: 0, duration: 0.4 });
 
     // Phase 3: Logos (80 -> 99%)
     const logoSequenceStartTime = tl.duration();
@@ -171,63 +150,28 @@ export default function Entrance({ onComplete }: { onComplete: () => void }) {
       ease: "power1.inOut"
     }, logoSequenceStartTime);
 
-    tl.to("#logo-showcase-container", { display: "flex", opacity: 1, duration: 0.3 }, logoSequenceStartTime);
-
     LOGOS.forEach((src, index) => {
       tl.to({}, {
         duration: 0.25,
-        onStart: () => {
-          const container = document.getElementById("active-logo-container");
-          if (container) {
-            container.innerHTML = `<img src="${src}" class="h-full w-auto object-contain" id="current-logo" style="opacity: 0;" />`;
-            gsap.to("#current-logo", { opacity: 1, duration: 0.15 });
-          }
-        }
+        onStart: () => setActiveLogo(src)
       }, logoSequenceStartTime + 0.3 + (index * 0.25));
     });
 
     // Final Grid Transition
     const finalGridStartTime = logoSequenceStartTime + 0.3 + (LOGOS.length * 0.25);
-    tl.to("#logo-showcase-container", { opacity: 0, duration: 0.2 }, finalGridStartTime);
-
-    tl.to(logoContainerRef.current, {
-      duration: 1.5,
+    tl.to({}, {
+      duration: 0.2,
       onStart: () => {
-        if (logoContainerRef.current) {
-          logoContainerRef.current.style.display = "flex";
-          logoContainerRef.current.innerHTML = `
-            <div class="flex flex-col items-center gap-16 max-w-5xl px-8">
-              <div class="grid grid-cols-3 gap-x-12 md:gap-x-20 gap-y-8 md:gap-y-12 items-center justify-items-center" id="final-grid">
-                ${LOGOS.map((src, i) => `<img src="${src}" class="h-10 md:h-16 w-auto object-contain logo-grid-item" style="opacity: 0;" />`).join("")}
-              </div>
-              <p class="subheading !opacity-100 text-primary tracking-[0.4em] uppercase text-sm opacity-0" id="final-text">Để cùng mang đến</p>
-            </div>
-          `;
-
-          gsap.to(".logo-grid-item", {
-            opacity: 1,
-            duration: 0.8,
-            stagger: 0.05,
-            ease: "power2.out"
-          });
-
-          gsap.to("#final-text", {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            delay: 0.5,
-            ease: "power2.out"
-          });
-        }
+        setActiveLogo(null);
+        setShowFinalGrid(true);
       }
-    }, finalGridStartTime + 0.2);
+    }, finalGridStartTime);
 
     tl.to(progressProxy, { value: 100, duration: 0.4 });
     tl.to({}, { duration: 0.8 });
   };
 
   useEffect(() => {
-    // Initial camera entrance
     gsap.fromTo(cameraRef.current,
       { opacity: 0, scale: 0.8, y: 20 },
       { opacity: 1, scale: 1, y: 0, duration: 1.2, ease: "power3.out" }
@@ -253,10 +197,8 @@ export default function Entrance({ onComplete }: { onComplete: () => void }) {
               className="w-[90vw] md:w-[55rem] h-auto transition-transform duration-300 ease-out group-hover:scale-105"
             />
 
-            {/* Refined 1-Finger Pointing Hint - Positioned Near Right Corner */}
             <div className="pointing-hint absolute top-20 right-0 md:top-36 md:right-0 pointer-events-none animate-bounce-slow flex flex-col items-center gap-2">
               <div className="relative w-12 h-12 md:w-20 md:h-20">
-                {/* Delicate Sparkle Lines at Fingertip */}
                 <div className="absolute -bottom-1 -left-1 flex gap-1 opacity-60 rotate-[225deg]">
                   <div className="w-[1px] h-2 bg-primary rounded-full"></div>
                   <div className="w-[1px] h-3 bg-primary rounded-full"></div>
@@ -275,8 +217,6 @@ export default function Entrance({ onComplete }: { onComplete: () => void }) {
                 Click to capture
               </p>
             </div>
-
-            {/* Pulsing Hint Overlay - Simplified */}
             <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl pointer-events-none"></div>
           </div>
         </div>
@@ -288,24 +228,49 @@ export default function Entrance({ onComplete }: { onComplete: () => void }) {
         className="fixed inset-0 bg-white z-[100] opacity-0 pointer-events-none"
       />
 
-      <div ref={imageContainerRef} className="absolute inset-0 flex items-center justify-center">
-        {/* Photo Stack */}
+      {/* Photo Stack */}
+      <div className="photo-stack-container absolute inset-0 flex items-center justify-center">
+        {activePhotos.map((photo) => (
+          <div key={photo.id} className="absolute inset-0 flex items-center justify-center pointer-events-none animate-fade-in">
+            <img 
+              src={photo.src} 
+              className="w-[280px] md:w-[420px] aspect-[3/4] object-cover shadow-2xl border-[10px] border-white"
+              style={{ transform: `rotate(${photo.rotation}deg)` }}
+            />
+          </div>
+        ))}
       </div>
 
-      <div ref={messageRef} className="absolute inset-0 flex items-center justify-center text-primary font-display text-4xl md:text-6xl opacity-0">
-        {/* "Bạn gần tới rồi" */}
-      </div>
+      {/* Message Reveal */}
+      {currentMessage && (
+        <div className="absolute inset-0 flex items-center justify-center text-primary font-display text-4xl md:text-6xl animate-fade-in">
+          {currentMessage}
+        </div>
+      )}
 
-      <div id="logo-showcase-container" className="hidden absolute inset-0 items-center justify-center opacity-0">
-        <div className="flex flex-col items-center justify-center">
-          <div id="active-logo-container" className="h-32 md:h-48 flex items-center justify-center"></div>
+      {/* Active Logo Sequence */}
+      {activeLogo && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center animate-fade-in">
+          <div className="h-32 md:h-48 flex items-center justify-center">
+            <img src={activeLogo} className="h-full w-auto object-contain" />
+          </div>
           <p className="subheading mt-8 !opacity-100 text-primary tracking-[0.2em] uppercase text-xs">Chúng tôi là 1 đội</p>
         </div>
-      </div>
+      )}
 
-      <div ref={logoContainerRef} className="hidden absolute inset-0 items-center justify-center">
-        {/* Final Grid */}
-      </div>
+      {/* Final Logo Grid */}
+      {showFinalGrid && (
+        <div className="absolute inset-0 flex items-center justify-center animate-fade-in">
+          <div className="flex flex-col items-center gap-16 max-w-5xl px-8">
+            <div className="grid grid-cols-3 gap-x-12 md:gap-x-20 gap-y-8 md:gap-y-12 items-center justify-items-center">
+              {LOGOS.map((src, i) => (
+                <img key={i} src={src} className="h-10 md:h-16 w-auto object-contain" />
+              ))}
+            </div>
+            <p className="subheading !opacity-100 text-primary tracking-[0.4em] uppercase text-sm">Để cùng mang đến</p>
+          </div>
+        </div>
+      )}
 
       {/* Progress Counter */}
       <div className={`absolute bottom-12 right-12 text-primary font-display text-6xl md:text-8xl select-none pointer-events-none tabular-nums flex items-baseline transition-opacity duration-500 ${isCaptured ? 'opacity-10' : 'opacity-0'}`}>
