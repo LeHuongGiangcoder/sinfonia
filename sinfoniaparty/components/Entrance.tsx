@@ -135,11 +135,11 @@ export default function Entrance({ onComplete }: { onComplete: () => void }) {
     // Phase 2: Pause at 80% with Message
     tl.to(".photo-stack-container", { opacity: 0, scale: 1.2, duration: 0.6, ease: "power3.in" });
     tl.to({}, {
-      duration: 0.8,
+      duration: 1.3,
       onStart: () => setCurrentMessage("Bạn gần tới rồi"),
       onComplete: () => setCurrentMessage("")
     });
-    tl.to({}, { duration: 0.8 });
+    tl.to({}, { duration: 0.5 });
 
     // Phase 3: Logos (80 -> 99%)
     const logoSequenceStartTime = tl.duration();
@@ -157,8 +157,8 @@ export default function Entrance({ onComplete }: { onComplete: () => void }) {
       }, logoSequenceStartTime + 0.3 + (index * 0.25));
     });
 
-    // Final Grid Transition
-    const finalGridStartTime = logoSequenceStartTime + 0.3 + (LOGOS.length * 0.25);
+    // Final Grid Transition - Added 0.5s pause after individual logos
+    const finalGridStartTime = logoSequenceStartTime + 0.3 + (LOGOS.length * 0.25) + 0.5;
     tl.to({}, {
       duration: 0.2,
       onStart: () => {
@@ -243,7 +243,7 @@ export default function Entrance({ onComplete }: { onComplete: () => void }) {
 
       {/* Message Reveal */}
       {currentMessage && (
-        <div className="absolute inset-0 flex items-center justify-center text-primary font-display text-4xl md:text-6xl animate-fade-in">
+        <div className="absolute inset-0 flex items-center justify-center text-primary font-display text-4xl md:text-6xl animate-fade-in -translate-y-12">
           {currentMessage}
         </div>
       )}
