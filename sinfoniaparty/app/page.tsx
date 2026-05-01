@@ -273,13 +273,74 @@ function ContactCard({ images, unit, rep, role, phone, intro, link }: {
   );
 }
 
+// --- Sub-component: Navbar ---
+function Navbar({ scrolled }: { scrolled: boolean }) {
+  const navItems = [
+    { name: "Venue", href: "#details-section" },
+    { name: "Agenda", href: "#agenda-section" },
+    { name: "Gallery", href: "#gallery-section" },
+    { name: "Dress Code", href: "#dresscode-section" },
+    { name: "RSVP", href: "#rsvp-section" },
+  ];
+
+  return (
+    <nav className={`fixed top-0 left-0 w-full z-[100] transition-all duration-700 ${scrolled ? "bg-background/80 backdrop-blur-lg border-b border-primary/5 py-4" : "bg-transparent py-8"}`}>
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center gap-8 flex-1">
+          {navItems.slice(0, 2).map((item) => (
+            <a 
+              key={item.name} 
+              href={item.href}
+              className={`text-[10px] uppercase tracking-[0.3em] font-medium transition-all hover:text-primary/100 ${scrolled ? "text-primary/70" : "text-white/70"}`}
+            >
+              {item.name}
+            </a>
+          ))}
+        </div>
+
+        {/* Brand Logo - Centered (Only visible on scroll) */}
+        <div className={`flex-none transition-all duration-700 ${scrolled ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"}`}>
+          <a href="#" className={`${purgatory.className} text-2xl md:text-3xl text-primary`}>
+            The Sinfonia
+          </a>
+        </div>
+
+        {/* Desktop Navigation Right */}
+        <div className="hidden md:flex items-center justify-end gap-8 flex-1">
+          {navItems.slice(2).map((item) => (
+            <a 
+              key={item.name} 
+              href={item.href}
+              className={`text-[10px] uppercase tracking-[0.3em] font-medium transition-all hover:text-primary/100 ${scrolled ? "text-primary/70" : "text-white/70"}`}
+            >
+              {item.name}
+            </a>
+          ))}
+        </div>
+
+        {/* Mobile Menu Button - Minimalist */}
+        <div className="md:hidden">
+          <button className={`${scrolled ? "text-primary" : "text-white"} opacity-80`}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-6 h-6">
+              <path d="M4 8h16M4 16h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </nav>
+  );
+}
+
 export default function Home() {
   const container = useRef<HTMLDivElement>(null);
   const agendaTrigger = useRef<HTMLDivElement>(null);
   const dresscodeTrigger = useRef<HTMLDivElement>(null);
+
   const [isLoading, setIsLoading] = useState(true);
-  const [activeAgenda, setActiveAgenda] = useState<number>(0);
-  const [activeDresscode, setActiveDresscode] = useState<number>(0);
+  const [activeAgenda, setActiveAgenda] = useState(0);
+  const [activeDresscode, setActiveDresscode] = useState(0);
+  const [scrolled, setScrolled] = useState(false);
   const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [formData, setFormData] = useState({
     name: "",
@@ -289,6 +350,15 @@ export default function Home() {
     meal_preference: "",
     note: ""
   });
+
+  // Handle scroll for Navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const agendaData = [
     {
@@ -457,6 +527,7 @@ export default function Home() {
   return (
     <>
       {isLoading && <Entrance onComplete={() => setIsLoading(false)} />}
+      {!isLoading && <Navbar scrolled={scrolled} />}
       <div ref={container} className={`min-h-screen ${isLoading ? "opacity-0" : "opacity-100"} transition-opacity duration-1000`}>
         {/* 1 & 2. Hero Section — Full Bleed */}
         <section className="relative h-screen w-full overflow-hidden bg-black">
@@ -838,7 +909,7 @@ export default function Home() {
         </div>
 
         {/* 5. RSVP */}
-        <section className="section-container section-accent">
+        <section className="section-container section-accent" id="rsvp-section">
           <div className="content-wrapper max-w-2xl">
             <div className="mb-16 space-y-4">
               <h2 className="heading-lg">RSVP</h2>
