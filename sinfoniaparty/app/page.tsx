@@ -23,49 +23,49 @@ export default function Home() {
     meal_preference: "",
     note: ""
   });
-  
+
   const agendaData = [
-    { 
-      time: "12:00", 
-      title: "CHECK IN", 
-      location: "Lobby Lounge", 
+    {
+      time: "12:00",
+      title: "CHECK IN",
+      location: "Lobby Lounge",
       details: [],
-      coords: { x: 56, y: 62, scale: 2.2 } 
+      coords: { x: 56, y: 62, scale: 2.2 }
     },
-    { 
-      time: "14:30", 
-      title: "TEA BREAK", 
-      location: "Sinfonia Garden", 
+    {
+      time: "14:30",
+      title: "TEA BREAK",
+      location: "Sinfonia Garden",
       details: [],
-      coords: { x: 58, y: 41, scale: 2.5 } 
+      coords: { x: 58, y: 41, scale: 2.5 }
     },
-    { 
-      time: "15:00", 
-      title: "WELCOME + WORKSHOP", 
-      location: "Grand Ballroom", 
+    {
+      time: "15:00",
+      title: "WELCOME + WORKSHOP",
+      location: "Grand Ballroom",
       details: ["Khai mạc", "Workshop"],
-      coords: { x: 47, y: 81, scale: 2.2 } 
+      coords: { x: 47, y: 81, scale: 2.2 }
     },
-    { 
-      time: "16:30", 
-      title: "CATCH THE SUN", 
-      location: "Sunset Terrace", 
+    {
+      time: "16:30",
+      title: "CATCH THE SUN",
+      location: "Sunset Terrace",
       details: ["Cocktail", "Live music"],
-      coords: { x: 70, y: 13, scale: 2.8 } 
+      coords: { x: 70, y: 13, scale: 2.8 }
     },
-    { 
-      time: "18:30", 
-      title: "A SKY FULL OF STARS", 
-      location: "Starlight Dining", 
+    {
+      time: "18:30",
+      title: "A SKY FULL OF STARS",
+      location: "Starlight Dining",
       details: ["Dinner", "Drinking game"],
-      coords: { x: 66, y: 60, scale: 2.5 } 
+      coords: { x: 66, y: 60, scale: 2.5 }
     },
-    { 
-      time: "20:30", 
-      title: "MIDNIGHT REVERIE", 
-      location: "Infinity Pool", 
+    {
+      time: "20:30",
+      title: "MIDNIGHT REVERIE",
+      location: "Infinity Pool",
       details: ["Fireworks", "DJ", "Pool Party"],
-      coords: { x: 50, y: 77, scale: 2.5 } 
+      coords: { x: 50, y: 77, scale: 2.5 }
     },
   ];
 
@@ -138,590 +138,590 @@ export default function Home() {
     <>
       {isLoading && <Entrance onComplete={() => setIsLoading(false)} />}
       <div ref={container} className={`min-h-screen ${isLoading ? "opacity-0" : "opacity-100"} transition-opacity duration-1000`}>
-      {/* 1 & 2. Hero Section — Full Bleed */}
-      <section className="relative h-screen w-full overflow-hidden bg-black">
-        {/* Background — natural colors, no overlay */}
-        <img
-          src="/assets/hero%20background.png"
-          alt="The Sinfonia"
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ willChange: 'auto' }}
-        />
+        {/* 1 & 2. Hero Section — Full Bleed */}
+        <section className="relative h-screen w-full overflow-hidden bg-black">
+          {/* Background — natural colors, no overlay */}
+          <img
+            src="/assets/hero%20background.png"
+            alt="The Sinfonia"
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ willChange: 'auto' }}
+          />
 
-        {/* Text block — repositioned to vertical center of viewport */}
-        <div
-          className="absolute left-1/2 z-10 flex flex-col items-center text-center w-full px-6"
-          style={{ top: '45%', transform: 'translate(-50%, -50%)' }}
-        >
-          {/* Subheading — above the title */}
-          <p
-            className="uppercase font-light tracking-[0.5em] text-[9px] md:text-[11px] mb-5"
-            style={{
-              color: 'rgba(243,237,225,0.65)',
-              animation: 'hero-fade-up 0.9s ease-out 0.3s both',
-            }}
+          {/* Text block — repositioned to vertical center of viewport */}
+          <div
+            className="absolute left-1/2 z-10 flex flex-col items-center text-center w-full px-6"
+            style={{ top: '45%', transform: 'translate(-50%, -50%)' }}
           >
-            a party that never ends
-          </p>
+            {/* Subheading — above the title */}
+            <p
+              className="uppercase font-light tracking-[0.5em] text-[9px] md:text-[11px] mb-5"
+              style={{
+                color: 'rgba(243,237,225,0.65)',
+                animation: 'hero-fade-up 0.9s ease-out 0.3s both',
+              }}
+            >
+              a party that never ends
+            </p>
 
-          {/* Main Title — Pure fade-up for maximum sharpness */}
-          <h1
-            className={`${purgatory.className} text-[4.5rem] md:text-[7rem] lg:text-[9rem] leading-none lowercase tracking-tight`}
-            style={{
-              color: '#f3ede1',
-              opacity: 0,
-              animation: 'hero-fade-up 1.2s ease-out 0.7s both',
-              transform: 'translateZ(0)',
-              WebkitFontSmoothing: 'antialiased',
-            } as React.CSSProperties}
+            {/* Main Title — Pure fade-up for maximum sharpness */}
+            <h1
+              className={`${purgatory.className} text-[4.5rem] md:text-[7rem] lg:text-[9rem] leading-none lowercase tracking-tight`}
+              style={{
+                color: '#f3ede1',
+                opacity: 0,
+                animation: 'hero-fade-up 1.2s ease-out 0.7s both',
+                transform: 'translateZ(0)',
+                WebkitFontSmoothing: 'antialiased',
+              } as React.CSSProperties}
+            >
+              The Sinfonia
+            </h1>
+          </div>
+
+          {/* Subtle bottom blend into next section */}
+          <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/30 to-transparent pointer-events-none z-10"></div>
+
+          {/* Scroll Indicator — Minimalist Mouse Icon */}
+          <div
+            className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-4 animate-fade-in"
+            style={{ animationDelay: '3.5s', animationFillMode: 'both' }}
           >
-            The Sinfonia
-          </h1>
-        </div>
-
-        {/* Subtle bottom blend into next section */}
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/30 to-transparent pointer-events-none z-10"></div>
-
-        {/* Scroll Indicator — Minimalist Mouse Icon */}
-        <div 
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-4 animate-fade-in"
-          style={{ animationDelay: '3.5s', animationFillMode: 'both' }}
-        >
-          {/* Elegant Mouse SVG */}
-          <div className="w-5 h-8 border-[1.2px] border-[#f3ede1]/30 rounded-full relative">
-            <div 
-              className="absolute left-1/2 top-2 -translate-x-1/2 w-[1.5px] h-[4px] bg-[#f3ede1]/60 rounded-full animate-wheel-scroll"
-            ></div>
-          </div>
-          
-          <div className="w-[1px] h-10 relative overflow-hidden" style={{ background: 'rgba(243,237,225,0.1)' }}>
-            <div 
-              className="absolute top-0 left-0 w-full h-1/2 animate-scroll-down" 
-              style={{ background: 'linear-gradient(to bottom, transparent, rgba(243,237,225,0.6), transparent)' }}
-            ></div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. Time & Places - Redesigned for Premium Aesthetic */}
-      <section className="section-container section-accent relative overflow-hidden" id="details-section">
-        <div className="content-wrapper max-w-6xl">
-          <div className="mb-20 space-y-4">
-            <h2 className="heading-lg">Thời gian & Địa điểm</h2>
-            <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
-            <p className="text-elegant opacity-60">Hành trình của những cảm xúc thăng hoa</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-            {/* Date Card */}
-            <div className="group relative p-6 md:p-10 pt-12 md:pt-16 bg-background/40 backdrop-blur-sm border border-primary/10 rounded-xs shadow-sm hover:shadow-xl transition-all duration-700 flex flex-col items-center justify-start overflow-hidden">
-              {/* Decorative Corner Frames */}
-              <div className="absolute top-4 left-4 w-10 h-10 border-t border-l border-primary/20 transition-all duration-500 group-hover:w-14 group-hover:h-14"></div>
-              <div className="absolute bottom-4 right-4 w-10 h-10 border-b border-r border-primary/20 transition-all duration-500 group-hover:w-14 group-hover:h-14"></div>
-              
-              <div className="space-y-8 relative z-10 w-full text-center">
-                <h3 className="subheading !mb-0">Thời gian diễn ra</h3>
-                
-                {/* Top Text Section — Tailored spacing for hierarchy */}
-                <div className="text-center flex flex-col items-center justify-start mt-10 h-[110px] w-full">
-                  <div className="mb-0">
-                    <p className="text-2xl md:text-3xl font-normal leading-none text-primary">
-                      02 & 03 Tháng 6
-                    </p>
-                  </div>
-                  <div className="mt-1">
-                    <p className="text-lg md:text-xl font-light italic opacity-80 leading-none">
-                      Thứ Ba & Thứ Tư
-                    </p>
-                  </div>
-                  <div className="mt-4">
-                    <p className="text-[10px] uppercase tracking-[0.2em] opacity-40 leading-none">
-                      Mùa hạ năm 2026
-                    </p>
-                  </div>
-                </div>
-
-                {/* Modern Minimalist Calendar — Compressed for viewport fit */}
-                <div className="-mx-6 md:-mx-10 bg-background/40 backdrop-blur-sm p-6 md:p-8 border-y border-primary/5 w-[calc(100%+3rem)] md:w-[calc(100%+5rem)] shadow-sm">
-                  <div className="flex justify-between items-center mb-6 px-4">
-                    <span className="font-display text-lg md:text-xl text-primary tracking-widest uppercase">June 2026</span>
-                    <div className="flex gap-6 opacity-30">
-                      <span className="text-sm cursor-default hover:opacity-100 transition-opacity">←</span>
-                      <span className="text-sm cursor-default hover:opacity-100 transition-opacity">→</span>
-                    </div>
-                  </div>
-                  
-                  <div className="grid grid-cols-7 gap-x-1 md:gap-x-4 gap-y-2 text-center px-2">
-                    {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(day => (
-                      <span key={day} className="text-[9px] font-bold opacity-30 tracking-[0.2em] mb-2">{day}</span>
-                    ))}
-                    
-                    <span className="text-sm opacity-10">31</span>
-                    <span className="text-sm opacity-40">1</span>
-                    
-                    <div className="relative flex items-center justify-center">
-                      <div className="absolute inset-0 bg-primary rounded-full w-7 h-7 mx-auto -translate-y-[1px]"></div>
-                      <span className="relative text-sm text-background font-medium">2</span>
-                    </div>
-                    
-                    <div className="relative flex items-center justify-center">
-                      <div className="absolute inset-0 bg-primary rounded-full w-7 h-7 mx-auto -translate-y-[1px]"></div>
-                      <span className="relative text-sm text-background font-medium">3</span>
-                    </div>
-                    
-                    {[4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30].map(d => (
-                      <span key={d} className="text-sm opacity-40">{d}</span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              
-              {/* Subtle Background Ornament */}
-              <div className="absolute -bottom-10 -left-10 w-40 h-40 border border-primary/5 rounded-full pointer-events-none group-hover:scale-110 transition-transform duration-1000"></div>
+            {/* Elegant Mouse SVG */}
+            <div className="w-5 h-8 border-[1.2px] border-[#f3ede1]/30 rounded-full relative">
+              <div
+                className="absolute left-1/2 top-2 -translate-x-1/2 w-[1.5px] h-[4px] bg-[#f3ede1]/60 rounded-full animate-wheel-scroll"
+              ></div>
             </div>
 
-            {/* Location Card */}
-            <div className="group relative p-6 md:p-10 pt-12 md:pt-16 bg-background/40 backdrop-blur-sm border border-primary/10 rounded-xs shadow-sm hover:shadow-xl transition-all duration-700 flex flex-col items-center justify-start overflow-hidden">
-              {/* Decorative Corner Frames */}
-              <div className="absolute top-4 left-4 w-10 h-10 border-t border-l border-primary/20 transition-all duration-500 group-hover:w-14 group-hover:h-14"></div>
-              <div className="absolute bottom-4 right-4 w-10 h-10 border-b border-r border-primary/20 transition-all duration-500 group-hover:w-14 group-hover:h-14"></div>
-
-              <div className="space-y-6 relative z-10 text-center w-full">
-                <h3 className="subheading !mb-0">Địa điểm tổ chức</h3>
-                
-                {/* Top Text Section — Tailored spacing synced with Time card */}
-                <div className="text-center flex flex-col items-center justify-start mt-10 h-[110px] w-full">
-                  <div className="mb-0">
-                    <p className="text-2xl md:text-3xl font-normal leading-none text-primary">
-                      Wyndham Sky Lake
-                    </p>
-                  </div>
-                  <div className="mt-1">
-                    <p className="text-lg md:text-xl font-light italic opacity-80 leading-none">
-                      Resort & Villas
-                    </p>
-                  </div>
-                  <div className="mt-4">
-                    <p className="text-[10px] uppercase tracking-[0.2em] opacity-40 leading-none">
-                      Chương Mỹ, Hà Nội, Việt Nam
-                    </p>
-                  </div>
-                </div>
-
-                {/* Bottom Section — Height synced with Calendar in Time card */}
-                <div className="flex flex-col h-[320px] w-full">
-                  {/* Venue Illustration — Expanded height */}
-                  <div className="-mx-6 md:-mx-10 relative overflow-hidden flex-grow border-y border-primary/5">
-                    <img 
-                      src="/assets/places.png" 
-                      alt="Wyndham Sky Lake Illustration" 
-                      className="w-full h-full object-cover opacity-90"
-                      style={{
-                        mixBlendMode: 'multiply',
-                        WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)',
-                        maskImage: 'linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)',
-                      }}
-                    />
-                  </div>
-
-                  <div className="pt-6 flex justify-center">
-                    <a
-                      href="https://maps.app.goo.gl/joX5qdMXjJcBBuwVA"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group/link relative inline-block px-8 py-3 overflow-hidden"
-                    >
-                      <span className="relative z-10 text-[10px] uppercase tracking-[0.3em] font-medium transition-colors group-hover/link:text-background">
-                        Chỉ đường
-                      </span>
-                      <div className="absolute inset-0 bg-primary translate-y-full group-hover/link:translate-y-0 transition-transform duration-500 ease-out"></div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              {/* Subtle Background Ornament */}
-              <div className="absolute -top-10 -right-10 w-40 h-40 border border-primary/5 rounded-full pointer-events-none group-hover:scale-110 transition-transform duration-1000"></div>
+            <div className="w-[1px] h-10 relative overflow-hidden" style={{ background: 'rgba(243,237,225,0.1)' }}>
+              <div
+                className="absolute top-0 left-0 w-full h-1/2 animate-scroll-down"
+                style={{ background: 'linear-gradient(to bottom, transparent, rgba(243,237,225,0.6), transparent)' }}
+              ></div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* 4. Agendas - Vertical Timeline & Spotlight Map (Pinned via ScrollTrigger) */}
-      <div ref={agendaTrigger} className="bg-background">
-        <section className="min-h-screen w-full flex items-center overflow-hidden py-24" id="agenda-section">
-          <div className="w-full max-w-7xl mx-auto px-6">
-            <div className="mb-16 space-y-4 text-center">
-              <h2 className="heading-lg">Chương trình</h2>
+        {/* 3. Time & Places - Redesigned for Premium Aesthetic */}
+        <section className="section-container section-accent relative overflow-hidden" id="details-section">
+          <div className="content-wrapper max-w-6xl">
+            <div className="mb-20 space-y-4">
+              <h2 className="heading-lg">Thời gian & Địa điểm</h2>
               <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
-              <p className="text-elegant opacity-60">Dấu ấn của những khoảnh khắc</p>
+              <p className="text-elegant opacity-60">Hành trình của những cảm xúc thăng hoa</p>
             </div>
-            
-            <div className="flex flex-col lg:flex-row gap-16 items-stretch h-[450px] md:h-[500px]">
-            {/* Vertical Timeline Bar - Typographic Minimalist */}
-            <div className="w-full lg:w-64 relative flex flex-col order-2 lg:order-1 h-full">
-              {/* The items container itself will define the height for the line */}
-              <div className="relative flex flex-row lg:flex-col justify-between h-full pl-8 lg:pl-12">
-                {/* Vertical Axis Line - Anchored to items container */}
-                <div className="absolute left-0 top-[8px] bottom-[8px] w-[1px] bg-primary/5 hidden lg:block"></div>
-                
-                {/* Vertical Active Progress Line */}
-                <div 
-                  className="absolute left-0 top-[8px] w-[1px] bg-primary/30 transition-all duration-1000 ease-in-out hidden lg:block"
-                  style={{ 
-                    height: `${(activeAgenda !== null ? (activeAgenda / (agendaData.length - 1)) * 100 : 0)}%`,
-                  }}
-                ></div>
 
-                {agendaData.map((item, idx) => (
-                  <div 
-                    key={idx}
-                    className={`flex lg:flex-row flex-col items-center lg:items-start group relative z-10 transition-all duration-700 ${activeAgenda === idx ? 'opacity-100' : 'opacity-20'}`}
-                  >
-                    {/* Time Label */}
-                    <div className="lg:w-16 lg:mr-8 mb-2 lg:mb-0">
-                      <span className={`text-xs md:text-sm font-light tabular-nums transition-colors duration-500 ${activeAgenda === idx ? 'text-primary' : ''}`}>
-                        {item.time}
-                      </span>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+              {/* Date Card */}
+              <div className="group relative p-6 md:p-10 pt-12 md:pt-16 bg-background/40 backdrop-blur-sm border border-primary/10 rounded-xs shadow-sm hover:shadow-xl transition-all duration-700 flex flex-col items-center justify-start overflow-hidden">
+                {/* Decorative Corner Frames */}
+                <div className="absolute top-4 left-4 w-10 h-10 border-t border-l border-primary/20 transition-all duration-500 group-hover:w-14 group-hover:h-14"></div>
+                <div className="absolute bottom-4 right-4 w-10 h-10 border-b border-r border-primary/20 transition-all duration-500 group-hover:w-14 group-hover:h-14"></div>
+
+                <div className="space-y-8 relative z-10 w-full text-center">
+                  <h3 className="subheading !mb-0">Thời gian diễn ra</h3>
+
+                  {/* Top Text Section — Tailored spacing for hierarchy */}
+                  <div className="text-center flex flex-col items-center justify-start mt-10 h-[110px] w-full">
+                    <div className="mb-0">
+                      <p className="text-2xl md:text-3xl font-normal leading-none text-primary">
+                        02 & 03 Tháng 6
+                      </p>
                     </div>
-                    
-                    {/* Title */}
-                    <div className="transition-all duration-700">
-                      <h3 className={`text-[11px] md:text-xs font-medium tracking-[0.15em] uppercase transition-colors ${activeAgenda === idx ? 'text-primary' : ''}`}>
-                        {item.title}
-                      </h3>
-                      <p className={`text-[9px] md:text-[10px] font-light mt-1 transition-all duration-500 ${activeAgenda === idx ? 'opacity-60 block' : 'opacity-0 hidden'}`}>
-                        {item.location}
+                    <div className="mt-1">
+                      <p className="text-lg md:text-xl font-light italic opacity-80 leading-none">
+                        Thứ Ba & Thứ Tư
+                      </p>
+                    </div>
+                    <div className="mt-4">
+                      <p className="text-[10px] uppercase tracking-[0.2em] opacity-40 leading-none">
+                        Mùa hạ năm 2026
                       </p>
                     </div>
                   </div>
-                ))}
+
+                  {/* Modern Minimalist Calendar — Compressed for viewport fit */}
+                  <div className="-mx-6 md:-mx-10 bg-background/40 backdrop-blur-sm p-6 md:p-8 border-y border-primary/5 w-[calc(100%+3rem)] md:w-[calc(100%+5rem)] shadow-sm">
+                    <div className="flex justify-between items-center mb-6 px-4">
+                      <span className="font-display text-lg md:text-xl text-primary tracking-widest uppercase">June 2026</span>
+                      <div className="flex gap-6 opacity-30">
+                        <span className="text-sm cursor-default hover:opacity-100 transition-opacity">←</span>
+                        <span className="text-sm cursor-default hover:opacity-100 transition-opacity">→</span>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-7 gap-x-1 md:gap-x-4 gap-y-2 text-center px-2">
+                      {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(day => (
+                        <span key={day} className="text-[9px] font-bold opacity-30 tracking-[0.2em] mb-2">{day}</span>
+                      ))}
+
+                      <span className="text-sm opacity-10">31</span>
+                      <span className="text-sm opacity-40">1</span>
+
+                      <div className="relative flex items-center justify-center">
+                        <div className="absolute inset-0 bg-primary rounded-full w-7 h-7 mx-auto -translate-y-[1px]"></div>
+                        <span className="relative text-sm text-background font-medium">2</span>
+                      </div>
+
+                      <div className="relative flex items-center justify-center">
+                        <div className="absolute inset-0 bg-primary rounded-full w-7 h-7 mx-auto -translate-y-[1px]"></div>
+                        <span className="relative text-sm text-background font-medium">3</span>
+                      </div>
+
+                      {[4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30].map(d => (
+                        <span key={d} className="text-sm opacity-40">{d}</span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Subtle Background Ornament */}
+                <div className="absolute -bottom-10 -left-10 w-40 h-40 border border-primary/5 rounded-full pointer-events-none group-hover:scale-110 transition-transform duration-1000"></div>
               </div>
-            </div>
 
-            {/* Map Overview - Right */}
-            <div className="flex-1 relative aspect-video lg:aspect-auto min-h-[400px] lg:min-h-0 overflow-hidden rounded-sm border border-primary/10 bg-accent/10 shadow-2xl group/map order-1 lg:order-2">
-              {/* The Map Image */}
-              <img 
-                src="/assets/map%201.png" 
-                alt="Sinfonia Overview Map" 
-                className="w-full h-full object-cover opacity-80 saturate-[0.7]"
-              />
+              {/* Location Card */}
+              <div className="group relative p-6 md:p-10 pt-12 md:pt-16 bg-background/40 backdrop-blur-sm border border-primary/10 rounded-xs shadow-sm hover:shadow-xl transition-all duration-700 flex flex-col items-center justify-start overflow-hidden">
+                {/* Decorative Corner Frames */}
+                <div className="absolute top-4 left-4 w-10 h-10 border-t border-l border-primary/20 transition-all duration-500 group-hover:w-14 group-hover:h-14"></div>
+                <div className="absolute bottom-4 right-4 w-10 h-10 border-b border-r border-primary/20 transition-all duration-500 group-hover:w-14 group-hover:h-14"></div>
 
-              {/* Spotlight Overlay */}
-              <div 
-                className="absolute inset-0 pointer-events-none z-10 transition-all duration-700 ease-in-out"
-                style={{
-                  background: activeAgenda !== null 
-                    ? `radial-gradient(circle 100px at ${agendaData[activeAgenda].coords.x}% ${agendaData[activeAgenda].coords.y}%, transparent 0%, rgba(0,0,0,0.25) 100%)`
-                    : 'rgba(0,0,0,0.1)'
-                }}
-              ></div>
+                <div className="space-y-6 relative z-10 text-center w-full">
+                  <h3 className="subheading !mb-0">Địa điểm tổ chức</h3>
 
-              {/* Magnifying Glass / Highlight Circle */}
-              {activeAgenda !== null && (
-                <div 
-                  className="absolute w-32 h-32 md:w-40 md:h-40 -ml-16 -mt-16 md:-ml-20 md:-mt-20 border-2 border-primary/30 rounded-full z-20 pointer-events-none transition-all duration-700 ease-in-out shadow-[0_0_50px_rgba(75,80,6,0.2)]"
-                  style={{ 
-                    left: `${agendaData[activeAgenda].coords.x}%`, 
-                    top: `${agendaData[activeAgenda].coords.y}%`,
-                  }}
-                >
-                  <div className="absolute top-1/2 left-1/2 -ml-2 -mt-2 w-4 h-4 bg-primary rounded-full shadow-[0_0_20px_rgba(75,80,6,0.5)]">
-                    <div className="absolute inset-0 rounded-full border-2 border-white/50 animate-ping"></div>
+                  {/* Top Text Section — Tailored spacing synced with Time card */}
+                  <div className="text-center flex flex-col items-center justify-start mt-10 h-[110px] w-full">
+                    <div className="mb-0">
+                      <p className="text-2xl md:text-3xl font-normal leading-none text-primary">
+                        Wyndham Sky Lake
+                      </p>
+                    </div>
+                    <div className="mt-1">
+                      <p className="text-lg md:text-xl font-light italic opacity-80 leading-none">
+                        Resort & Villas
+                      </p>
+                    </div>
+                    <div className="mt-4">
+                      <p className="text-[10px] uppercase tracking-[0.2em] opacity-40 leading-none">
+                        Chương Mỹ, Hà Nội, Việt Nam
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Bottom Section — Height synced with Calendar in Time card */}
+                  <div className="flex flex-col h-[320px] w-full">
+                    {/* Venue Illustration — Expanded height */}
+                    <div className="-mx-6 md:-mx-10 relative overflow-hidden flex-grow border-y border-primary/5">
+                      <img
+                        src="/assets/places.png"
+                        alt="Wyndham Sky Lake Illustration"
+                        className="w-full h-full object-cover opacity-90"
+                        style={{
+                          mixBlendMode: 'multiply',
+                          WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)',
+                          maskImage: 'linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)',
+                        }}
+                      />
+                    </div>
+
+                    <div className="pt-6 flex justify-center">
+                      <a
+                        href="https://maps.app.goo.gl/joX5qdMXjJcBBuwVA"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group/link relative inline-block px-8 py-3 overflow-hidden"
+                      >
+                        <span className="relative z-10 text-[10px] uppercase tracking-[0.3em] font-medium transition-colors group-hover/link:text-background">
+                          Chỉ đường
+                        </span>
+                        <div className="absolute inset-0 bg-primary translate-y-full group-hover/link:translate-y-0 transition-transform duration-500 ease-out"></div>
+                      </a>
+                    </div>
                   </div>
                 </div>
-              )}
 
-              {/* Activity Details Overlay on Map */}
-              {activeAgenda !== null && (
-                <div className="absolute bottom-4 left-4 z-40 w-[180px] md:w-[220px] h-[160px] md:h-[180px] p-4 bg-background/95 backdrop-blur-xl border border-primary/20 rounded-xs shadow-2xl animate-fade-in pointer-events-none flex flex-col">
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-xl md:text-2xl font-light tabular-nums text-primary/30">{agendaData[activeAgenda].time}</span>
-                    <div className="h-[1px] flex-1 bg-primary/10"></div>
-                  </div>
-                  
-                  <h3 className="text-sm md:text-base font-medium mb-0.5 tracking-tight text-primary leading-tight">
-                    {agendaData[activeAgenda].title}
-                  </h3>
-                  <p className="text-[8px] md:text-[9px] uppercase tracking-widest opacity-60 mb-2">
-                    {agendaData[activeAgenda].location}
-                  </p>
-
-                  <div className="flex-1 overflow-y-auto no-scrollbar">
-                    {agendaData[activeAgenda].details.length > 0 && (
-                      <ul className="space-y-1 border-t border-primary/5 pt-2">
-                        {agendaData[activeAgenda].details.map((detail, dIdx) => (
-                          <li key={dIdx} className="text-[9px] md:text-[10px] opacity-70 font-light flex items-start gap-1.5">
-                            <span className="mt-1 w-1 h-1 bg-primary/40 rounded-full shrink-0"></span>
-                            <span>{detail}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                </div>
-              )}
-
-              {/* Cinematic Vignette */}
-              <div className="absolute inset-0 pointer-events-none z-30 shadow-[inset_0_0_100px_rgba(75,80,6,0.1)]"></div>
+                {/* Subtle Background Ornament */}
+                <div className="absolute -top-10 -right-10 w-40 h-40 border border-primary/5 rounded-full pointer-events-none group-hover:scale-110 transition-transform duration-1000"></div>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
 
-      {/* 5. RSVP */}
-      <section className="section-container section-accent">
-        <div className="content-wrapper max-w-2xl">
-          <div className="mb-16 space-y-4">
-            <h2 className="heading-lg">Phản hồi</h2>
-            <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
-            <p className="text-elegant opacity-60">Hãy để chúng tôi chuẩn bị tốt nhất cho bạn</p>
-          </div>
-
-          {formStatus === "success" ? (
-            <div className="text-center py-12 space-y-4">
-              <h3 className="heading-md">Cảm ơn bạn đã phản hồi</h3>
-              <p className="text-elegant">Chúng tôi đã nhận được thông tin và rất mong được đón tiếp bạn.</p>
-              <button onClick={() => setFormStatus("idle")} className="text-sm underline opacity-60 hover:opacity-100">Gửi phản hồi khác</button>
-            </div>
-          ) : (
-            <form className="space-y-8 text-left" onSubmit={handleSubmit}>
-              <div className="space-y-2">
-                <label className="subheading block opacity-100">Họ và tên</label>
-                <input
-                  type="text"
-                  name="name"
-                  required
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  className="w-full bg-transparent border-b border-primary py-2 focus:outline-none placeholder:opacity-30"
-                  placeholder="Nhập họ và tên"
-                />
+        {/* 4. Agendas - Vertical Timeline & Spotlight Map (Pinned via ScrollTrigger) */}
+        <div ref={agendaTrigger} className="bg-background">
+          <section className="min-h-screen w-full flex items-center overflow-hidden py-24" id="agenda-section">
+            <div className="w-full max-w-7xl mx-auto px-6">
+              <div className="mb-16 space-y-4 text-center">
+                <h2 className="heading-lg">Chương trình</h2>
+                <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
+                <p className="text-elegant opacity-60">Dấu ấn của những khoảnh khắc</p>
               </div>
 
-              <div className="space-y-2">
-                <label className="subheading block opacity-100">Tên đơn vị / Thương hiệu</label>
-                <input
-                  type="text"
-                  name="business"
-                  required
-                  value={formData.business}
-                  onChange={handleInputChange}
-                  className="w-full bg-transparent border-b border-primary py-2 focus:outline-none placeholder:opacity-30"
-                  placeholder="Nhập tên doanh nghiệp"
-                />
-              </div>
+              <div className="flex flex-col lg:flex-row gap-16 items-stretch h-[450px] md:h-[500px]">
+                {/* Vertical Timeline Bar - Typographic Minimalist */}
+                <div className="w-full lg:w-64 relative flex flex-col order-2 lg:order-1 h-full">
+                  {/* The items container itself will define the height for the line */}
+                  <div className="relative flex flex-row lg:flex-col justify-between h-full pl-8 lg:pl-12">
+                    {/* Vertical Axis Line - Anchored to items container */}
+                    <div className="absolute left-0 top-[8px] bottom-[8px] w-[1px] bg-primary/5 hidden lg:block"></div>
 
-              <div className="space-y-4">
-                <label className="subheading block opacity-100">Bạn sẽ tham dự cùng chúng tôi chứ?</label>
-                <div className="flex flex-col space-y-2">
-                  <label className="flex items-center space-x-3 cursor-pointer group">
-                    <input
-                      type="radio"
-                      name="confirmation"
-                      required
-                      value="absolutely! cant wait"
-                      checked={formData.confirmation === "absolutely! cant wait"}
-                      onChange={handleInputChange}
-                      className="w-4 h-4 accent-primary"
-                    />
-                    <span className="font-light group-hover:opacity-100 opacity-70 transition-opacity">Chắc chắn rồi! Rất mong chờ.</span>
-                  </label>
-                  <label className="flex items-center space-x-3 cursor-pointer group">
-                    <input
-                      type="radio"
-                      name="confirmation"
-                      value="Maybe next time"
-                      checked={formData.confirmation === "Maybe next time"}
-                      onChange={handleInputChange}
-                      className="w-4 h-4 accent-primary"
-                    />
-                    <span className="font-light group-hover:opacity-100 opacity-70 transition-opacity">Hẹn dịp khác nhé.</span>
-                  </label>
+                    {/* Vertical Active Progress Line */}
+                    <div
+                      className="absolute left-0 top-[8px] w-[1px] bg-primary/30 transition-all duration-1000 ease-in-out hidden lg:block"
+                      style={{
+                        height: `${(activeAgenda !== null ? (activeAgenda / (agendaData.length - 1)) * 100 : 0)}%`,
+                      }}
+                    ></div>
+
+                    {agendaData.map((item, idx) => (
+                      <div
+                        key={idx}
+                        className={`flex lg:flex-row flex-col items-center lg:items-start group relative z-10 transition-all duration-700 ${activeAgenda === idx ? 'opacity-100' : 'opacity-20'}`}
+                      >
+                        {/* Time Label */}
+                        <div className="lg:w-16 lg:mr-8 mb-2 lg:mb-0">
+                          <span className={`text-xs md:text-sm font-light tabular-nums transition-colors duration-500 ${activeAgenda === idx ? 'text-primary' : ''}`}>
+                            {item.time}
+                          </span>
+                        </div>
+
+                        {/* Title */}
+                        <div className="transition-all duration-700">
+                          <h3 className={`text-[11px] md:text-xs font-medium tracking-[0.15em] uppercase transition-colors ${activeAgenda === idx ? 'text-primary' : ''}`}>
+                            {item.title}
+                          </h3>
+                          <p className={`text-[9px] md:text-[10px] font-light mt-1 transition-all duration-500 ${activeAgenda === idx ? 'opacity-60 block' : 'opacity-0 hidden'}`}>
+                            {item.location}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="space-y-2">
-                  <label className="subheading block opacity-100">Số lượng người tham dự</label>
-                  <input
-                    type="number"
-                    name="attendants"
-                    min="1"
-                    value={formData.attendants}
-                    onChange={handleInputChange}
-                    className="w-full bg-transparent border-b border-primary py-2 focus:outline-none"
+                {/* Map Overview - Right */}
+                <div className="flex-1 relative aspect-video lg:aspect-auto min-h-[400px] lg:min-h-0 overflow-hidden rounded-sm border border-primary/10 bg-accent/10 shadow-2xl group/map order-1 lg:order-2">
+                  {/* The Map Image */}
+                  <img
+                    src="/assets/map 2.png"
+                    alt="Sinfonia Overview Map"
+                    className="w-full h-full object-cover opacity-80 saturate-[0.7]"
                   />
+
+                  {/* Spotlight Overlay */}
+                  <div
+                    className="absolute inset-0 pointer-events-none z-10 transition-all duration-700 ease-in-out"
+                    style={{
+                      background: activeAgenda !== null
+                        ? `radial-gradient(circle 100px at ${agendaData[activeAgenda].coords.x}% ${agendaData[activeAgenda].coords.y}%, transparent 0%, rgba(0,0,0,0.25) 100%)`
+                        : 'rgba(0,0,0,0.1)'
+                    }}
+                  ></div>
+
+                  {/* Magnifying Glass / Highlight Circle */}
+                  {activeAgenda !== null && (
+                    <div
+                      className="absolute w-32 h-32 md:w-40 md:h-40 -ml-16 -mt-16 md:-ml-20 md:-mt-20 border-2 border-primary/30 rounded-full z-20 pointer-events-none transition-all duration-700 ease-in-out shadow-[0_0_50px_rgba(75,80,6,0.2)]"
+                      style={{
+                        left: `${agendaData[activeAgenda].coords.x}%`,
+                        top: `${agendaData[activeAgenda].coords.y}%`,
+                      }}
+                    >
+                      <div className="absolute top-1/2 left-1/2 -ml-2 -mt-2 w-4 h-4 bg-primary rounded-full shadow-[0_0_20px_rgba(75,80,6,0.5)]">
+                        <div className="absolute inset-0 rounded-full border-2 border-white/50 animate-ping"></div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Activity Details Overlay on Map */}
+                  {activeAgenda !== null && (
+                    <div className="absolute bottom-4 left-4 z-40 w-[180px] md:w-[220px] h-[160px] md:h-[180px] p-4 bg-background/95 backdrop-blur-xl border border-primary/20 rounded-xs shadow-2xl animate-fade-in pointer-events-none flex flex-col">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-xl md:text-2xl font-light tabular-nums text-primary/30">{agendaData[activeAgenda].time}</span>
+                        <div className="h-[1px] flex-1 bg-primary/10"></div>
+                      </div>
+
+                      <h3 className="text-sm md:text-base font-medium mb-0.5 tracking-tight text-primary leading-tight">
+                        {agendaData[activeAgenda].title}
+                      </h3>
+                      <p className="text-[8px] md:text-[9px] uppercase tracking-widest opacity-60 mb-2">
+                        {agendaData[activeAgenda].location}
+                      </p>
+
+                      <div className="flex-1 overflow-y-auto no-scrollbar">
+                        {agendaData[activeAgenda].details.length > 0 && (
+                          <ul className="space-y-1 border-t border-primary/5 pt-2">
+                            {agendaData[activeAgenda].details.map((detail, dIdx) => (
+                              <li key={dIdx} className="text-[9px] md:text-[10px] opacity-70 font-light flex items-start gap-1.5">
+                                <span className="mt-1 w-1 h-1 bg-primary/40 rounded-full shrink-0"></span>
+                                <span>{detail}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Cinematic Vignette */}
+                  <div className="absolute inset-0 pointer-events-none z-30 shadow-[inset_0_0_100px_rgba(75,80,6,0.1)]"></div>
                 </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        {/* 5. RSVP */}
+        <section className="section-container section-accent">
+          <div className="content-wrapper max-w-2xl">
+            <div className="mb-16 space-y-4">
+              <h2 className="heading-lg">Phản hồi</h2>
+              <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
+              <p className="text-elegant opacity-60">Hãy để chúng tôi chuẩn bị tốt nhất cho bạn</p>
+            </div>
+
+            {formStatus === "success" ? (
+              <div className="text-center py-12 space-y-4">
+                <h3 className="heading-md">Cảm ơn bạn đã phản hồi</h3>
+                <p className="text-elegant">Chúng tôi đã nhận được thông tin và rất mong được đón tiếp bạn.</p>
+                <button onClick={() => setFormStatus("idle")} className="text-sm underline opacity-60 hover:opacity-100">Gửi phản hồi khác</button>
+              </div>
+            ) : (
+              <form className="space-y-8 text-left" onSubmit={handleSubmit}>
                 <div className="space-y-2">
-                  <label className="subheading block opacity-100">Yêu cầu về thực đơn</label>
+                  <label className="subheading block opacity-100">Họ và tên</label>
                   <input
                     type="text"
-                    name="meal_preference"
-                    value={formData.meal_preference}
+                    name="name"
+                    required
+                    value={formData.name}
                     onChange={handleInputChange}
                     className="w-full bg-transparent border-b border-primary py-2 focus:outline-none placeholder:opacity-30"
-                    placeholder="Dị ứng, ăn chay..."
+                    placeholder="Nhập họ và tên"
                   />
                 </div>
-              </div>
 
-              <div className="space-y-2">
-                <label className="subheading block opacity-100">Lời nhắn gửi đến Ban tổ chức</label>
-                <textarea
-                  name="note"
-                  rows={3}
-                  value={formData.note}
-                  onChange={handleInputChange}
-                  className="w-full bg-transparent border-b border-primary py-2 focus:outline-none placeholder:opacity-30 resize-none"
-                  placeholder="Bạn có muốn nhắn nhủ điều gì không?"
-                ></textarea>
-              </div>
-
-              {formStatus === "error" && (
-                <p className="text-red-800 text-sm italic">Đã có lỗi xảy ra. Vui lòng thử lại hoặc liên hệ trực tiếp với chúng tôi.</p>
-              )}
-
-              <div className="text-center pt-8">
-                <button
-                  type="submit"
-                  disabled={formStatus === "submitting"}
-                  className="btn-secondary disabled:opacity-50"
-                >
-                  {formStatus === "submitting" ? "Đang gửi..." : "Gửi phản hồi"}
-                </button>
-              </div>
-            </form>
-          )}
-        </div>
-      </section>
-
-      {/* 6. Dresscode */}
-      <section className="section-container">
-        <div className="content-wrapper max-w-4xl">
-          <div className="mb-16 space-y-4">
-            <h2 className="heading-lg">Quy chuẩn trang phục</h2>
-            <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
-            <p className="text-elegant opacity-60">Dresscode for an Elegant Atmosphere</p>
-          </div>
-          
-          <div className="border border-primary/10 rounded-sm overflow-hidden">
-            {/* Header Row */}
-            <div className="grid grid-cols-1 md:grid-cols-[1.5fr_2fr_2fr] bg-primary/[0.03] border-b border-primary/10">
-              <div className="p-6 hidden md:block"></div>
-              <div className="p-6 text-center border-l border-primary/10">
-                <h4 className="subheading !opacity-100 text-primary">Dành cho Nữ</h4>
-              </div>
-              <div className="p-6 text-center border-l border-primary/10">
-                <h4 className="subheading !opacity-100 text-primary">Dành cho Nam</h4>
-              </div>
-            </div>
-
-            {/* Activities Rows */}
-            {[
-              {
-                activity: "Đón khách",
-                eng: "Welcoming",
-                women: "Váy lụa màu Pastel (Pastel silk dress)",
-                men: "Vest hoặc Blazer (Đen hoặc có màu)"
-              },
-              {
-                activity: "Tiệc tối",
-                eng: "Dinner",
-                women: "Đầm dạ hội sang trọng (Tông màu Olive hoặc Đen)",
-                men: "Suit / Tuxedo lịch lãm (Tông màu Olive hoặc Đen)"
-              },
-              {
-                activity: "Tiệc hồ bơi",
-                eng: "After Party",
-                women: "Trang phục hồ bơi / Bikini (Pool Party Chic)",
-                men: "Quần short / Trang phục bơi thoải mái"
-              }
-            ].map((item, idx) => (
-              <div key={idx} className="grid grid-cols-1 md:grid-cols-[1.5fr_2fr_2fr] border-b last:border-b-0 border-primary/10 items-stretch">
-                <div className="p-6 bg-primary/[0.01] flex flex-col justify-center">
-                  <h3 className="text-xl font-medium">{item.activity}</h3>
-                  <p className="text-xs uppercase tracking-widest opacity-40 mt-1">{item.eng}</p>
+                <div className="space-y-2">
+                  <label className="subheading block opacity-100">Tên đơn vị / Thương hiệu</label>
+                  <input
+                    type="text"
+                    name="business"
+                    required
+                    value={formData.business}
+                    onChange={handleInputChange}
+                    className="w-full bg-transparent border-b border-primary py-2 focus:outline-none placeholder:opacity-30"
+                    placeholder="Nhập tên doanh nghiệp"
+                  />
                 </div>
-                
-                {/* Mobile Labels are shown only on small screens */}
-                <div className="p-8 border-t md:border-t-0 md:border-l border-primary/10 flex flex-col justify-center">
-                  <span className="md:hidden subheading mb-2 block">Nữ</span>
-                  <p className="font-light">{item.women}</p>
+
+                <div className="space-y-4">
+                  <label className="subheading block opacity-100">Bạn sẽ tham dự cùng chúng tôi chứ?</label>
+                  <div className="flex flex-col space-y-2">
+                    <label className="flex items-center space-x-3 cursor-pointer group">
+                      <input
+                        type="radio"
+                        name="confirmation"
+                        required
+                        value="absolutely! cant wait"
+                        checked={formData.confirmation === "absolutely! cant wait"}
+                        onChange={handleInputChange}
+                        className="w-4 h-4 accent-primary"
+                      />
+                      <span className="font-light group-hover:opacity-100 opacity-70 transition-opacity">Chắc chắn rồi! Rất mong chờ.</span>
+                    </label>
+                    <label className="flex items-center space-x-3 cursor-pointer group">
+                      <input
+                        type="radio"
+                        name="confirmation"
+                        value="Maybe next time"
+                        checked={formData.confirmation === "Maybe next time"}
+                        onChange={handleInputChange}
+                        className="w-4 h-4 accent-primary"
+                      />
+                      <span className="font-light group-hover:opacity-100 opacity-70 transition-opacity">Hẹn dịp khác nhé.</span>
+                    </label>
+                  </div>
                 </div>
-                <div className="p-8 border-t md:border-t-0 md:border-l border-primary/10 flex flex-col justify-center">
-                  <span className="md:hidden subheading mb-2 block">Nam</span>
-                  <p className="font-light">{item.men}</p>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-2">
+                    <label className="subheading block opacity-100">Số lượng người tham dự</label>
+                    <input
+                      type="number"
+                      name="attendants"
+                      min="1"
+                      value={formData.attendants}
+                      onChange={handleInputChange}
+                      className="w-full bg-transparent border-b border-primary py-2 focus:outline-none"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="subheading block opacity-100">Yêu cầu về thực đơn</label>
+                    <input
+                      type="text"
+                      name="meal_preference"
+                      value={formData.meal_preference}
+                      onChange={handleInputChange}
+                      className="w-full bg-transparent border-b border-primary py-2 focus:outline-none placeholder:opacity-30"
+                      placeholder="Dị ứng, ăn chay..."
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="subheading block opacity-100">Lời nhắn gửi đến Ban tổ chức</label>
+                  <textarea
+                    name="note"
+                    rows={3}
+                    value={formData.note}
+                    onChange={handleInputChange}
+                    className="w-full bg-transparent border-b border-primary py-2 focus:outline-none placeholder:opacity-30 resize-none"
+                    placeholder="Bạn có muốn nhắn nhủ điều gì không?"
+                  ></textarea>
+                </div>
+
+                {formStatus === "error" && (
+                  <p className="text-red-800 text-sm italic">Đã có lỗi xảy ra. Vui lòng thử lại hoặc liên hệ trực tiếp với chúng tôi.</p>
+                )}
+
+                <div className="text-center pt-8">
+                  <button
+                    type="submit"
+                    disabled={formStatus === "submitting"}
+                    className="btn-secondary disabled:opacity-50"
+                  >
+                    {formStatus === "submitting" ? "Đang gửi..." : "Gửi phản hồi"}
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+        </section>
+
+        {/* 6. Dresscode */}
+        <section className="section-container">
+          <div className="content-wrapper max-w-4xl">
+            <div className="mb-16 space-y-4">
+              <h2 className="heading-lg">Quy chuẩn trang phục</h2>
+              <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
+              <p className="text-elegant opacity-60">Dresscode for an Elegant Atmosphere</p>
+            </div>
+
+            <div className="border border-primary/10 rounded-sm overflow-hidden">
+              {/* Header Row */}
+              <div className="grid grid-cols-1 md:grid-cols-[1.5fr_2fr_2fr] bg-primary/[0.03] border-b border-primary/10">
+                <div className="p-6 hidden md:block"></div>
+                <div className="p-6 text-center border-l border-primary/10">
+                  <h4 className="subheading !opacity-100 text-primary">Dành cho Nữ</h4>
+                </div>
+                <div className="p-6 text-center border-l border-primary/10">
+                  <h4 className="subheading !opacity-100 text-primary">Dành cho Nam</h4>
                 </div>
               </div>
-            ))}
-          </div>
 
-          <div className="mt-16 text-center">
-            <p className="text-elegant">"Sự thanh lịch là vẻ đẹp không bao giờ phai nhạt."</p>
-          </div>
-        </div>
-      </section>
+              {/* Activities Rows */}
+              {[
+                {
+                  activity: "Đón khách",
+                  eng: "Welcoming",
+                  women: "Váy lụa màu Pastel (Pastel silk dress)",
+                  men: "Vest hoặc Blazer (Đen hoặc có màu)"
+                },
+                {
+                  activity: "Tiệc tối",
+                  eng: "Dinner",
+                  women: "Đầm dạ hội sang trọng (Tông màu Olive hoặc Đen)",
+                  men: "Suit / Tuxedo lịch lãm (Tông màu Olive hoặc Đen)"
+                },
+                {
+                  activity: "Tiệc hồ bơi",
+                  eng: "After Party",
+                  women: "Trang phục hồ bơi / Bikini (Pool Party Chic)",
+                  men: "Quần short / Trang phục bơi thoải mái"
+                }
+              ].map((item, idx) => (
+                <div key={idx} className="grid grid-cols-1 md:grid-cols-[1.5fr_2fr_2fr] border-b last:border-b-0 border-primary/10 items-stretch">
+                  <div className="p-6 bg-primary/[0.01] flex flex-col justify-center">
+                    <h3 className="text-xl font-medium">{item.activity}</h3>
+                    <p className="text-xs uppercase tracking-widest opacity-40 mt-1">{item.eng}</p>
+                  </div>
 
-      {/* 7. Contact Us */}
-      <section className="section-container section-accent">
-        <div className="content-wrapper">
-          <div className="mb-16 space-y-4 text-center">
-            <h2 className="heading-lg">Liên hệ</h2>
-            <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
-            <p className="text-elegant opacity-60">Hỗ trợ thông tin trực tiếp</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div className="flex flex-col items-center">
-              <h3 className="heading-md mb-2">Đơn vị 1</h3>
-              <p className="font-light text-lg">Người đại diện 1</p>
-              <a href="mailto:rep1@example.com" className="text-sm opacity-60 mt-2 hover:opacity-100 transition-opacity">rep1@example.com</a>
-              <p className="text-sm opacity-60 mt-1">+84 123 456 789</p>
+                  {/* Mobile Labels are shown only on small screens */}
+                  <div className="p-8 border-t md:border-t-0 md:border-l border-primary/10 flex flex-col justify-center">
+                    <span className="md:hidden subheading mb-2 block">Nữ</span>
+                    <p className="font-light">{item.women}</p>
+                  </div>
+                  <div className="p-8 border-t md:border-t-0 md:border-l border-primary/10 flex flex-col justify-center">
+                    <span className="md:hidden subheading mb-2 block">Nam</span>
+                    <p className="font-light">{item.men}</p>
+                  </div>
+                </div>
+              ))}
             </div>
-            <div className="flex flex-col items-center">
-              <h3 className="heading-md mb-2">Đơn vị 2</h3>
-              <p className="font-light text-lg">Người đại diện 2</p>
-              <a href="mailto:rep2@example.com" className="text-sm opacity-60 mt-2 hover:opacity-100 transition-opacity">rep2@example.com</a>
-              <p className="text-sm opacity-60 mt-1">+84 123 456 789</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <h3 className="heading-md mb-2">Đơn vị 3</h3>
-              <p className="font-light text-lg">Người đại diện 3</p>
-              <a href="mailto:rep3@example.com" className="text-sm opacity-60 mt-2 hover:opacity-100 transition-opacity">rep3@example.com</a>
-              <p className="text-sm opacity-60 mt-1">+84 123 456 789</p>
+
+            <div className="mt-16 text-center">
+              <p className="text-elegant">"Sự thanh lịch là vẻ đẹp không bao giờ phai nhạt."</p>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* 8. Thank you note — Minimalist Finale (Full Viewport) */}
-      <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-black">
-        {/* Background Image — Pure & Sharp */}
-        <img
-          src="/assets/thankyou%20background.png"
-          alt="Thank You"
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-
-        {/* Content Overlay — Standardized with Hero layout */}
-        <div className="relative z-20 content-wrapper max-w-4xl px-8 flex flex-col items-center">
-          <div className="flex flex-col items-center text-center">
-            {/* Subheading — Synced size with Hero */}
-            <p 
-              className="text-[10px] md:text-xs uppercase tracking-[0.5em] font-light !text-white opacity-60 mb-4"
-            >
-              See you at The Sinfonia
-            </p>
-
-            {/* Main Title — Synced size with Hero */}
-            <h2 className={`${purgatory.className} text-[4.5rem] md:text-[7rem] lg:text-[9rem] !text-white lowercase tracking-tight leading-none`}>
-              Thank you
-            </h2>
+        {/* 7. Contact Us */}
+        <section className="section-container section-accent">
+          <div className="content-wrapper">
+            <div className="mb-16 space-y-4 text-center">
+              <h2 className="heading-lg">Liên hệ</h2>
+              <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
+              <p className="text-elegant opacity-60">Hỗ trợ thông tin trực tiếp</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+              <div className="flex flex-col items-center">
+                <h3 className="heading-md mb-2">Đơn vị 1</h3>
+                <p className="font-light text-lg">Người đại diện 1</p>
+                <a href="mailto:rep1@example.com" className="text-sm opacity-60 mt-2 hover:opacity-100 transition-opacity">rep1@example.com</a>
+                <p className="text-sm opacity-60 mt-1">+84 123 456 789</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <h3 className="heading-md mb-2">Đơn vị 2</h3>
+                <p className="font-light text-lg">Người đại diện 2</p>
+                <a href="mailto:rep2@example.com" className="text-sm opacity-60 mt-2 hover:opacity-100 transition-opacity">rep2@example.com</a>
+                <p className="text-sm opacity-60 mt-1">+84 123 456 789</p>
+              </div>
+              <div className="flex flex-col items-center">
+                <h3 className="heading-md mb-2">Đơn vị 3</h3>
+                <p className="font-light text-lg">Người đại diện 3</p>
+                <a href="mailto:rep3@example.com" className="text-sm opacity-60 mt-2 hover:opacity-100 transition-opacity">rep3@example.com</a>
+                <p className="text-sm opacity-60 mt-1">+84 123 456 789</p>
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+        {/* 8. Thank you note — Minimalist Finale (Full Viewport) */}
+        <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-black">
+          {/* Background Image — Pure & Sharp */}
+          <img
+            src="/assets/thankyou%20background.png"
+            alt="Thank You"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+
+          {/* Content Overlay — Standardized with Hero layout */}
+          <div className="relative z-20 content-wrapper max-w-4xl px-8 flex flex-col items-center">
+            <div className="flex flex-col items-center text-center">
+              {/* Subheading — Synced size with Hero */}
+              <p
+                className="text-[10px] md:text-xs uppercase tracking-[0.5em] font-light !text-white opacity-60 mb-4"
+              >
+                See you at The Sinfonia
+              </p>
+
+              {/* Main Title — Synced size with Hero */}
+              <h2 className={`${purgatory.className} text-[4.5rem] md:text-[7rem] lg:text-[9rem] !text-white lowercase tracking-tight leading-none`}>
+                Thank you
+              </h2>
+            </div>
+          </div>
+        </section>
       </div>
     </>
   );
