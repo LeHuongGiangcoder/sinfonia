@@ -2,15 +2,18 @@
 
 import { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { amsterdam } from "@/lib/fonts";
 import Entrance from "@/components/Entrance";
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function Home() {
   const container = useRef<HTMLDivElement>(null);
+  const agendaTrigger = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [activeAgenda, setActiveAgenda] = useState<number>(0);
   const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [formData, setFormData] = useState({
     name: "",
@@ -20,6 +23,51 @@ export default function Home() {
     meal_preference: "",
     note: ""
   });
+  
+  const agendaData = [
+    { 
+      time: "12:00", 
+      title: "CHECK IN", 
+      location: "Lobby Lounge", 
+      details: [],
+      coords: { x: 56, y: 62, scale: 2.2 } 
+    },
+    { 
+      time: "14:30", 
+      title: "TEA BREAK", 
+      location: "Sinfonia Garden", 
+      details: [],
+      coords: { x: 58, y: 41, scale: 2.5 } 
+    },
+    { 
+      time: "15:00", 
+      title: "WELCOME + WORKSHOP", 
+      location: "Grand Ballroom", 
+      details: ["Khai mạc", "Workshop"],
+      coords: { x: 47, y: 81, scale: 2.2 } 
+    },
+    { 
+      time: "16:30", 
+      title: "CATCH THE SUN", 
+      location: "Sunset Terrace", 
+      details: ["Cocktail", "Live music"],
+      coords: { x: 70, y: 13, scale: 2.8 } 
+    },
+    { 
+      time: "18:30", 
+      title: "A SKY FULL OF STARS", 
+      location: "Starlight Dining", 
+      details: ["Dinner", "Drinking game"],
+      coords: { x: 66, y: 60, scale: 2.5 } 
+    },
+    { 
+      time: "20:30", 
+      title: "MIDNIGHT REVERIE", 
+      location: "Infinity Pool", 
+      details: ["Fireworks", "DJ", "Pool Party"],
+      coords: { x: 50, y: 77, scale: 2.5 } 
+    },
+  ];
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -66,6 +114,23 @@ export default function Home() {
         ease: "power3.out",
         stagger: 0.2,
       });
+
+      // ScrollTrigger for Agenda Pinning & State
+      ScrollTrigger.create({
+        trigger: agendaTrigger.current,
+        start: "top top",
+        end: "+=3500", // Total scroll distance for all items
+        pin: true,
+        scrub: true,
+        onUpdate: (self) => {
+          // Calculate which agenda item to show based on scroll progress
+          const totalItems = agendaData.length;
+          const progress = self.progress;
+          // Segment progress into equal parts for each item
+          const index = Math.min(Math.floor(progress * totalItems), totalItems - 1);
+          setActiveAgenda(index);
+        }
+      });
     }
   }, { scope: container, dependencies: [isLoading] });
 
@@ -84,111 +149,207 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 3. Time & Places */}
-      <section className="section-container section-accent">
-        <div className="content-wrapper">
-          <h2 className="heading-lg mb-16">Thời gian & Địa điểm</h2>
+      {/* 3. Time & Places - Redesigned for Premium Aesthetic */}
+      <section className="section-container section-accent relative overflow-hidden" id="details-section">
+        <div className="content-wrapper max-w-6xl">
+          <div className="mb-20 space-y-4">
+            <h2 className="heading-lg">Thời gian & Địa điểm</h2>
+            <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
+            <p className="text-elegant opacity-60">Hành trình của những cảm xúc thăng hoa</p>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 text-center">
-            <div className="space-y-6">
-              <h3 className="subheading">Ngày diễn ra</h3>
-              <div className="space-y-1">
-                <p className="text-3xl font-light">Thứ Ba & Thứ Tư</p>
-                <p className="text-4xl font-normal text-primary">02 & 03 Tháng 6, 2026</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+            {/* Date Card */}
+            <div className="group relative p-12 md:p-16 bg-background/40 backdrop-blur-sm border border-primary/10 rounded-xs shadow-sm hover:shadow-xl transition-all duration-700 flex flex-col items-center justify-center overflow-hidden">
+              {/* Decorative Corner Frames */}
+              <div className="absolute top-6 left-6 w-12 h-12 border-t border-l border-primary/20 transition-all duration-500 group-hover:w-16 group-hover:h-16"></div>
+              <div className="absolute bottom-6 right-6 w-12 h-12 border-b border-r border-primary/20 transition-all duration-500 group-hover:w-16 group-hover:h-16"></div>
+              
+              <div className="space-y-8 relative z-10">
+                <h3 className="subheading">Thời gian diễn ra</h3>
+                <div className="text-center space-y-2">
+                  <p className="text-xl md:text-2xl font-light tracking-wide italic opacity-80">Thứ Ba & Thứ Tư</p>
+                  <p className={`${amsterdam.className} text-6xl md:text-7xl text-primary lowercase leading-tight py-2`}>
+                    02 & 03 Tháng 6
+                  </p>
+                  <p className="text-base tracking-[0.4em] font-light opacity-40 uppercase">Mùa hạ năm 2026</p>
+                </div>
               </div>
+              
+              {/* Subtle Background Ornament */}
+              <div className="absolute -bottom-10 -left-10 w-40 h-40 border border-primary/5 rounded-full pointer-events-none group-hover:scale-110 transition-transform duration-1000"></div>
             </div>
 
-            <div className="space-y-6">
-              <h3 className="subheading">Địa điểm</h3>
-              <div className="space-y-2">
-                <p className="text-3xl font-light leading-snug">Wyndham Sky Lake <br /> Resort & Villas</p>
+            {/* Location Card */}
+            <div className="group relative p-12 md:p-16 bg-background/40 backdrop-blur-sm border border-primary/10 rounded-xs shadow-sm hover:shadow-xl transition-all duration-700 flex flex-col items-center justify-center overflow-hidden">
+              {/* Decorative Corner Frames */}
+              <div className="absolute top-6 left-6 w-12 h-12 border-t border-l border-primary/20 transition-all duration-500 group-hover:w-16 group-hover:h-16"></div>
+              <div className="absolute bottom-6 right-6 w-12 h-12 border-b border-r border-primary/20 transition-all duration-500 group-hover:w-16 group-hover:h-16"></div>
+
+              <div className="space-y-8 relative z-10 text-center">
+                <h3 className="subheading">Địa điểm tổ chức</h3>
+                <div className="space-y-4">
+                  <p className="text-3xl md:text-4xl font-normal leading-tight text-primary">
+                    Wyndham Sky Lake <br /> 
+                    <span className="font-light italic text-2xl md:text-3xl opacity-80">Resort & Villas</span>
+                  </p>
+                  <p className="text-xs uppercase tracking-[0.2em] opacity-40">Chương Mỹ, Hà Nội, Việt Nam</p>
+                </div>
+
+                <div className="pt-6">
+                  <a
+                    href="https://maps.app.goo.gl/joX5qdMXjJcBBuwVA"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group/link relative inline-block px-8 py-3 overflow-hidden"
+                  >
+                    <span className="relative z-10 text-[10px] uppercase tracking-[0.3em] font-medium transition-colors group-hover/link:text-background">
+                      Chỉ đường
+                    </span>
+                    <div className="absolute inset-0 bg-primary translate-y-full group-hover/link:translate-y-0 transition-transform duration-500 ease-out"></div>
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-[1px] bg-primary group-hover/link:opacity-0 transition-opacity"></div>
+                  </a>
+                </div>
               </div>
-              <a
-                href="https://maps.app.goo.gl/joX5qdMXjJcBBuwVA"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block mt-4 text-sm uppercase tracking-widest border-b border-primary pb-1 hover:opacity-60 transition-opacity"
-              >
-                Xem trên Google Maps
-              </a>
+
+              {/* Subtle Background Ornament */}
+              <div className="absolute -top-10 -right-10 w-40 h-40 border border-primary/5 rounded-full pointer-events-none group-hover:scale-110 transition-transform duration-1000"></div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 4. Agendas */}
-      <section className="section-container">
-        <div className="content-wrapper max-w-4xl">
-          <h2 className="heading-lg mb-16">Chương trình</h2>
-          
-          <div className="space-y-0 border-t border-primary/20">
-            {[
-              { time: "12:00", title: "CHECK IN", location: "Lobby Lounge", details: [] },
-              { time: "14:30", title: "TEA BREAK", location: "Sinfonia Garden", details: [] },
-              { 
-                time: "15:00", 
-                title: "WELCOME + WORKSHOP", 
-                location: "Grand Ballroom", 
-                details: ["Khai mạc", "Workshop"] 
-              },
-              { 
-                time: "16:30", 
-                title: "CATCH THE SUN", 
-                location: "Sunset Terrace", 
-                details: ["Cocktail", "Live music"] 
-              },
-              { 
-                time: "18:30", 
-                title: "A SKY FULL OF STARS", 
-                location: "Starlight Dining", 
-                details: ["Dinner", "Drinking game"] 
-              },
-              { 
-                time: "20:30", 
-                title: "MIDNIGHT REVERIE", 
-                location: "Infinity Pool", 
-                details: ["Fireworks", "DJ", "Pool Party"] 
-              },
-            ].map((item, idx) => (
-              <div key={idx} className="grid grid-cols-1 md:grid-cols-2 py-8 border-b border-primary/10 gap-8 items-start hover:bg-primary/[0.02] transition-colors px-4">
-                <div className="flex items-baseline space-x-6">
-                  <span className="text-2xl font-light opacity-50 tabular-nums min-w-[70px]">{item.time}</span>
-                  <div className="space-y-2">
-                    <h3 className="text-xl font-medium tracking-wide text-left">{item.title}</h3>
-                    {item.details.length > 0 && (
-                      <ul className="space-y-1 text-left">
-                        {item.details.map((detail, dIdx) => (
-                          <li key={dIdx} className="text-sm opacity-60 font-light flex items-center">
-                            <span className="w-1 h-1 bg-primary rounded-full mr-2 opacity-40"></span>
-                            {detail}
+      {/* 4. Agendas - Vertical Timeline & Spotlight Map (Pinned via ScrollTrigger) */}
+      <div ref={agendaTrigger} className="bg-background">
+        <section className="min-h-screen w-full flex items-center overflow-hidden py-24" id="agenda-section">
+          <div className="w-full max-w-7xl mx-auto px-6">
+            <div className="mb-16 space-y-4 text-center">
+              <h2 className="heading-lg">Chương trình</h2>
+              <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
+              <p className="text-elegant opacity-60">Dấu ấn của những khoảnh khắc</p>
+            </div>
+            
+            <div className="flex flex-col lg:flex-row gap-16 items-stretch h-[450px] md:h-[500px]">
+            {/* Vertical Timeline Bar - Typographic Minimalist */}
+            <div className="w-full lg:w-64 relative flex flex-col order-2 lg:order-1 h-full">
+              {/* The items container itself will define the height for the line */}
+              <div className="relative flex flex-row lg:flex-col justify-between h-full pl-8 lg:pl-12">
+                {/* Vertical Axis Line - Anchored to items container */}
+                <div className="absolute left-0 top-[8px] bottom-[8px] w-[1px] bg-primary/5 hidden lg:block"></div>
+                
+                {/* Vertical Active Progress Line */}
+                <div 
+                  className="absolute left-0 top-[8px] w-[1px] bg-primary/30 transition-all duration-1000 ease-in-out hidden lg:block"
+                  style={{ 
+                    height: `${(activeAgenda !== null ? (activeAgenda / (agendaData.length - 1)) * 100 : 0)}%`,
+                  }}
+                ></div>
+
+                {agendaData.map((item, idx) => (
+                  <div 
+                    key={idx}
+                    className={`flex lg:flex-row flex-col items-center lg:items-start group relative z-10 transition-all duration-700 ${activeAgenda === idx ? 'opacity-100' : 'opacity-20'}`}
+                  >
+                    {/* Time Label */}
+                    <div className="lg:w-16 lg:mr-8 mb-2 lg:mb-0">
+                      <span className={`text-xs md:text-sm font-light tabular-nums transition-colors duration-500 ${activeAgenda === idx ? 'text-primary' : ''}`}>
+                        {item.time}
+                      </span>
+                    </div>
+                    
+                    {/* Title */}
+                    <div className="transition-all duration-700">
+                      <h3 className={`text-[11px] md:text-xs font-medium tracking-[0.15em] uppercase transition-colors ${activeAgenda === idx ? 'text-primary' : ''}`}>
+                        {item.title}
+                      </h3>
+                      <p className={`text-[9px] md:text-[10px] font-light mt-1 transition-all duration-500 ${activeAgenda === idx ? 'opacity-60 block' : 'opacity-0 hidden'}`}>
+                        {item.location}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Map Overview - Right */}
+            <div className="flex-1 relative aspect-video lg:aspect-auto min-h-[400px] lg:min-h-0 overflow-hidden rounded-sm border border-primary/10 bg-accent/10 shadow-2xl group/map order-1 lg:order-2">
+              {/* The Map Image */}
+              <img 
+                src="/assets/map%201.png" 
+                alt="Sinfonia Overview Map" 
+                className="w-full h-full object-cover opacity-80 saturate-[0.7]"
+              />
+
+              {/* Spotlight Overlay */}
+              <div 
+                className="absolute inset-0 pointer-events-none z-10 transition-all duration-700 ease-in-out"
+                style={{
+                  background: activeAgenda !== null 
+                    ? `radial-gradient(circle 100px at ${agendaData[activeAgenda].coords.x}% ${agendaData[activeAgenda].coords.y}%, transparent 0%, rgba(0,0,0,0.25) 100%)`
+                    : 'rgba(0,0,0,0.1)'
+                }}
+              ></div>
+
+              {/* Magnifying Glass / Highlight Circle */}
+              {activeAgenda !== null && (
+                <div 
+                  className="absolute w-32 h-32 md:w-40 md:h-40 -ml-16 -mt-16 md:-ml-20 md:-mt-20 border-2 border-primary/30 rounded-full z-20 pointer-events-none transition-all duration-700 ease-in-out shadow-[0_0_50px_rgba(75,80,6,0.2)]"
+                  style={{ 
+                    left: `${agendaData[activeAgenda].coords.x}%`, 
+                    top: `${agendaData[activeAgenda].coords.y}%`,
+                  }}
+                >
+                  <div className="absolute top-1/2 left-1/2 -ml-2 -mt-2 w-4 h-4 bg-primary rounded-full shadow-[0_0_20px_rgba(75,80,6,0.5)]">
+                    <div className="absolute inset-0 rounded-full border-2 border-white/50 animate-ping"></div>
+                  </div>
+                </div>
+              )}
+
+              {/* Activity Details Overlay on Map */}
+              {activeAgenda !== null && (
+                <div className="absolute bottom-4 left-4 z-40 w-[180px] md:w-[220px] h-[160px] md:h-[180px] p-4 bg-background/95 backdrop-blur-xl border border-primary/20 rounded-xs shadow-2xl animate-fade-in pointer-events-none flex flex-col">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-xl md:text-2xl font-light tabular-nums text-primary/30">{agendaData[activeAgenda].time}</span>
+                    <div className="h-[1px] flex-1 bg-primary/10"></div>
+                  </div>
+                  
+                  <h3 className="text-sm md:text-base font-medium mb-0.5 tracking-tight text-primary leading-tight">
+                    {agendaData[activeAgenda].title}
+                  </h3>
+                  <p className="text-[8px] md:text-[9px] uppercase tracking-widest opacity-60 mb-2">
+                    {agendaData[activeAgenda].location}
+                  </p>
+
+                  <div className="flex-1 overflow-y-auto no-scrollbar">
+                    {agendaData[activeAgenda].details.length > 0 && (
+                      <ul className="space-y-1 border-t border-primary/5 pt-2">
+                        {agendaData[activeAgenda].details.map((detail, dIdx) => (
+                          <li key={dIdx} className="text-[9px] md:text-[10px] opacity-70 font-light flex items-start gap-1.5">
+                            <span className="mt-1 w-1 h-1 bg-primary/40 rounded-full shrink-0"></span>
+                            <span>{detail}</span>
                           </li>
                         ))}
                       </ul>
                     )}
                   </div>
                 </div>
-                <div className="md:text-right flex flex-col md:items-end justify-center h-full">
-                  <span className="subheading !opacity-100 mb-1">Địa điểm</span>
-                  <span className="text-lg font-light italic text-primary/80">{item.location}</span>
-                </div>
-              </div>
-            ))}
-          </div>
+              )}
 
-          <div className="mt-12 p-6 border border-primary/10 bg-primary/[0.02] text-center italic">
-            <p className="text-sm opacity-70">
-              * Thời gian thay đổi layout (trang phục, makeup) đã được tính toán và tích hợp sẵn trong agenda.
-            </p>
+              {/* Cinematic Vignette */}
+              <div className="absolute inset-0 pointer-events-none z-30 shadow-[inset_0_0_100px_rgba(75,80,6,0.1)]"></div>
+            </div>
           </div>
         </div>
       </section>
+    </div>
 
       {/* 5. RSVP */}
       <section className="section-container section-accent">
         <div className="content-wrapper max-w-2xl">
-          <div className="mb-12">
-            <h2 className="heading-lg mb-4">RSVP</h2>
-            <p className="text-elegant">Bạn sẽ cùng chúng tôi hòa nhịp trong bản giao hưởng sang trọng này chứ?</p>
+          <div className="mb-16 space-y-4">
+            <h2 className="heading-lg">Phản hồi</h2>
+            <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
+            <p className="text-elegant opacity-60">Hãy để chúng tôi chuẩn bị tốt nhất cho bạn</p>
           </div>
 
           {formStatus === "success" ? (
@@ -312,7 +473,11 @@ export default function Home() {
       {/* 6. Dresscode */}
       <section className="section-container">
         <div className="content-wrapper max-w-4xl">
-          <h2 className="heading-lg mb-16">Trang phục</h2>
+          <div className="mb-16 space-y-4">
+            <h2 className="heading-lg">Quy chuẩn trang phục</h2>
+            <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
+            <p className="text-elegant opacity-60">Dresscode for an Elegant Atmosphere</p>
+          </div>
           
           <div className="border border-primary/10 rounded-sm overflow-hidden">
             {/* Header Row */}
@@ -375,7 +540,11 @@ export default function Home() {
       {/* 7. Contact Us */}
       <section className="section-container section-accent">
         <div className="content-wrapper">
-          <h2 className="heading-lg mb-16">Liên hệ</h2>
+          <div className="mb-16 space-y-4 text-center">
+            <h2 className="heading-lg">Liên hệ</h2>
+            <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
+            <p className="text-elegant opacity-60">Hỗ trợ thông tin trực tiếp</p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             <div className="flex flex-col items-center">
               <h3 className="heading-md mb-2">Đơn vị 1</h3>
@@ -402,7 +571,11 @@ export default function Home() {
       {/* 8. Thank you note */}
       <section className="py-32 section-accent border-t border-primary/10">
         <div className="content-wrapper">
-          <h2 className="heading-lg mb-6">Cảm ơn bạn</h2>
+          <div className="mb-12 space-y-4 text-center">
+            <h2 className="heading-lg">Cảm ơn bạn</h2>
+            <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
+            <p className="text-elegant opacity-60">Hẹn gặp bạn tại The Sinfonia</p>
+          </div>
           <p className="text-elegant max-w-lg mx-auto">
             Chúng tôi rất mong được chia sẻ trải nghiệm tuyệt vời này cùng bạn tại The Sinfonia.
           </p>
