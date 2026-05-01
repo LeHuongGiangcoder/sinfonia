@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import gsap from "gsap";
 import Image from "next/image";
-import { amsterdam } from "@/lib/fonts";
+import { purgatory } from "@/lib/fonts";
 
 const IMAGES = [
   "/assets/w7.jpeg",
@@ -315,7 +315,7 @@ export default function Entrance({ onComplete }: { onComplete: () => void }) {
 
       {/* Brand Name */}
       <div className={`absolute bottom-12 left-12 pointer-events-none transition-opacity duration-500 ${isCaptured ? 'opacity-20' : 'opacity-0'}`}>
-        <h1 className="font-brand text-4xl text-primary lowercase">The Sinfonia</h1>
+        <h1 className={`${purgatory.className} font-brand text-4xl text-primary lowercase`}>The Sinfonia</h1>
       </div>
     </div>
   );

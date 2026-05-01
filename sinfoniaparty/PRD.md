@@ -10,7 +10,7 @@
     *   Background: `#fff8eb` (Antique Cream / Parchment)
     *   Text: Deep Charcoal or the Primary Accent for headers.
 *   **Typography:**
-    *   Display/Headings: **Amsterdam** (Sophisticated Script/Serif for a vintage look)
+    *   Display/Headings: **Armelie** (Sophisticated Script/Serif for a vintage look)
     *   Body/UI: **Montserrat** (Modern Sans-Serif for clarity)
 
 ## 3. Technical Stack
@@ -38,7 +38,7 @@
 - `--color-bg`: `#fff8eb`
 
 ### Typography Implementation
-- `font-display`: 'Amsterdam', serif;
+- `font-display`: 'Armelie', serif;
 - `font-body`: 'Montserrat', sans-serif;
 
 ## 6. Functional Requirements

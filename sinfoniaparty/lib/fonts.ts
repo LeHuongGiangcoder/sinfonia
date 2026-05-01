@@ -11,7 +11,7 @@ export const playfair = Playfair_Display({
   subsets: ["latin"],
 });
 
-export const amsterdam = localFont({
-  src: "../public/assets/amsterdam-handwriting/amsterdam.ttf",
-  variable: "--font-amsterdam",
+export const purgatory = localFont({
+  src: "../public/assets/purgatory/Purgatory.ttf",
+  variable: "--font-purgatory",
 });

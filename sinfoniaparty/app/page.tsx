@@ -4,7 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { amsterdam } from "@/lib/fonts";
+import { purgatory } from "@/lib/fonts";
 import Entrance from "@/components/Entrance";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
@@ -138,14 +138,68 @@ export default function Home() {
     <>
       {isLoading && <Entrance onComplete={() => setIsLoading(false)} />}
       <div ref={container} className={`min-h-screen ${isLoading ? "opacity-0" : "opacity-100"} transition-opacity duration-1000`}>
-      {/* 1 & 2. Opening & Hero Section */}
-      <section className="section-container">
-        <div className="hero-content content-wrapper">
-          <h2 className="subheading mb-4">Trân trọng kính mời</h2>
-          <h1 className={`${amsterdam.className} heading-xl mb-8 lowercase`}>The Sinfonia</h1>
-          <p className="text-lg md:text-xl font-light max-w-2xl mx-auto">
-            Nơi hội ngộ của sự sang trọng và di sản ngành cưới Việt Nam.
+      {/* 1 & 2. Hero Section — Full Bleed */}
+      <section className="relative h-screen w-full overflow-hidden bg-black">
+        {/* Background — natural colors, no overlay */}
+        <img
+          src="/assets/hero%20background.png"
+          alt="The Sinfonia"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ willChange: 'auto' }}
+        />
+
+        {/* Text block — repositioned to vertical center of viewport */}
+        <div
+          className="absolute left-1/2 z-10 flex flex-col items-center text-center w-full px-6"
+          style={{ top: '45%', transform: 'translate(-50%, -50%)' }}
+        >
+          {/* Subheading — above the title */}
+          <p
+            className="uppercase font-light tracking-[0.5em] text-[9px] md:text-[11px] mb-5"
+            style={{
+              color: 'rgba(243,237,225,0.65)',
+              animation: 'hero-fade-up 0.9s ease-out 0.3s both',
+            }}
+          >
+            a party that never ends
           </p>
+
+          {/* Main Title — Pure fade-up for maximum sharpness */}
+          <h1
+            className={`${purgatory.className} text-[4.5rem] md:text-[7rem] lg:text-[9rem] leading-none lowercase tracking-tight`}
+            style={{
+              color: '#f3ede1',
+              opacity: 0,
+              animation: 'hero-fade-up 1.2s ease-out 0.7s both',
+              transform: 'translateZ(0)',
+              WebkitFontSmoothing: 'antialiased',
+            } as React.CSSProperties}
+          >
+            The Sinfonia
+          </h1>
+        </div>
+
+        {/* Subtle bottom blend into next section */}
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/30 to-transparent pointer-events-none z-10"></div>
+
+        {/* Scroll Indicator — Minimalist Mouse Icon */}
+        <div 
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-4 animate-fade-in"
+          style={{ animationDelay: '3.5s', animationFillMode: 'both' }}
+        >
+          {/* Elegant Mouse SVG */}
+          <div className="w-5 h-8 border-[1.2px] border-[#f3ede1]/30 rounded-full relative">
+            <div 
+              className="absolute left-1/2 top-2 -translate-x-1/2 w-[1.5px] h-[4px] bg-[#f3ede1]/60 rounded-full animate-wheel-scroll"
+            ></div>
+          </div>
+          
+          <div className="w-[1px] h-10 relative overflow-hidden" style={{ background: 'rgba(243,237,225,0.1)' }}>
+            <div 
+              className="absolute top-0 left-0 w-full h-1/2 animate-scroll-down" 
+              style={{ background: 'linear-gradient(to bottom, transparent, rgba(243,237,225,0.6), transparent)' }}
+            ></div>
+          </div>
         </div>
       </section>
 
@@ -169,7 +223,7 @@ export default function Home() {
                 <h3 className="subheading">Thời gian diễn ra</h3>
                 <div className="text-center space-y-2">
                   <p className="text-xl md:text-2xl font-light tracking-wide italic opacity-80">Thứ Ba & Thứ Tư</p>
-                  <p className={`${amsterdam.className} text-6xl md:text-7xl text-primary lowercase leading-tight py-2`}>
+                  <p className={`${purgatory.className} text-6xl md:text-7xl text-primary lowercase leading-tight py-2`}>
                     02 & 03 Tháng 6
                   </p>
                   <p className="text-base tracking-[0.4em] font-light opacity-40 uppercase">Mùa hạ năm 2026</p>

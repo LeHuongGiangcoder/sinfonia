@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { montserrat, playfair, amsterdam } from "@/lib/fonts";
+import { montserrat, playfair, purgatory } from "@/lib/fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${montserrat.variable} ${playfair.variable} ${amsterdam.variable} h-full antialiased`}
+      className={`${montserrat.variable} ${playfair.variable} ${purgatory.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans text-foreground bg-background">
         {/* Cinematic Grain Overlay */}

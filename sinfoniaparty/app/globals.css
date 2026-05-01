@@ -7,7 +7,7 @@
   --color-accent: #f3ede1;
   --font-sans: var(--font-montserrat);
   --font-display: var(--font-playfair);
-  --font-brand: var(--font-amsterdam);
+  --font-brand: var(--font-purgatory);
 }
 
 /* Base styles to enforce the vintage feel */
@@ -141,6 +141,50 @@ body::after {
 
 @utility animate-fade-in {
   animation: fade-in 0.5s ease-out forwards;
+}
+
+/* Hero text reveal — pure opacity, no GPU compositing blur */
+@keyframes hero-fade-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Handwriting / Write-on reveal — uses mask-image for an ink-on-paper reveal effect */
+@keyframes write-on {
+  0% { 
+    -webkit-mask-size: 0% 100%; 
+    mask-size: 0% 100%;
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  100% { 
+    -webkit-mask-size: 200% 100%; 
+    mask-size: 200% 100%;
+    opacity: 1;
+  }
+}
+
+@utility animate-write-on {
+  -webkit-mask-image: linear-gradient(to right, black 50%, transparent 50%);
+  mask-image: linear-gradient(to right, black 50%, transparent 50%);
+  -webkit-mask-size: 0% 100%;
+  mask-size: 0% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  animation: write-on 2.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes wheel-scroll {
+  0% { transform: translate(-50%, 0); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translate(-50%, 8px); opacity: 0; }
+}
+
+@utility animate-wheel-scroll {
+  animation: wheel-scroll 2s ease-in-out infinite;
 }
 
 @utility no-scrollbar {
