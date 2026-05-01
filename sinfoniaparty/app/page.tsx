@@ -541,116 +541,149 @@ export default function Home() {
             </div>
 
             {formStatus === "success" ? (
-              <div className="text-center py-12 space-y-4">
-                <h3 className="heading-md">Cảm ơn bạn đã phản hồi</h3>
-                <p className="text-elegant">Chúng tôi đã nhận được thông tin và rất mong được đón tiếp bạn.</p>
-                <button onClick={() => setFormStatus("idle")} className="text-sm underline opacity-60 hover:opacity-100">Gửi phản hồi khác</button>
+              <div className="text-center py-24 space-y-6 animate-fade-in bg-white/30 backdrop-blur-sm rounded-lg border border-primary/10 max-w-2xl mx-auto shadow-sm">
+                <div className="flex justify-center">
+                  <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
+                    <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <h3 className="heading-md">Cảm ơn bạn đã phản hồi</h3>
+                  <p className="text-elegant">Chúng tôi đã nhận được thông tin và rất mong được đón tiếp bạn.</p>
+                </div>
+                <button 
+                  onClick={() => setFormStatus("idle")} 
+                  className="text-xs uppercase tracking-[0.2em] opacity-40 hover:opacity-100 transition-all hover:tracking-[0.3em] mt-4"
+                >
+                  Gửi phản hồi khác
+                </button>
               </div>
             ) : (
-              <form className="space-y-8 text-left" onSubmit={handleSubmit}>
-                <div className="space-y-2">
-                  <label className="subheading block opacity-100">Họ và tên</label>
-                  <input
-                    type="text"
-                    name="name"
-                    required
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    className="w-full bg-transparent border-b border-primary py-2 focus:outline-none placeholder:opacity-30"
-                    placeholder="Nhập họ và tên"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="subheading block opacity-100">Tên đơn vị / Thương hiệu</label>
-                  <input
-                    type="text"
-                    name="business"
-                    required
-                    value={formData.business}
-                    onChange={handleInputChange}
-                    className="w-full bg-transparent border-b border-primary py-2 focus:outline-none placeholder:opacity-30"
-                    placeholder="Nhập tên doanh nghiệp"
-                  />
-                </div>
-
-                <div className="space-y-4">
-                  <label className="subheading block opacity-100">Bạn sẽ tham dự cùng chúng tôi chứ?</label>
-                  <div className="flex flex-col space-y-2">
-                    <label className="flex items-center space-x-3 cursor-pointer group">
-                      <input
-                        type="radio"
-                        name="confirmation"
-                        required
-                        value="absolutely! cant wait"
-                        checked={formData.confirmation === "absolutely! cant wait"}
-                        onChange={handleInputChange}
-                        className="w-4 h-4 accent-primary"
-                      />
-                      <span className="font-light group-hover:opacity-100 opacity-70 transition-opacity">Chắc chắn rồi! Rất mong chờ.</span>
-                    </label>
-                    <label className="flex items-center space-x-3 cursor-pointer group">
-                      <input
-                        type="radio"
-                        name="confirmation"
-                        value="Maybe next time"
-                        checked={formData.confirmation === "Maybe next time"}
-                        onChange={handleInputChange}
-                        className="w-4 h-4 accent-primary"
-                      />
-                      <span className="font-light group-hover:opacity-100 opacity-70 transition-opacity">Hẹn dịp khác nhé.</span>
-                    </label>
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="space-y-2">
-                    <label className="subheading block opacity-100">Số lượng người tham dự</label>
+              <form className="max-w-2xl mx-auto space-y-12" onSubmit={handleSubmit}>
+                {/* Section: Name & Brand */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                  <div className="space-y-3 group">
+                    <label className="subheading block text-[10px] tracking-[0.25em] transition-colors group-focus-within:text-primary">Họ và tên</label>
                     <input
-                      type="number"
-                      name="attendants"
-                      min="1"
-                      value={formData.attendants}
+                      type="text"
+                      name="name"
+                      required
+                      value={formData.name}
                       onChange={handleInputChange}
-                      className="w-full bg-transparent border-b border-primary py-2 focus:outline-none"
+                      className="w-full bg-transparent border-b border-primary/20 py-3 focus:border-primary focus:outline-none transition-all placeholder:opacity-20 font-light text-lg"
+                      placeholder="Nhập họ và tên"
                     />
                   </div>
-                  <div className="space-y-2">
-                    <label className="subheading block opacity-100">Yêu cầu về thực đơn</label>
+
+                  <div className="space-y-3 group">
+                    <label className="subheading block text-[10px] tracking-[0.25em] transition-colors group-focus-within:text-primary">Tên đơn vị / Thương hiệu</label>
+                    <input
+                      type="text"
+                      name="business"
+                      required
+                      value={formData.business}
+                      onChange={handleInputChange}
+                      className="w-full bg-transparent border-b border-primary/20 py-3 focus:border-primary focus:outline-none transition-all placeholder:opacity-20 font-light text-lg"
+                      placeholder="Nhập tên doanh nghiệp"
+                    />
+                  </div>
+                </div>
+
+                {/* Section: Confirmation */}
+                <div className="space-y-6 pt-4">
+                  <label className="subheading block text-[10px] tracking-[0.25em] text-center mb-8">Bạn sẽ tham dự cùng chúng tôi chứ?</label>
+                  <div className="flex flex-col md:flex-row justify-center gap-8 md:gap-16">
+                    <label className="flex items-center space-x-4 cursor-pointer group">
+                      <div className="relative flex items-center justify-center">
+                        <input
+                          type="radio"
+                          name="confirmation"
+                          required
+                          value="absolutely! cant wait"
+                          checked={formData.confirmation === "absolutely! cant wait"}
+                          onChange={handleInputChange}
+                          className="peer appearance-none w-5 h-5 border border-primary/30 rounded-full checked:border-primary transition-all cursor-pointer"
+                        />
+                        <div className="absolute w-2.5 h-2.5 bg-primary rounded-full scale-0 peer-checked:scale-100 transition-transform duration-300"></div>
+                      </div>
+                      <span className="font-light text-sm tracking-wide opacity-60 group-hover:opacity-100 transition-opacity">Chắc chắn rồi! Rất mong chờ.</span>
+                    </label>
+
+                    <label className="flex items-center space-x-4 cursor-pointer group">
+                      <div className="relative flex items-center justify-center">
+                        <input
+                          type="radio"
+                          name="confirmation"
+                          required
+                          value="Maybe next time"
+                          checked={formData.confirmation === "Maybe next time"}
+                          onChange={handleInputChange}
+                          className="peer appearance-none w-5 h-5 border border-primary/30 rounded-full checked:border-primary transition-all cursor-pointer"
+                        />
+                        <div className="absolute w-2.5 h-2.5 bg-primary rounded-full scale-0 peer-checked:scale-100 transition-transform duration-300"></div>
+                      </div>
+                      <span className="font-light text-sm tracking-wide opacity-60 group-hover:opacity-100 transition-opacity">Hẹn dịp khác nhé.</span>
+                    </label>
+                  </div>
+                </div>
+
+                {/* Section: Details */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 pt-4">
+                  <div className="space-y-3 group">
+                    <label className="subheading block text-[10px] tracking-[0.25em] transition-colors group-focus-within:text-primary">Số lượng người tham dự</label>
+                    <div className="relative">
+                      <input
+                        type="number"
+                        name="attendants"
+                        min="1"
+                        value={formData.attendants}
+                        onChange={handleInputChange}
+                        className="w-full bg-transparent border-b border-primary/20 py-3 focus:border-primary focus:outline-none transition-all font-light text-lg"
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-3 group">
+                    <label className="subheading block text-[10px] tracking-[0.25em] transition-colors group-focus-within:text-primary">Yêu cầu về thực đơn</label>
                     <input
                       type="text"
                       name="meal_preference"
                       value={formData.meal_preference}
                       onChange={handleInputChange}
-                      className="w-full bg-transparent border-b border-primary py-2 focus:outline-none placeholder:opacity-30"
+                      className="w-full bg-transparent border-b border-primary/20 py-3 focus:border-primary focus:outline-none transition-all placeholder:opacity-20 font-light text-lg"
                       placeholder="Dị ứng, ăn chay..."
                     />
                   </div>
                 </div>
 
-                <div className="space-y-2">
-                  <label className="subheading block opacity-100">Lời nhắn gửi đến Ban tổ chức</label>
+                {/* Section: Message */}
+                <div className="space-y-3 group pt-4">
+                  <label className="subheading block text-[10px] tracking-[0.25em] transition-colors group-focus-within:text-primary">Lời nhắn gửi đến Ban tổ chức</label>
                   <textarea
                     name="note"
-                    rows={3}
+                    rows={2}
                     value={formData.note}
                     onChange={handleInputChange}
-                    className="w-full bg-transparent border-b border-primary py-2 focus:outline-none placeholder:opacity-30 resize-none"
+                    className="w-full bg-transparent border-b border-primary/20 py-3 focus:border-primary focus:outline-none transition-all placeholder:opacity-20 font-light text-lg resize-none"
                     placeholder="Bạn có muốn nhắn nhủ điều gì không?"
                   ></textarea>
                 </div>
 
                 {formStatus === "error" && (
-                  <p className="text-red-800 text-sm italic">Đã có lỗi xảy ra. Vui lòng thử lại hoặc liên hệ trực tiếp với chúng tôi.</p>
+                  <p className="text-red-800 text-xs italic text-center">Đã có lỗi xảy ra. Vui lòng thử lại hoặc liên hệ trực tiếp với chúng tôi.</p>
                 )}
 
                 <div className="text-center pt-8">
                   <button
                     type="submit"
                     disabled={formStatus === "submitting"}
-                    className="btn-secondary disabled:opacity-50"
+                    className="relative px-12 py-5 overflow-hidden group border border-primary/20 transition-all duration-700 hover:border-primary disabled:opacity-50"
                   >
-                    {formStatus === "submitting" ? "Đang gửi..." : "Gửi phản hồi"}
+                    <span className="relative z-10 text-xs uppercase tracking-[0.4em] font-medium transition-colors duration-500 group-hover:text-background">
+                      {formStatus === "submitting" ? "Đang gửi..." : "Gửi phản hồi"}
+                    </span>
+                    <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-out"></div>
                   </button>
                 </div>
               </form>
