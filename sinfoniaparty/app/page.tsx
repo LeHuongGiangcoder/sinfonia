@@ -349,9 +349,9 @@ export default function Home() {
 
         {/* 4. Agendas - Vertical Timeline & Spotlight Map (Pinned via ScrollTrigger) */}
         <div ref={agendaTrigger} className="bg-background">
-          <section className="min-h-screen w-full flex items-center overflow-hidden py-24" id="agenda-section">
+          <section className="min-h-screen w-full flex flex-col justify-center overflow-hidden" id="agenda-section">
             <div className="w-full max-w-7xl mx-auto px-6">
-              <div className="mb-16 space-y-4 text-center">
+              <div className="mb-12 space-y-4 text-center">
                 <h2 className="heading-lg">Chương trình</h2>
                 <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
                 <p className="text-elegant opacity-60">Dấu ấn của những khoảnh khắc</p>
