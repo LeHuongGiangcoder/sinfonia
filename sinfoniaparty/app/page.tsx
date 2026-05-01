@@ -101,8 +101,8 @@ export default function Home() {
       subtitle: "Tiệc hồ bơi",
       women: "Trang phục hồ bơi / Bikini",
       men: "Quần short / Trang phục bơi",
-      womenImg: "/assets/women 1.png",
-      menImg: "/assets/men 2.png",
+      womenImg: "/assets/women 4.png",
+      menImg: "/assets/men 4.png",
       palette: {
         women: ["#B2EBF2", "#FFF9C4", "#FFCCBC", "#FFFFFF"],
         men: ["#E0F7FA", "#CFD8DC", "#FFAB91", "#FFFFFF"]
