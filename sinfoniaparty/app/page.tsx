@@ -622,17 +622,30 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 8. Thank you note */}
-      <section className="py-32 section-accent border-t border-primary/10">
-        <div className="content-wrapper">
-          <div className="mb-12 space-y-4 text-center">
-            <h2 className="heading-lg">Cảm ơn bạn</h2>
-            <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
-            <p className="text-elegant opacity-60">Hẹn gặp bạn tại The Sinfonia</p>
+      {/* 8. Thank you note — Minimalist Finale (Full Viewport) */}
+      <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-black">
+        {/* Background Image — Pure & Sharp */}
+        <img
+          src="/assets/thankyou%20background.png"
+          alt="Thank You"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+
+        {/* Content Overlay — Standardized with Hero layout */}
+        <div className="relative z-20 content-wrapper max-w-4xl px-8 flex flex-col items-center">
+          <div className="flex flex-col items-center text-center">
+            {/* Subheading — Synced size with Hero */}
+            <p 
+              className="text-[10px] md:text-xs uppercase tracking-[0.5em] font-light !text-white opacity-60 mb-4"
+            >
+              See you at The Sinfonia
+            </p>
+
+            {/* Main Title — Synced size with Hero */}
+            <h2 className={`${purgatory.className} text-[4.5rem] md:text-[7rem] lg:text-[9rem] !text-white lowercase tracking-tight leading-none`}>
+              Thank you
+            </h2>
           </div>
-          <p className="text-elegant max-w-lg mx-auto">
-            Chúng tôi rất mong được chia sẻ trải nghiệm tuyệt vời này cùng bạn tại The Sinfonia.
-          </p>
         </div>
       </section>
       </div>
