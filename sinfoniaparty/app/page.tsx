@@ -544,24 +544,25 @@ export default function Home() {
             className="absolute left-1/2 z-10 flex flex-col items-center text-center w-full px-6"
             style={{ top: '45%', transform: 'translate(-50%, -50%)' }}
           >
-            {/* Subheading — above the title */}
+            {/* Subheading — Now repositioned above the title */}
             <p
-              className="uppercase font-light tracking-[0.5em] text-[9px] md:text-[11px] mb-5"
+              className="text-elegant uppercase tracking-[0.4em] text-xs md:text-sm mb-4"
               style={{
-                color: 'rgba(243,237,225,0.65)',
-                animation: 'hero-fade-up 0.9s ease-out 0.3s both',
+                color: 'rgba(243,237,225,0.85)',
+                opacity: 0,
+                animation: 'hero-fade-up 1s ease-out 1.2s both',
               }}
             >
               a party that never ends
             </p>
 
-            {/* Main Title — Pure fade-up for maximum sharpness */}
+            {/* Main Title — Still appears first for immediate impact */}
             <h1
               className={`${purgatory.className} text-[4.5rem] md:text-[7rem] lg:text-[9rem] leading-none lowercase tracking-tight`}
               style={{
                 color: '#f3ede1',
                 opacity: 0,
-                animation: 'hero-fade-up 1.2s ease-out 0.7s both',
+                animation: 'hero-fade-up 1.2s ease-out 0.3s both',
                 transform: 'translateZ(0)',
                 WebkitFontSmoothing: 'antialiased',
               } as React.CSSProperties}
