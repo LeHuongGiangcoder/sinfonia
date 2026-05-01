@@ -876,7 +876,7 @@ export default function Home() {
                 </div>
 
                 {/* Map Overview - Right */}
-                <div className="flex-1 relative aspect-video lg:aspect-auto min-h-[400px] lg:min-h-0 overflow-hidden rounded-sm border border-primary/10 bg-accent/10 shadow-2xl group/map order-1 lg:order-2">
+                <div className="flex-1 relative aspect-video lg:aspect-square xl:aspect-video max-h-[500px] overflow-hidden rounded-sm border border-primary/10 bg-accent/10 shadow-2xl group/map order-1 lg:order-2">
                   {/* The Map Image */}
                   <img
                     src="/assets/map 2.png"
@@ -911,7 +911,7 @@ export default function Home() {
 
                   {/* Activity Details Overlay on Map */}
                   {activeAgenda !== null && (
-                    <div className="absolute bottom-4 left-4 z-40 w-[180px] md:w-[220px] h-[160px] md:h-[180px] p-4 bg-background/95 backdrop-blur-xl border border-primary/20 rounded-xs shadow-2xl animate-fade-in pointer-events-none flex flex-col">
+                    <div className="absolute bottom-4 left-4 z-40 w-[180px] md:w-[220px] h-auto max-h-[180px] min-h-[140px] p-4 bg-background/95 backdrop-blur-xl border border-primary/20 rounded-xs shadow-2xl animate-fade-in pointer-events-none flex flex-col">
                       <div className="flex items-center gap-2 mb-2">
                         <span className="text-xl md:text-2xl font-light tabular-nums text-primary/30">{agendaData[activeAgenda].time}</span>
                         <div className="h-[1px] flex-1 bg-primary/10"></div>
