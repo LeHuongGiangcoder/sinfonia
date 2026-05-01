@@ -221,12 +221,50 @@ export default function Home() {
               
               <div className="space-y-8 relative z-10">
                 <h3 className="subheading">Thời gian diễn ra</h3>
-                <div className="text-center space-y-2">
-                  <p className="text-xl md:text-2xl font-light tracking-wide italic opacity-80">Thứ Ba & Thứ Tư</p>
-                  <p className={`${purgatory.className} text-6xl md:text-7xl text-primary lowercase leading-tight py-2`}>
-                    02 & 03 Tháng 6
-                  </p>
-                  <p className="text-base tracking-[0.4em] font-light opacity-40 uppercase">Mùa hạ năm 2026</p>
+                
+                <div className="flex flex-col items-center justify-center gap-10 mt-10">
+                  {/* Top Text Section — Min-height for alignment */}
+                  <div className="text-center space-y-4 min-h-[140px] flex flex-col justify-center">
+                    <p className="text-3xl md:text-4xl font-normal leading-tight text-primary">
+                      02 & 03 Tháng 6 <br /> 
+                      <span className="font-light italic text-2xl md:text-3xl opacity-80">Thứ Ba & Thứ Tư</span>
+                    </p>
+                    <p className="text-xs uppercase tracking-[0.2em] opacity-40">Mùa hạ năm 2026</p>
+                  </div>
+
+                  {/* Modern Minimalist Calendar */}
+                  <div className="bg-background/40 backdrop-blur-sm p-8 border border-primary/5 rounded-2xl w-full max-w-[320px] shadow-sm">
+                    <div className="flex justify-between items-center mb-8 px-2">
+                      <span className="font-display text-xl text-primary">June 2026</span>
+                      <div className="flex gap-4 opacity-30">
+                        <span className="text-xs cursor-default">←</span>
+                        <span className="text-xs cursor-default">→</span>
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-7 gap-y-4 text-center">
+                      {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map(day => (
+                        <span key={day} className="text-[10px] font-bold opacity-30 tracking-widest mb-2">{day}</span>
+                      ))}
+                      
+                      <span className="text-sm opacity-10">31</span>
+                      <span className="text-sm opacity-40">1</span>
+                      
+                      <div className="relative flex items-center justify-center">
+                        <div className="absolute inset-0 bg-primary scale-110 rounded-full"></div>
+                        <span className="relative text-sm text-background font-medium">2</span>
+                      </div>
+                      
+                      <div className="relative flex items-center justify-center">
+                        <div className="absolute inset-0 bg-primary scale-110 rounded-full"></div>
+                        <span className="relative text-sm text-background font-medium">3</span>
+                      </div>
+                      
+                      {[4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30].map(d => (
+                        <span key={d} className="text-sm opacity-40">{d}</span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
               
@@ -242,12 +280,27 @@ export default function Home() {
 
               <div className="space-y-8 relative z-10 text-center">
                 <h3 className="subheading">Địa điểm tổ chức</h3>
-                <div className="space-y-4">
+                {/* Top Text Section — Min-height synced with Time card */}
+                <div className="space-y-4 min-h-[140px] flex flex-col justify-center">
                   <p className="text-3xl md:text-4xl font-normal leading-tight text-primary">
                     Wyndham Sky Lake <br /> 
                     <span className="font-light italic text-2xl md:text-3xl opacity-80">Resort & Villas</span>
                   </p>
                   <p className="text-xs uppercase tracking-[0.2em] opacity-40">Chương Mỹ, Hà Nội, Việt Nam</p>
+                </div>
+
+                {/* Venue Illustration — Full width with vertical softening only */}
+                <div className="-mx-12 md:-mx-16 mt-6 relative overflow-hidden">
+                  <img 
+                    src="/assets/places.png" 
+                    alt="Wyndham Sky Lake Illustration" 
+                    className="w-full h-auto object-cover opacity-90"
+                    style={{
+                      mixBlendMode: 'multiply',
+                      WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)',
+                      maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)',
+                    }}
+                  />
                 </div>
 
                 <div className="pt-6">
