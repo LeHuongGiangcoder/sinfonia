@@ -1238,8 +1238,8 @@ export default function Home() {
                 images={["thomas.png"]}
                 unit="Wyndham"
                 rep="Mr. Thomas"
-                role="Hỗ trợ địa điểm & Tiệc"
-                phone=""
+                role="0889010399"
+                phone="Hỗ trợ địa điểm & Tiệc"
                 intro="Tận hưởng không gian nghỉ dưỡng tuyệt mỹ và dịch vụ đẳng cấp tại Wyndham Sky Lake, nơi khởi đầu cho những hành trình hạnh phúc."
                 link="https://www.facebook.com/WynhamSkyLake.ResortVillas"
               />
