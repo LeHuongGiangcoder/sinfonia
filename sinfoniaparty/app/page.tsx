@@ -912,8 +912,8 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Selected Activity Details — New Location below timeline */}
-              <div className={`mt-10 mb-12 text-center transition-all duration-700 ${activeAgenda !== null ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+              {/* Selected Activity Details — Stable fixed-height container to prevent layout jumping */}
+              <div className={`mt-10 mb-12 text-center transition-all duration-700 min-h-[160px] md:min-h-[200px] flex flex-col justify-center ${activeAgenda !== null ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
                 {activeAgenda !== null && (
                   <div className="space-y-3">
                     <div className="flex items-center justify-center gap-4">
