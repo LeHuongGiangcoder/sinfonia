@@ -207,12 +207,12 @@ function ContactCard({ images, unit, rep, role, phone, intro, link }: {
         {/* Slide 1: Rep Photo */}
         <div className="w-full h-full shrink-0 relative">
           <img src={`/assets/${images[0]}`} className="w-full h-full object-cover" alt={rep} />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
           <div className="absolute bottom-6 left-6 right-6 text-left text-white">
-            <p className="text-[10px] uppercase tracking-[0.3em] opacity-70 mb-1">{unit}</p>
-            <h3 className="heading-md text-2xl !text-white">{rep}</h3>
-            <p className="text-xs font-light opacity-90 mt-1">{phone}</p>
-            <p className="text-[10px] font-light opacity-60 mt-0.5">{role}</p>
+            <p className="text-[10px] uppercase tracking-[0.3em] font-medium opacity-80 mb-1">{unit}</p>
+            <h3 className="heading-md text-2xl font-bold !text-white">{rep}</h3>
+            <p className="text-xs font-medium opacity-100 mt-1">{phone}</p>
+            <p className="text-[10px] font-medium opacity-70 mt-0.5">{role}</p>
           </div>
         </div>
 
@@ -223,7 +223,7 @@ function ContactCard({ images, unit, rep, role, phone, intro, link }: {
           <p className="text-sm font-light leading-relaxed mb-8 opacity-90 italic">
             "{intro}"
           </p>
-          {phone && <p className="text-base tracking-widest mb-8">{phone}</p>}
+
           {link && (
             <a
               href={link}
