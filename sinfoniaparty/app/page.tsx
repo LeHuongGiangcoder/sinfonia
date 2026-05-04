@@ -379,6 +379,8 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [activeAgenda, setActiveAgenda] = useState(0);
   const [activeDresscode, setActiveDresscode] = useState(0);
+  const [showAgendaHint, setShowAgendaHint] = useState(true);
+  const [showDresscodeHint, setShowDresscodeHint] = useState(true);
   const [scrolled, setScrolled] = useState(false);
   const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [formData, setFormData] = useState({
@@ -528,11 +530,6 @@ export default function Home() {
         stagger: 0.2,
       });
 
-      // ScrollTrigger for Agenda Pinning & State
-
-
-
-
       // Bridge Section — Word by word reveal
       const bridgeWords = gsap.utils.toArray(".bridge-word");
       gsap.from(bridgeWords, {
@@ -671,7 +668,19 @@ export default function Home() {
             <div className="mb-20 space-y-4">
               <h2 className="heading-lg">Time & Venue</h2>
               <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
-              <p className="text-elegant opacity-60">Hành trình của những cảm xúc thăng hoa</p>
+              <p className="text-elegant opacity-60">Lựa chọn trang phục cho những khoảnh khắc tuyệt vời</p>
+
+              {/* Interaction Hint — Dresscode */}
+              {showDresscodeHint && (
+                <div className="pt-4 flex flex-col items-center gap-2 opacity-40 transition-opacity duration-1000">
+                  <div className="flex items-center gap-8">
+                    <div className="w-12 h-[0.5px] bg-primary/20"></div>
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary animate-move-horizontal"></div>
+                    <div className="w-12 h-[0.5px] bg-primary/20"></div>
+                  </div>
+                  <span className="text-[8px] tracking-[0.4em] uppercase font-light">Swipe to see more</span>
+                </div>
+              )}
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
@@ -817,6 +826,18 @@ export default function Home() {
                 <h2 className="heading-lg">The Agenda</h2>
                 <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
                 <p className="text-elegant opacity-60">Dấu ấn của những khoảnh khắc</p>
+                
+                {/* Interaction Hint — Agenda */}
+                {showAgendaHint && (
+                  <div className="pt-4 flex flex-col items-center gap-2 opacity-40 transition-opacity duration-1000">
+                    <div className="flex items-center gap-8">
+                      <div className="w-12 h-[0.5px] bg-primary/20"></div>
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary animate-move-horizontal"></div>
+                      <div className="w-12 h-[0.5px] bg-primary/20"></div>
+                    </div>
+                    <span className="text-[8px] tracking-[0.4em] uppercase font-light">Explore Timeline</span>
+                  </div>
+                )}
               </div>
 
               {/* Unified Horizontal Timeline — Agenda */}
@@ -831,7 +852,10 @@ export default function Home() {
                   {agendaData.map((item, idx) => (
                     <button
                       key={idx}
-                      onClick={() => setActiveAgenda(idx)}
+                      onClick={() => {
+                        setActiveAgenda(idx);
+                        setShowAgendaHint(false);
+                      }}
                       className={`timeline-node ${activeAgenda === idx ? 'opacity-100' : 'opacity-40 hover:opacity-80'}`}
                       style={{ width: `${100 / agendaData.length}%` }}
                     >
@@ -864,7 +888,10 @@ export default function Home() {
                 {/* Navigation Arrows for Agenda Map */}
                 <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between z-30 pointer-events-none px-6">
                   <button
-                    onClick={() => setActiveAgenda(prev => Math.max(0, prev - 1))}
+                    onClick={() => {
+                      setActiveAgenda(prev => Math.max(0, prev - 1));
+                      setShowAgendaHint(false);
+                    }}
                     disabled={activeAgenda === 0}
                     className={`pointer-events-auto w-10 h-10 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white transition-all duration-500 hover:bg-white hover:text-black disabled:opacity-0 disabled:pointer-events-none`}
                   >
@@ -873,7 +900,10 @@ export default function Home() {
                     </svg>
                   </button>
                   <button
-                    onClick={() => setActiveAgenda(prev => Math.min(agendaData.length - 1, prev + 1))}
+                    onClick={() => {
+                      setActiveAgenda(prev => Math.min(agendaData.length - 1, prev + 1));
+                      setShowAgendaHint(false);
+                    }}
                     disabled={activeAgenda === agendaData.length - 1}
                     className={`pointer-events-auto w-10 h-10 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white transition-all duration-500 hover:bg-white hover:text-black disabled:opacity-0 disabled:pointer-events-none`}
                   >
@@ -1113,7 +1143,10 @@ export default function Home() {
                     {dresscodeData.map((item, idx) => (
                       <button
                         key={idx}
-                        onClick={() => setActiveDresscode(idx)}
+                        onClick={() => {
+                          setActiveDresscode(idx);
+                          setShowDresscodeHint(false);
+                        }}
                         className={`timeline-node ${activeDresscode === idx ? 'opacity-100' : 'opacity-40 hover:opacity-80'}`}
                         style={{ width: `${100 / dresscodeData.length}%` }}
                       >
