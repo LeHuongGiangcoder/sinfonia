@@ -377,6 +377,8 @@ export default function Home() {
   const bridgeRef = useRef<HTMLDivElement>(null);
 
   const [isLoading, setIsLoading] = useState(true);
+  const audioRef = useRef<HTMLVideoElement>(null);
+  const [isMuted, setIsMuted] = useState(false);
   const [activeAgenda, setActiveAgenda] = useState(0);
   const [activeDresscode, setActiveDresscode] = useState(0);
   const [showAgendaHint, setShowAgendaHint] = useState(true);
@@ -393,12 +395,15 @@ export default function Home() {
 
   // Handle scroll for Navbar
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Audio Playback Trigger
+  useEffect(() => {
+    if (!isLoading && audioRef.current) {
+      audioRef.current.play().catch(err => console.log("Playback blocked:", err));
+    }
+  }, [isLoading]);
 
   const agendaData = [
     {
@@ -569,6 +574,13 @@ export default function Home() {
       <div ref={container} className={`min-h-screen ${isLoading ? "opacity-0" : "opacity-100"} transition-opacity duration-1000`}>
         {/* 1 & 2. Hero Section — Full Bleed */}
         <section className="relative h-screen w-full overflow-hidden bg-black">
+          {/* Audio Source */}
+          <video
+            ref={audioRef}
+            src="/assets/Lady Gaga, Bruno Mars - Die With A Smile (Official Music Video).mp4"
+            loop
+            className="hidden"
+          />
           {/* Background — natural colors, no overlay */}
           <img
             src="/assets/hero%20background.png"
@@ -620,6 +632,36 @@ export default function Home() {
                 style={{ background: 'linear-gradient(to bottom, transparent, rgba(243,237,225,0.6), transparent)' }}
               ></div>
             </div>
+          </div>
+
+          {/* Audio Control — Elegant Toggle */}
+          <div className="absolute bottom-10 right-10 z-30 reveal-on-scroll">
+            <button
+              onClick={() => {
+                if (audioRef.current) {
+                  audioRef.current.muted = !isMuted;
+                  setIsMuted(!isMuted);
+                }
+              }}
+              className="group flex items-center gap-3 bg-white/5 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full transition-all duration-500 hover:bg-white/10"
+            >
+              <div className="relative flex items-center justify-center w-4 h-4">
+                {!isMuted ? (
+                  <div className="flex gap-[1px] items-center h-3">
+                    <div className="w-[1.5px] h-2 bg-white/80 animate-music-bar-1"></div>
+                    <div className="w-[1.5px] h-3 bg-white/80 animate-music-bar-2.5"></div>
+                    <div className="w-[1.5px] h-1.5 bg-white/80 animate-music-bar-2"></div>
+                  </div>
+                ) : (
+                  <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" className="w-4 h-4 opacity-60">
+                    <path d="M11 5L6 9H2v6h4l5 4V5zM23 9l-6 6M17 9l6 6" />
+                  </svg>
+                )}
+              </div>
+              <span className="text-[9px] uppercase tracking-[0.3em] font-medium text-white/60 group-hover:text-white transition-colors">
+                {isMuted ? "Sound Off" : "Sound On"}
+              </span>
+            </button>
           </div>
         </section>
 
