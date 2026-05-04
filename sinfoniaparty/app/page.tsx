@@ -1168,7 +1168,7 @@ export default function Home() {
                       className={`pointer-events-auto w-12 h-12 rounded-full border border-primary/10 bg-background/50 backdrop-blur-md flex items-center justify-center text-primary transition-all duration-500 hover:bg-primary hover:text-background disabled:opacity-0 disabled:pointer-events-none`}
                     >
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
-                        <path d="M9 18l6-6-6-6" className="rotate-180 origin-center" />
+                        <path d="M9 6l6 6-6 6" />
                       </svg>
                     </button>
                   </div>
