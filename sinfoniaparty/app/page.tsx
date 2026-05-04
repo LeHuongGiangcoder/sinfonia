@@ -543,6 +543,22 @@ export default function Home() {
         stagger: 0.2,
         ease: "power2.out",
       });
+
+      // Generic Section Reveals
+      const reveals = gsap.utils.toArray(".reveal-on-scroll");
+      reveals.forEach((el: any) => {
+        gsap.from(el, {
+          scrollTrigger: {
+            trigger: el,
+            start: "top 88%",
+            toggleActions: "play none none reverse",
+          },
+          y: 40,
+          opacity: 0,
+          duration: 1.2,
+          ease: "power3.out",
+        });
+      });
     }
   }, { scope: container, dependencies: [isLoading] });
 
@@ -620,7 +636,7 @@ export default function Home() {
           </p>
         </section>
         {/* 2.5 Atmosphere Gallery — A cinematic journey through the day */}
-        <section className="p-[1px] md:p-[4px] bg-background relative overflow-hidden" id="gallery-section">
+        <section className="p-[1px] md:p-[4px] bg-background relative overflow-hidden reveal-on-scroll" id="gallery-section">
           <div className="w-full">
             {/* Interaction Hint */}
             <div className="flex justify-center py-4 opacity-30 animate-pulse-slow">
@@ -664,7 +680,7 @@ export default function Home() {
 
         {/* 3. Time & Places - Redesigned for Premium Aesthetic */}
         <section className="section-container section-accent relative overflow-hidden" id="details-section">
-          <div className="content-wrapper max-w-6xl">
+          <div className="content-wrapper max-w-6xl reveal-on-scroll">
             <div className="mb-20 space-y-4">
               <h2 className="heading-lg">Time & Venue</h2>
               <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
@@ -821,7 +837,7 @@ export default function Home() {
         {/* 4. Agendas — Clickable Map View */}
         <div ref={agendaTrigger} className="bg-background">
           <section className="py-24 md:py-32 w-full flex flex-col justify-center overflow-hidden" id="agenda-section">
-            <div className="w-full max-w-7xl mx-auto px-6">
+            <div className="w-full max-w-7xl mx-auto px-6 reveal-on-scroll">
               <div className="mb-12 space-y-4 text-center">
                 <h2 className="heading-lg">The Agenda</h2>
                 <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
@@ -977,7 +993,7 @@ export default function Home() {
 
         {/* 5. RSVP */}
         <section className="section-container section-accent" id="rsvp-section">
-          <div className="content-wrapper max-w-2xl">
+          <div className="content-wrapper max-w-2xl reveal-on-scroll">
             <div className="mb-16 space-y-4">
               <h2 className="heading-lg">RSVP</h2>
               <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
@@ -1123,7 +1139,7 @@ export default function Home() {
         {/* 6. Dresscode — Clickable Carousel View */}
         <div ref={dresscodeTrigger} className="bg-background">
           <section className="py-24 md:py-32 w-full flex flex-col justify-center overflow-hidden" id="dresscode-section">
-            <div className="content-wrapper max-w-6xl">
+            <div className="content-wrapper max-w-6xl reveal-on-scroll">
               <div className="mb-10 space-y-4 text-center">
                 <h2 className="heading-lg">Dress Code</h2>
                 <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
@@ -1252,7 +1268,7 @@ export default function Home() {
 
         {/* 7. Contact Us — Interactive Person Collage */}
         <section className="min-h-screen py-20 md:py-32 flex items-center justify-center section-accent relative overflow-hidden" id="contact-section">
-          <div className="w-full max-w-6xl mx-auto px-4 md:px-12">
+          <div className="w-full max-w-6xl mx-auto px-4 md:px-12 reveal-on-scroll">
             <div className="mb-12 space-y-4 text-center">
               <h2 className="heading-lg">Contact</h2>
               <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
@@ -1301,7 +1317,7 @@ export default function Home() {
           />
 
           {/* Content Overlay — Standardized with Hero layout */}
-          <div className="relative z-20 content-wrapper max-w-4xl px-8 flex flex-col items-center">
+          <div className="relative z-20 content-wrapper max-w-4xl px-8 flex flex-col items-center reveal-on-scroll">
             <div className="flex flex-col items-center text-center">
               {/* Subheading — Synced size with Hero */}
               <p
