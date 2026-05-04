@@ -545,20 +545,7 @@ export default function Home() {
         }
       });
 
-      // ScrollTrigger for Dresscode Pinning & State
-      ScrollTrigger.create({
-        trigger: dresscodeTrigger.current,
-        start: "top top",
-        end: "+=1500", // Smaller scroll distance for 3 items
-        pin: true,
-        scrub: true,
-        onUpdate: (self) => {
-          const totalItems = 3;
-          const progress = self.progress;
-          const index = Math.min(Math.floor(progress * totalItems), totalItems - 1);
-          setActiveDresscode(index);
-        }
-      });
+
       
       // Bridge Section — Word by word reveal
       const bridgeWords = gsap.utils.toArray(".bridge-word");
@@ -1109,9 +1096,9 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 6. Dresscode — Upgraded Timeline & Illustration View */}
+        {/* 6. Dresscode — Clickable Carousel View */}
         <div ref={dresscodeTrigger} className="bg-background">
-          <section className="min-h-screen w-full flex flex-col justify-center overflow-hidden" id="dresscode-section">
+          <section className="py-24 md:py-32 w-full flex flex-col justify-center overflow-hidden" id="dresscode-section">
             <div className="content-wrapper max-w-6xl">
               <div className="mb-10 space-y-4 text-center">
                 <h2 className="heading-lg">Dress Code</h2>
@@ -1119,83 +1106,113 @@ export default function Home() {
                 <p className="text-elegant opacity-60">Trang phục phù hợp với The Sunset Sinfonia</p>
               </div>
 
-              <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-stretch min-h-[500px] h-auto">
-                {/* Left Timeline - Vertical Axis */}
-                <div className="w-full lg:w-48 relative flex flex-col h-full">
-                  <div className="relative flex flex-col justify-between h-full pl-8 lg:pl-12 py-8 gap-y-16">
-                    {/* Vertical Axis Line */}
-                    <div className="absolute left-0 top-[15px] bottom-[15px] w-[1px] bg-primary/5 hidden lg:block"></div>
-
-                    {/* Vertical Progress Line */}
-                    <div
-                      className="absolute left-0 top-[15px] w-[1px] bg-primary/30 transition-all duration-1000 ease-in-out hidden lg:block"
+              <div className="flex flex-col gap-16 h-auto relative">
+                {/* Horizontal Timeline */}
+                <div className="w-full max-w-4xl mx-auto relative py-12">
+                  <div className="relative flex justify-between items-center px-4 md:px-12">
+                    {/* Horizontal Axis Line */}
+                    <div className="absolute left-12 right-12 top-[1.35rem] h-[1px] bg-primary/10"></div>
+                    
+                    {/* Horizontal Progress Line */}
+                    <div 
+                      className="absolute left-12 h-[1px] bg-primary/40 transition-all duration-1000 ease-in-out top-[1.35rem]"
                       style={{
-                        height: `${(activeDresscode / (dresscodeData.length - 1)) * 100}%`,
+                        width: `calc(${(activeDresscode / (dresscodeData.length - 1)) * 100}% - 0px)`,
                       }}
                     ></div>
 
                     {dresscodeData.map((item, idx) => (
-                      <div
+                      <button 
                         key={idx}
-                        className={`flex flex-col justify-center relative z-10 transition-all duration-700 ${activeDresscode === idx ? 'opacity-100' : 'opacity-20'}`}
+                        onClick={() => setActiveDresscode(idx)}
+                        className={`flex flex-col items-center relative z-10 transition-all duration-700 group/item ${activeDresscode === idx ? 'opacity-100' : 'opacity-20 hover:opacity-50'}`}
+                        style={{ flex: 1 }}
                       >
-                        <h3 className={`text-sm md:text-base font-medium tracking-[0.1em] uppercase transition-colors ${activeDresscode === idx ? 'text-primary' : ''}`}>
-                          {item.title}
-                        </h3>
-                        <p className="text-[10px] uppercase tracking-widest opacity-40 mt-1">{item.subtitle}</p>
-                      </div>
+                        <div className={`w-3 h-3 rounded-full border border-primary/20 bg-background transition-all duration-500 mb-6 group-hover/item:scale-110 ${activeDresscode === idx ? 'border-primary bg-primary scale-125 shadow-[0_0_15px_rgba(75,80,6,0.3)]' : ''}`}></div>
+                        <div className="text-center">
+                          <h3 className={`text-[10px] md:text-xs font-medium tracking-[0.2em] uppercase transition-colors ${activeDresscode === idx ? 'text-primary' : ''}`}>
+                            {item.title}
+                          </h3>
+                          <p className="text-[8px] md:text-[9px] uppercase tracking-[0.25em] opacity-40 mt-1">{item.subtitle}</p>
+                        </div>
+                      </button>
                     ))}
                   </div>
                 </div>
 
-                {/* Right Illustration & Details */}
-                <div className="flex-1 grid grid-cols-2 gap-8 md:gap-16 items-center">
-                  {/* Women Side */}
-                  <div className="flex flex-col items-center space-y-4 animate-fade-in" key={`women-${activeDresscode}`}>
-                    <div className="relative h-[250px] md:h-[350px] w-full flex items-center justify-center">
-                      <img
-                        src={dresscodeData[activeDresscode].womenImg}
-                        alt="Women Dresscode"
-                        className="h-full object-contain"
-                      />
-                    </div>
-                    <div className="text-center space-y-3">
-                      <p className="text-[10px] md:text-[11px] font-light max-w-[200px] mx-auto opacity-70 italic leading-relaxed">
-                        {dresscodeData[activeDresscode].women}
-                      </p>
-                      <div className="flex justify-center gap-3">
-                        {dresscodeData[activeDresscode].palette.women.map((color, i) => (
-                          <div
-                            key={i}
-                            className="w-4 h-4 md:w-5 md:h-5 rounded-full border border-primary/10 shadow-sm"
-                            style={{ backgroundColor: color }}
-                          />
-                        ))}
-                      </div>
-                    </div>
+                {/* Main Content Area with Arrows */}
+                <div className="relative w-full">
+                  {/* Navigation Arrows */}
+                  <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between z-30 pointer-events-none px-4 md:-mx-12">
+                    <button 
+                      onClick={() => setActiveDresscode(prev => Math.max(0, prev - 1))}
+                      disabled={activeDresscode === 0}
+                      className={`pointer-events-auto w-12 h-12 rounded-full border border-primary/10 bg-background/50 backdrop-blur-md flex items-center justify-center text-primary transition-all duration-500 hover:bg-primary hover:text-background disabled:opacity-0 disabled:pointer-events-none`}
+                    >
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+                        <path d="M15 18l-6-6 6-6" />
+                      </svg>
+                    </button>
+                    <button 
+                      onClick={() => setActiveDresscode(prev => Math.min(dresscodeData.length - 1, prev + 1))}
+                      disabled={activeDresscode === dresscodeData.length - 1}
+                      className={`pointer-events-auto w-12 h-12 rounded-full border border-primary/10 bg-background/50 backdrop-blur-md flex items-center justify-center text-primary transition-all duration-500 hover:bg-primary hover:text-background disabled:opacity-0 disabled:pointer-events-none`}
+                    >
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+                        <path d="M9 6l6 6-6 6" />
+                      </svg>
+                    </button>
                   </div>
 
-                  {/* Men Side */}
-                  <div className="flex flex-col items-center space-y-4 animate-fade-in" key={`men-${activeDresscode}`}>
-                    <div className="relative h-[250px] md:h-[350px] w-full flex items-center justify-center">
-                      <img
-                        src={dresscodeData[activeDresscode].menImg}
-                        alt="Men Dresscode"
-                        className="h-full object-contain"
-                      />
+                  {/* Illustration & Details */}
+                  <div className="flex-1 grid grid-cols-2 gap-8 md:gap-16 items-center">
+                    {/* Women Side */}
+                    <div className="flex flex-col items-center space-y-4 animate-fade-in" key={`women-${activeDresscode}`}>
+                      <div className="relative h-[250px] md:h-[380px] w-full flex items-center justify-center">
+                        <img
+                          src={dresscodeData[activeDresscode].womenImg}
+                          alt="Women Dresscode"
+                          className="h-full object-contain"
+                        />
+                      </div>
+                      <div className="text-center space-y-3">
+                        <p className="text-[10px] md:text-[11px] font-light max-w-[200px] mx-auto opacity-70 italic leading-relaxed">
+                          {dresscodeData[activeDresscode].women}
+                        </p>
+                        <div className="flex justify-center gap-3">
+                          {dresscodeData[activeDresscode].palette.women.map((color, i) => (
+                            <div
+                              key={i}
+                              className="w-4 h-4 md:w-5 md:h-5 rounded-full border border-primary/10 shadow-sm"
+                              style={{ backgroundColor: color }}
+                            />
+                          ))}
+                        </div>
+                      </div>
                     </div>
-                    <div className="text-center space-y-3">
-                      <p className="text-[10px] md:text-[11px] font-light max-w-[200px] mx-auto opacity-70 italic leading-relaxed">
-                        {dresscodeData[activeDresscode].men}
-                      </p>
-                      <div className="flex justify-center gap-3">
-                        {dresscodeData[activeDresscode].palette.men.map((color, i) => (
-                          <div
-                            key={i}
-                            className="w-4 h-4 md:w-5 md:h-5 rounded-full border border-primary/10 shadow-sm"
-                            style={{ backgroundColor: color }}
-                          />
-                        ))}
+
+                    {/* Men Side */}
+                    <div className="flex flex-col items-center space-y-4 animate-fade-in" key={`men-${activeDresscode}`}>
+                      <div className="relative h-[250px] md:h-[380px] w-full flex items-center justify-center">
+                        <img
+                          src={dresscodeData[activeDresscode].menImg}
+                          alt="Men Dresscode"
+                          className="h-full object-contain"
+                        />
+                      </div>
+                      <div className="text-center space-y-3">
+                        <p className="text-[10px] md:text-[11px] font-light max-w-[200px] mx-auto opacity-70 italic leading-relaxed">
+                          {dresscodeData[activeDresscode].men}
+                        </p>
+                        <div className="flex justify-center gap-3">
+                          {dresscodeData[activeDresscode].palette.men.map((color, i) => (
+                            <div
+                              key={i}
+                              className="w-4 h-4 md:w-5 md:h-5 rounded-full border border-primary/10 shadow-sm"
+                              style={{ backgroundColor: color }}
+                            />
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>
