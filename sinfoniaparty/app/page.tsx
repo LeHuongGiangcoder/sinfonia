@@ -401,12 +401,7 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Audio Playback Trigger
-  useEffect(() => {
-    if (!isLoading && audioRef.current) {
-      audioRef.current.play().catch(err => console.log("Playback blocked:", err));
-    }
-  }, [isLoading]);
+
 
   const agendaData = [
     {
