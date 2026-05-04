@@ -395,6 +395,10 @@ export default function Home() {
 
   // Handle scroll for Navbar
   useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -632,36 +636,6 @@ export default function Home() {
                 style={{ background: 'linear-gradient(to bottom, transparent, rgba(243,237,225,0.6), transparent)' }}
               ></div>
             </div>
-          </div>
-
-          {/* Audio Control — Elegant Toggle */}
-          <div className="absolute bottom-10 right-10 z-30 reveal-on-scroll">
-            <button
-              onClick={() => {
-                if (audioRef.current) {
-                  audioRef.current.muted = !isMuted;
-                  setIsMuted(!isMuted);
-                }
-              }}
-              className="group flex items-center gap-3 bg-white/5 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full transition-all duration-500 hover:bg-white/10"
-            >
-              <div className="relative flex items-center justify-center w-4 h-4">
-                {!isMuted ? (
-                  <div className="flex gap-[1px] items-center h-3">
-                    <div className="w-[1.5px] h-2 bg-white/80 animate-music-bar-1"></div>
-                    <div className="w-[1.5px] h-3 bg-white/80 animate-music-bar-2.5"></div>
-                    <div className="w-[1.5px] h-1.5 bg-white/80 animate-music-bar-2"></div>
-                  </div>
-                ) : (
-                  <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" className="w-4 h-4 opacity-60">
-                    <path d="M11 5L6 9H2v6h4l5 4V5zM23 9l-6 6M17 9l6 6" />
-                  </svg>
-                )}
-              </div>
-              <span className="text-[9px] uppercase tracking-[0.3em] font-medium text-white/60 group-hover:text-white transition-colors">
-                {isMuted ? "Sound Off" : "Sound On"}
-              </span>
-            </button>
           </div>
         </section>
 
@@ -1375,6 +1349,43 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* Persistent Audio Control — Redesigned per reference */}
+        {!isLoading && (
+          <div className="fixed bottom-8 right-8 z-[100] animate-fade-in" style={{ animationDelay: '1s' }}>
+            <button
+              onClick={() => {
+                if (audioRef.current) {
+                  const newState = !isMuted;
+                  audioRef.current.muted = newState;
+                  setIsMuted(newState);
+                }
+              }}
+              className="group flex items-center gap-4 transition-all duration-700"
+            >
+              {/* Music Bars Indicator */}
+              <div className="flex gap-[3px] items-center h-4">
+                <div className={`w-[1.5px] bg-primary/40 transition-all duration-500 ${!isMuted ? 'animate-music-one' : 'h-1'}`}></div>
+                <div className={`w-[1.5px] bg-primary/40 transition-all duration-500 ${!isMuted ? 'animate-music-two' : 'h-2'}`}></div>
+                <div className={`w-[1.5px] bg-primary/40 transition-all duration-500 ${!isMuted ? 'animate-music-three' : 'h-1.5'}`}></div>
+              </div>
+              
+              {/* Circular Button */}
+              <div className="relative w-11 h-11 rounded-full border border-primary/20 flex items-center justify-center bg-background/60 backdrop-blur-xl group-hover:border-primary/50 group-active:scale-95 transition-all duration-500 shadow-sm">
+                 <div className="flex flex-col gap-[3px]">
+                    <div className="w-3 h-[1.5px] bg-primary/80"></div>
+                    <div className="w-3 h-[1.5px] bg-primary/80"></div>
+                 </div>
+                 {/* Mute Slash Overlay */}
+                 {isMuted && (
+                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                     <div className="w-full h-[1px] bg-primary/40 rotate-45 scale-x-75"></div>
+                   </div>
+                 )}
+              </div>
+            </button>
+          </div>
+        )}
       </div>
     </>
   );
