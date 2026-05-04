@@ -293,8 +293,8 @@ function Navbar({ scrolled }: { scrolled: boolean }) {
           {/* Desktop Navigation Left */}
           <div className="hidden md:flex items-center gap-8 flex-1">
             {navItems.slice(0, 2).map((item) => (
-              <a 
-                key={item.name} 
+              <a
+                key={item.name}
                 href={item.href}
                 className={`text-[10px] uppercase tracking-[0.3em] font-medium transition-all hover:text-primary/100 ${scrolled ? "text-primary/70" : "text-white/70"}`}
               >
@@ -313,8 +313,8 @@ function Navbar({ scrolled }: { scrolled: boolean }) {
           {/* Desktop Navigation Right */}
           <div className="hidden md:flex items-center justify-end gap-8 flex-1">
             {navItems.slice(2).map((item) => (
-              <a 
-                key={item.name} 
+              <a
+                key={item.name}
                 href={item.href}
                 className={`text-[10px] uppercase tracking-[0.3em] font-medium transition-all hover:text-primary/100 ${scrolled ? "text-primary/70" : "text-white/70"}`}
               >
@@ -325,7 +325,7 @@ function Navbar({ scrolled }: { scrolled: boolean }) {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden">
-            <button 
+            <button
               onClick={toggleMenu}
               className={`${scrolled || menuOpen ? "text-primary" : "text-white"} transition-colors`}
             >
@@ -347,20 +347,20 @@ function Navbar({ scrolled }: { scrolled: boolean }) {
       <div className={`fixed inset-0 z-[90] bg-background flex flex-col items-center justify-center transition-all duration-700 md:hidden ${menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
         <div className="space-y-12 text-center">
           {navItems.map((item, i) => (
-            <a 
-              key={item.name} 
+            <a
+              key={item.name}
               href={item.href}
               onClick={() => setMenuOpen(false)}
               className="block text-2xl font-display italic text-primary opacity-0 translate-y-8"
-              style={{ 
-                animation: menuOpen ? `hero-fade-up 0.8s ease-out ${0.1 + i * 0.1}s both` : "none" 
+              style={{
+                animation: menuOpen ? `hero-fade-up 0.8s ease-out ${0.1 + i * 0.1}s both` : "none"
               }}
             >
               {item.name}
             </a>
           ))}
         </div>
-        
+
         {/* Decorative element for mobile menu */}
         <div className="absolute bottom-12 left-1/2 -translate-x-1/2 opacity-20">
           <p className={`${purgatory.className} text-4xl text-primary`}>The Sunset Sinfonia</p>
@@ -529,24 +529,10 @@ export default function Home() {
       });
 
       // ScrollTrigger for Agenda Pinning & State
-      ScrollTrigger.create({
-        trigger: agendaTrigger.current,
-        start: "top top",
-        end: "+=3500", // Total scroll distance for all items
-        pin: true,
-        scrub: true,
-        onUpdate: (self) => {
-          // Calculate which agenda item to show based on scroll progress
-          const totalItems = agendaData.length;
-          const progress = self.progress;
-          // Segment progress into equal parts for each item
-          const index = Math.min(Math.floor(progress * totalItems), totalItems - 1);
-          setActiveAgenda(index);
-        }
-      });
 
 
-      
+
+
       // Bridge Section — Word by word reveal
       const bridgeWords = gsap.utils.toArray(".bridge-word");
       gsap.from(bridgeWords, {
@@ -626,7 +612,7 @@ export default function Home() {
 
         {/* Bridge Section — A cinematic transition */}
         <section ref={bridgeRef} className="py-32 md:py-48 bg-background flex flex-col items-center justify-center text-center relative overflow-hidden">
-          <p 
+          <p
             className="text-elegant uppercase tracking-[0.5em] text-xl md:text-3xl lg:text-4xl text-primary/80 max-w-[90%] leading-relaxed flex flex-wrap justify-center gap-y-4"
           >
             {"a party that never ends".split(" ").map((word, i) => (
@@ -823,9 +809,9 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 4. Agendas - Vertical Timeline & Spotlight Map (Pinned via ScrollTrigger) */}
+        {/* 4. Agendas — Clickable Map View */}
         <div ref={agendaTrigger} className="bg-background">
-          <section className="min-h-screen w-full flex flex-col justify-center overflow-hidden" id="agenda-section">
+          <section className="py-24 md:py-32 w-full flex flex-col justify-center overflow-hidden" id="agenda-section">
             <div className="w-full max-w-7xl mx-auto px-6">
               <div className="mb-12 space-y-4 text-center">
                 <h2 className="heading-lg">The Agenda</h2>
@@ -850,9 +836,10 @@ export default function Home() {
                     ></div>
 
                     {agendaData.map((item, idx) => (
-                      <div
+                      <button
                         key={idx}
-                        className={`flex flex-col justify-center relative z-10 transition-all duration-700 ${activeAgenda === idx ? 'opacity-100' : 'opacity-20'}`}
+                        onClick={() => setActiveAgenda(idx)}
+                        className={`flex flex-col justify-center relative z-10 transition-all duration-700 text-left w-full group/item ${activeAgenda === idx ? 'opacity-100' : 'opacity-20 hover:opacity-50'}`}
                       >
                         <div className="flex lg:flex-row flex-col items-center lg:items-start">
                           {/* Time Label */}
@@ -874,7 +861,7 @@ export default function Home() {
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </button>
                     ))}
                   </div>
                 </div>
@@ -883,10 +870,32 @@ export default function Home() {
                 <div className="flex-1 relative aspect-video lg:aspect-square xl:aspect-video max-h-[500px] overflow-hidden rounded-sm border border-primary/10 bg-accent/10 shadow-2xl group/map order-1 lg:order-2">
                   {/* The Map Image */}
                   <img
-                    src="/assets/map 2.png"
+                    src="/assets/map 3.png"
                     alt="The Sunset Sinfonia Overview Map"
                     className="w-full h-full object-cover object-top opacity-80 saturate-[0.7]"
                   />
+
+                  {/* Navigation Arrows for Agenda Map */}
+                  <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between z-30 pointer-events-none px-6">
+                    <button 
+                      onClick={() => setActiveAgenda(prev => Math.max(0, prev - 1))}
+                      disabled={activeAgenda === 0}
+                      className={`pointer-events-auto w-10 h-10 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white transition-all duration-500 hover:bg-white hover:text-black disabled:opacity-0 disabled:pointer-events-none`}
+                    >
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+                        <path d="M15 18l-6-6 6-6" />
+                      </svg>
+                    </button>
+                    <button 
+                      onClick={() => setActiveAgenda(prev => Math.min(agendaData.length - 1, prev + 1))}
+                      disabled={activeAgenda === agendaData.length - 1}
+                      className={`pointer-events-auto w-10 h-10 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white transition-all duration-500 hover:bg-white hover:text-black disabled:opacity-0 disabled:pointer-events-none`}
+                    >
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+                        <path d="M9 6l6 6-6 6" />
+                      </svg>
+                    </button>
+                  </div>
 
                   {/* Spotlight Overlay */}
                   <div
@@ -1112,9 +1121,9 @@ export default function Home() {
                   <div className="relative flex justify-between items-center px-4 md:px-12">
                     {/* Horizontal Axis Line */}
                     <div className="absolute left-12 right-12 top-[1.35rem] h-[1px] bg-primary/10"></div>
-                    
+
                     {/* Horizontal Progress Line */}
-                    <div 
+                    <div
                       className="absolute left-12 h-[1px] bg-primary/40 transition-all duration-1000 ease-in-out top-[1.35rem]"
                       style={{
                         width: `calc(${(activeDresscode / (dresscodeData.length - 1)) * 100}% - 0px)`,
@@ -1122,7 +1131,7 @@ export default function Home() {
                     ></div>
 
                     {dresscodeData.map((item, idx) => (
-                      <button 
+                      <button
                         key={idx}
                         onClick={() => setActiveDresscode(idx)}
                         className={`flex flex-col items-center relative z-10 transition-all duration-700 group/item ${activeDresscode === idx ? 'opacity-100' : 'opacity-20 hover:opacity-50'}`}
@@ -1144,7 +1153,7 @@ export default function Home() {
                 <div className="relative w-full">
                   {/* Navigation Arrows */}
                   <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between z-30 pointer-events-none px-4 md:-mx-12">
-                    <button 
+                    <button
                       onClick={() => setActiveDresscode(prev => Math.max(0, prev - 1))}
                       disabled={activeDresscode === 0}
                       className={`pointer-events-auto w-12 h-12 rounded-full border border-primary/10 bg-background/50 backdrop-blur-md flex items-center justify-center text-primary transition-all duration-500 hover:bg-primary hover:text-background disabled:opacity-0 disabled:pointer-events-none`}
@@ -1153,13 +1162,13 @@ export default function Home() {
                         <path d="M15 18l-6-6 6-6" />
                       </svg>
                     </button>
-                    <button 
+                    <button
                       onClick={() => setActiveDresscode(prev => Math.min(dresscodeData.length - 1, prev + 1))}
                       disabled={activeDresscode === dresscodeData.length - 1}
                       className={`pointer-events-auto w-12 h-12 rounded-full border border-primary/10 bg-background/50 backdrop-blur-md flex items-center justify-center text-primary transition-all duration-500 hover:bg-primary hover:text-background disabled:opacity-0 disabled:pointer-events-none`}
                     >
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
-                        <path d="M9 6l6 6-6 6" />
+                        <path d="M9 18l6-6-6-6" className="rotate-180 origin-center" />
                       </svg>
                     </button>
                   </div>
