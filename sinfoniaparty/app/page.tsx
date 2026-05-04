@@ -981,9 +981,9 @@ export default function Home() {
                     
                     {/* Interaction Hint — Agenda */}
                     {showAgendaHint && activeAgenda === 0 && (
-                      <div className="absolute -top-12 left-1/2 -translate-x-1/2 animate-bounce-slow pointer-events-none">
+                      <div className="absolute -top-12 left-1/2 -translate-x-1/2 animate-bounce-slow pointer-events-none z-40">
                         <div className="bg-[#fff8eb] text-primary text-[7px] px-2 py-1.5 rounded-full uppercase tracking-[0.2em] font-bold whitespace-nowrap shadow-[0_10px_20px_rgba(0,0,0,0.1)] border border-primary/20">
-                          Tap to see next
+                          Click to see next
                         </div>
                         <div className="w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-t-[6px] border-t-[#fff8eb] mx-auto"></div>
                       </div>
@@ -1265,9 +1265,9 @@ export default function Home() {
 
                       {/* Interaction Hint — Dresscode */}
                       {showDresscodeHint && activeDresscode === 0 && (
-                        <div className="absolute -top-12 left-1/2 -translate-x-1/2 animate-bounce-slow pointer-events-none">
+                        <div className="absolute -top-12 left-1/2 -translate-x-1/2 animate-bounce-slow pointer-events-none z-40">
                           <div className="bg-[#fff8eb] text-primary text-[7px] px-2 py-1.5 rounded-full uppercase tracking-[0.2em] font-bold whitespace-nowrap shadow-[0_10px_20px_rgba(0,0,0,0.1)] border border-primary/20">
-                            Tap to see next
+                            Click to see next
                           </div>
                           <div className="w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-t-[6px] border-t-[#fff8eb] mx-auto"></div>
                         </div>
@@ -1344,11 +1344,11 @@ export default function Home() {
             </div>
 
             <div 
-              className="flex md:grid md:grid-cols-3 overflow-x-auto snap-x snap-mandatory no-scrollbar gap-4 md:gap-8 pb-8 -mx-4 px-4"
+              className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar gap-4 md:gap-8 pb-8 -mx-4 px-4"
               onTouchStart={() => setShowContactHint(false)}
               onScroll={() => setShowContactHint(false)}
             >
-              <div className="relative min-w-[85vw] md:min-w-0 snap-center">
+              <div className="relative min-w-[85vw] md:min-w-[30%] snap-center">
                 <ContactCard
                   images={["ginale.jpg"]}
                   unit="Glow"
@@ -1359,11 +1359,11 @@ export default function Home() {
                   link="https://zalo.me/0857086906"
                 />
 
-                {/* Interaction Hint — Contact Mobile Bubble */}
+                {/* Interaction Hint — Contact Bubble */}
                 {showContactHint && (
-                  <div className="absolute right-4 top-1/2 -translate-y-1/2 animate-move-horizontal pointer-events-none md:hidden z-30">
+                  <div className="absolute right-4 top-1/2 -translate-y-1/2 animate-move-horizontal pointer-events-none z-30">
                     <div className="bg-[#fff8eb] text-primary text-[7px] px-2 py-1.5 rounded-full uppercase tracking-[0.2em] font-bold whitespace-nowrap shadow-[0_10px_20px_rgba(0,0,0,0.3)] border border-primary/20 flex items-center gap-2">
-                      Swipe left
+                      Scroll to see more
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-2 h-2">
                         <path d="M9 18l6-6-6-6" />
                       </svg>
