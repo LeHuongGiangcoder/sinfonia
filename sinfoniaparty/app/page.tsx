@@ -211,7 +211,8 @@ function ContactCard({ images, unit, rep, role, phone, intro, link }: {
           <div className="absolute bottom-6 left-6 right-6 text-left text-white">
             <p className="text-[10px] uppercase tracking-[0.3em] opacity-70 mb-1">{unit}</p>
             <h3 className="heading-md text-2xl !text-white">{rep}</h3>
-            <p className="text-xs font-light opacity-80 mt-1">{role}</p>
+            <p className="text-xs font-light opacity-90 mt-1">{phone}</p>
+            <p className="text-[10px] font-light opacity-60 mt-0.5">{role}</p>
           </div>
         </div>
 
