@@ -60,7 +60,7 @@ function InstagramPost({ images }: { images: string[] }) {
         <>
           <button
             onClick={prev}
-            className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white z-10 hover:bg-white/40 transition-colors"
+            className="absolute hidden md:flex left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/20 backdrop-blur-md items-center justify-center text-white z-10 hover:bg-white/40 transition-colors"
           >
             <span className="sr-only">Previous</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-4 h-4">
@@ -69,7 +69,7 @@ function InstagramPost({ images }: { images: string[] }) {
           </button>
           <button
             onClick={next}
-            className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white z-10 hover:bg-white/40 transition-colors"
+            className="absolute hidden md:flex right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/20 backdrop-blur-md items-center justify-center text-white z-10 hover:bg-white/40 transition-colors"
           >
             <span className="sr-only">Next</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-4 h-4">
