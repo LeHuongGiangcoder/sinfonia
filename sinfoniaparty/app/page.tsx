@@ -899,22 +899,49 @@ export default function Home() {
                         <p className={`text-[10px] md:text-xs font-light tabular-nums mb-1 transition-colors ${activeAgenda === idx ? 'text-primary' : 'text-primary/40'}`}>
                           {item.time}
                         </p>
-                        <h3 className={`text-[8px] md:text-[9px] font-medium tracking-[0.15em] uppercase transition-colors hidden md:block ${activeAgenda === idx ? 'text-primary' : 'text-primary/20'}`}>
-                          {item.title}
-                        </h3>
                       </div>
                     </button>
                   ))}
                 </div>
               </div>
 
-              {/* Map Overview — Full Width below timeline */}
-              <div className="relative aspect-video md:aspect-[16/10] w-full overflow-hidden rounded-sm border border-primary/10 bg-accent/10 shadow-2xl group/map">
-                {/* The Map Image */}
+              {/* Selected Activity Details — New Location below timeline */}
+              <div className={`mt-10 mb-12 text-center transition-all duration-700 ${activeAgenda !== null ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+                {activeAgenda !== null && (
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-center gap-4">
+                      <div className="w-12 h-[1px] bg-primary/10"></div>
+                      <span className={`${purgatory.className} text-4xl text-primary`}>{agendaData[activeAgenda].time}</span>
+                      <div className="w-12 h-[1px] bg-primary/10"></div>
+                    </div>
+                    <h3 className="heading-md !text-2xl md:!text-3xl text-primary">{agendaData[activeAgenda].title}</h3>
+                    <p className="subheading !opacity-100 text-primary/60">{agendaData[activeAgenda].location}</p>
+                    {agendaData[activeAgenda].details.length > 0 && (
+                      <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 pt-2">
+                        {agendaData[activeAgenda].details.map((detail, idx) => (
+                          <span key={idx} className="text-[10px] uppercase tracking-[0.2em] opacity-40 italic">{detail}</span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              {/* Map Overview — Auto-zooming Map */}
+              <div className="relative aspect-video md:aspect-[21/9] w-full overflow-hidden rounded-sm border border-primary/10 bg-accent/10 shadow-2xl group/map">
+                {/* The Map Image with Zoom Effect */}
                 <img
                   src="/assets/map 3.png"
                   alt="The Sunset Sinfonia Overview Map"
-                  className="w-full h-full object-cover object-center opacity-80 saturate-[0.7]"
+                  className="w-full h-full object-cover saturate-[0.7] transition-all duration-1000 ease-in-out"
+                  style={{
+                    transform: activeAgenda !== null 
+                      ? `scale(${agendaData[activeAgenda].coords.scale})` 
+                      : 'scale(1)',
+                    transformOrigin: activeAgenda !== null 
+                      ? `${agendaData[activeAgenda].coords.x}% ${agendaData[activeAgenda].coords.y}%` 
+                      : 'center center'
+                  }}
                 />
 
                 {/* Navigation Arrows for Agenda Map */}
@@ -945,57 +972,27 @@ export default function Home() {
                   </button>
                 </div>
 
-                {/* Spotlight Overlay */}
+                {/* Spotlight Overlay — Subtle while zoomed */}
                 <div
-                  className="absolute inset-0 pointer-events-none z-10 transition-all duration-700 ease-in-out"
+                  className="absolute inset-0 pointer-events-none z-10 transition-all duration-1000 ease-in-out"
                   style={{
                     background: activeAgenda !== null
-                      ? `radial-gradient(circle 100px at ${agendaData[activeAgenda].coords.x}% ${agendaData[activeAgenda].coords.y}%, transparent 0%, rgba(0,0,0,0.25) 100%)`
-                      : 'rgba(0,0,0,0.1)'
+                      ? `radial-gradient(circle 80px at ${agendaData[activeAgenda].coords.x}% ${agendaData[activeAgenda].coords.y}%, transparent 0%, rgba(0,0,0,0.15) 100%)`
+                      : 'rgba(0,0,0,0.05)'
                   }}
                 ></div>
 
                 {/* Magnifying Glass / Highlight Circle */}
                 {activeAgenda !== null && (
                   <div
-                    className="absolute w-32 h-32 md:w-40 md:h-40 -ml-16 -mt-16 md:-ml-20 md:-mt-20 border-2 border-primary/30 rounded-full z-20 pointer-events-none transition-all duration-700 ease-in-out shadow-[0_0_50px_rgba(75,80,6,0.2)]"
+                    className="absolute w-12 h-12 -ml-6 -mt-6 border-2 border-primary/30 rounded-full z-20 pointer-events-none transition-all duration-1000 ease-in-out shadow-[0_0_20px_rgba(75,80,6,0.2)]"
                     style={{
                       left: `${agendaData[activeAgenda].coords.x}%`,
                       top: `${agendaData[activeAgenda].coords.y}%`,
                     }}
                   >
-                    <div className="absolute top-1/2 left-1/2 -ml-2 -mt-2 w-4 h-4 bg-primary rounded-full shadow-[0_0_20px_rgba(75,80,6,0.5)]">
+                    <div className="absolute top-1/2 left-1/2 -ml-1 -mt-1 w-2 h-2 bg-primary rounded-full shadow-[0_0_10px_rgba(75,80,6,0.5)]">
                       <div className="absolute inset-0 rounded-full border-2 border-white/50 animate-ping"></div>
-                    </div>
-                  </div>
-                )}
-
-                {/* Activity Details Overlay on Map */}
-                {activeAgenda !== null && (
-                  <div className="absolute bottom-4 left-4 z-40 w-[180px] md:w-[220px] h-auto max-h-[180px] min-h-[140px] p-4 bg-background/95 backdrop-blur-xl border border-primary/20 rounded-xs shadow-2xl animate-fade-in pointer-events-none flex flex-col">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-xl md:text-2xl font-light tabular-nums text-primary/30">{agendaData[activeAgenda].time}</span>
-                      <div className="h-[1px] flex-1 bg-primary/10"></div>
-                    </div>
-
-                    <h3 className="text-sm md:text-base font-medium mb-0.5 tracking-tight text-primary leading-tight">
-                      {agendaData[activeAgenda].title}
-                    </h3>
-                    <p className="text-[8px] md:text-[9px] uppercase tracking-widest opacity-60 mb-2">
-                      {agendaData[activeAgenda].location}
-                    </p>
-
-                    <div className="flex-1 overflow-y-auto no-scrollbar">
-                      {agendaData[activeAgenda].details.length > 0 && (
-                        <ul className="space-y-1 border-t border-primary/5 pt-2">
-                          {agendaData[activeAgenda].details.map((detail, dIdx) => (
-                            <li key={dIdx} className="text-[9px] md:text-[10px] opacity-70 font-light flex items-start gap-1.5">
-                              <span className="mt-1 w-1 h-1 bg-primary/40 rounded-full shrink-0"></span>
-                              <span>{detail}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
                     </div>
                   </div>
                 )}
