@@ -700,7 +700,7 @@ export default function Home() {
             <div className="mb-20 space-y-4">
               <h2 className="heading-lg">Time & Venue</h2>
               <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
-              <p className="text-elegant opacity-60">Lựa chọn trang phục cho những khoảnh khắc tuyệt vời</p>
+              <p className="text-elegant opacity-60">Nơi ghi dấu những khoảnh khắc hạnh phúc</p>
 
               {/* Interaction Hint — Dresscode */}
               {showDresscodeHint && (
@@ -1159,7 +1159,7 @@ export default function Home() {
               <div className="mb-10 space-y-4 text-center">
                 <h2 className="heading-lg">Dress Code</h2>
                 <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
-                <p className="text-elegant opacity-60">Trang phục phù hợp với The Sunset Sinfonia</p>
+                <p className="text-elegant opacity-60">Lựa chọn trang phục cho những khoảnh khắc tuyệt vời</p>
               </div>
 
               <div className="flex flex-col gap-16 h-auto relative">
