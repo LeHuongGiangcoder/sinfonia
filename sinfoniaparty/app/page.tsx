@@ -1288,34 +1288,40 @@ export default function Home() {
               <p className="text-elegant opacity-60">Main support contacts</p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
-              <ContactCard
-                images={["ginale.jpg"]}
-                unit="Glow"
-                rep="Ms. Giang Le"
-                role="0857086906"
-                phone="Hỗ trợ kỹ thuật Website"
-                intro="Glow mang đến giải pháp kỹ thuật và thẩm mỹ số hóa, biến những ý tưởng bay bổng thành trải nghiệm tương tác mượt mà cho website của bạn."
-                link="https://www.facebook.com/profile.php?id=61560901527827"
-              />
-              <ContactCard
-                images={["nhat linh.png"]}
-                unit="Fancy"
-                rep="Ms. Nhat Linh"
-                role="0852071736"
-                phone="Hỗ trợ kế hoạch & Kỹ thuật"
-                intro="Với Fancy, mỗi đám cưới là một tác phẩm nghệ thuật. Chúng tôi tận tâm kiến tạo không gian tiệc sang trọng, tinh tế và mang đậm dấu ấn cá nhân."
-                link="https://www.facebook.com/fancywedding2015"
-              />
-              <ContactCard
-                images={["thomas.png"]}
-                unit="Wyndham"
-                rep="Mr. Thomas"
-                role="0889010399"
-                phone="Hỗ trợ địa điểm & Tiệc"
-                intro="Tận hưởng không gian nghỉ dưỡng tuyệt mỹ và dịch vụ đẳng cấp tại Wyndham Sky Lake, nơi khởi đầu cho những hành trình hạnh phúc."
-                link="https://www.facebook.com/WynhamSkyLake.ResortVillas"
-              />
+            <div className="flex md:grid md:grid-cols-3 overflow-x-auto snap-x snap-mandatory no-scrollbar gap-4 md:gap-8 pb-8 -mx-4 px-4">
+              <div className="min-w-[85vw] md:min-w-0 snap-center">
+                <ContactCard
+                  images={["ginale.jpg"]}
+                  unit="Glow"
+                  rep="Ms. Giang Le"
+                  role="0857086906"
+                  phone="Hỗ trợ kỹ thuật Website"
+                  intro="Glow mang đến giải pháp kỹ thuật và thẩm mỹ số hóa, biến những ý tưởng bay bổng thành trải nghiệm tương tác mượt mà cho website của bạn."
+                  link="https://www.facebook.com/profile.php?id=61560901527827"
+                />
+              </div>
+              <div className="min-w-[85vw] md:min-w-0 snap-center">
+                <ContactCard
+                  images={["nhat linh.png"]}
+                  unit="Fancy"
+                  rep="Ms. Nhat Linh"
+                  role="0852071736"
+                  phone="Hỗ trợ kế hoạch & Kỹ thuật"
+                  intro="Với Fancy, mỗi đám cưới là một tác phẩm nghệ thuật. Chúng tôi tận tâm kiến tạo không gian tiệc sang trọng, tinh tế và mang đậm dấu ấn cá nhân."
+                  link="https://www.facebook.com/fancywedding2015"
+                />
+              </div>
+              <div className="min-w-[85vw] md:min-w-0 snap-center">
+                <ContactCard
+                  images={["thomas.png"]}
+                  unit="Wyndham"
+                  rep="Mr. Thomas"
+                  role="0889010399"
+                  phone="Hỗ trợ địa điểm & Tiệc"
+                  intro="Tận hưởng không gian nghỉ dưỡng tuyệt mỹ và dịch vụ đẳng cấp tại Wyndham Sky Lake, nơi khởi đầu cho những hành trình hạnh phúc."
+                  link="https://www.facebook.com/WynhamSkyLake.ResortVillas"
+                />
+              </div>
             </div>
           </div>
         </section>
