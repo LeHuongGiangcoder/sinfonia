@@ -1229,8 +1229,8 @@ export default function Home() {
                 images={["nhat linh.png"]}
                 unit="Fancy"
                 rep="Ms. Nhat Linh"
-                role="Hỗ trợ kế hoạch & Kỹ thuật"
-                phone=""
+                role="0852071736"
+                phone="Hỗ trợ kế hoạch & Kỹ thuật"
                 intro="Với Fancy, mỗi đám cưới là một tác phẩm nghệ thuật. Chúng tôi tận tâm kiến tạo không gian tiệc sang trọng, tinh tế và mang đậm dấu ấn cá nhân."
                 link="https://www.facebook.com/fancywedding2015"
               />
