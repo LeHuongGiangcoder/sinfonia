@@ -1,7 +1,7 @@
-# PRD: The Sinfonia Event Website
+# PRD: The Sunset Sinfonia Event Website
 
 ## 1. Project Overview
-**The Sinfonia** is an exclusive event website designed to serve as the primary information hub for guests. It brings together prominent figures from the wedding industry in Vietnam. The digital experience must reflect the prestige, elegance, and heritage of the event.
+**The Sunset Sinfonia** is an exclusive event website designed to serve as the primary information hub for guests. It brings together prominent figures from the wedding industry in Vietnam. The digital experience must reflect the prestige, elegance, and heritage of the event.
 
 ## 2. Brand & Aesthetic Identity
 *   **Vibe:** Classy, Elegant, European Vintage.
@@ -23,8 +23,8 @@
 
 | Order | Section | Content/Functionality | Key Animation Goal |
 | :--- | :--- | :--- | :--- |
-| 1 | **Opening** | Immersive pre-loader or entrance animation. | Fade in/out of "The Sinfonia" logo with a vintage texture overlay. |
-| 2 | **Hero Section** | Main branding: "The Sinfonia", Date, and Location. | Split-text reveal of the title using GSAP. |
+| 1 | **Opening** | Immersive pre-loader or entrance animation. | Fade in/out of "The Sunset Sinfonia" logo with a vintage texture overlay. |
+| 2 | **Hero Section** | Main branding: "The Sunset Sinfonia", Date, and Location. | Split-text reveal of the title using GSAP. |
 | 3 | **Time & Places** | Venue name, address, and interactive map link. | Elegant sliding reveal of location cards. |
 | 4 | **Agendas** | Detailed timeline of the day's activities. | Staggered list items appearing on scroll. |
 | 5 | **RSVP** | Guest confirmation form (Name, Attendance, Dietary). | Smooth form field transitions and success state animation. |

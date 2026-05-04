@@ -306,7 +306,7 @@ function Navbar({ scrolled }: { scrolled: boolean }) {
           {/* Brand Logo - Centered */}
           <div className={`flex-none transition-all duration-700 ${scrolled || menuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"}`}>
             <a href="#" className={`${purgatory.className} text-2xl md:text-3xl text-primary`}>
-              The Sinfonia
+              The Sunset Sinfonia
             </a>
           </div>
 
@@ -363,7 +363,7 @@ function Navbar({ scrolled }: { scrolled: boolean }) {
         
         {/* Decorative element for mobile menu */}
         <div className="absolute bottom-12 left-1/2 -translate-x-1/2 opacity-20">
-          <p className={`${purgatory.className} text-4xl text-primary`}>The Sinfonia</p>
+          <p className={`${purgatory.className} text-4xl text-primary`}>The Sunset Sinfonia</p>
         </div>
       </div>
     </>
@@ -572,7 +572,7 @@ export default function Home() {
           {/* Background — natural colors, no overlay */}
           <img
             src="/assets/hero%20background.png"
-            alt="The Sinfonia"
+            alt="The Sunset Sinfonia"
             className="absolute inset-0 w-full h-full object-cover"
             style={{ willChange: 'auto' }}
           />
@@ -580,7 +580,7 @@ export default function Home() {
           {/* Text block — repositioned to vertical center of viewport */}
           <div
             className="absolute left-1/2 z-10 flex flex-col items-center text-center w-full px-6"
-            style={{ top: '45%', transform: 'translate(-50%, -50%)' }}
+            style={{ top: '42%', transform: 'translate(-50%, -50%)' }}
           >
             {/* Subheading — Now repositioned above the title */}
             <p
@@ -596,7 +596,7 @@ export default function Home() {
 
             {/* Main Title — Now appears first for immediate impact */}
             <h1
-              className={`${purgatory.className} text-5xl md:text-7xl lg:text-9xl leading-none lowercase tracking-tight`}
+              className={`${purgatory.className} text-5xl md:text-7xl lg:text-9xl leading-[0.95] lowercase tracking-tight flex flex-col items-center`}
               style={{
                 color: '#f3ede1',
                 opacity: 0,
@@ -605,7 +605,8 @@ export default function Home() {
                 WebkitFontSmoothing: 'antialiased',
               } as React.CSSProperties}
             >
-              The Sinfonia
+              <span>The Sunset</span>
+              <span>Sinfonia</span>
             </h1>
           </div>
 
@@ -880,7 +881,7 @@ export default function Home() {
                   {/* The Map Image */}
                   <img
                     src="/assets/map 2.png"
-                    alt="Sinfonia Overview Map"
+                    alt="The Sunset Sinfonia Overview Map"
                     className="w-full h-full object-cover object-top opacity-80 saturate-[0.7]"
                   />
 
@@ -1114,7 +1115,7 @@ export default function Home() {
               <div className="mb-10 space-y-4 text-center">
                 <h2 className="heading-lg">Dress Code</h2>
                 <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
-                <p className="text-elegant opacity-60">Trang phục phù hợp với Sinfonia</p>
+                <p className="text-elegant opacity-60">Trang phục phù hợp với The Sunset Sinfonia</p>
               </div>
 
               <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-stretch min-h-[500px] h-auto">
@@ -1261,7 +1262,7 @@ export default function Home() {
               <p
                 className="text-[10px] md:text-xs uppercase tracking-[0.5em] font-light !text-white opacity-60 mb-4"
               >
-                See you at The Sinfonia
+                See you at The Sunset Sinfonia
               </p>
 
               {/* Main Title — Synced size with Hero */}

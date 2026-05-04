@@ -3,7 +3,7 @@ import { montserrat, playfair, purgatory } from "@/lib/fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "The Sinfonia",
+  title: "The Sunset Sinfonia",
   description: "An exclusive event for the wedding industry in Vietnam.",
 };
 
