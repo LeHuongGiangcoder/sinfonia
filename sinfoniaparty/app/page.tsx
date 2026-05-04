@@ -404,7 +404,7 @@ export default function Home() {
       title: "CHECK IN",
       location: "Lobby Lounge",
       details: [],
-      coords: { x: 65, y: 64, scale: 2.2 }
+      coords: { x: 65, y: 48, scale: 2.2 }
     },
     {
       time: "14:30",
@@ -418,7 +418,7 @@ export default function Home() {
       title: "WELCOME + WORKSHOP",
       location: "Grand Ballroom",
       details: ["Khai mạc", "Workshop"],
-      coords: { x: 65, y: 64, scale: 2.2 }
+      coords: { x: 65, y: 48, scale: 2.2 }
     },
     {
       time: "16:30",
@@ -439,7 +439,7 @@ export default function Home() {
       title: "MIDNIGHT REVERIE",
       location: "Infinity Pool",
       details: ["Fireworks", "DJ", "Pool Party"],
-      coords: { x: 65, y: 64, scale: 2.2 }
+      coords: { x: 65, y: 48, scale: 2.2 }
     },
   ];
 
@@ -822,7 +822,7 @@ export default function Home() {
               {/* Unified Horizontal Timeline — Agenda */}
               <div className="timeline-container">
                 <div className="timeline-line-base"></div>
-                <div 
+                <div
                   className="timeline-line-progress"
                   style={{ width: `calc(${(activeAgenda / (agendaData.length - 1)) * 100}% - 0px)` }}
                 ></div>
@@ -853,17 +853,17 @@ export default function Home() {
               </div>
 
               {/* Map Overview — Full Width below timeline */}
-              <div className="relative aspect-video md:aspect-[21/9] w-full overflow-hidden rounded-sm border border-primary/10 bg-accent/10 shadow-2xl group/map">
+              <div className="relative aspect-video md:aspect-[16/10] w-full overflow-hidden rounded-sm border border-primary/10 bg-accent/10 shadow-2xl group/map">
                 {/* The Map Image */}
                 <img
                   src="/assets/map 3.png"
                   alt="The Sunset Sinfonia Overview Map"
-                  className="w-full h-full object-cover object-top opacity-80 saturate-[0.7]"
+                  className="w-full h-full object-cover object-center opacity-80 saturate-[0.7]"
                 />
 
                 {/* Navigation Arrows for Agenda Map */}
                 <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between z-30 pointer-events-none px-6">
-                  <button 
+                  <button
                     onClick={() => setActiveAgenda(prev => Math.max(0, prev - 1))}
                     disabled={activeAgenda === 0}
                     className={`pointer-events-auto w-10 h-10 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white transition-all duration-500 hover:bg-white hover:text-black disabled:opacity-0 disabled:pointer-events-none`}
@@ -872,7 +872,7 @@ export default function Home() {
                       <path d="M15 18l-6-6 6-6" />
                     </svg>
                   </button>
-                  <button 
+                  <button
                     onClick={() => setActiveAgenda(prev => Math.min(agendaData.length - 1, prev + 1))}
                     disabled={activeAgenda === agendaData.length - 1}
                     className={`pointer-events-auto w-10 h-10 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white transition-all duration-500 hover:bg-white hover:text-black disabled:opacity-0 disabled:pointer-events-none`}
@@ -1104,7 +1104,7 @@ export default function Home() {
                 {/* Unified Horizontal Timeline — Dresscode */}
                 <div className="timeline-container">
                   <div className="timeline-line-base"></div>
-                  <div 
+                  <div
                     className="timeline-line-progress"
                     style={{ width: `calc(${(activeDresscode / (dresscodeData.length - 1)) * 100}% - 0px)` }}
                   ></div>
