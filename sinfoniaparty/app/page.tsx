@@ -375,7 +375,7 @@ export default function Home() {
   const bridgeRef = useRef<HTMLDivElement>(null);
 
   const [isLoading, setIsLoading] = useState(true);
-  const audioRef = useRef<HTMLVideoElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
   const [isMuted, setIsMuted] = useState(false);
   const [activeAgenda, setActiveAgenda] = useState(0);
   const [activeDresscode, setActiveDresscode] = useState(0);
@@ -582,11 +582,10 @@ export default function Home() {
         {/* 1 & 2. Hero Section — Full Bleed */}
         <section className="relative h-screen w-full overflow-hidden bg-black">
           {/* Audio Source */}
-          <video
+          <audio
             ref={audioRef}
             src="/assets/Lady Gaga, Bruno Mars - Die With A Smile (Official Music Video).mp4"
             loop
-            className="hidden"
           />
           {/* Background — natural colors, no overlay */}
           <img
