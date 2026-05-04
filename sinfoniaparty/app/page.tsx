@@ -912,14 +912,14 @@ export default function Home() {
                   <div className="space-y-3 animate-fade-in">
                     <div className="flex items-center justify-center gap-4">
                       <div className="w-12 h-[1px] bg-primary/10"></div>
-                      <span className={`${purgatory.className} text-4xl text-primary`}>{agendaData[activeAgenda].time}</span>
+                      <span className={`${purgatory.className} text-4xl text-primary`}>{agendaData[activeAgenda as number].time}</span>
                       <div className="w-12 h-[1px] bg-primary/10"></div>
                     </div>
-                    <h3 className="heading-md !text-2xl md:!text-3xl text-primary">{agendaData[activeAgenda].title}</h3>
-                    <p className="subheading !opacity-100 text-primary/60">{agendaData[activeAgenda].location}</p>
-                    {agendaData[activeAgenda].details.length > 0 && (
+                    <h3 className="heading-md !text-2xl md:!text-3xl text-primary">{agendaData[activeAgenda as number].title}</h3>
+                    <p className="subheading !opacity-100 text-primary/60">{agendaData[activeAgenda as number].location}</p>
+                    {agendaData[activeAgenda as number].details.length > 0 && (
                       <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 pt-2">
-                        {agendaData[activeAgenda].details.map((detail, idx) => (
+                        {agendaData[activeAgenda as number].details.map((detail, idx) => (
                           <span key={idx} className="text-[10px] uppercase tracking-[0.2em] opacity-40 italic">{detail}</span>
                         ))}
                       </div>
@@ -940,14 +940,14 @@ export default function Home() {
                     {activeAgenda !== null ? (
                       <div className="space-y-3 animate-fade-in text-left">
                         <div className="flex items-center gap-3">
-                          <span className={`${purgatory.className} text-3xl text-primary`}>{agendaData[activeAgenda].time}</span>
+                          <span className={`${purgatory.className} text-3xl text-primary`}>{agendaData[activeAgenda as number].time}</span>
                           <div className="h-[1px] flex-1 bg-primary/10"></div>
                         </div>
-                        <h3 className="heading-md !text-xl text-primary">{agendaData[activeAgenda].title}</h3>
-                        <p className="subheading !text-sm !opacity-100 text-primary/60">{agendaData[activeAgenda].location}</p>
-                        {agendaData[activeAgenda].details.length > 0 && (
+                        <h3 className="heading-md !text-xl text-primary">{agendaData[activeAgenda as number].title}</h3>
+                        <p className="subheading !text-sm !opacity-100 text-primary/60">{agendaData[activeAgenda as number].location}</p>
+                        {agendaData[activeAgenda as number].details.length > 0 && (
                           <div className="flex flex-wrap gap-x-3 gap-y-1 pt-2 border-t border-primary/5 mt-2">
-                            {agendaData[activeAgenda].details.map((detail, idx) => (
+                            {agendaData[activeAgenda as number].details.map((detail, idx) => (
                               <span key={idx} className="text-[9px] uppercase tracking-[0.1em] opacity-40 italic">{detail}</span>
                             ))}
                           </div>
@@ -968,10 +968,10 @@ export default function Home() {
                   className="w-full h-full object-cover saturate-[0.7] transition-all duration-1000 ease-in-out"
                   style={{
                     transform: activeAgenda !== null 
-                      ? `scale(${agendaData[activeAgenda].coords.scale})` 
+                      ? `scale(${agendaData[activeAgenda as number].coords.scale})` 
                       : 'scale(1)',
                     transformOrigin: activeAgenda !== null 
-                      ? `${agendaData[activeAgenda].coords.x}% ${agendaData[activeAgenda].coords.y}%` 
+                      ? `${agendaData[activeAgenda as number].coords.x}% ${agendaData[activeAgenda as number].coords.y}%` 
                       : '50% 20%'
                   }}
                 />
