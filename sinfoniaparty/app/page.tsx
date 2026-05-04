@@ -361,10 +361,7 @@ function Navbar({ scrolled }: { scrolled: boolean }) {
           ))}
         </div>
 
-        {/* Decorative element for mobile menu */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 opacity-20">
-          <p className={`${purgatory.className} text-4xl text-primary`}>The Sunset Sinfonia</p>
-        </div>
+
       </div>
     </>
   );
