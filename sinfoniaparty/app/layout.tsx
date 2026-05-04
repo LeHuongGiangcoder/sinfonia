@@ -15,9 +15,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${montserrat.variable} ${playfair.variable} ${purgatory.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans text-foreground bg-background">
+      <body className="min-h-full flex flex-col font-sans text-foreground bg-background" suppressHydrationWarning>
         {/* Cinematic Grain Overlay */}
         <div className="grain-overlay" />
         {children}

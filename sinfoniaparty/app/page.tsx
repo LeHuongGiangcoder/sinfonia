@@ -580,19 +580,8 @@ export default function Home() {
           {/* Text block — repositioned to vertical center of viewport */}
           <div
             className="absolute left-1/2 z-10 flex flex-col items-center text-center w-full px-6"
-            style={{ top: '42%', transform: 'translate(-50%, -50%)' }}
+            style={{ top: '44%', transform: 'translate(-50%, -50%)' }}
           >
-            {/* Subheading — Now repositioned above the title */}
-            <p
-              className="text-elegant uppercase tracking-[0.4em] text-xs md:text-sm mb-4"
-              style={{
-                color: 'rgba(243,237,225,0.85)',
-                opacity: 0,
-                animation: 'hero-fade-up 1s ease-out 1.2s both',
-              }}
-            >
-              a party that never ends
-            </p>
 
             {/* Main Title — Now appears first for immediate impact */}
             <h1
@@ -605,8 +594,8 @@ export default function Home() {
                 WebkitFontSmoothing: 'antialiased',
               } as React.CSSProperties}
             >
-              <span>The Sunset</span>
-              <span>Sinfonia</span>
+              <span className="hero-content">The Sunset</span>
+              <span className="hero-content">Sinfonia</span>
             </h1>
           </div>
 
@@ -631,6 +620,22 @@ export default function Home() {
                 style={{ background: 'linear-gradient(to bottom, transparent, rgba(243,237,225,0.6), transparent)' }}
               ></div>
             </div>
+          </div>
+        </section>
+
+        {/* Bridge Section — A cinematic transition */}
+        <section className="py-24 md:py-32 bg-background flex flex-col items-center justify-center text-center relative overflow-hidden">
+          <div className="w-[1px] h-12 bg-primary/20 mb-8 animate-scroll-down"></div>
+          <p 
+            className="text-elegant uppercase tracking-[0.5em] text-[10px] md:text-xs text-primary/60 max-w-[80%] leading-loose"
+            style={{ animation: 'fade-in 2s ease-out both' }}
+          >
+            a party that never ends
+          </p>
+          <div className="mt-8 flex gap-4 opacity-20">
+            <div className="w-1.5 h-1.5 rounded-full bg-primary"></div>
+            <div className="w-1.5 h-1.5 rounded-full bg-primary"></div>
+            <div className="w-1.5 h-1.5 rounded-full bg-primary"></div>
           </div>
         </section>
         {/* 2.5 Atmosphere Gallery — A cinematic journey through the day */}
