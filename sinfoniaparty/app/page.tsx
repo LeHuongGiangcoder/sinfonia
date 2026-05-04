@@ -926,14 +926,8 @@ export default function Home() {
                     )}
                   </div>
                 ) : (
-                  <div className="space-y-3 animate-fade-in opacity-60">
-                    <div className="flex items-center justify-center gap-4">
-                      <div className="w-12 h-[1px] bg-primary/10"></div>
-                      <span className={`${purgatory.className} text-4xl text-primary`}>THE</span>
-                      <div className="w-12 h-[1px] bg-primary/10"></div>
-                    </div>
-                    <h3 className="heading-md !text-2xl md:!text-3xl text-primary uppercase tracking-[0.3em]">Journey</h3>
-                    <p className="subheading !opacity-100 text-primary/60 italic">Explore our venue on the map</p>
+                  <div className="space-y-1 animate-fade-in opacity-80">
+                    <h3 className="heading-md !text-2xl md:!text-3xl text-primary uppercase tracking-[0.2em]">Welcome to Wyndham</h3>
                   </div>
                 )}
               </div>
@@ -960,9 +954,8 @@ export default function Home() {
                         )}
                       </div>
                     ) : (
-                      <div className="space-y-3 animate-fade-in opacity-60 text-left">
-                        <h3 className="heading-md !text-xl text-primary uppercase tracking-[0.2em]">The Journey</h3>
-                        <p className="subheading !text-xs !opacity-100 text-primary/60 italic">Click the arrows to explore our wedding venue locations.</p>
+                      <div className="animate-fade-in text-left">
+                        <h3 className="heading-md !text-xl text-primary uppercase tracking-[0.1em]">Welcome to Wyndham</h3>
                       </div>
                     )}
                   </div>
@@ -1013,7 +1006,7 @@ export default function Home() {
                     </button>
                     
                     {/* Interaction Hint — Agenda */}
-                    {showAgendaHint && activeAgenda === 0 && (
+                    {showAgendaHint && (activeAgenda === 0 || activeAgenda === null) && (
                       <div className="absolute -top-12 left-1/2 -translate-x-1/2 animate-bounce-slow pointer-events-none z-40">
                         <div className="bg-[#fff8eb] text-primary text-[7px] px-2 py-1.5 rounded-full uppercase tracking-[0.2em] font-bold whitespace-nowrap shadow-[0_10px_20px_rgba(0,0,0,0.1)] border border-primary/20">
                           Click to see next
