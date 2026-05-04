@@ -409,42 +409,42 @@ export default function Home() {
       title: "CHECK IN",
       location: "Lobby Lounge",
       details: [],
-      coords: { x: 65, y: 48, scale: 2.2 }
+      coords: { x: 65, y: 45, scale: 2 }
     },
     {
       time: "14:30",
       title: "TEA BREAK",
       location: "Sinfonia Garden",
       details: [],
-      coords: { x: 80, y: 2, scale: 2.2 }
+      coords: { x: 75, y: 15, scale: 2.2 }
     },
     {
       time: "15:00",
       title: "WELCOME + WORKSHOP",
       location: "Grand Ballroom",
       details: ["Khai mạc", "Workshop"],
-      coords: { x: 65, y: 48, scale: 2.2 }
+      coords: { x: 65, y: 45, scale: 2 }
     },
     {
       time: "16:30",
       title: "CATCH THE SUN",
       location: "Sunset Terrace",
       details: ["Cocktail", "Live music"],
-      coords: { x: 80, y: 2, scale: 2.2 }
+      coords: { x: 75, y: 15, scale: 2.2 }
     },
     {
       time: "18:30",
       title: "A SKY FULL OF STARS",
       location: "Starlight Dining",
       details: ["Dinner", "Drinking game"],
-      coords: { x: 80, y: 2, scale: 2.2 }
+      coords: { x: 75, y: 15, scale: 2.2 }
     },
     {
       time: "20:30",
       title: "MIDNIGHT REVERIE",
       location: "Infinity Pool",
       details: ["Fireworks", "DJ", "Pool Party"],
-      coords: { x: 65, y: 48, scale: 2.2 }
+      coords: { x: 65, y: 45, scale: 2 }
     },
   ];
 
@@ -933,7 +933,7 @@ export default function Home() {
               </div>
 
               {/* Map Overview — Auto-zooming Map */}
-              <div className="relative aspect-video md:aspect-[16/7] w-full overflow-hidden rounded-sm border border-primary/10 bg-[#e5e1d8] shadow-2xl group/map">
+              <div className="relative aspect-video md:aspect-[16/9] w-full overflow-hidden rounded-sm border border-primary/10 bg-[#e5e1d8] shadow-2xl group/map">
                 {/* Desktop Detail Overlay — The "Note" style per user request */}
                 <div className="hidden md:block absolute top-8 left-8 z-40 w-72 pointer-events-none">
                   <div className={`bg-background/90 backdrop-blur-md p-6 rounded-sm border border-primary/10 shadow-2xl transition-all duration-700 ${activeAgenda !== null ? 'opacity-100 translate-x-0' : 'opacity-100 translate-x-0'}`}>
@@ -972,7 +972,7 @@ export default function Home() {
                       : 'scale(1)',
                     transformOrigin: activeAgenda !== null 
                       ? `${agendaData[activeAgenda as number].coords.x}% ${agendaData[activeAgenda as number].coords.y}%` 
-                      : 'center 5%'
+                      : 'center top'
                   }}
                 />
 
