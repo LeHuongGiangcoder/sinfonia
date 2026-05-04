@@ -981,7 +981,7 @@ export default function Home() {
                   <button
                     onClick={() => {
                       if (activeAgenda === 0) setActiveAgenda(null);
-                      else if (activeAgenda !== null) setActiveAgenda(prev => prev - 1);
+                      else if (activeAgenda !== null) setActiveAgenda(prev => (prev as number) - 1);
                     }}
                     disabled={activeAgenda === null}
                     className={`pointer-events-auto w-10 h-10 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white transition-all duration-500 hover:bg-white hover:text-black disabled:opacity-0 disabled:pointer-events-none`}
