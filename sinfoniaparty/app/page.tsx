@@ -819,12 +819,11 @@ export default function Home() {
                 <p className="text-elegant opacity-60">Dấu ấn của những khoảnh khắc</p>
               </div>
 
-              {/* Horizontal Timeline — Consistent with Dresscode */}
-              <div className="mb-16 relative px-4 md:px-20">
-                {/* Connecting Line */}
-                <div className="absolute top-[18px] left-4 md:left-20 right-4 md:right-20 h-[1px] bg-primary/10"></div>
+              {/* Unified Horizontal Timeline — Agenda */}
+              <div className="timeline-container">
+                <div className="timeline-line-base"></div>
                 <div 
-                  className="absolute top-[18px] left-4 md:left-20 h-[1px] bg-primary/40 transition-all duration-1000 ease-in-out"
+                  className="timeline-line-progress"
                   style={{ width: `calc(${(activeAgenda / (agendaData.length - 1)) * 100}% - 0px)` }}
                 ></div>
 
@@ -833,20 +832,18 @@ export default function Home() {
                     <button
                       key={idx}
                       onClick={() => setActiveAgenda(idx)}
-                      className={`flex flex-col items-center group transition-all duration-500 ${activeAgenda === idx ? 'opacity-100' : 'opacity-20 hover:opacity-60'}`}
+                      className={`timeline-node ${activeAgenda === idx ? 'opacity-100' : 'opacity-40 hover:opacity-80'}`}
                       style={{ width: `${100 / agendaData.length}%` }}
                     >
-                      {/* Interactive Dot */}
-                      <div className={`w-9 h-9 rounded-full border transition-all duration-500 bg-background flex items-center justify-center ${activeAgenda === idx ? 'border-primary scale-110 shadow-lg shadow-primary/5' : 'border-primary/20'}`}>
-                        <div className={`w-2 h-2 rounded-full transition-all duration-500 ${activeAgenda === idx ? 'bg-primary scale-125' : 'bg-primary/20'}`}></div>
+                      <div className={`timeline-dot ${activeAgenda === idx ? 'timeline-dot-active' : ''}`}>
+                        <div className={`timeline-dot-inner ${activeAgenda === idx ? 'timeline-dot-inner-active' : ''}`}></div>
                       </div>
 
-                      {/* Labels */}
                       <div className="mt-4 text-center">
-                        <p className={`text-[10px] md:text-xs font-light tabular-nums mb-1 transition-colors ${activeAgenda === idx ? 'text-primary' : ''}`}>
+                        <p className={`text-[10px] md:text-xs font-light tabular-nums mb-1 transition-colors ${activeAgenda === idx ? 'text-primary' : 'text-primary/40'}`}>
                           {item.time}
                         </p>
-                        <h3 className={`text-[8px] md:text-[9px] font-medium tracking-[0.15em] uppercase transition-colors hidden md:block ${activeAgenda === idx ? 'text-primary' : 'text-primary/60'}`}>
+                        <h3 className={`text-[8px] md:text-[9px] font-medium tracking-[0.15em] uppercase transition-colors hidden md:block ${activeAgenda === idx ? 'text-primary' : 'text-primary/20'}`}>
                           {item.title}
                         </h3>
                       </div>
@@ -1104,33 +1101,33 @@ export default function Home() {
               </div>
 
               <div className="flex flex-col gap-16 h-auto relative">
-                {/* Horizontal Timeline */}
-                <div className="w-full max-w-4xl mx-auto relative py-12">
-                  <div className="relative flex justify-between items-center px-4 md:px-12">
-                    {/* Horizontal Axis Line */}
-                    <div className="absolute left-12 right-12 top-[1.35rem] h-[1px] bg-primary/10"></div>
+                {/* Unified Horizontal Timeline — Dresscode */}
+                <div className="timeline-container">
+                  <div className="timeline-line-base"></div>
+                  <div 
+                    className="timeline-line-progress"
+                    style={{ width: `calc(${(activeDresscode / (dresscodeData.length - 1)) * 100}% - 0px)` }}
+                  ></div>
 
-                    {/* Horizontal Progress Line */}
-                    <div
-                      className="absolute left-12 h-[1px] bg-primary/40 transition-all duration-1000 ease-in-out top-[1.35rem]"
-                      style={{
-                        width: `calc(${(activeDresscode / (dresscodeData.length - 1)) * 100}% - 0px)`,
-                      }}
-                    ></div>
-
+                  <div className="flex justify-between items-start relative z-10">
                     {dresscodeData.map((item, idx) => (
                       <button
                         key={idx}
                         onClick={() => setActiveDresscode(idx)}
-                        className={`flex flex-col items-center relative z-10 transition-all duration-700 group/item ${activeDresscode === idx ? 'opacity-100' : 'opacity-20 hover:opacity-50'}`}
-                        style={{ flex: 1 }}
+                        className={`timeline-node ${activeDresscode === idx ? 'opacity-100' : 'opacity-40 hover:opacity-80'}`}
+                        style={{ width: `${100 / dresscodeData.length}%` }}
                       >
-                        <div className={`w-3 h-3 rounded-full border border-primary/20 bg-background transition-all duration-500 mb-6 group-hover/item:scale-110 ${activeDresscode === idx ? 'border-primary bg-primary scale-125 shadow-[0_0_15px_rgba(75,80,6,0.3)]' : ''}`}></div>
-                        <div className="text-center">
-                          <h3 className={`text-[10px] md:text-xs font-medium tracking-[0.2em] uppercase transition-colors ${activeDresscode === idx ? 'text-primary' : ''}`}>
+                        <div className={`timeline-dot ${activeDresscode === idx ? 'timeline-dot-active' : ''}`}>
+                          <div className={`timeline-dot-inner ${activeDresscode === idx ? 'timeline-dot-inner-active' : ''}`}></div>
+                        </div>
+
+                        <div className="mt-4 text-center">
+                          <p className={`text-[10px] md:text-xs font-light tracking-[0.2em] uppercase mb-1 transition-colors ${activeDresscode === idx ? 'text-primary' : 'text-primary/40'}`}>
                             {item.title}
+                          </p>
+                          <h3 className={`text-[8px] md:text-[9px] font-medium tracking-[0.1em] transition-colors hidden md:block ${activeDresscode === idx ? 'text-primary' : 'text-primary/20'}`}>
+                            {item.subtitle}
                           </h3>
-                          <p className="text-[8px] md:text-[9px] uppercase tracking-[0.25em] opacity-40 mt-1">{item.subtitle}</p>
                         </div>
                       </button>
                     ))}
