@@ -601,7 +601,7 @@ export default function Home() {
 
             {/* Main Title — Now appears first for immediate impact */}
             <h1
-              className={`${purgatory.className} text-5xl md:text-7xl lg:text-9xl leading-[0.95] lowercase tracking-tight flex flex-col items-center`}
+              className={`${purgatory.className} text-6xl md:text-8xl lg:text-9xl leading-[0.95] lowercase tracking-tight flex flex-col items-center`}
               style={{
                 color: '#f3ede1',
                 opacity: 0,
