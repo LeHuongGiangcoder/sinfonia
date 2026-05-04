@@ -404,42 +404,42 @@ export default function Home() {
       title: "CHECK IN",
       location: "Lobby Lounge",
       details: [],
-      coords: { x: 56, y: 62, scale: 2.2 }
+      coords: { x: 65, y: 64, scale: 2.2 }
     },
     {
       time: "14:30",
       title: "TEA BREAK",
       location: "Sinfonia Garden",
       details: [],
-      coords: { x: 58, y: 41, scale: 2.5 }
+      coords: { x: 72, y: 22, scale: 2.5 }
     },
     {
       time: "15:00",
       title: "WELCOME + WORKSHOP",
       location: "Grand Ballroom",
       details: ["Khai mạc", "Workshop"],
-      coords: { x: 47, y: 81, scale: 2.2 }
+      coords: { x: 65, y: 64, scale: 2.2 }
     },
     {
       time: "16:30",
       title: "CATCH THE SUN",
       location: "Sunset Terrace",
       details: ["Cocktail", "Live music"],
-      coords: { x: 70, y: 13, scale: 2.8 }
+      coords: { x: 72, y: 22, scale: 2.5 }
     },
     {
       time: "18:30",
       title: "A SKY FULL OF STARS",
       location: "Starlight Dining",
       details: ["Dinner", "Drinking game"],
-      coords: { x: 66, y: 60, scale: 2.5 }
+      coords: { x: 72, y: 22, scale: 2.5 }
     },
     {
       time: "20:30",
       title: "MIDNIGHT REVERIE",
       location: "Infinity Pool",
       details: ["Fireworks", "DJ", "Pool Party"],
-      coords: { x: 50, y: 77, scale: 2.5 }
+      coords: { x: 65, y: 64, scale: 2.2 }
     },
   ];
 
