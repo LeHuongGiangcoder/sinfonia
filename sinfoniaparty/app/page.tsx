@@ -1372,14 +1372,18 @@ export default function Home() {
               
               {/* Circular Button */}
               <div className="relative w-11 h-11 rounded-full border border-primary/20 flex items-center justify-center bg-background/60 backdrop-blur-xl group-hover:border-primary/50 group-active:scale-95 transition-all duration-500 shadow-sm">
-                 <div className="flex flex-col gap-[3px]">
-                    <div className="w-3 h-[1.5px] bg-primary/80"></div>
-                    <div className="w-3 h-[1.5px] bg-primary/80"></div>
-                 </div>
-                 {/* Mute Slash Overlay */}
-                 {isMuted && (
-                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                     <div className="w-full h-[1px] bg-primary/40 rotate-45 scale-x-75"></div>
+                 {!isMuted ? (
+                   /* Pause Icon */
+                   <div className="flex gap-[3px]">
+                     <div className="w-[1.5px] h-3 bg-primary/80"></div>
+                     <div className="w-[1.5px] h-3 bg-primary/80"></div>
+                   </div>
+                 ) : (
+                   /* Play Icon */
+                   <div className="ml-0.5">
+                     <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5 text-primary/80">
+                       <path d="M8 5v14l11-7z" />
+                     </svg>
                    </div>
                  )}
               </div>
