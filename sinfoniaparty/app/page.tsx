@@ -377,7 +377,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isMuted, setIsMuted] = useState(false);
-  const [activeAgenda, setActiveAgenda] = useState(0);
+  const [activeAgenda, setActiveAgenda] = useState<number | null>(null);
   const [activeDresscode, setActiveDresscode] = useState(0);
   const [showAgendaHint, setShowAgendaHint] = useState(true);
   const [showDresscodeHint, setShowDresscodeHint] = useState(true);
@@ -416,7 +416,7 @@ export default function Home() {
       title: "TEA BREAK",
       location: "Sinfonia Garden",
       details: [],
-      coords: { x: 72, y: 22, scale: 2.5 }
+      coords: { x: 73, y: 14, scale: 2.8 }
     },
     {
       time: "15:00",
@@ -430,14 +430,14 @@ export default function Home() {
       title: "CATCH THE SUN",
       location: "Sunset Terrace",
       details: ["Cocktail", "Live music"],
-      coords: { x: 72, y: 22, scale: 2.5 }
+      coords: { x: 73, y: 14, scale: 2.8 }
     },
     {
       time: "18:30",
       title: "A SKY FULL OF STARS",
       location: "Starlight Dining",
       details: ["Dinner", "Drinking game"],
-      coords: { x: 72, y: 22, scale: 2.5 }
+      coords: { x: 73, y: 14, scale: 2.8 }
     },
     {
       time: "20:30",
@@ -603,7 +603,7 @@ export default function Home() {
 
             {/* Main Title — Now appears first for immediate impact */}
             <h1
-              className={`${purgatory.className} text-7xl md:text-[10rem] lg:text-[12rem] leading-[0.95] lowercase tracking-tight flex flex-col items-center`}
+              className={`${purgatory.className} text-7xl md:text-[8rem] lg:text-[9.5rem] leading-[0.95] lowercase tracking-tight flex flex-col items-center`}
               style={{
                 color: '#f3ede1',
                 opacity: 0,
@@ -873,13 +873,13 @@ export default function Home() {
                     width: `${100 - (100 / agendaData.length)}%` 
                   }}
                 ></div>
-                <div
-                  className="timeline-line-progress"
-                  style={{ 
-                    left: `${(100 / agendaData.length) / 2}%`,
-                    width: `${(activeAgenda / (agendaData.length - 1)) * (100 - (100 / agendaData.length))}%` 
-                  }}
-                ></div>
+                  <div
+                    className="timeline-line-progress"
+                    style={{ 
+                      left: `${(100 / agendaData.length) / 2}%`,
+                      width: `${activeAgenda !== null ? (activeAgenda / (agendaData.length - 1)) * (100 - (100 / agendaData.length)) : 0}%` 
+                    }}
+                  ></div>
 
                 <div className="flex justify-between items-start relative z-10">
                   {agendaData.map((item, idx) => (
@@ -906,10 +906,10 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Selected Activity Details — Stable fixed-height container to prevent layout jumping */}
-              <div className={`mt-10 mb-12 text-center transition-all duration-700 min-h-[160px] md:min-h-[200px] flex flex-col justify-center ${activeAgenda !== null ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-                {activeAgenda !== null && (
-                  <div className="space-y-3">
+              {/* Selected Activity Details — Mobile only (hidden on desktop to save space) */}
+              <div className={`mt-10 mb-12 text-center transition-all duration-700 min-h-[160px] md:hidden flex flex-col justify-center ${activeAgenda !== null ? 'opacity-100 translate-y-0' : 'opacity-100 translate-y-0'}`}>
+                {activeAgenda !== null ? (
+                  <div className="space-y-3 animate-fade-in">
                     <div className="flex items-center justify-center gap-4">
                       <div className="w-12 h-[1px] bg-primary/10"></div>
                       <span className={`${purgatory.className} text-4xl text-primary`}>{agendaData[activeAgenda].time}</span>
@@ -925,11 +925,49 @@ export default function Home() {
                       </div>
                     )}
                   </div>
+                ) : (
+                  <div className="space-y-3 animate-fade-in opacity-60">
+                    <div className="flex items-center justify-center gap-4">
+                      <div className="w-12 h-[1px] bg-primary/10"></div>
+                      <span className={`${purgatory.className} text-4xl text-primary`}>THE</span>
+                      <div className="w-12 h-[1px] bg-primary/10"></div>
+                    </div>
+                    <h3 className="heading-md !text-2xl md:!text-3xl text-primary uppercase tracking-[0.3em]">Journey</h3>
+                    <p className="subheading !opacity-100 text-primary/60 italic">Explore our venue on the map</p>
+                  </div>
                 )}
               </div>
 
               {/* Map Overview — Auto-zooming Map */}
               <div className="relative aspect-video md:aspect-[21/9] w-full overflow-hidden rounded-sm border border-primary/10 bg-accent/10 shadow-2xl group/map">
+                {/* Desktop Detail Overlay — The "Note" style per user request */}
+                <div className="hidden md:block absolute top-8 left-8 z-40 w-72 pointer-events-none">
+                  <div className={`bg-background/90 backdrop-blur-md p-6 rounded-sm border border-primary/10 shadow-2xl transition-all duration-700 ${activeAgenda !== null ? 'opacity-100 translate-x-0' : 'opacity-100 translate-x-0'}`}>
+                    {activeAgenda !== null ? (
+                      <div className="space-y-3 animate-fade-in text-left">
+                        <div className="flex items-center gap-3">
+                          <span className={`${purgatory.className} text-3xl text-primary`}>{agendaData[activeAgenda].time}</span>
+                          <div className="h-[1px] flex-1 bg-primary/10"></div>
+                        </div>
+                        <h3 className="heading-md !text-xl text-primary">{agendaData[activeAgenda].title}</h3>
+                        <p className="subheading !text-sm !opacity-100 text-primary/60">{agendaData[activeAgenda].location}</p>
+                        {agendaData[activeAgenda].details.length > 0 && (
+                          <div className="flex flex-wrap gap-x-3 gap-y-1 pt-2 border-t border-primary/5 mt-2">
+                            {agendaData[activeAgenda].details.map((detail, idx) => (
+                              <span key={idx} className="text-[9px] uppercase tracking-[0.1em] opacity-40 italic">{detail}</span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <div className="space-y-3 animate-fade-in opacity-60 text-left">
+                        <h3 className="heading-md !text-xl text-primary uppercase tracking-[0.2em]">The Journey</h3>
+                        <p className="subheading !text-xs !opacity-100 text-primary/60 italic">Click the arrows to explore our wedding venue locations.</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
                 {/* The Map Image with Zoom Effect */}
                 <img
                   src="/assets/map 3.png"
@@ -949,10 +987,10 @@ export default function Home() {
                 <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between z-30 pointer-events-none px-6">
                   <button
                     onClick={() => {
-                      setActiveAgenda(prev => Math.max(0, prev - 1));
-                      setShowAgendaHint(false);
+                      if (activeAgenda === 0) setActiveAgenda(null);
+                      else if (activeAgenda !== null) setActiveAgenda(prev => prev - 1);
                     }}
-                    disabled={activeAgenda === 0}
+                    disabled={activeAgenda === null}
                     className={`pointer-events-auto w-10 h-10 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white transition-all duration-500 hover:bg-white hover:text-black disabled:opacity-0 disabled:pointer-events-none`}
                   >
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
@@ -962,7 +1000,8 @@ export default function Home() {
                   <div className="relative">
                     <button
                       onClick={() => {
-                        setActiveAgenda(prev => Math.min(agendaData.length - 1, prev + 1));
+                        if (activeAgenda === null) setActiveAgenda(0);
+                        else setActiveAgenda(prev => Math.min(agendaData.length - 1, (prev as number) + 1));
                         setShowAgendaHint(false);
                       }}
                       disabled={activeAgenda === agendaData.length - 1}
@@ -1338,11 +1377,11 @@ export default function Home() {
             </div>
 
             <div 
-              className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar gap-4 md:gap-8 pb-8 -mx-4 px-4"
+              className="flex md:grid md:grid-cols-3 overflow-x-auto snap-x snap-mandatory no-scrollbar gap-4 md:gap-8 pb-8 -mx-4 px-4"
               onTouchStart={() => setShowContactHint(false)}
               onScroll={() => setShowContactHint(false)}
             >
-              <div className="relative min-w-[85vw] md:min-w-[30%] snap-center">
+              <div className="relative min-w-[85vw] md:min-w-0 snap-center">
                 <ContactCard
                   images={["ginale.jpg"]}
                   unit="Glow"
@@ -1353,11 +1392,11 @@ export default function Home() {
                   link="https://zalo.me/0857086906"
                 />
 
-                {/* Interaction Hint — Contact Bubble */}
+                {/* Interaction Hint — Contact Bubble (Mobile Only) */}
                 {showContactHint && (
-                  <div className="absolute right-4 top-1/2 -translate-y-1/2 animate-move-horizontal pointer-events-none z-30">
+                  <div className="absolute right-4 top-1/2 -translate-y-1/2 animate-move-horizontal pointer-events-none md:hidden z-30">
                     <div className="bg-[#fff8eb] text-primary text-[7px] px-2 py-1.5 rounded-full uppercase tracking-[0.2em] font-bold whitespace-nowrap shadow-[0_10px_20px_rgba(0,0,0,0.3)] border border-primary/20 flex items-center gap-2">
-                      Scroll to see more
+                      Swipe left
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-2 h-2">
                         <path d="M9 18l6-6-6-6" />
                       </svg>
@@ -1405,7 +1444,7 @@ export default function Home() {
           <div className="relative z-20 content-wrapper max-w-4xl px-8 flex flex-col items-center reveal-on-scroll">
             <div className="flex flex-col items-center text-center">
               {/* Main Title — Synced size with Hero, split for mobile impact */}
-              <h2 className={`${purgatory.className} text-[6rem] md:text-[8rem] lg:text-[10rem] !text-white lowercase tracking-tight leading-[0.85] md:leading-none flex flex-col md:flex-row items-center gap-x-8`}>
+              <h2 className={`${purgatory.className} text-[6rem] md:text-[7rem] lg:text-[8rem] !text-white lowercase tracking-tight leading-[0.85] md:leading-none flex flex-col md:flex-row items-center gap-x-8`}>
                 <span>thank</span>
                 <span>you</span>
               </h2>
