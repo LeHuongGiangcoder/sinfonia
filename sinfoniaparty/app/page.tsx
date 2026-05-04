@@ -572,7 +572,7 @@ export default function Home() {
           onComplete={() => setIsLoading(false)} 
           onInteraction={() => {
             if (audioRef.current) {
-              audioRef.current.play().then(() => setIsPlaying(true)).catch(e => console.log("Audio play blocked", e));
+              audioRef.current.play().then(() => setIsMuted(false)).catch(e => console.log("Audio play blocked", e));
             }
           }}
         />
