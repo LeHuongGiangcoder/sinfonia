@@ -1165,7 +1165,7 @@ export default function Home() {
                 <p className="text-elegant opacity-60">Lựa chọn trang phục cho những khoảnh khắc tuyệt vời</p>
               </div>
 
-              <div className="flex flex-col gap-16 h-auto relative">
+              <div className="flex flex-col gap-4 md:gap-16 h-auto relative">
                 {/* Unified Horizontal Timeline — Dresscode */}
                 <div className="timeline-container">
                   <div 
