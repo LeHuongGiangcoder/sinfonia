@@ -982,10 +982,10 @@ export default function Home() {
                     {/* Interaction Hint — Agenda */}
                     {showAgendaHint && activeAgenda === 0 && (
                       <div className="absolute -top-12 left-1/2 -translate-x-1/2 animate-bounce-slow pointer-events-none">
-                        <div className="bg-primary/90 text-background text-[7px] px-2 py-1.5 rounded-full uppercase tracking-[0.2em] font-bold whitespace-nowrap shadow-lg backdrop-blur-sm border border-white/10">
+                        <div className="bg-[#fff8eb] text-primary text-[7px] px-2 py-1.5 rounded-full uppercase tracking-[0.2em] font-bold whitespace-nowrap shadow-[0_10px_20px_rgba(0,0,0,0.1)] border border-primary/20">
                           Tap to see next
                         </div>
-                        <div className="w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-t-[6px] border-t-primary/90 mx-auto"></div>
+                        <div className="w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-t-[6px] border-t-[#fff8eb] mx-auto"></div>
                       </div>
                     )}
                   </div>
@@ -1266,10 +1266,10 @@ export default function Home() {
                       {/* Interaction Hint — Dresscode */}
                       {showDresscodeHint && activeDresscode === 0 && (
                         <div className="absolute -top-12 left-1/2 -translate-x-1/2 animate-bounce-slow pointer-events-none">
-                          <div className="bg-primary/90 text-background text-[7px] px-2 py-1.5 rounded-full uppercase tracking-[0.2em] font-bold whitespace-nowrap shadow-lg backdrop-blur-sm border border-white/10">
+                          <div className="bg-[#fff8eb] text-primary text-[7px] px-2 py-1.5 rounded-full uppercase tracking-[0.2em] font-bold whitespace-nowrap shadow-[0_10px_20px_rgba(0,0,0,0.1)] border border-primary/20">
                             Tap to see next
                           </div>
-                          <div className="w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-t-[6px] border-t-primary/90 mx-auto"></div>
+                          <div className="w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-t-[6px] border-t-[#fff8eb] mx-auto"></div>
                         </div>
                       )}
                     </div>
