@@ -819,142 +819,130 @@ export default function Home() {
                 <p className="text-elegant opacity-60">Dấu ấn của những khoảnh khắc</p>
               </div>
 
-              <div className="flex flex-col lg:flex-row gap-16 items-stretch min-h-[500px] h-auto">
-                {/* Vertical Timeline Bar - Typographic Minimalist */}
-                <div className="w-full lg:w-64 relative flex flex-col order-2 lg:order-1 h-full">
-                  {/* The items container itself will define the height for the line */}
-                  <div className="relative flex flex-col justify-between h-full pl-8 lg:pl-12 py-4 gap-y-10">
-                    {/* Vertical Axis Line - Anchored to items container */}
-                    <div className="absolute left-0 top-[8px] bottom-[8px] w-[1px] bg-primary/5 hidden lg:block"></div>
+              {/* Horizontal Timeline — Consistent with Dresscode */}
+              <div className="mb-16 relative px-4 md:px-20">
+                {/* Connecting Line */}
+                <div className="absolute top-[18px] left-4 md:left-20 right-4 md:right-20 h-[1px] bg-primary/10"></div>
+                <div 
+                  className="absolute top-[18px] left-4 md:left-20 h-[1px] bg-primary/40 transition-all duration-1000 ease-in-out"
+                  style={{ width: `calc(${(activeAgenda / (agendaData.length - 1)) * 100}% - 0px)` }}
+                ></div>
 
-                    {/* Vertical Active Progress Line */}
-                    <div
-                      className="absolute left-0 top-[8px] w-[1px] bg-primary/30 transition-all duration-1000 ease-in-out hidden lg:block"
-                      style={{
-                        height: `${(activeAgenda !== null ? (activeAgenda / (agendaData.length - 1)) * 100 : 0)}%`,
-                      }}
-                    ></div>
+                <div className="flex justify-between items-start relative z-10">
+                  {agendaData.map((item, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setActiveAgenda(idx)}
+                      className={`flex flex-col items-center group transition-all duration-500 ${activeAgenda === idx ? 'opacity-100' : 'opacity-20 hover:opacity-60'}`}
+                      style={{ width: `${100 / agendaData.length}%` }}
+                    >
+                      {/* Interactive Dot */}
+                      <div className={`w-9 h-9 rounded-full border transition-all duration-500 bg-background flex items-center justify-center ${activeAgenda === idx ? 'border-primary scale-110 shadow-lg shadow-primary/5' : 'border-primary/20'}`}>
+                        <div className={`w-2 h-2 rounded-full transition-all duration-500 ${activeAgenda === idx ? 'bg-primary scale-125' : 'bg-primary/20'}`}></div>
+                      </div>
 
-                    {agendaData.map((item, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => setActiveAgenda(idx)}
-                        className={`flex flex-col justify-center relative z-10 transition-all duration-700 text-left w-full group/item ${activeAgenda === idx ? 'opacity-100' : 'opacity-20 hover:opacity-50'}`}
-                      >
-                        <div className="flex lg:flex-row flex-col items-center lg:items-start">
-                          {/* Time Label */}
-                          <div className="lg:w-16 lg:mr-8 mb-2 lg:mb-0 shrink-0">
-                            <span className={`text-xs md:text-sm font-light tabular-nums transition-colors duration-500 ${activeAgenda === idx ? 'text-primary' : ''}`}>
-                              {item.time}
-                            </span>
-                          </div>
+                      {/* Labels */}
+                      <div className="mt-4 text-center">
+                        <p className={`text-[10px] md:text-xs font-light tabular-nums mb-1 transition-colors ${activeAgenda === idx ? 'text-primary' : ''}`}>
+                          {item.time}
+                        </p>
+                        <h3 className={`text-[8px] md:text-[9px] font-medium tracking-[0.15em] uppercase transition-colors hidden md:block ${activeAgenda === idx ? 'text-primary' : 'text-primary/60'}`}>
+                          {item.title}
+                        </h3>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
 
-                          {/* Title */}
-                          <div className="transition-all duration-700">
-                            <h3 className={`text-[11px] md:text-xs font-medium tracking-[0.15em] uppercase transition-colors ${activeAgenda === idx ? 'text-primary' : ''}`}>
-                              {item.title}
-                            </h3>
-                            <div className="relative h-4 overflow-visible">
-                              <p className={`absolute top-1 left-0 text-[9px] md:text-[10px] font-light transition-all duration-500 whitespace-nowrap ${activeAgenda === idx ? 'opacity-60 block' : 'opacity-0 hidden'}`}>
-                                {item.location}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </button>
-                    ))}
-                  </div>
+              {/* Map Overview — Full Width below timeline */}
+              <div className="relative aspect-video md:aspect-[21/9] w-full overflow-hidden rounded-sm border border-primary/10 bg-accent/10 shadow-2xl group/map">
+                {/* The Map Image */}
+                <img
+                  src="/assets/map 3.png"
+                  alt="The Sunset Sinfonia Overview Map"
+                  className="w-full h-full object-cover object-top opacity-80 saturate-[0.7]"
+                />
+
+                {/* Navigation Arrows for Agenda Map */}
+                <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between z-30 pointer-events-none px-6">
+                  <button 
+                    onClick={() => setActiveAgenda(prev => Math.max(0, prev - 1))}
+                    disabled={activeAgenda === 0}
+                    className={`pointer-events-auto w-10 h-10 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white transition-all duration-500 hover:bg-white hover:text-black disabled:opacity-0 disabled:pointer-events-none`}
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+                      <path d="M15 18l-6-6 6-6" />
+                    </svg>
+                  </button>
+                  <button 
+                    onClick={() => setActiveAgenda(prev => Math.min(agendaData.length - 1, prev + 1))}
+                    disabled={activeAgenda === agendaData.length - 1}
+                    className={`pointer-events-auto w-10 h-10 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white transition-all duration-500 hover:bg-white hover:text-black disabled:opacity-0 disabled:pointer-events-none`}
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+                      <path d="M9 6l6 6-6 6" />
+                    </svg>
+                  </button>
                 </div>
 
-                {/* Map Overview - Right */}
-                <div className="flex-1 relative aspect-video lg:aspect-square xl:aspect-video max-h-[500px] overflow-hidden rounded-sm border border-primary/10 bg-accent/10 shadow-2xl group/map order-1 lg:order-2">
-                  {/* The Map Image */}
-                  <img
-                    src="/assets/map 3.png"
-                    alt="The Sunset Sinfonia Overview Map"
-                    className="w-full h-full object-cover object-top opacity-80 saturate-[0.7]"
-                  />
+                {/* Spotlight Overlay */}
+                <div
+                  className="absolute inset-0 pointer-events-none z-10 transition-all duration-700 ease-in-out"
+                  style={{
+                    background: activeAgenda !== null
+                      ? `radial-gradient(circle 100px at ${agendaData[activeAgenda].coords.x}% ${agendaData[activeAgenda].coords.y}%, transparent 0%, rgba(0,0,0,0.25) 100%)`
+                      : 'rgba(0,0,0,0.1)'
+                  }}
+                ></div>
 
-                  {/* Navigation Arrows for Agenda Map */}
-                  <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between z-30 pointer-events-none px-6">
-                    <button 
-                      onClick={() => setActiveAgenda(prev => Math.max(0, prev - 1))}
-                      disabled={activeAgenda === 0}
-                      className={`pointer-events-auto w-10 h-10 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white transition-all duration-500 hover:bg-white hover:text-black disabled:opacity-0 disabled:pointer-events-none`}
-                    >
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
-                        <path d="M15 18l-6-6 6-6" />
-                      </svg>
-                    </button>
-                    <button 
-                      onClick={() => setActiveAgenda(prev => Math.min(agendaData.length - 1, prev + 1))}
-                      disabled={activeAgenda === agendaData.length - 1}
-                      className={`pointer-events-auto w-10 h-10 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white transition-all duration-500 hover:bg-white hover:text-black disabled:opacity-0 disabled:pointer-events-none`}
-                    >
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
-                        <path d="M9 6l6 6-6 6" />
-                      </svg>
-                    </button>
-                  </div>
-
-                  {/* Spotlight Overlay */}
+                {/* Magnifying Glass / Highlight Circle */}
+                {activeAgenda !== null && (
                   <div
-                    className="absolute inset-0 pointer-events-none z-10 transition-all duration-700 ease-in-out"
+                    className="absolute w-32 h-32 md:w-40 md:h-40 -ml-16 -mt-16 md:-ml-20 md:-mt-20 border-2 border-primary/30 rounded-full z-20 pointer-events-none transition-all duration-700 ease-in-out shadow-[0_0_50px_rgba(75,80,6,0.2)]"
                     style={{
-                      background: activeAgenda !== null
-                        ? `radial-gradient(circle 100px at ${agendaData[activeAgenda].coords.x}% ${agendaData[activeAgenda].coords.y}%, transparent 0%, rgba(0,0,0,0.25) 100%)`
-                        : 'rgba(0,0,0,0.1)'
+                      left: `${agendaData[activeAgenda].coords.x}%`,
+                      top: `${agendaData[activeAgenda].coords.y}%`,
                     }}
-                  ></div>
-
-                  {/* Magnifying Glass / Highlight Circle */}
-                  {activeAgenda !== null && (
-                    <div
-                      className="absolute w-32 h-32 md:w-40 md:h-40 -ml-16 -mt-16 md:-ml-20 md:-mt-20 border-2 border-primary/30 rounded-full z-20 pointer-events-none transition-all duration-700 ease-in-out shadow-[0_0_50px_rgba(75,80,6,0.2)]"
-                      style={{
-                        left: `${agendaData[activeAgenda].coords.x}%`,
-                        top: `${agendaData[activeAgenda].coords.y}%`,
-                      }}
-                    >
-                      <div className="absolute top-1/2 left-1/2 -ml-2 -mt-2 w-4 h-4 bg-primary rounded-full shadow-[0_0_20px_rgba(75,80,6,0.5)]">
-                        <div className="absolute inset-0 rounded-full border-2 border-white/50 animate-ping"></div>
-                      </div>
+                  >
+                    <div className="absolute top-1/2 left-1/2 -ml-2 -mt-2 w-4 h-4 bg-primary rounded-full shadow-[0_0_20px_rgba(75,80,6,0.5)]">
+                      <div className="absolute inset-0 rounded-full border-2 border-white/50 animate-ping"></div>
                     </div>
-                  )}
+                  </div>
+                )}
 
-                  {/* Activity Details Overlay on Map */}
-                  {activeAgenda !== null && (
-                    <div className="absolute bottom-4 left-4 z-40 w-[180px] md:w-[220px] h-auto max-h-[180px] min-h-[140px] p-4 bg-background/95 backdrop-blur-xl border border-primary/20 rounded-xs shadow-2xl animate-fade-in pointer-events-none flex flex-col">
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="text-xl md:text-2xl font-light tabular-nums text-primary/30">{agendaData[activeAgenda].time}</span>
-                        <div className="h-[1px] flex-1 bg-primary/10"></div>
-                      </div>
-
-                      <h3 className="text-sm md:text-base font-medium mb-0.5 tracking-tight text-primary leading-tight">
-                        {agendaData[activeAgenda].title}
-                      </h3>
-                      <p className="text-[8px] md:text-[9px] uppercase tracking-widest opacity-60 mb-2">
-                        {agendaData[activeAgenda].location}
-                      </p>
-
-                      <div className="flex-1 overflow-y-auto no-scrollbar">
-                        {agendaData[activeAgenda].details.length > 0 && (
-                          <ul className="space-y-1 border-t border-primary/5 pt-2">
-                            {agendaData[activeAgenda].details.map((detail, dIdx) => (
-                              <li key={dIdx} className="text-[9px] md:text-[10px] opacity-70 font-light flex items-start gap-1.5">
-                                <span className="mt-1 w-1 h-1 bg-primary/40 rounded-full shrink-0"></span>
-                                <span>{detail}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                      </div>
+                {/* Activity Details Overlay on Map */}
+                {activeAgenda !== null && (
+                  <div className="absolute bottom-4 left-4 z-40 w-[180px] md:w-[220px] h-auto max-h-[180px] min-h-[140px] p-4 bg-background/95 backdrop-blur-xl border border-primary/20 rounded-xs shadow-2xl animate-fade-in pointer-events-none flex flex-col">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-xl md:text-2xl font-light tabular-nums text-primary/30">{agendaData[activeAgenda].time}</span>
+                      <div className="h-[1px] flex-1 bg-primary/10"></div>
                     </div>
-                  )}
 
-                  {/* Cinematic Vignette */}
-                  <div className="absolute inset-0 pointer-events-none z-30 shadow-[inset_0_0_100px_rgba(75,80,6,0.1)]"></div>
-                </div>
+                    <h3 className="text-sm md:text-base font-medium mb-0.5 tracking-tight text-primary leading-tight">
+                      {agendaData[activeAgenda].title}
+                    </h3>
+                    <p className="text-[8px] md:text-[9px] uppercase tracking-widest opacity-60 mb-2">
+                      {agendaData[activeAgenda].location}
+                    </p>
+
+                    <div className="flex-1 overflow-y-auto no-scrollbar">
+                      {agendaData[activeAgenda].details.length > 0 && (
+                        <ul className="space-y-1 border-t border-primary/5 pt-2">
+                          {agendaData[activeAgenda].details.map((detail, dIdx) => (
+                            <li key={dIdx} className="text-[9px] md:text-[10px] opacity-70 font-light flex items-start gap-1.5">
+                              <span className="mt-1 w-1 h-1 bg-primary/40 rounded-full shrink-0"></span>
+                              <span>{detail}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* Cinematic Vignette */}
+                <div className="absolute inset-0 pointer-events-none z-30 shadow-[inset_0_0_100px_rgba(75,80,6,0.1)]"></div>
               </div>
             </div>
           </section>
