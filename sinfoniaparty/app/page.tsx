@@ -1353,16 +1353,10 @@ export default function Home() {
           {/* Content Overlay — Standardized with Hero layout */}
           <div className="relative z-20 content-wrapper max-w-4xl px-8 flex flex-col items-center reveal-on-scroll">
             <div className="flex flex-col items-center text-center">
-              {/* Subheading — Synced size with Hero */}
-              <p
-                className="text-[10px] md:text-xs uppercase tracking-[0.5em] font-light !text-white opacity-60 mb-4"
-              >
-                See you at The Sunset Sinfonia
-              </p>
-
-              {/* Main Title — Synced size with Hero */}
-              <h2 className={`${purgatory.className} text-[4.5rem] md:text-[7rem] lg:text-[9rem] !text-white lowercase tracking-tight leading-none`}>
-                Thank you
+              {/* Main Title — Synced size with Hero, split for mobile impact */}
+              <h2 className={`${purgatory.className} text-[5rem] md:text-[7rem] lg:text-[9rem] !text-white lowercase tracking-tight leading-[0.85] md:leading-none flex flex-col md:flex-row items-center gap-x-8`}>
+                <span>thank</span>
+                <span>you</span>
               </h2>
             </div>
           </div>
