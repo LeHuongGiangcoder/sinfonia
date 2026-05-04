@@ -32,7 +32,7 @@ interface PhotoItem {
   rotation: number;
 }
 
-export default function Entrance({ onComplete }: { onComplete: () => void }) {
+export default function Entrance({ onComplete, onInteraction }: { onComplete: () => void, onInteraction?: () => void }) {
   const [progress, setProgress] = useState(0);
   const [isCaptured, setIsCaptured] = useState(false);
   const [activePhotos, setActivePhotos] = useState<PhotoItem[]>([]);
@@ -46,6 +46,9 @@ export default function Entrance({ onComplete }: { onComplete: () => void }) {
 
   const startSequence = () => {
     if (isCaptured) return;
+    
+    // Trigger audio early via user interaction for mobile compatibility
+    if (onInteraction) onInteraction();
     
     gsap.to(".pointing-hint", { opacity: 0, duration: 0.3 });
 
@@ -197,7 +200,7 @@ export default function Entrance({ onComplete }: { onComplete: () => void }) {
               className="w-[90vw] md:w-[55rem] h-auto transition-transform duration-300 ease-out group-hover:scale-105"
             />
 
-            <div className="pointing-hint absolute top-20 right-0 md:top-36 md:right-0 pointer-events-none animate-bounce-slow flex flex-col items-center gap-2">
+            <div className="pointing-hint absolute -top-4 right-0 md:top-36 md:right-0 pointer-events-none animate-bounce-slow flex flex-col items-center gap-2">
               <div className="relative w-12 h-12 md:w-20 md:h-20">
                 <div className="absolute -bottom-1 -left-1 flex gap-1 opacity-60 rotate-[225deg]">
                   <div className="w-[1px] h-2 bg-primary rounded-full"></div>

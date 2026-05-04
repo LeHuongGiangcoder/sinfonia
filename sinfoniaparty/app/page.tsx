@@ -381,6 +381,7 @@ export default function Home() {
   const [activeDresscode, setActiveDresscode] = useState(0);
   const [showAgendaHint, setShowAgendaHint] = useState(true);
   const [showDresscodeHint, setShowDresscodeHint] = useState(true);
+  const [showContactHint, setShowContactHint] = useState(true);
   const [scrolled, setScrolled] = useState(false);
   const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [formData, setFormData] = useState({
@@ -571,7 +572,16 @@ export default function Home() {
 
   return (
     <>
-      {isLoading && <Entrance onComplete={() => setIsLoading(false)} />}
+      {isLoading && (
+        <Entrance 
+          onComplete={() => setIsLoading(false)} 
+          onInteraction={() => {
+            if (audioRef.current) {
+              audioRef.current.play().then(() => setIsPlaying(true)).catch(e => console.log("Audio play blocked", e));
+            }
+          }}
+        />
+      )}
       {!isLoading && <Navbar scrolled={scrolled} />}
       <div ref={container} className={`min-h-screen ${isLoading ? "opacity-0" : "opacity-100"} transition-opacity duration-1000`}>
         {/* 1 & 2. Hero Section — Full Bleed */}
@@ -599,7 +609,7 @@ export default function Home() {
 
             {/* Main Title — Now appears first for immediate impact */}
             <h1
-              className={`${purgatory.className} text-6xl md:text-8xl lg:text-9xl leading-[0.95] lowercase tracking-tight flex flex-col items-center`}
+              className={`${purgatory.className} text-7xl md:text-[10rem] lg:text-[12rem] leading-[0.95] lowercase tracking-tight flex flex-col items-center`}
               style={{
                 color: '#f3ede1',
                 opacity: 0,
@@ -955,18 +965,30 @@ export default function Home() {
                       <path d="M15 18l-6-6 6-6" />
                     </svg>
                   </button>
-                  <button
-                    onClick={() => {
-                      setActiveAgenda(prev => Math.min(agendaData.length - 1, prev + 1));
-                      setShowAgendaHint(false);
-                    }}
-                    disabled={activeAgenda === agendaData.length - 1}
-                    className={`pointer-events-auto w-10 h-10 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white transition-all duration-500 hover:bg-white hover:text-black disabled:opacity-0 disabled:pointer-events-none`}
-                  >
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
-                      <path d="M9 6l6 6-6 6" />
-                    </svg>
-                  </button>
+                  <div className="relative">
+                    <button
+                      onClick={() => {
+                        setActiveAgenda(prev => Math.min(agendaData.length - 1, prev + 1));
+                        setShowAgendaHint(false);
+                      }}
+                      disabled={activeAgenda === agendaData.length - 1}
+                      className={`pointer-events-auto w-10 h-10 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white transition-all duration-500 hover:bg-white hover:text-black disabled:opacity-0 disabled:pointer-events-none`}
+                    >
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+                        <path d="M9 6l6 6-6 6" />
+                      </svg>
+                    </button>
+                    
+                    {/* Interaction Hint — Agenda */}
+                    {showAgendaHint && activeAgenda === 0 && (
+                      <div className="absolute -top-12 left-1/2 -translate-x-1/2 animate-bounce-slow pointer-events-none">
+                        <div className="bg-primary/90 text-background text-[7px] px-2 py-1.5 rounded-full uppercase tracking-[0.2em] font-bold whitespace-nowrap shadow-lg backdrop-blur-sm border border-white/10">
+                          Tap to see next
+                        </div>
+                        <div className="w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-t-[6px] border-t-primary/90 mx-auto"></div>
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 {/* Spotlight Overlay — Subtle while zoomed */}
@@ -1007,7 +1029,7 @@ export default function Home() {
             <div className="mb-16 space-y-4">
               <h2 className="heading-lg">RSVP</h2>
               <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
-              <p className="text-elegant opacity-60">Hãy để chúng tôi chuẩn bị tốt nhất cho bạn</p>
+              <p className="text-elegant opacity-80">Hãy để chúng tôi chuẩn bị tốt nhất cho bạn</p>
             </div>
 
             {formStatus === "success" ? (
@@ -1035,27 +1057,27 @@ export default function Home() {
                 {/* Section: Name & Brand */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
                   <div className="space-y-3 group">
-                    <label className="subheading block text-[10px] tracking-[0.25em] transition-colors group-focus-within:text-primary">Họ và tên</label>
+                    <label className="subheading block text-[10px] tracking-[0.25em] font-semibold opacity-80 transition-colors group-focus-within:text-primary">Họ và tên</label>
                     <input
                       type="text"
                       name="name"
                       required
                       value={formData.name}
                       onChange={handleInputChange}
-                      className="w-full bg-transparent border-b border-primary/20 py-3 focus:border-primary focus:outline-none transition-all placeholder:opacity-20 font-light text-lg"
+                      className="w-full bg-transparent border-b border-primary/30 py-3 focus:border-primary focus:outline-none transition-all placeholder:opacity-40 font-normal text-lg"
                       placeholder="Nhập họ và tên"
                     />
                   </div>
 
                   <div className="space-y-3 group">
-                    <label className="subheading block text-[10px] tracking-[0.25em] transition-colors group-focus-within:text-primary">Tên đơn vị / Thương hiệu</label>
+                    <label className="subheading block text-[10px] tracking-[0.25em] font-semibold opacity-80 transition-colors group-focus-within:text-primary">Tên đơn vị / Thương hiệu</label>
                     <input
                       type="text"
                       name="business"
                       required
                       value={formData.business}
                       onChange={handleInputChange}
-                      className="w-full bg-transparent border-b border-primary/20 py-3 focus:border-primary focus:outline-none transition-all placeholder:opacity-20 font-light text-lg"
+                      className="w-full bg-transparent border-b border-primary/30 py-3 focus:border-primary focus:outline-none transition-all placeholder:opacity-40 font-normal text-lg"
                       placeholder="Nhập tên doanh nghiệp"
                     />
                   </div>
@@ -1074,11 +1096,11 @@ export default function Home() {
                           value="absolutely! cant wait"
                           checked={formData.confirmation === "absolutely! cant wait"}
                           onChange={handleInputChange}
-                          className="peer appearance-none w-5 h-5 border border-primary/30 rounded-full checked:border-primary transition-all cursor-pointer"
+                          className="peer appearance-none w-5 h-5 border border-primary/40 rounded-full checked:border-primary transition-all cursor-pointer"
                         />
                         <div className="absolute w-2.5 h-2.5 bg-primary rounded-full scale-0 peer-checked:scale-100 transition-transform duration-300"></div>
                       </div>
-                      <span className="font-light text-sm tracking-wide opacity-60 group-hover:opacity-100 transition-opacity">Chắc chắn rồi! Rất mong chờ.</span>
+                      <span className="font-medium text-sm tracking-wide opacity-80 group-hover:opacity-100 transition-opacity">Chắc chắn rồi! Rất mong chờ.</span>
                     </label>
 
                     <label className="flex items-center space-x-4 cursor-pointer group">
@@ -1090,37 +1112,37 @@ export default function Home() {
                           value="Maybe next time"
                           checked={formData.confirmation === "Maybe next time"}
                           onChange={handleInputChange}
-                          className="peer appearance-none w-5 h-5 border border-primary/30 rounded-full checked:border-primary transition-all cursor-pointer"
+                          className="peer appearance-none w-5 h-5 border border-primary/40 rounded-full checked:border-primary transition-all cursor-pointer"
                         />
                         <div className="absolute w-2.5 h-2.5 bg-primary rounded-full scale-0 peer-checked:scale-100 transition-transform duration-300"></div>
                       </div>
-                      <span className="font-light text-sm tracking-wide opacity-60 group-hover:opacity-100 transition-opacity">Hẹn dịp khác nhé.</span>
+                      <span className="font-medium text-sm tracking-wide opacity-80 group-hover:opacity-100 transition-opacity">Hẹn dịp khác nhé.</span>
                     </label>
                   </div>
                 </div>
 
                 {/* Section: Details */}
                 <div className="space-y-3 group pt-4">
-                  <label className="subheading block text-[10px] tracking-[0.25em] transition-colors group-focus-within:text-primary">Yêu cầu về thực đơn</label>
+                  <label className="subheading block text-[10px] tracking-[0.25em] font-semibold opacity-80 transition-colors group-focus-within:text-primary">Yêu cầu về thực đơn</label>
                   <input
                     type="text"
                     name="meal_preference"
                     value={formData.meal_preference}
                     onChange={handleInputChange}
-                    className="w-full bg-transparent border-b border-primary/20 py-3 focus:border-primary focus:outline-none transition-all placeholder:opacity-20 font-light text-lg"
+                    className="w-full bg-transparent border-b border-primary/30 py-3 focus:border-primary focus:outline-none transition-all placeholder:opacity-40 font-normal text-lg"
                     placeholder="Dị ứng, ăn chay..."
                   />
                 </div>
 
                 {/* Section: Message */}
                 <div className="space-y-3 group pt-4">
-                  <label className="subheading block text-[10px] tracking-[0.25em] transition-colors group-focus-within:text-primary">Lời nhắn gửi đến Ban tổ chức</label>
+                  <label className="subheading block text-[10px] tracking-[0.25em] font-semibold opacity-80 transition-colors group-focus-within:text-primary">Lời nhắn gửi đến Ban tổ chức</label>
                   <textarea
                     name="note"
                     rows={2}
                     value={formData.note}
                     onChange={handleInputChange}
-                    className="w-full bg-transparent border-b border-primary/20 py-3 focus:border-primary focus:outline-none transition-all placeholder:opacity-20 font-light text-lg resize-none"
+                    className="w-full bg-transparent border-b border-primary/30 py-3 focus:border-primary focus:outline-none transition-all placeholder:opacity-40 font-normal text-lg resize-none"
                     placeholder="Bạn có muốn nhắn nhủ điều gì không?"
                   ></textarea>
                 </div>
@@ -1227,15 +1249,30 @@ export default function Home() {
                         <path d="M15 18l-6-6 6-6" />
                       </svg>
                     </button>
-                    <button
-                      onClick={() => setActiveDresscode(prev => Math.min(dresscodeData.length - 1, prev + 1))}
-                      disabled={activeDresscode === dresscodeData.length - 1}
-                      className={`pointer-events-auto w-12 h-12 rounded-full border border-primary/10 bg-background/50 backdrop-blur-md flex items-center justify-center text-primary transition-all duration-500 hover:bg-primary hover:text-background disabled:opacity-0 disabled:pointer-events-none`}
-                    >
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
-                        <path d="M9 6l6 6-6 6" />
-                      </svg>
-                    </button>
+                    <div className="relative">
+                      <button
+                        onClick={() => {
+                          setActiveDresscode(prev => Math.min(dresscodeData.length - 1, prev + 1));
+                          setShowDresscodeHint(false);
+                        }}
+                        disabled={activeDresscode === dresscodeData.length - 1}
+                        className={`pointer-events-auto w-12 h-12 rounded-full border border-primary/10 bg-background/50 backdrop-blur-md flex items-center justify-center text-primary transition-all duration-500 hover:bg-primary hover:text-background disabled:opacity-0 disabled:pointer-events-none`}
+                      >
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+                          <path d="M9 6l6 6-6 6" />
+                        </svg>
+                      </button>
+
+                      {/* Interaction Hint — Dresscode */}
+                      {showDresscodeHint && activeDresscode === 0 && (
+                        <div className="absolute -top-12 left-1/2 -translate-x-1/2 animate-bounce-slow pointer-events-none">
+                          <div className="bg-primary/90 text-background text-[7px] px-2 py-1.5 rounded-full uppercase tracking-[0.2em] font-bold whitespace-nowrap shadow-lg backdrop-blur-sm border border-white/10">
+                            Tap to see next
+                          </div>
+                          <div className="w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-t-[6px] border-t-primary/90 mx-auto"></div>
+                        </div>
+                      )}
+                    </div>
                   </div>
 
                   {/* Illustration & Details */}
@@ -1304,9 +1341,25 @@ export default function Home() {
               <h2 className="heading-lg">Contact</h2>
               <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
               <p className="text-elegant opacity-60">Main support contacts</p>
+              
+              {/* Interaction Hint — Contact */}
+              {showContactHint && (
+                <div className="pt-4 flex flex-col items-center gap-2 opacity-40 transition-opacity duration-1000 md:hidden">
+                  <div className="flex items-center gap-8">
+                    <div className="w-12 h-[0.5px] bg-primary/20"></div>
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary animate-move-horizontal"></div>
+                    <div className="w-12 h-[0.5px] bg-primary/20"></div>
+                  </div>
+                  <span className="text-[8px] tracking-[0.4em] uppercase font-light">Swipe to see more</span>
+                </div>
+              )}
             </div>
 
-            <div className="flex md:grid md:grid-cols-3 overflow-x-auto snap-x snap-mandatory no-scrollbar gap-4 md:gap-8 pb-8 -mx-4 px-4">
+            <div 
+              className="flex md:grid md:grid-cols-3 overflow-x-auto snap-x snap-mandatory no-scrollbar gap-4 md:gap-8 pb-8 -mx-4 px-4"
+              onTouchStart={() => setShowContactHint(false)}
+              onScroll={() => setShowContactHint(false)}
+            >
               <div className="min-w-[85vw] md:min-w-0 snap-center">
                 <ContactCard
                   images={["ginale.jpg"]}
@@ -1357,7 +1410,7 @@ export default function Home() {
           <div className="relative z-20 content-wrapper max-w-4xl px-8 flex flex-col items-center reveal-on-scroll">
             <div className="flex flex-col items-center text-center">
               {/* Main Title — Synced size with Hero, split for mobile impact */}
-              <h2 className={`${purgatory.className} text-[5rem] md:text-[7rem] lg:text-[9rem] !text-white lowercase tracking-tight leading-[0.85] md:leading-none flex flex-col md:flex-row items-center gap-x-8`}>
+              <h2 className={`${purgatory.className} text-[6rem] md:text-[8rem] lg:text-[10rem] !text-white lowercase tracking-tight leading-[0.85] md:leading-none flex flex-col md:flex-row items-center gap-x-8`}>
                 <span>thank</span>
                 <span>you</span>
               </h2>
