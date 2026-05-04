@@ -206,8 +206,8 @@ body::after {
 .timeline-line-base {
   position: absolute;
   top: 12px; /* Adjusted for smaller dots */
-  left: 1rem;
-  right: 1rem;
+  left: 0;
+  right: 0;
   height: 1px;
   background-color: rgba(75, 80, 6, 0.08); /* Even softer */
   z-index: 0;
@@ -223,7 +223,7 @@ body::after {
 .timeline-line-progress {
   position: absolute;
   top: 12px; /* Adjusted for smaller dots */
-  left: 1rem;
+  left: 0;
   height: 1px;
   background-color: rgba(75, 80, 6, 0.3); /* Softer progress */
   transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);

@@ -871,10 +871,19 @@ export default function Home() {
 
               {/* Unified Horizontal Timeline — Agenda */}
               <div className="timeline-container">
-                <div className="timeline-line-base"></div>
+                <div 
+                  className="timeline-line-base"
+                  style={{ 
+                    left: `${(100 / agendaData.length) / 2}%`, 
+                    width: `${100 - (100 / agendaData.length)}%` 
+                  }}
+                ></div>
                 <div
                   className="timeline-line-progress"
-                  style={{ width: `calc(${(activeAgenda / (agendaData.length - 1)) * 100}% - 0px)` }}
+                  style={{ 
+                    left: `${(100 / agendaData.length) / 2}%`,
+                    width: `${(activeAgenda / (agendaData.length - 1)) * (100 - (100 / agendaData.length))}%` 
+                  }}
                 ></div>
 
                 <div className="flex justify-between items-start relative z-10">
@@ -1159,10 +1168,19 @@ export default function Home() {
               <div className="flex flex-col gap-16 h-auto relative">
                 {/* Unified Horizontal Timeline — Dresscode */}
                 <div className="timeline-container">
-                  <div className="timeline-line-base"></div>
+                  <div 
+                    className="timeline-line-base"
+                    style={{ 
+                      left: `${(100 / dresscodeData.length) / 2}%`, 
+                      width: `${100 - (100 / dresscodeData.length)}%` 
+                    }}
+                  ></div>
                   <div
                     className="timeline-line-progress"
-                    style={{ width: `calc(${(activeDresscode / (dresscodeData.length - 1)) * 100}% - 0px)` }}
+                    style={{ 
+                      left: `${(100 / dresscodeData.length) / 2}%`,
+                      width: `${(activeDresscode / (dresscodeData.length - 1)) * (100 - (100 / dresscodeData.length))}%` 
+                    }}
                   ></div>
 
                   <div className="flex justify-between items-start relative z-10">
