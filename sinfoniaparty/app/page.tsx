@@ -700,17 +700,7 @@ export default function Home() {
               <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
               <p className="text-elegant opacity-60">Nơi ghi dấu những khoảnh khắc hạnh phúc</p>
 
-              {/* Interaction Hint — Dresscode */}
-              {showDresscodeHint && (
-                <div className="pt-4 flex flex-col items-center gap-2 opacity-40 transition-opacity duration-1000">
-                  <div className="flex items-center gap-8">
-                    <div className="w-12 h-[0.5px] bg-primary/20"></div>
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary animate-move-horizontal"></div>
-                    <div className="w-12 h-[0.5px] bg-primary/20"></div>
-                  </div>
-                  <span className="text-[8px] tracking-[0.4em] uppercase font-light">Swipe to see more</span>
-                </div>
-              )}
+
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
@@ -1164,6 +1154,18 @@ export default function Home() {
                 <h2 className="heading-lg">Dress Code</h2>
                 <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
                 <p className="text-elegant opacity-60">Lựa chọn trang phục cho những khoảnh khắc tuyệt vời</p>
+                
+                {/* Interaction Hint — Dresscode */}
+                {showDresscodeHint && (
+                  <div className="pt-4 flex flex-col items-center gap-2 opacity-40 transition-opacity duration-1000">
+                    <div className="flex items-center gap-8">
+                      <div className="w-12 h-[0.5px] bg-primary/20"></div>
+                      <div className="w-1.5 h-1.5 rounded-full bg-primary animate-move-horizontal"></div>
+                      <div className="w-12 h-[0.5px] bg-primary/20"></div>
+                    </div>
+                    <span className="text-[8px] tracking-[0.4em] uppercase font-light">Swipe to explore</span>
+                  </div>
+                )}
               </div>
 
               <div className="flex flex-col gap-4 md:gap-16 h-auto relative">
