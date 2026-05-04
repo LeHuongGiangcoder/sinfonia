@@ -416,7 +416,7 @@ export default function Home() {
       title: "TEA BREAK",
       location: "Sinfonia Garden",
       details: [],
-      coords: { x: 70, y: 15, scale: 2.3 }
+      coords: { x: 75, y: 5, scale: 1.8 }
     },
     {
       time: "15:00",
@@ -430,14 +430,14 @@ export default function Home() {
       title: "CATCH THE SUN",
       location: "Sunset Terrace",
       details: ["Cocktail", "Live music"],
-      coords: { x: 70, y: 15, scale: 2.3 }
+      coords: { x: 75, y: 5, scale: 1.8 }
     },
     {
       time: "18:30",
       title: "A SKY FULL OF STARS",
       location: "Starlight Dining",
       details: ["Dinner", "Drinking game"],
-      coords: { x: 70, y: 15, scale: 2.3 }
+      coords: { x: 75, y: 5, scale: 1.8 }
     },
     {
       time: "20:30",
@@ -969,10 +969,10 @@ export default function Home() {
                   style={{
                     transform: activeAgenda !== null 
                       ? `scale(${agendaData[activeAgenda as number].coords.scale})` 
-                      : 'scale(1)',
+                      : 'scale(0.7)',
                     transformOrigin: activeAgenda !== null 
                       ? `${agendaData[activeAgenda as number].coords.x}% ${agendaData[activeAgenda as number].coords.y}%` 
-                      : '50% 20%'
+                      : 'center top'
                   }}
                 />
 
