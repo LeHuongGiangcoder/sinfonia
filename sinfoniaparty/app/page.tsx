@@ -1341,18 +1341,6 @@ export default function Home() {
               <h2 className="heading-lg">Contact</h2>
               <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
               <p className="text-elegant opacity-60">Main support contacts</p>
-              
-              {/* Interaction Hint — Contact */}
-              {showContactHint && (
-                <div className="pt-4 flex flex-col items-center gap-2 opacity-40 transition-opacity duration-1000 md:hidden">
-                  <div className="flex items-center gap-8">
-                    <div className="w-12 h-[0.5px] bg-primary/20"></div>
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary animate-move-horizontal"></div>
-                    <div className="w-12 h-[0.5px] bg-primary/20"></div>
-                  </div>
-                  <span className="text-[8px] tracking-[0.4em] uppercase font-light">Swipe to see more</span>
-                </div>
-              )}
             </div>
 
             <div 
@@ -1360,7 +1348,7 @@ export default function Home() {
               onTouchStart={() => setShowContactHint(false)}
               onScroll={() => setShowContactHint(false)}
             >
-              <div className="min-w-[85vw] md:min-w-0 snap-center">
+              <div className="relative min-w-[85vw] md:min-w-0 snap-center">
                 <ContactCard
                   images={["ginale.jpg"]}
                   unit="Glow"
@@ -1368,9 +1356,22 @@ export default function Home() {
                   role="0857086906"
                   phone="Hỗ trợ kỹ thuật Website"
                   intro="Glow mang đến giải pháp kỹ thuật và thẩm mỹ số hóa, biến những ý tưởng bay bổng thành trải nghiệm tương tác mượt mà cho website của bạn."
-                  link="https://www.facebook.com/profile.php?id=61560901527827"
+                  link="https://zalo.me/0857086906"
                 />
+
+                {/* Interaction Hint — Contact Mobile Bubble */}
+                {showContactHint && (
+                  <div className="absolute right-4 top-1/2 -translate-y-1/2 animate-move-horizontal pointer-events-none md:hidden z-30">
+                    <div className="bg-[#fff8eb] text-primary text-[7px] px-2 py-1.5 rounded-full uppercase tracking-[0.2em] font-bold whitespace-nowrap shadow-[0_10px_20px_rgba(0,0,0,0.3)] border border-primary/20 flex items-center gap-2">
+                      Swipe left
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-2 h-2">
+                        <path d="M9 18l6-6-6-6" />
+                      </svg>
+                    </div>
+                  </div>
+                )}
               </div>
+
               <div className="min-w-[85vw] md:min-w-0 snap-center">
                 <ContactCard
                   images={["nhat linh.png"]}
