@@ -374,6 +374,7 @@ export default function Home() {
   const container = useRef<HTMLDivElement>(null);
   const agendaTrigger = useRef<HTMLDivElement>(null);
   const dresscodeTrigger = useRef<HTMLDivElement>(null);
+  const bridgeRef = useRef<HTMLDivElement>(null);
 
   const [isLoading, setIsLoading] = useState(true);
   const [activeAgenda, setActiveAgenda] = useState(0);
@@ -384,7 +385,6 @@ export default function Home() {
     name: "",
     business: "",
     confirmation: "",
-    attendants: "1",
     meal_preference: "",
     note: ""
   });
@@ -559,6 +559,20 @@ export default function Home() {
           setActiveDresscode(index);
         }
       });
+      
+      // Bridge Section — Word by word reveal
+      const bridgeWords = gsap.utils.toArray(".bridge-word");
+      gsap.from(bridgeWords, {
+        scrollTrigger: {
+          trigger: bridgeRef.current,
+          start: "top 85%",
+          end: "bottom 70%",
+          scrub: 1,
+        },
+        opacity: 0.1,
+        stagger: 0.2,
+        ease: "power2.out",
+      });
     }
   }, { scope: container, dependencies: [isLoading] });
 
@@ -624,19 +638,16 @@ export default function Home() {
         </section>
 
         {/* Bridge Section — A cinematic transition */}
-        <section className="py-24 md:py-32 bg-background flex flex-col items-center justify-center text-center relative overflow-hidden">
-          <div className="w-[1px] h-12 bg-primary/20 mb-8 animate-scroll-down"></div>
+        <section ref={bridgeRef} className="py-32 md:py-48 bg-background flex flex-col items-center justify-center text-center relative overflow-hidden">
           <p 
-            className="text-elegant uppercase tracking-[0.5em] text-[10px] md:text-xs text-primary/60 max-w-[80%] leading-loose"
-            style={{ animation: 'fade-in 2s ease-out both' }}
+            className="text-elegant uppercase tracking-[0.5em] text-xl md:text-3xl lg:text-4xl text-primary/80 max-w-[90%] leading-relaxed flex flex-wrap justify-center gap-y-4"
           >
-            a party that never ends
+            {"a party that never ends".split(" ").map((word, i) => (
+              <span key={i} className="bridge-word inline-block mx-[0.2em]">
+                {word}
+              </span>
+            ))}
           </p>
-          <div className="mt-8 flex gap-4 opacity-20">
-            <div className="w-1.5 h-1.5 rounded-full bg-primary"></div>
-            <div className="w-1.5 h-1.5 rounded-full bg-primary"></div>
-            <div className="w-1.5 h-1.5 rounded-full bg-primary"></div>
-          </div>
         </section>
         {/* 2.5 Atmosphere Gallery — A cinematic journey through the day */}
         <section className="p-[1px] md:p-[4px] bg-background relative overflow-hidden" id="gallery-section">
@@ -1052,31 +1063,16 @@ export default function Home() {
                 </div>
 
                 {/* Section: Details */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 pt-4">
-                  <div className="space-y-3 group">
-                    <label className="subheading block text-[10px] tracking-[0.25em] transition-colors group-focus-within:text-primary">Số lượng người tham dự</label>
-                    <div className="relative">
-                      <input
-                        type="number"
-                        name="attendants"
-                        min="1"
-                        value={formData.attendants}
-                        onChange={handleInputChange}
-                        className="w-full bg-transparent border-b border-primary/20 py-3 focus:border-primary focus:outline-none transition-all font-light text-lg"
-                      />
-                    </div>
-                  </div>
-                  <div className="space-y-3 group">
-                    <label className="subheading block text-[10px] tracking-[0.25em] transition-colors group-focus-within:text-primary">Yêu cầu về thực đơn</label>
-                    <input
-                      type="text"
-                      name="meal_preference"
-                      value={formData.meal_preference}
-                      onChange={handleInputChange}
-                      className="w-full bg-transparent border-b border-primary/20 py-3 focus:border-primary focus:outline-none transition-all placeholder:opacity-20 font-light text-lg"
-                      placeholder="Dị ứng, ăn chay..."
-                    />
-                  </div>
+                <div className="space-y-3 group pt-4">
+                  <label className="subheading block text-[10px] tracking-[0.25em] transition-colors group-focus-within:text-primary">Yêu cầu về thực đơn</label>
+                  <input
+                    type="text"
+                    name="meal_preference"
+                    value={formData.meal_preference}
+                    onChange={handleInputChange}
+                    className="w-full bg-transparent border-b border-primary/20 py-3 focus:border-primary focus:outline-none transition-all placeholder:opacity-20 font-light text-lg"
+                    placeholder="Dị ứng, ăn chay..."
+                  />
                 </div>
 
                 {/* Section: Message */}
