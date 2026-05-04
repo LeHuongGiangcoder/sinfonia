@@ -42,7 +42,7 @@ function InstagramPost({ images }: { images: string[] }) {
   return (
     <div
       ref={containerRef}
-      className="relative aspect-square overflow-hidden bg-primary/5 cursor-pointer group"
+      className="relative aspect-[3/4] overflow-hidden bg-primary/5 cursor-pointer group"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={() => setIndex((prev) => (prev + 1) % images.length)}
