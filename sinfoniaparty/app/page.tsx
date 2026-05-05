@@ -1059,26 +1059,26 @@ export default function Home() {
         </div>
 
         {/* 5. RSVP */}
-        <section className="section-container section-accent" id="rsvp-section">
-          <div className="content-wrapper max-w-2xl reveal-on-scroll">
+        <section className="min-h-screen flex items-center justify-center py-24 px-6 bg-[#4b5006] text-[#fff8eb] relative z-10" id="rsvp-section">
+          <div className="content-wrapper max-w-2xl opacity-100">
             <div className="mb-16 space-y-4">
-              <h2 className="heading-lg">RSVP</h2>
-              <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
-              <p className="text-elegant opacity-80">Hãy để chúng tôi chuẩn bị tốt nhất cho bạn</p>
+              <h2 className="heading-lg !text-[#fff8eb]">RSVP</h2>
+              <div className="w-24 h-[1px] bg-[#fff8eb]/20 mx-auto"></div>
+              <p className="text-elegant !text-[#fff8eb]/80">Hãy để chúng tôi chuẩn bị tốt nhất cho bạn</p>
             </div>
 
             {formStatus === "success" ? (
-              <div className="text-center py-24 space-y-6 animate-fade-in bg-white/30 backdrop-blur-sm rounded-lg border border-primary/10 max-w-2xl mx-auto shadow-sm">
+              <div className="text-center py-24 space-y-6 animate-fade-in bg-[#fff8eb]/10 backdrop-blur-sm rounded-lg border border-[#fff8eb]/10 max-w-2xl mx-auto shadow-sm">
                 <div className="flex justify-center">
-                  <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
-                    <svg className="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-16 h-16 rounded-full bg-[#fff8eb]/10 flex items-center justify-center">
+                    <svg className="w-8 h-8 text-[#fff8eb]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <h3 className="heading-md">Cảm ơn bạn đã phản hồi</h3>
-                  <p className="text-elegant">Chúng tôi đã nhận được thông tin và rất mong được đón tiếp bạn.</p>
+                  <h3 className="heading-md !text-[#fff8eb]">Cảm ơn bạn đã phản hồi</h3>
+                  <p className="text-elegant !text-[#fff8eb]">Chúng tôi đã nhận được thông tin và rất mong được đón tiếp bạn.</p>
                 </div>
                 <button
                   onClick={() => setFormStatus("idle")}
@@ -1090,29 +1090,29 @@ export default function Home() {
             ) : (
               <form className="max-w-2xl mx-auto space-y-12" onSubmit={handleSubmit}>
                 {/* Section: Name & Brand */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 text-left">
                   <div className="space-y-3 group">
-                    <label className="subheading block text-[10px] tracking-[0.25em] font-semibold opacity-80 transition-colors group-focus-within:text-primary">Họ và tên</label>
+                    <label className="subheading block text-[10px] tracking-[0.25em] font-semibold !text-[#fff8eb]/80 transition-colors group-focus-within:!text-[#fff8eb]">Họ và tên</label>
                     <input
                       type="text"
                       name="name"
                       required
                       value={formData.name}
                       onChange={handleInputChange}
-                      className="w-full bg-transparent border-b border-primary/30 py-3 focus:border-primary focus:outline-none transition-all placeholder:opacity-40 font-normal text-lg"
+                      className="w-full bg-transparent border-b border-[#fff8eb]/30 py-3 focus:border-[#fff8eb] focus:outline-none transition-all placeholder:text-[#fff8eb]/40 font-normal text-lg text-[#fff8eb]"
                       placeholder="Nhập họ và tên"
                     />
                   </div>
 
                   <div className="space-y-3 group">
-                    <label className="subheading block text-[10px] tracking-[0.25em] font-semibold opacity-80 transition-colors group-focus-within:text-primary">Tên đơn vị / Thương hiệu</label>
+                    <label className="subheading block text-[10px] tracking-[0.25em] font-semibold !text-[#fff8eb]/80 transition-colors group-focus-within:!text-[#fff8eb]">Tên đơn vị / Thương hiệu</label>
                     <input
                       type="text"
                       name="business"
                       required
                       value={formData.business}
                       onChange={handleInputChange}
-                      className="w-full bg-transparent border-b border-primary/30 py-3 focus:border-primary focus:outline-none transition-all placeholder:opacity-40 font-normal text-lg"
+                      className="w-full bg-transparent border-b border-[#fff8eb]/30 py-3 focus:border-[#fff8eb] focus:outline-none transition-all placeholder:text-[#fff8eb]/40 font-normal text-lg text-[#fff8eb]"
                       placeholder="Nhập tên doanh nghiệp"
                     />
                   </div>
@@ -1120,7 +1120,7 @@ export default function Home() {
 
                 {/* Section: Confirmation */}
                 <div className="space-y-6 pt-4">
-                  <label className="subheading block text-[10px] tracking-[0.25em] text-center mb-8">Bạn sẽ tham dự cùng chúng tôi chứ?</label>
+                  <label className="subheading block text-[10px] tracking-[0.25em] text-center mb-8 !text-[#fff8eb]/80">Bạn sẽ tham dự cùng chúng tôi chứ?</label>
                   <div className="flex flex-col md:flex-row justify-center gap-8 md:gap-16">
                     <label className="flex items-center space-x-4 cursor-pointer group">
                       <div className="relative flex items-center justify-center">
@@ -1131,11 +1131,11 @@ export default function Home() {
                           value="absolutely! cant wait"
                           checked={formData.confirmation === "absolutely! cant wait"}
                           onChange={handleInputChange}
-                          className="peer appearance-none w-5 h-5 border border-primary/40 rounded-full checked:border-primary transition-all cursor-pointer"
+                          className="peer appearance-none w-5 h-5 border border-[#fff8eb]/40 rounded-full checked:border-[#fff8eb] transition-all cursor-pointer"
                         />
-                        <div className="absolute w-2.5 h-2.5 bg-primary rounded-full scale-0 peer-checked:scale-100 transition-transform duration-300"></div>
+                        <div className="absolute w-2.5 h-2.5 bg-[#fff8eb] rounded-full scale-0 peer-checked:scale-100 transition-transform duration-300"></div>
                       </div>
-                      <span className="font-medium text-sm tracking-wide opacity-80 group-hover:opacity-100 transition-opacity">Chắc chắn rồi! Rất mong chờ.</span>
+                      <span className="font-medium text-sm tracking-wide !text-[#fff8eb]/80 group-hover:!text-[#fff8eb] transition-opacity">Chắc chắn rồi! Rất mong chờ.</span>
                     </label>
 
                     <label className="flex items-center space-x-4 cursor-pointer group">
@@ -1147,37 +1147,37 @@ export default function Home() {
                           value="Maybe next time"
                           checked={formData.confirmation === "Maybe next time"}
                           onChange={handleInputChange}
-                          className="peer appearance-none w-5 h-5 border border-primary/40 rounded-full checked:border-primary transition-all cursor-pointer"
+                          className="peer appearance-none w-5 h-5 border border-[#fff8eb]/40 rounded-full checked:border-[#fff8eb] transition-all cursor-pointer"
                         />
-                        <div className="absolute w-2.5 h-2.5 bg-primary rounded-full scale-0 peer-checked:scale-100 transition-transform duration-300"></div>
+                        <div className="absolute w-2.5 h-2.5 bg-[#fff8eb] rounded-full scale-0 peer-checked:scale-100 transition-transform duration-300"></div>
                       </div>
-                      <span className="font-medium text-sm tracking-wide opacity-80 group-hover:opacity-100 transition-opacity">Hẹn dịp khác nhé.</span>
+                      <span className="font-medium text-sm tracking-wide !text-[#fff8eb]/80 group-hover:!text-[#fff8eb] transition-opacity">Hẹn dịp khác nhé.</span>
                     </label>
                   </div>
                 </div>
 
                 {/* Section: Details */}
-                <div className="space-y-3 group pt-4">
-                  <label className="subheading block text-[10px] tracking-[0.25em] font-semibold opacity-80 transition-colors group-focus-within:text-primary">Yêu cầu về thực đơn</label>
+                <div className="space-y-3 group pt-4 text-left">
+                  <label className="subheading block text-[10px] tracking-[0.25em] font-semibold !text-[#fff8eb]/80 transition-colors group-focus-within:!text-[#fff8eb]">Yêu cầu về thực đơn</label>
                   <input
                     type="text"
                     name="meal_preference"
                     value={formData.meal_preference}
                     onChange={handleInputChange}
-                    className="w-full bg-transparent border-b border-primary/30 py-3 focus:border-primary focus:outline-none transition-all placeholder:opacity-40 font-normal text-lg"
+                    className="w-full bg-transparent border-b border-[#fff8eb]/30 py-3 focus:border-[#fff8eb] focus:outline-none transition-all placeholder:text-[#fff8eb]/40 font-normal text-lg text-[#fff8eb]"
                     placeholder="Dị ứng, ăn chay..."
                   />
                 </div>
 
                 {/* Section: Message */}
-                <div className="space-y-3 group pt-4">
-                  <label className="subheading block text-[10px] tracking-[0.25em] font-semibold opacity-80 transition-colors group-focus-within:text-primary">Lời nhắn gửi đến Ban tổ chức</label>
+                <div className="space-y-3 group pt-4 text-left">
+                  <label className="subheading block text-[10px] tracking-[0.25em] font-semibold !text-[#fff8eb]/80 transition-colors group-focus-within:!text-[#fff8eb]">Lời nhắn gửi đến Ban tổ chức</label>
                   <textarea
                     name="note"
                     rows={2}
                     value={formData.note}
                     onChange={handleInputChange}
-                    className="w-full bg-transparent border-b border-primary/30 py-3 focus:border-primary focus:outline-none transition-all placeholder:opacity-40 font-normal text-lg resize-none"
+                    className="w-full bg-transparent border-b border-[#fff8eb]/30 py-3 focus:border-[#fff8eb] focus:outline-none transition-all placeholder:text-[#fff8eb]/40 font-normal text-lg resize-none text-[#fff8eb]"
                     placeholder="Bạn có muốn nhắn nhủ điều gì không?"
                   ></textarea>
                 </div>
@@ -1190,12 +1190,12 @@ export default function Home() {
                   <button
                     type="submit"
                     disabled={formStatus === "submitting"}
-                    className="relative px-12 py-5 overflow-hidden group border border-primary/20 transition-all duration-700 hover:border-primary disabled:opacity-50"
+                    className="relative px-12 py-5 overflow-hidden group border border-[#fff8eb]/20 transition-all duration-700 hover:border-[#fff8eb] disabled:opacity-50"
                   >
-                    <span className="relative z-10 text-xs uppercase tracking-[0.4em] font-medium transition-colors duration-500 group-hover:text-background">
+                    <span className="relative z-10 text-xs uppercase tracking-[0.4em] font-medium transition-colors duration-500 text-[#fff8eb] group-hover:text-[#4b5006]">
                       {formStatus === "submitting" ? "Đang gửi..." : "Gửi phản hồi"}
                     </span>
-                    <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-out"></div>
+                    <div className="absolute inset-0 bg-[#fff8eb] translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-out"></div>
                   </button>
                 </div>
               </form>

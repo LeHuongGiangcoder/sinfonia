@@ -76,6 +76,10 @@ h1, h2, h3, h4, h5, h6 {
   @apply bg-[#f3ede1];
 }
 
+@utility section-olive {
+  @apply bg-primary text-background;
+}
+
 @utility content-wrapper {
   @apply w-full max-w-5xl mx-auto text-center;
 }

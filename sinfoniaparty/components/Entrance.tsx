@@ -255,10 +255,10 @@ export default function Entrance({ onComplete, onInteraction }: { onComplete: ()
       {/* Active Logo Sequence */}
       {activeLogo && (
         <div className="absolute inset-0 flex flex-col items-center justify-center animate-fade-in">
-          <div className="h-32 md:h-48 flex items-center justify-center">
-            <img src={activeLogo} className="h-full w-auto object-contain" />
+          <div className="w-40 h-40 md:w-64 md:h-64 bg-white/10 rounded-sm overflow-hidden flex items-center justify-center shadow-2xl">
+            <img src={activeLogo} className="w-full h-full object-cover" alt="Active Partner" />
           </div>
-          <p className="subheading mt-8 !opacity-100 text-primary tracking-[0.2em] uppercase text-xs">Chúng tôi là 1 đội</p>
+          <p className="subheading mt-12 !opacity-100 text-primary tracking-[0.2em] uppercase text-xs">Chúng tôi là 1 đội</p>
         </div>
       )}
 
