@@ -15,15 +15,18 @@ const IMAGES = [
 ];
 
 const LOGOS = [
-  "/assets/fancy_logo.jpg",
-  "/assets/wyndham logo.jpg",
-  "/assets/glow_logo.jpg",
-  "/assets/tada_logo.jpg",
-  "/assets/entropy_logo.jpg",
-  "/assets/marslow_logo.jpg",
-  "/assets/win_booth_logo.jpg",
-  "/assets/nguyenlieubonphuong_logo.jpg",
-  "/assets/light_wedding_logo.jpg",
+  "/assets/logo webp/wyndham logo.webp",
+  "/assets/logo webp/fancy_logo.webp",
+  "/assets/logo webp/glow_logo.webp",
+  "/assets/logo webp/tada_logo.webp",
+  "/assets/logo webp/entropy_logo.webp",
+  "/assets/logo webp/marslow_logo.webp",
+  "/assets/logo webp/win_booth_logo.webp",
+  "/assets/logo webp/nguyenlieubonphuong_logo.webp",
+  "/assets/logo webp/light_wedding_logo.webp",
+  "/assets/logo webp/Hanoi Tráp logo.webp",
+  "/assets/logo webp/mr sơn tùng mc.webp",
+  "/assets/logo webp/én bridal.webp",
 ];
 
 interface PhotoItem {
@@ -146,22 +149,23 @@ export default function Entrance({ onComplete, onInteraction }: { onComplete: ()
 
     // Phase 3: Logos (80 -> 99%)
     const logoSequenceStartTime = tl.duration();
+    const logoInterval = 0.2; // Slightly faster for 12 logos
 
     tl.to(progressProxy, {
       value: 99,
-      duration: LOGOS.length * 0.4 + 1.6,
+      duration: LOGOS.length * logoInterval + 1.2,
       ease: "power1.inOut"
     }, logoSequenceStartTime);
 
     LOGOS.forEach((src, index) => {
       tl.to({}, {
-        duration: 0.25,
+        duration: logoInterval,
         onStart: () => setActiveLogo(src)
-      }, logoSequenceStartTime + 0.3 + (index * 0.25));
+      }, logoSequenceStartTime + 0.3 + (index * logoInterval));
     });
 
-    // Final Grid Transition - Added 0.5s pause after individual logos
-    const finalGridStartTime = logoSequenceStartTime + 0.3 + (LOGOS.length * 0.25) + 0.5;
+    // Final Grid Transition
+    const finalGridStartTime = logoSequenceStartTime + 0.3 + (LOGOS.length * logoInterval) + 0.6;
     tl.to({}, {
       duration: 0.2,
       onStart: () => {
@@ -171,7 +175,7 @@ export default function Entrance({ onComplete, onInteraction }: { onComplete: ()
     }, finalGridStartTime);
 
     tl.to(progressProxy, { value: 100, duration: 0.4 });
-    tl.to({}, { duration: 0.8 });
+    tl.to({}, { duration: 1.2 });
   };
 
   useEffect(() => {
@@ -216,9 +220,6 @@ export default function Entrance({ onComplete, onInteraction }: { onComplete: ()
                   <path d="M6 10l-3 3a2 2 0 0 0 0 2.8l4 4a8 8 0 0 0 5 2.2" />
                 </svg>
               </div>
-              <p className="subheading !opacity-100 text-primary tracking-[0.4em] uppercase text-[10px] md:text-xs whitespace-nowrap">
-                Click to capture
-              </p>
             </div>
             <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity rounded-xl pointer-events-none"></div>
           </div>
