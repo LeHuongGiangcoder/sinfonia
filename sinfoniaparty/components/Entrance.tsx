@@ -194,6 +194,7 @@ export default function Entrance({ onComplete, onInteraction }: { onComplete: ()
       {!isCaptured && (
         <div
           ref={cameraRef}
+          onMouseDown={() => onInteraction?.()}
           onClick={startSequence}
           className="relative z-20 flex items-center justify-center cursor-pointer -translate-y-6"
         >

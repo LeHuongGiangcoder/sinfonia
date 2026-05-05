@@ -567,6 +567,14 @@ export default function Home() {
 
   return (
     <>
+      {/* Audio Source — Moved outside and preloaded for immediate playback */}
+      <audio
+        ref={audioRef}
+        src="/assets/Lady Gaga, Bruno Mars - Die With A Smile (Official Music Video).mp4"
+        loop
+        preload="auto"
+      />
+
       {isLoading && (
         <Entrance 
           onComplete={() => setIsLoading(false)} 
@@ -581,12 +589,6 @@ export default function Home() {
       <div ref={container} className={`min-h-screen ${isLoading ? "opacity-0" : "opacity-100"} transition-opacity duration-1000`}>
         {/* 1 & 2. Hero Section — Full Bleed */}
         <section className="relative h-screen w-full overflow-hidden bg-black">
-          {/* Audio Source */}
-          <audio
-            ref={audioRef}
-            src="/assets/Lady Gaga, Bruno Mars - Die With A Smile (Official Music Video).mp4"
-            loop
-          />
           {/* Background — natural colors, no overlay */}
           <img
             src="/assets/hero%20background.png"
@@ -910,7 +912,7 @@ export default function Home() {
               </div>
 
               {/* Selected Activity Details — Mobile only (hidden on desktop to save space) */}
-              <div className={`mt-10 mb-12 text-center transition-all duration-700 min-h-[160px] md:hidden flex flex-col justify-center ${activeAgenda !== null ? 'opacity-100 translate-y-0' : 'opacity-100 translate-y-0'}`}>
+              <div className={`mt-10 mb-12 text-center transition-all duration-700 min-h-[220px] md:hidden flex flex-col justify-center ${activeAgenda !== null ? 'opacity-100 translate-y-0' : 'opacity-100 translate-y-0'}`}>
                 {activeAgenda !== null ? (
                   <div className="space-y-3 animate-fade-in">
                     <div className="flex items-center justify-center gap-4">
@@ -968,7 +970,7 @@ export default function Home() {
                 <img
                   src="/assets/map 3.png"
                   alt="The Sunset Sinfonia Overview Map"
-                  className="w-full h-full object-cover saturate-[0.7] transition-all duration-1000 ease-in-out"
+                  className="w-full h-full object-cover saturate-[0.7] transition-all duration-1000 ease-in-out will-change-transform"
                   style={{
                     transform: activeAgenda !== null 
                       ? `scale(${agendaData[activeAgenda as number].coords.scale})` 
@@ -983,6 +985,7 @@ export default function Home() {
                 <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between z-30 pointer-events-none px-6">
                   <button
                     type="button"
+                    onMouseDown={(e) => e.preventDefault()}
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
@@ -990,7 +993,7 @@ export default function Home() {
                       else if (activeAgenda !== null) setActiveAgenda(prev => (prev as number) - 1);
                     }}
                     disabled={activeAgenda === null}
-                    className={`pointer-events-auto w-10 h-10 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white transition-all duration-500 hover:bg-white hover:text-black disabled:opacity-0 disabled:pointer-events-none`}
+                    className={`pointer-events-auto w-10 h-10 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white transition-all duration-500 hover:bg-white hover:text-black disabled:opacity-0 disabled:pointer-events-none outline-none`}
                   >
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
                       <path d="M15 18l-6-6 6-6" />
@@ -999,6 +1002,7 @@ export default function Home() {
                   <div className="relative">
                     <button
                       type="button"
+                      onMouseDown={(e) => e.preventDefault()}
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
@@ -1007,7 +1011,7 @@ export default function Home() {
                         setShowAgendaHint(false);
                       }}
                       disabled={activeAgenda === agendaData.length - 1}
-                      className={`pointer-events-auto w-10 h-10 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white transition-all duration-500 hover:bg-white hover:text-black disabled:opacity-0 disabled:pointer-events-none`}
+                      className={`pointer-events-auto w-10 h-10 rounded-full border border-white/20 bg-black/40 backdrop-blur-md flex items-center justify-center text-white transition-all duration-500 hover:bg-white hover:text-black disabled:opacity-0 disabled:pointer-events-none outline-none`}
                     >
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
                         <path d="M9 6l6 6-6 6" />
@@ -1248,13 +1252,14 @@ export default function Home() {
                       <button
                         key={idx}
                         type="button"
+                        onMouseDown={(e) => e.preventDefault()}
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
                           setActiveDresscode(idx);
                           setShowDresscodeHint(false);
                         }}
-                        className={`timeline-node ${activeDresscode === idx ? 'opacity-100' : 'opacity-40 hover:opacity-80'}`}
+                        className={`timeline-node outline-none ${activeDresscode === idx ? 'opacity-100' : 'opacity-40 hover:opacity-80'}`}
                         style={{ width: `${100 / dresscodeData.length}%` }}
                       >
                         <div className={`timeline-dot ${activeDresscode === idx ? 'timeline-dot-active' : ''}`}>
@@ -1280,13 +1285,14 @@ export default function Home() {
                   <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between z-30 pointer-events-none px-4 md:-mx-12">
                     <button
                       type="button"
+                      onMouseDown={(e) => e.preventDefault()}
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
                         setActiveDresscode(prev => Math.max(0, prev - 1));
                       }}
                       disabled={activeDresscode === 0}
-                      className={`pointer-events-auto w-12 h-12 rounded-full border border-primary/10 bg-background/50 backdrop-blur-md flex items-center justify-center text-primary transition-all duration-500 hover:bg-primary hover:text-background disabled:opacity-0 disabled:pointer-events-none`}
+                      className={`pointer-events-auto w-12 h-12 rounded-full border border-primary/10 bg-background/50 backdrop-blur-md flex items-center justify-center text-primary transition-all duration-500 hover:bg-primary hover:text-background disabled:opacity-0 disabled:pointer-events-none outline-none`}
                     >
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
                         <path d="M15 18l-6-6 6-6" />
@@ -1295,6 +1301,7 @@ export default function Home() {
                     <div className="relative">
                       <button
                         type="button"
+                        onMouseDown={(e) => e.preventDefault()}
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
@@ -1302,7 +1309,7 @@ export default function Home() {
                           setShowDresscodeHint(false);
                         }}
                         disabled={activeDresscode === dresscodeData.length - 1}
-                        className={`pointer-events-auto w-12 h-12 rounded-full border border-primary/10 bg-background/50 backdrop-blur-md flex items-center justify-center text-primary transition-all duration-500 hover:bg-primary hover:text-background disabled:opacity-0 disabled:pointer-events-none`}
+                        className={`pointer-events-auto w-12 h-12 rounded-full border border-primary/10 bg-background/50 backdrop-blur-md flex items-center justify-center text-primary transition-all duration-500 hover:bg-primary hover:text-background disabled:opacity-0 disabled:pointer-events-none outline-none`}
                       >
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
                           <path d="M9 6l6 6-6 6" />
@@ -1333,7 +1340,7 @@ export default function Home() {
                         />
                       </div>
                       <div className="text-center space-y-3">
-                        <p className="text-[10px] md:text-[11px] font-light max-w-[200px] mx-auto opacity-70 italic leading-relaxed min-h-[40px] md:min-h-[48px]">
+                        <p className="text-[10px] md:text-[11px] font-light max-w-[200px] mx-auto opacity-70 italic leading-relaxed min-h-[64px] md:min-h-[80px]">
                           {dresscodeData[activeDresscode].women}
                         </p>
                         <div className="flex justify-center gap-3">
@@ -1358,7 +1365,7 @@ export default function Home() {
                         />
                       </div>
                       <div className="text-center space-y-3">
-                        <p className="text-[10px] md:text-[11px] font-light max-w-[200px] mx-auto opacity-70 italic leading-relaxed min-h-[40px] md:min-h-[48px]">
+                        <p className="text-[10px] md:text-[11px] font-light max-w-[200px] mx-auto opacity-70 italic leading-relaxed min-h-[64px] md:min-h-[80px]">
                           {dresscodeData[activeDresscode].men}
                         </p>
                         <div className="flex justify-center gap-3">
