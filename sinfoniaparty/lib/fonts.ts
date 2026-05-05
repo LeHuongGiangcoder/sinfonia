@@ -14,4 +14,5 @@ export const playfair = Playfair_Display({
 export const purgatory = localFont({
   src: "../public/assets/purgatory/Purgatory.ttf",
   variable: "--font-purgatory",
+  display: "block",
 });

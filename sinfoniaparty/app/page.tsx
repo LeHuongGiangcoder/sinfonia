@@ -609,13 +609,12 @@ export default function Home() {
               style={{
                 color: '#f3ede1',
                 opacity: 0,
-                animation: 'hero-fade-up 1.2s ease-out 0.3s both',
                 transform: 'translateZ(0)',
                 WebkitFontSmoothing: 'antialiased',
               } as React.CSSProperties}
             >
-              <span className="hero-content">The Sunset</span>
-              <span className="hero-content">Sinfonia</span>
+              <span className="hero-content overflow-visible px-4">The Sunset</span>
+              <span className="hero-content overflow-visible px-4">Sinfonia</span>
             </h1>
           </div>
 

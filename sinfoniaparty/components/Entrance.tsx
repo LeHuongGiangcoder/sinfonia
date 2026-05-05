@@ -200,7 +200,7 @@ export default function Entrance({ onComplete, onInteraction }: { onComplete: ()
         >
           <div className="relative flex items-center justify-center group w-fit h-fit">
             <img
-              src="/assets/camera.png"
+              src="/assets/camera.webp"
               alt="Vintage Camera"
               className="w-[90vw] md:w-[55rem] h-auto transition-transform duration-300 ease-out group-hover:scale-105"
             />
