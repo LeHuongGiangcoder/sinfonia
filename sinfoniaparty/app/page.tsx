@@ -608,7 +608,6 @@ export default function Home() {
               className={`${purgatory.className} text-7xl md:text-[8rem] lg:text-[9.5rem] leading-[0.95] lowercase tracking-tight flex flex-col items-center`}
               style={{
                 color: '#f3ede1',
-                opacity: 0,
                 transform: 'translateZ(0)',
                 WebkitFontSmoothing: 'antialiased',
               } as React.CSSProperties}
