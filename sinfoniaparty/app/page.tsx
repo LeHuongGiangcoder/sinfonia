@@ -454,8 +454,8 @@ export default function Home() {
       subtitle: "Đón khách",
       women: "Váy lụa",
       men: "Vest / Blazer",
-      womenImg: "/assets/women 1.png",
-      menImg: "/assets/men 2.png",
+      womenImg: "/assets/dresscode%20webp/women%201.webp",
+      menImg: "/assets/dresscode%20webp/men%202.webp",
       palette: {
         women: ["#FCE4EC", "#FFF9C4", "#E1BEE7", "#FFFFFF"],
         men: ["#F5F5DC", "#D2B48C", "#4E342E", "#FFFFFF"]
@@ -466,8 +466,8 @@ export default function Home() {
       subtitle: "Tiệc tối",
       women: "Đầm dạ hội",
       men: "Suit / Tuxedo",
-      womenImg: "/assets/women 3.png",
-      menImg: "/assets/men 3.png",
+      womenImg: "/assets/dresscode%20webp/women%203.webp",
+      menImg: "/assets/dresscode%20webp/men%203.webp",
       palette: {
         women: ["#556B2F", "#1A1A1A", "#8B4513", "#FFFFFF"],
         men: ["#556B2F", "#1A1A1A", "#333333", "#FFFFFF"]
@@ -478,8 +478,8 @@ export default function Home() {
       subtitle: "Tiệc hồ bơi",
       women: "Trang phục hồ bơi / Bikini",
       men: "Quần short / Trang phục bơi",
-      womenImg: "/assets/women 4.png",
-      menImg: "/assets/men 4.png",
+      womenImg: "/assets/dresscode%20webp/women%204.webp",
+      menImg: "/assets/dresscode%20webp/men%204.webp",
       palette: {
         women: ["#B2EBF2", "#FFF9C4", "#FFCCBC", "#FFFFFF"],
         men: ["#E0F7FA", "#CFD8DC", "#FFAB91", "#FFFFFF"]
