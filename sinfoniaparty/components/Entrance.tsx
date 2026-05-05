@@ -268,7 +268,9 @@ export default function Entrance({ onComplete, onInteraction }: { onComplete: ()
           <div className="flex flex-col items-center gap-16 max-w-5xl px-8">
             <div className="grid grid-cols-3 gap-x-12 md:gap-x-20 gap-y-8 md:gap-y-12 items-center justify-items-center">
               {LOGOS.map((src, i) => (
-                <img key={i} src={src} className="h-10 md:h-16 w-auto object-contain" />
+                <div key={i} className="w-12 h-12 md:w-20 md:h-20 bg-white/10 rounded-sm overflow-hidden flex items-center justify-center shadow-sm">
+                  <img src={src} className="w-full h-full object-cover" alt="Partner Logo" />
+                </div>
               ))}
             </div>
             <p className="subheading !opacity-100 text-primary tracking-[0.4em] uppercase text-sm">Để cùng mang đến</p>
