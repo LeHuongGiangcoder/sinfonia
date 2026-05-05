@@ -885,7 +885,10 @@ export default function Home() {
                   {agendaData.map((item, idx) => (
                     <button
                       key={idx}
-                      onClick={() => {
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
                         setActiveAgenda(idx);
                         setShowAgendaHint(false);
                       }}
@@ -979,7 +982,10 @@ export default function Home() {
                 {/* Navigation Arrows for Agenda Map */}
                 <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between z-30 pointer-events-none px-6">
                   <button
-                    onClick={() => {
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
                       if (activeAgenda === 0) setActiveAgenda(null);
                       else if (activeAgenda !== null) setActiveAgenda(prev => (prev as number) - 1);
                     }}
@@ -992,7 +998,10 @@ export default function Home() {
                   </button>
                   <div className="relative">
                     <button
-                      onClick={() => {
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
                         if (activeAgenda === null) setActiveAgenda(0);
                         else setActiveAgenda(prev => Math.min(agendaData.length - 1, (prev as number) + 1));
                         setShowAgendaHint(false);
@@ -1238,7 +1247,10 @@ export default function Home() {
                     {dresscodeData.map((item, idx) => (
                       <button
                         key={idx}
-                        onClick={() => {
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
                           setActiveDresscode(idx);
                           setShowDresscodeHint(false);
                         }}
@@ -1267,7 +1279,12 @@ export default function Home() {
                   {/* Navigation Arrows */}
                   <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between z-30 pointer-events-none px-4 md:-mx-12">
                     <button
-                      onClick={() => setActiveDresscode(prev => Math.max(0, prev - 1))}
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setActiveDresscode(prev => Math.max(0, prev - 1));
+                      }}
                       disabled={activeDresscode === 0}
                       className={`pointer-events-auto w-12 h-12 rounded-full border border-primary/10 bg-background/50 backdrop-blur-md flex items-center justify-center text-primary transition-all duration-500 hover:bg-primary hover:text-background disabled:opacity-0 disabled:pointer-events-none`}
                     >
@@ -1277,7 +1294,10 @@ export default function Home() {
                     </button>
                     <div className="relative">
                       <button
-                        onClick={() => {
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
                           setActiveDresscode(prev => Math.min(dresscodeData.length - 1, prev + 1));
                           setShowDresscodeHint(false);
                         }}
@@ -1313,7 +1333,7 @@ export default function Home() {
                         />
                       </div>
                       <div className="text-center space-y-3">
-                        <p className="text-[10px] md:text-[11px] font-light max-w-[200px] mx-auto opacity-70 italic leading-relaxed">
+                        <p className="text-[10px] md:text-[11px] font-light max-w-[200px] mx-auto opacity-70 italic leading-relaxed min-h-[40px] md:min-h-[48px]">
                           {dresscodeData[activeDresscode].women}
                         </p>
                         <div className="flex justify-center gap-3">
@@ -1338,7 +1358,7 @@ export default function Home() {
                         />
                       </div>
                       <div className="text-center space-y-3">
-                        <p className="text-[10px] md:text-[11px] font-light max-w-[200px] mx-auto opacity-70 italic leading-relaxed">
+                        <p className="text-[10px] md:text-[11px] font-light max-w-[200px] mx-auto opacity-70 italic leading-relaxed min-h-[40px] md:min-h-[48px]">
                           {dresscodeData[activeDresscode].men}
                         </p>
                         <div className="flex justify-center gap-3">
