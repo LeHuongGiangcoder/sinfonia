@@ -47,6 +47,7 @@ export default function Entrance({ onComplete, onInteraction }: { onComplete: ()
   const containerRef = useRef<HTMLDivElement>(null);
   const cameraRef = useRef<HTMLDivElement>(null);
   const flashRef = useRef<HTMLDivElement>(null);
+  const shutterRef = useRef<HTMLAudioElement>(null);
 
   const startSequence = () => {
     if (isCaptured) return;
@@ -86,6 +87,12 @@ export default function Entrance({ onComplete, onInteraction }: { onComplete: ()
       opacity: 1,
       duration: 0.1,
       ease: "power2.in",
+      onStart: () => {
+        if (shutterRef.current) {
+          shutterRef.current.currentTime = 0;
+          shutterRef.current.play().catch(e => console.log("Shutter play blocked", e));
+        }
+      }
     })
     .to(flashRef.current, {
       opacity: 0,
@@ -228,6 +235,9 @@ export default function Entrance({ onComplete, onInteraction }: { onComplete: ()
         </div>
       )}
 
+      {/* Shutter Sound */}
+      <audio ref={shutterRef} src="/assets/camera shutter1.mp4" preload="auto" />
+
       {/* Camera Flash */}
       <div
         ref={flashRef}
@@ -271,8 +281,8 @@ export default function Entrance({ onComplete, onInteraction }: { onComplete: ()
       {/* Final Logo Grid */}
       {showFinalGrid && (
         <div className="absolute inset-0 flex items-center justify-center animate-fade-in">
-          <div className="flex flex-col items-center gap-16 max-w-5xl px-8">
-            <div className="flex flex-wrap justify-center gap-x-8 md:gap-x-16 gap-y-6 md:gap-y-10 items-center">
+          <div className="flex flex-col items-center gap-16 max-w-3xl px-8">
+            <div className="flex flex-wrap justify-center gap-x-6 md:gap-x-10 gap-y-6 md:gap-y-8 items-center max-w-[280px] md:max-w-xl">
               {LOGOS.map((src, i) => (
                 <div key={i} className="w-12 h-12 md:w-20 md:h-20 bg-white/10 rounded-sm overflow-hidden flex items-center justify-center">
                   <img 
