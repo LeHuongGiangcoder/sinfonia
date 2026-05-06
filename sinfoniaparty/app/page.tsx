@@ -694,9 +694,9 @@ export default function Home() {
 
         {/* Bridge Section — A cinematic transition */}
         <section ref={bridgeRef} className="py-32 md:py-48 bg-background flex flex-col items-center justify-center text-center relative overflow-hidden">
-          {/* Signature Olive Decorations — Top Corners only */}
-          <div className="absolute -top-10 -left-10 opacity-[0.18] pointer-events-none rotate-[15deg] hidden md:block">
-            <img src="/assets/component/19.svg" className="w-[22rem] h-[22rem]" alt="" />
+          {/* Signature Olive Decorations — Bottom-Left and Top-Right */}
+          <div className="absolute -bottom-16 -left-16 opacity-[0.18] pointer-events-none rotate-[-15deg] hidden md:block">
+            <img src="/assets/component/20.svg" className="w-[22rem] h-[22rem]" alt="" />
           </div>
           <div className="absolute -top-10 -right-10 opacity-[0.18] pointer-events-none rotate-[165deg] hidden md:block">
             <img src="/assets/component/18.svg" className="w-[22rem] h-[22rem]" alt="" />
