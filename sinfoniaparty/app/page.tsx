@@ -633,26 +633,28 @@ export default function Home() {
       // Calendar Highlight Animation
       gsap.from(".calendar-circle", {
         scrollTrigger: {
-          trigger: "#details-section",
-          start: "top 70%",
+          trigger: ".calendar-circle",
+          start: "top 90%",
+          toggleActions: "play none none reverse",
         },
         scale: 0,
         opacity: 0,
-        duration: 1,
-        stagger: 0.2,
+        duration: 0.8,
+        stagger: 0.15,
         ease: "back.out(1.7)",
       });
 
       // Venue Image Animation
       gsap.from(".venue-image", {
         scrollTrigger: {
-          trigger: "#details-section",
-          start: "top 60%",
+          trigger: ".venue-image",
+          start: "top 90%",
+          toggleActions: "play none none reverse",
         },
-        scale: 0.9,
+        scale: 0.3,
         opacity: 0,
-        duration: 1.8,
-        ease: "power2.out",
+        duration: 1.6,
+        ease: "power3.out",
       });
     }
   }, { scope: container, dependencies: [isLoading] });
