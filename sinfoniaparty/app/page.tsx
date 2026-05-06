@@ -694,6 +694,16 @@ export default function Home() {
 
         {/* Bridge Section — A cinematic transition */}
         <section ref={bridgeRef} className="py-32 md:py-48 bg-background flex flex-col items-center justify-center text-center relative overflow-hidden">
+          {/* Signature Olive Decorations — Corner Framing */}
+          <div className="absolute top-0 -right-24 opacity-[0.1] pointer-events-none rotate-[135deg] hidden md:block">
+            <img src="/assets/component/18.svg" className="w-[28rem] h-[28rem]" alt="" />
+          </div>
+          <div className="absolute -bottom-24 -left-24 opacity-[0.1] pointer-events-none rotate-[315deg] hidden md:block">
+            <img src="/assets/component/20.svg" className="w-[30rem] h-[30rem]" alt="" />
+          </div>
+          <div className="absolute top-0 right-0 opacity-[0.08] pointer-events-none rotate-[135deg] md:hidden">
+            <img src="/assets/component/18.svg" className="w-48 h-48" alt="" />
+          </div>
           <p
             className="text-elegant uppercase tracking-[0.5em] text-xl md:text-3xl lg:text-4xl text-primary/80 max-w-[90%] leading-relaxed flex flex-wrap justify-center gap-y-4"
           >
@@ -706,6 +716,16 @@ export default function Home() {
         </section>
         {/* 2.5 Atmosphere Gallery — A cinematic journey through the day */}
         <section className="p-[1px] md:p-[4px] bg-background relative overflow-hidden reveal-on-scroll" id="gallery-section">
+          {/* Signature Olive Decorations — Corner Framing */}
+          <div className="absolute -top-32 -left-32 opacity-[0.1] pointer-events-none rotate-[45deg] hidden md:block">
+            <img src="/assets/component/19.svg" className="w-[32rem] h-[32rem]" alt="" />
+          </div>
+          <div className="absolute -bottom-40 -right-40 opacity-[0.12] pointer-events-none rotate-[225deg] hidden md:block">
+            <img src="/assets/component/20.svg" className="w-[38rem] h-[38rem]" alt="" />
+          </div>
+          <div className="absolute bottom-0 right-0 opacity-[0.08] pointer-events-none rotate-[225deg] md:hidden">
+            <img src="/assets/component/20.svg" className="w-56 h-56" alt="" />
+          </div>
           <div className="w-full">
             {/* Interaction Hint */}
             <div className="flex justify-center py-4 opacity-30 animate-pulse-slow">
