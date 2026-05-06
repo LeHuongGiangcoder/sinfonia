@@ -111,6 +111,53 @@ function InstagramPost({ images }: { images: string[] }) {
   );
 }
 
+// --- Sub-component: NavigationHint ---
+function NavigationHint({ text, isVisible }: { text: string; isVisible: boolean }) {
+  const handRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    if (!containerRef.current || !handRef.current || !isVisible) return;
+
+    gsap.set(handRef.current, { opacity: 0, y: 30, scale: 0.8 });
+
+    ScrollTrigger.create({
+      trigger: containerRef.current,
+      start: "top 60%",
+      once: true,
+      onEnter: () => {
+        const tl = gsap.timeline({ delay: 0.5 });
+        tl.to(handRef.current, { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "power3.out" })
+          .to(handRef.current, { scale: 0.85, duration: 0.1, repeat: 1, yoyo: true }, "+=0.2")
+          .to(handRef.current, { opacity: 0, y: -20, duration: 0.6, ease: "power2.in" }, "+=2.5");
+      }
+    });
+  }, { scope: containerRef, dependencies: [isVisible] });
+
+  if (!isVisible) return null;
+
+  return (
+    <div ref={containerRef} className="absolute inset-0 pointer-events-none z-50 flex items-center justify-center">
+      <div ref={handRef} className="flex flex-col items-center gap-3">
+        <div className="relative">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" className="w-16 h-16 drop-shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+            <path d="M12 10V4a2 2 0 0 0-2-2h0a2 2 0 0 0-2 2v7" />
+            <path d="M12 10a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v4" />
+            <path d="M16 12a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v4" />
+            <path d="M20 14a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v4" />
+            <path d="M12 22h4a8 8 0 0 0 8-8v-2" />
+            <path d="M6 10l-3 3a2 2 0 0 0 0 2.8l4 4a8 8 0 0 0 5 2.2" />
+          </svg>
+          <div className="absolute top-0 right-0 w-6 h-6 border-2 border-white rounded-full animate-ping opacity-75"></div>
+        </div>
+        <p className="text-[11px] text-white font-medium uppercase tracking-[0.25em] bg-black/40 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20">
+          {text}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 // --- Sub-component: GalleryHint ---
 function GalleryHint() {
   const handRef = useRef<HTMLDivElement>(null);
@@ -940,7 +987,16 @@ export default function Home() {
               </div>
 
               {/* Map Overview — Auto-zooming Map */}
-              <div className="relative aspect-video md:aspect-[16/9] w-full overflow-hidden rounded-sm border border-primary/10 bg-[#e5e1d8] shadow-2xl group/map">
+              <div 
+                className="relative aspect-video md:aspect-[16/9] w-full overflow-hidden rounded-sm border border-primary/10 bg-[#e5e1d8] shadow-2xl group/map cursor-pointer"
+                onClick={() => {
+                  if (activeAgenda === null) setActiveAgenda(0);
+                  else if (activeAgenda < agendaData.length - 1) setActiveAgenda(prev => (prev as number) + 1);
+                  setShowAgendaHint(false);
+                }}
+              >
+                {/* Interaction Hint */}
+                <NavigationHint text="Click to view more" isVisible={showAgendaHint} />
                 {/* Desktop Detail Overlay — The "Note" style per user request */}
                 <div className="hidden md:block absolute top-8 left-8 z-40 w-72 pointer-events-none">
                   <div className={`bg-background/90 backdrop-blur-md p-6 rounded-sm border border-primary/10 shadow-2xl transition-all duration-700 ${activeAgenda !== null ? 'opacity-100 translate-x-0' : 'opacity-100 translate-x-0'}`}>
@@ -1282,7 +1338,15 @@ export default function Home() {
                 </div>
 
                 {/* Main Content Area with Arrows */}
-                <div className="relative w-full">
+                <div 
+                  className="relative w-full cursor-pointer"
+                  onClick={() => {
+                    if (activeDresscode < dresscodeData.length - 1) setActiveDresscode(prev => prev + 1);
+                    setShowDresscodeHint(false);
+                  }}
+                >
+                  {/* Interaction Hint */}
+                  <NavigationHint text="Click to view more" isVisible={showDresscodeHint} />
                   {/* Navigation Arrows */}
                   <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between z-30 pointer-events-none px-4 md:-mx-12">
                     <button
