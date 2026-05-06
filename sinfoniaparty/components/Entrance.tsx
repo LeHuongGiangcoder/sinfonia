@@ -24,9 +24,9 @@ const LOGOS = [
   "/assets/logo webp/win_booth_logo.webp",
   "/assets/logo webp/nguyenlieubonphuong_logo.webp",
   "/assets/logo webp/light_wedding_logo.webp",
-  "/assets/logo webp/hanoi tráp logo off.webp",
+  "/assets/logo webp/hanoi_trap_logo.webp",
   "/assets/logo webp/mc logo.webp",
-  "/assets/logo webp/én bridal.webp",
+  "/assets/logo webp/en_bridal.webp",
   "/assets/logo webp/kav logo.webp",
 ];
 
@@ -280,7 +280,7 @@ export default function Entrance({ onComplete, onInteraction }: { onComplete: ()
           <div className="w-40 h-40 md:w-64 md:h-64 bg-white/10 rounded-sm overflow-hidden flex items-center justify-center">
             <img 
               src={activeLogo} 
-              className={`w-full h-full object-contain ${activeLogo.includes('hanoi') ? 'scale-[1.2]' : 'scale-100'}`} 
+              className={`w-full h-full object-contain ${activeLogo.includes('hanoi') ? 'scale-[1.4]' : 'scale-100'}`} 
               alt="Active Partner" 
             />
           </div>
@@ -297,7 +297,7 @@ export default function Entrance({ onComplete, onInteraction }: { onComplete: ()
                 <div key={i} className="w-12 h-12 md:w-20 md:h-20 bg-white/10 rounded-sm overflow-hidden flex items-center justify-center">
                   <img 
                     src={src} 
-                    className={`w-full h-full object-contain ${src.includes('hanoi') ? 'scale-[1.2]' : 'scale-100'}`} 
+                    className={`w-full h-full object-contain ${src.includes('hanoi') ? 'scale-[1.4]' : 'scale-100'}`} 
                     alt="Partner Logo" 
                   />
                 </div>

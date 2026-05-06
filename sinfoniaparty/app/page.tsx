@@ -123,7 +123,7 @@ function NavigationHint({ text, isVisible }: { text: string; isVisible: boolean 
 
     ScrollTrigger.create({
       trigger: containerRef.current,
-      start: "top 60%",
+      start: "top 80%",
       once: true,
       onEnter: () => {
         const tl = gsap.timeline({ delay: 0.5 });
@@ -170,7 +170,7 @@ function GalleryHint() {
 
     ScrollTrigger.create({
       trigger: containerRef.current,
-      start: "top 60%",
+      start: "top 80%",
       once: true,
       onEnter: () => {
         const tl = gsap.timeline({ delay: 0.5 });
@@ -1377,6 +1377,11 @@ export default function Home() {
                 >
                   {/* Interaction Hint */}
                   <NavigationHint text="Click to view more" isVisible={showDresscodeHint} />
+                  
+                  {/* Dark Overlay for Hint Visibility */}
+                  <div 
+                    className={`absolute inset-0 bg-black/60 z-40 transition-opacity duration-1000 pointer-events-none ${showDresscodeHint ? 'opacity-100' : 'opacity-0'}`}
+                  ></div>
                   {/* Navigation Arrows */}
                   <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between z-30 pointer-events-none px-4 md:-mx-12">
                     <button
