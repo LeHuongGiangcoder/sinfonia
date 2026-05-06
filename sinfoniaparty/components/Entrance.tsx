@@ -309,7 +309,7 @@ export default function Entrance({ onComplete, onInteraction }: { onComplete: ()
       )}
 
       {/* Progress Counter */}
-      <div className={`absolute bottom-12 right-12 text-primary font-display text-6xl md:text-8xl select-none pointer-events-none tabular-nums flex items-baseline transition-opacity duration-500 ${isCaptured ? 'opacity-10' : 'opacity-0'}`}>
+      <div className={`absolute bottom-12 right-12 md:bottom-auto md:top-12 text-primary font-display text-6xl md:text-8xl select-none pointer-events-none tabular-nums flex items-baseline transition-opacity duration-500 ${isCaptured ? 'opacity-10' : 'opacity-0'}`}>
         {progress.toString().padStart(2, "0")}
         <span className="text-3xl md:text-4xl ml-2 opacity-60">%</span>
       </div>
