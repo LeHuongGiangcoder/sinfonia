@@ -140,7 +140,7 @@ function NavigationHint({ text, isVisible }: { text: string; isVisible: boolean 
     <div ref={containerRef} className="absolute inset-0 pointer-events-none z-50 flex items-center justify-center">
       <div ref={handRef} className="flex flex-col items-center gap-3">
         <div className="relative">
-          <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" className="w-16 h-16 drop-shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" className="w-16 h-16">
             <path d="M12 10V4a2 2 0 0 0-2-2h0a2 2 0 0 0-2 2v7" />
             <path d="M12 10a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v4" />
             <path d="M16 12a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v4" />
@@ -894,7 +894,18 @@ export default function Home() {
         </section>
 
         {/* 4. Agendas — Clickable Map View */}
-        <div ref={agendaTrigger} className="bg-background">
+        <div ref={agendaTrigger} className="bg-background relative overflow-hidden">
+          {/* Signature Olive Decorations */}
+          <div className="absolute top-20 -right-12 opacity-[0.05] pointer-events-none rotate-[15deg] hidden md:block">
+            <img src="/assets/component/18.svg" className="w-64 h-64" alt="" />
+          </div>
+          <div className="absolute -bottom-12 -left-12 opacity-[0.05] pointer-events-none rotate-[-45deg] hidden md:block">
+            <img src="/assets/component/19.svg" className="w-80 h-80" alt="" />
+          </div>
+          <div className="absolute top-1/2 -left-10 opacity-[0.03] pointer-events-none rotate-[190deg] md:hidden">
+            <img src="/assets/component/20.svg" className="w-40 h-40" alt="" />
+          </div>
+
           <section className="py-24 md:py-32 w-full flex flex-col justify-center overflow-hidden" id="agenda-section">
             <div className="w-full max-w-7xl mx-auto px-6 reveal-on-scroll">
               <div className="mb-12 space-y-4 text-center">
@@ -902,17 +913,6 @@ export default function Home() {
                 <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
                 <p className="text-elegant opacity-60">Dấu ấn của những khoảnh khắc</p>
 
-                {/* Interaction Hint — Agenda */}
-                {showAgendaHint && (
-                  <div className="pt-4 flex flex-col items-center gap-2 opacity-40 transition-opacity duration-1000">
-                    <div className="flex items-center gap-8">
-                      <div className="w-12 h-[0.5px] bg-primary/20"></div>
-                      <div className="w-1.5 h-1.5 rounded-full bg-primary animate-move-horizontal"></div>
-                      <div className="w-12 h-[0.5px] bg-primary/20"></div>
-                    </div>
-                    <span className="text-[8px] tracking-[0.4em] uppercase font-light">Explore Timeline</span>
-                  </div>
-                )}
               </div>
 
               {/* Unified Horizontal Timeline — Agenda */}
@@ -997,6 +997,11 @@ export default function Home() {
               >
                 {/* Interaction Hint */}
                 <NavigationHint text="Click to view more" isVisible={showAgendaHint} />
+                
+                {/* Dark Overlay for Hint Visibility */}
+                <div 
+                  className={`absolute inset-0 bg-black/60 z-40 transition-opacity duration-1000 pointer-events-none ${showAgendaHint ? 'opacity-100' : 'opacity-0'}`}
+                ></div>
                 {/* Desktop Detail Overlay — The "Note" style per user request */}
                 <div className="hidden md:block absolute top-8 left-8 z-40 w-72 pointer-events-none">
                   <div className={`bg-background/90 backdrop-blur-md p-6 rounded-sm border border-primary/10 shadow-2xl transition-all duration-700 ${activeAgenda !== null ? 'opacity-100 translate-x-0' : 'opacity-100 translate-x-0'}`}>
@@ -1076,15 +1081,6 @@ export default function Home() {
                       </svg>
                     </button>
 
-                    {/* Interaction Hint — Agenda */}
-                    {showAgendaHint && (activeAgenda === 0 || activeAgenda === null) && (
-                      <div className="absolute -top-12 left-1/2 -translate-x-1/2 animate-bounce-slow pointer-events-none z-40">
-                        <div className="bg-[#fff8eb] text-primary text-[7px] px-2 py-1.5 rounded-full uppercase tracking-[0.2em] font-bold whitespace-nowrap shadow-[0_10px_20px_rgba(0,0,0,0.1)] border border-primary/20">
-                          Click to see next
-                        </div>
-                        <div className="w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-t-[6px] border-t-[#fff8eb] mx-auto"></div>
-                      </div>
-                    )}
                   </div>
                 </div>
 
@@ -1266,7 +1262,18 @@ export default function Home() {
         </section>
 
         {/* 6. Dresscode — Clickable Carousel View */}
-        <div ref={dresscodeTrigger} className="bg-background">
+        <div ref={dresscodeTrigger} className="bg-background relative overflow-hidden">
+          {/* Signature Olive Decorations */}
+          <div className="absolute -top-10 left-1/4 opacity-[0.05] pointer-events-none rotate-[75deg] hidden md:block">
+            <img src="/assets/component/20.svg" className="w-72 h-72" alt="" />
+          </div>
+          <div className="absolute bottom-20 -right-20 opacity-[0.05] pointer-events-none rotate-[-15deg] hidden md:block">
+            <img src="/assets/component/18.svg" className="w-96 h-96" alt="" />
+          </div>
+          <div className="absolute bottom-0 -right-10 opacity-[0.04] pointer-events-none rotate-[45deg] md:hidden">
+            <img src="/assets/component/19.svg" className="w-48 h-48" alt="" />
+          </div>
+
           <section className="py-24 md:py-32 w-full flex flex-col justify-center overflow-hidden" id="dresscode-section">
             <div className="content-wrapper max-w-6xl reveal-on-scroll">
               <div className="mb-10 space-y-4 text-center">
@@ -1274,17 +1281,6 @@ export default function Home() {
                 <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
                 <p className="text-elegant opacity-60">Lựa chọn trang phục cho những khoảnh khắc tuyệt vời</p>
 
-                {/* Interaction Hint — Dresscode */}
-                {showDresscodeHint && (
-                  <div className="pt-4 flex flex-col items-center gap-2 opacity-40 transition-opacity duration-1000">
-                    <div className="flex items-center gap-8">
-                      <div className="w-12 h-[0.5px] bg-primary/20"></div>
-                      <div className="w-1.5 h-1.5 rounded-full bg-primary animate-move-horizontal"></div>
-                      <div className="w-12 h-[0.5px] bg-primary/20"></div>
-                    </div>
-                    <span className="text-[8px] tracking-[0.4em] uppercase font-light">Swipe to explore</span>
-                  </div>
-                )}
               </div>
 
               <div className="flex flex-col gap-4 md:gap-16 h-auto relative">
@@ -1382,15 +1378,6 @@ export default function Home() {
                         </svg>
                       </button>
 
-                      {/* Interaction Hint — Dresscode */}
-                      {showDresscodeHint && activeDresscode === 0 && (
-                        <div className="absolute -top-12 left-1/2 -translate-x-1/2 animate-bounce-slow pointer-events-none z-40">
-                          <div className="bg-[#fff8eb] text-primary text-[7px] px-2 py-1.5 rounded-full uppercase tracking-[0.2em] font-bold whitespace-nowrap shadow-[0_10px_20px_rgba(0,0,0,0.1)] border border-primary/20">
-                            Click to see next
-                          </div>
-                          <div className="w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-t-[6px] border-t-[#fff8eb] mx-auto"></div>
-                        </div>
-                      )}
                     </div>
                   </div>
 
@@ -1455,6 +1442,13 @@ export default function Home() {
 
         {/* 7. Contact Us — Interactive Person Collage */}
         <section className="min-h-screen py-20 md:py-32 flex items-center justify-center section-accent relative overflow-hidden" id="contact-section">
+          {/* Signature Olive Decorations */}
+          <div className="absolute top-0 right-1/4 opacity-[0.04] pointer-events-none rotate-[210deg]">
+            <img src="/assets/component/19.svg" className="w-64 h-64" alt="" />
+          </div>
+          <div className="absolute -bottom-20 left-10 opacity-[0.05] pointer-events-none rotate-[10deg]">
+            <img src="/assets/component/20.svg" className="w-72 h-72" alt="" />
+          </div>
           <div className="w-full max-w-6xl mx-auto px-4 md:px-12 reveal-on-scroll">
             <div className="mb-12 space-y-4 text-center">
               <h2 className="heading-lg">Contact</h2>
