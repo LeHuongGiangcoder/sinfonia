@@ -1300,8 +1300,12 @@ export default function Home() {
           <div className="absolute -bottom-40 -left-40 opacity-[0.18] pointer-events-none rotate-[0deg] hidden md:block">
             <img src="/assets/component/18.svg" className="w-[40rem] h-[40rem]" alt="" />
           </div>
-          <div className="absolute -bottom-6 -right-6 opacity-[0.15] pointer-events-none rotate-[225deg] md:hidden">
-            <img src="/assets/component/19.svg" className="w-48 h-48" alt="" />
+          {/* Mobile Signature Olive Decorations — Top Corners */}
+          <div className="absolute top-0 -left-8 opacity-[0.12] pointer-events-none rotate-[45deg] md:hidden">
+            <img src="/assets/component/18.svg" className="w-32 h-32" alt="" />
+          </div>
+          <div className="absolute top-4 -right-8 opacity-[0.12] pointer-events-none rotate-[135deg] md:hidden">
+            <img src="/assets/component/20.svg" className="w-36 h-36" alt="" />
           </div>
 
           <section className="py-24 md:py-32 w-full flex flex-col justify-center overflow-hidden" id="dresscode-section">
