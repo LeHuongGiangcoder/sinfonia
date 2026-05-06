@@ -900,7 +900,7 @@ export default function Home() {
                       </div>
 
                       <div className="mt-4 text-center">
-                        <p className={`text-[10px] md:text-xs font-semibold tabular-nums mb-1 transition-colors ${activeAgenda === idx ? 'text-primary' : 'text-primary/60'}`}>
+                        <p className={`text-[12px] md:text-sm font-semibold tabular-nums mb-1 transition-colors ${activeAgenda === idx ? 'text-primary' : 'text-primary/60'}`}>
                           {item.time}
                         </p>
                       </div>
@@ -1265,10 +1265,10 @@ export default function Home() {
                         </div>
 
                         <div className="mt-4 text-center">
-                          <p className={`text-[10px] md:text-xs font-semibold tracking-[0.2em] uppercase mb-1 transition-colors ${activeDresscode === idx ? 'text-primary' : 'text-primary/60'}`}>
+                          <p className={`text-[12px] md:text-sm font-semibold tracking-[0.2em] uppercase mb-1 transition-colors ${activeDresscode === idx ? 'text-primary' : 'text-primary/60'}`}>
                             {item.title}
                           </p>
-                          <h3 className={`text-[8px] md:text-[9px] font-semibold tracking-[0.1em] transition-colors hidden md:block ${activeDresscode === idx ? 'text-primary' : 'text-primary/40'}`}>
+                          <h3 className={`text-[10px] md:text-xs font-semibold tracking-[0.1em] transition-colors hidden md:block ${activeDresscode === idx ? 'text-primary' : 'text-primary/40'}`}>
                             {item.subtitle}
                           </h3>
                         </div>
