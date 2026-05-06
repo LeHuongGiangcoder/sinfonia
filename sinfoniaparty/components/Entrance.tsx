@@ -220,11 +220,11 @@ export default function Entrance({ onComplete, onInteraction }: { onComplete: ()
             <img
               src="/assets/camera.webp"
               alt="Vintage Camera"
-              className="w-[90vw] md:w-[55rem] h-auto transition-transform duration-300 ease-out group-hover:scale-105"
+              className="w-[90vw] md:w-[40rem] h-auto transition-transform duration-300 ease-out group-hover:scale-105"
             />
 
-            <div className="pointing-hint absolute top-12 right-0 md:top-36 md:right-0 pointer-events-none animate-bounce-slow flex flex-col items-center gap-2">
-              <div className="relative w-12 h-12 md:w-20 md:h-20">
+            <div className="pointing-hint absolute top-12 right-0 md:top-24 md:-right-8 pointer-events-none animate-bounce-slow flex flex-col items-center gap-2">
+              <div className="relative w-12 h-12 md:w-16 md:h-16">
                 <div className="absolute -bottom-1 -left-1 flex gap-1 opacity-60 rotate-[225deg]">
                   <div className="w-[1px] h-2 bg-primary rounded-full"></div>
                   <div className="w-[1px] h-3 bg-primary rounded-full"></div>
