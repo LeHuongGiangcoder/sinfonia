@@ -198,6 +198,16 @@ export default function Entrance({ onComplete, onInteraction }: { onComplete: ()
       ref={containerRef}
       className="fixed inset-0 z-[9999] bg-[#fff8eb] flex flex-col items-center justify-center overflow-hidden"
     >
+      {/* Signature Olive Decorations — Subtle Branding for Entrance */}
+      <div className="absolute -top-24 -left-24 opacity-[0.08] pointer-events-none rotate-[45deg] hidden md:block">
+        <img src="/assets/component/18.svg" className="w-[30rem] h-[30rem]" alt="" />
+      </div>
+      <div className="absolute -bottom-32 -right-32 opacity-[0.08] pointer-events-none rotate-[225deg] hidden md:block">
+        <img src="/assets/component/19.svg" className="w-[35rem] h-[35rem]" alt="" />
+      </div>
+      <div className="absolute -top-12 -right-12 opacity-[0.05] pointer-events-none rotate-[135deg] md:hidden">
+        <img src="/assets/component/20.svg" className="w-64 h-64" alt="" />
+      </div>
       {/* Interactive Camera Section */}
       {!isCaptured && (
         <div
