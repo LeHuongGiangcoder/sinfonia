@@ -280,7 +280,7 @@ export default function Entrance({ onComplete, onInteraction }: { onComplete: ()
           <div className="w-40 h-40 md:w-64 md:h-64 bg-white/10 rounded-sm overflow-hidden flex items-center justify-center">
             <img 
               src={activeLogo} 
-              className={`w-full h-full object-contain ${activeLogo.includes('hanoi') ? 'scale-[1.8]' : 'scale-100'}`} 
+              className={`w-full h-full object-contain ${activeLogo.includes('hanoi') ? 'scale-[1.2]' : 'scale-100'}`} 
               alt="Active Partner" 
             />
           </div>
@@ -297,7 +297,7 @@ export default function Entrance({ onComplete, onInteraction }: { onComplete: ()
                 <div key={i} className="w-12 h-12 md:w-20 md:h-20 bg-white/10 rounded-sm overflow-hidden flex items-center justify-center">
                   <img 
                     src={src} 
-                    className={`w-full h-full object-contain ${src.includes('hanoi') ? 'scale-[1.8]' : 'scale-100'}`} 
+                    className={`w-full h-full object-contain ${src.includes('hanoi') ? 'scale-[1.2]' : 'scale-100'}`} 
                     alt="Partner Logo" 
                   />
                 </div>
