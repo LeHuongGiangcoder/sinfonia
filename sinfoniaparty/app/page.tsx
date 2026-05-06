@@ -576,8 +576,8 @@ export default function Home() {
       />
 
       {isLoading && (
-        <Entrance 
-          onComplete={() => setIsLoading(false)} 
+        <Entrance
+          onComplete={() => setIsLoading(false)}
           onInteraction={() => {
             if (audioRef.current) {
               audioRef.current.play().then(() => setIsMuted(false)).catch(e => console.log("Audio play blocked", e));
@@ -850,7 +850,7 @@ export default function Home() {
                 <h2 className="heading-lg">The Agenda</h2>
                 <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
                 <p className="text-elegant opacity-60">Dấu ấn của những khoảnh khắc</p>
-                
+
                 {/* Interaction Hint — Agenda */}
                 {showAgendaHint && (
                   <div className="pt-4 flex flex-col items-center gap-2 opacity-40 transition-opacity duration-1000">
@@ -866,20 +866,20 @@ export default function Home() {
 
               {/* Unified Horizontal Timeline — Agenda */}
               <div className="timeline-container">
-                <div 
+                <div
                   className="timeline-line-base"
-                  style={{ 
-                    left: `${(100 / agendaData.length) / 2}%`, 
-                    width: `${100 - (100 / agendaData.length)}%` 
+                  style={{
+                    left: `${(100 / agendaData.length) / 2}%`,
+                    width: `${100 - (100 / agendaData.length)}%`
                   }}
                 ></div>
-                  <div
-                    className="timeline-line-progress"
-                    style={{ 
-                      left: `${(100 / agendaData.length) / 2}%`,
-                      width: `${activeAgenda !== null ? (activeAgenda / (agendaData.length - 1)) * (100 - (100 / agendaData.length)) : 0}%` 
-                    }}
-                  ></div>
+                <div
+                  className="timeline-line-progress"
+                  style={{
+                    left: `${(100 / agendaData.length) / 2}%`,
+                    width: `${activeAgenda !== null ? (activeAgenda / (agendaData.length - 1)) * (100 - (100 / agendaData.length)) : 0}%`
+                  }}
+                ></div>
 
                 <div className="flex justify-between items-start relative z-10">
                   {agendaData.map((item, idx) => (
@@ -970,11 +970,11 @@ export default function Home() {
                   alt="The Sunset Sinfonia Overview Map"
                   className="w-full h-full object-cover saturate-[0.7] transition-all duration-1000 ease-in-out will-change-transform"
                   style={{
-                    transform: activeAgenda !== null 
-                      ? `scale(${agendaData[activeAgenda as number].coords.scale})` 
+                    transform: activeAgenda !== null
+                      ? `scale(${agendaData[activeAgenda as number].coords.scale})`
                       : 'scale(1)',
-                    transformOrigin: activeAgenda !== null 
-                      ? `${agendaData[activeAgenda as number].coords.x}% ${agendaData[activeAgenda as number].coords.y}%` 
+                    transformOrigin: activeAgenda !== null
+                      ? `${agendaData[activeAgenda as number].coords.x}% ${agendaData[activeAgenda as number].coords.y}%`
                       : 'center top'
                   }}
                 />
@@ -1015,7 +1015,7 @@ export default function Home() {
                         <path d="M9 6l6 6-6 6" />
                       </svg>
                     </button>
-                    
+
                     {/* Interaction Hint — Agenda */}
                     {showAgendaHint && (activeAgenda === 0 || activeAgenda === null) && (
                       <div className="absolute -top-12 left-1/2 -translate-x-1/2 animate-bounce-slow pointer-events-none z-40">
@@ -1213,7 +1213,7 @@ export default function Home() {
                 <h2 className="heading-lg">Dress Code</h2>
                 <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
                 <p className="text-elegant opacity-60">Lựa chọn trang phục cho những khoảnh khắc tuyệt vời</p>
-                
+
                 {/* Interaction Hint — Dresscode */}
                 {showDresscodeHint && (
                   <div className="pt-4 flex flex-col items-center gap-2 opacity-40 transition-opacity duration-1000">
@@ -1230,18 +1230,18 @@ export default function Home() {
               <div className="flex flex-col gap-4 md:gap-16 h-auto relative">
                 {/* Unified Horizontal Timeline — Dresscode */}
                 <div className="timeline-container">
-                  <div 
+                  <div
                     className="timeline-line-base"
-                    style={{ 
-                      left: `${(100 / dresscodeData.length) / 2}%`, 
-                      width: `${100 - (100 / dresscodeData.length)}%` 
+                    style={{
+                      left: `${(100 / dresscodeData.length) / 2}%`,
+                      width: `${100 - (100 / dresscodeData.length)}%`
                     }}
                   ></div>
                   <div
                     className="timeline-line-progress"
-                    style={{ 
+                    style={{
                       left: `${(100 / dresscodeData.length) / 2}%`,
-                      width: `${(activeDresscode / (dresscodeData.length - 1)) * (100 - (100 / dresscodeData.length))}%` 
+                      width: `${(activeDresscode / (dresscodeData.length - 1)) * (100 - (100 / dresscodeData.length))}%`
                     }}
                   ></div>
 
@@ -1394,7 +1394,7 @@ export default function Home() {
               <p className="text-elegant opacity-60">Main support contacts</p>
             </div>
 
-            <div 
+            <div
               className="flex md:grid md:grid-cols-3 overflow-x-auto snap-x snap-mandatory no-scrollbar gap-4 md:gap-8 pb-8 -mx-4 px-4"
               onTouchStart={() => setShowContactHint(false)}
               onScroll={() => setShowContactHint(false)}
@@ -1437,7 +1437,7 @@ export default function Home() {
               <div className="min-w-[85vw] md:min-w-0 snap-center">
                 <ContactCard
                   images={["thomas.png"]}
-                  unit="Wyndham"
+                  unit="SkyLake"
                   rep="Mr. Thomas"
                   role="0889010399"
                   phone="Hỗ trợ địa điểm & Tiệc"
@@ -1489,23 +1489,23 @@ export default function Home() {
                 <div className={`w-[1.5px] bg-primary/40 transition-all duration-500 ${!isMuted ? 'animate-music-two' : 'h-2'}`}></div>
                 <div className={`w-[1.5px] bg-primary/40 transition-all duration-500 ${!isMuted ? 'animate-music-three' : 'h-1.5'}`}></div>
               </div>
-              
+
               {/* Circular Button */}
               <div className="relative w-11 h-11 rounded-full border border-primary/20 flex items-center justify-center bg-background/60 backdrop-blur-xl group-hover:border-primary/50 group-active:scale-95 transition-all duration-500 shadow-sm">
-                 {!isMuted ? (
-                   /* Pause Icon */
-                   <div className="flex gap-[3px]">
-                     <div className="w-[1.5px] h-3 bg-primary/80"></div>
-                     <div className="w-[1.5px] h-3 bg-primary/80"></div>
-                   </div>
-                 ) : (
-                   /* Play Icon */
-                   <div className="ml-0.5">
-                     <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5 text-primary/80">
-                       <path d="M8 5v14l11-7z" />
-                     </svg>
-                   </div>
-                 )}
+                {!isMuted ? (
+                  /* Pause Icon */
+                  <div className="flex gap-[3px]">
+                    <div className="w-[1.5px] h-3 bg-primary/80"></div>
+                    <div className="w-[1.5px] h-3 bg-primary/80"></div>
+                  </div>
+                ) : (
+                  /* Play Icon */
+                  <div className="ml-0.5">
+                    <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5 text-primary/80">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </div>
+                )}
               </div>
             </button>
           </div>
