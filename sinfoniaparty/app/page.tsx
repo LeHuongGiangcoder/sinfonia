@@ -421,6 +421,8 @@ function Navbar({ scrolled }: { scrolled: boolean }) {
 
 export default function Home() {
   const container = useRef<HTMLDivElement>(null);
+  const heroHandRef = useRef<HTMLImageElement>(null);
+  const heroTitleRef = useRef<HTMLHeadingElement>(null);
   const agendaTrigger = useRef<HTMLDivElement>(null);
   const dresscodeTrigger = useRef<HTMLDivElement>(null);
   const bridgeRef = useRef<HTMLDivElement>(null);
@@ -575,14 +577,28 @@ export default function Home() {
 
   useGSAP(() => {
     if (!isLoading) {
-      // Initial hero fade in
-      gsap.from(".hero-content", {
-        y: 30,
-        opacity: 0,
+      // Create a timeline for the hero sequence
+      const tl = gsap.timeline({ delay: 0.5 });
+
+      // 1. Initial state: Hand is hidden below
+      gsap.set(heroHandRef.current, { yPercent: 100, opacity: 0 });
+      gsap.set(".hero-content", { y: 30, opacity: 0 });
+
+      // 2. Animate hand from bottom
+      tl.to(heroHandRef.current, {
+        yPercent: 0,
+        opacity: 1,
+        duration: 1.8,
+        ease: "power3.out",
+      })
+      // 3. Animate title
+      .to(".hero-content", {
+        y: 0,
+        opacity: 1,
         duration: 1.5,
         ease: "power3.out",
         stagger: 0.2,
-      });
+      }, "-=0.8");
 
       // Bridge Section — Word by word reveal
       const bridgeWords = gsap.utils.toArray(".bridge-word");
@@ -639,13 +655,22 @@ export default function Home() {
       {!isLoading && <Navbar scrolled={scrolled} />}
       <div ref={container} className={`min-h-screen ${isLoading ? "opacity-0" : "opacity-100"} transition-opacity duration-1000`}>
         {/* 1 & 2. Hero Section — Full Bleed */}
-        <section className="relative h-screen w-full overflow-hidden bg-black">
-          {/* Background — natural colors, no overlay */}
+        <section className="relative h-screen w-full overflow-hidden bg-[#0a0a0a]">
+          {/* Layer 1: Curtain Background (Static) */}
           <img
-            src="/assets/hero%20background.png"
+            src="/assets/hero back.png"
             alt="The Sunset Sinfonia"
             className="absolute inset-0 w-full h-full object-cover"
-            style={{ willChange: 'auto' }}
+            style={{ willChange: 'transform' }}
+          />
+
+          {/* Layer 2: Hand with Tray (Animated) */}
+          <img
+            ref={heroHandRef}
+            src="/assets/hand back.png"
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
+            style={{ willChange: 'transform' }}
           />
 
           {/* Text block — repositioned to vertical center of viewport */}
@@ -656,6 +681,7 @@ export default function Home() {
 
             {/* Main Title — Now appears first for immediate impact */}
             <h1
+              ref={heroTitleRef}
               className={`${purgatory.className} text-7xl md:text-[8rem] lg:text-[9.5rem] leading-[0.95] lowercase tracking-tight flex flex-col items-center`}
               style={{
                 color: '#f3ede1',
