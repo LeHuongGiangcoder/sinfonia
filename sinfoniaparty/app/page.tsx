@@ -206,7 +206,11 @@ function ContactCard({ images, unit, rep, role, phone, intro, link }: {
       <div className="absolute inset-0 flex transition-transform duration-500 ease-out" style={{ transform: `translateX(-${index * 100}%)` }}>
         {/* Slide 1: Rep Photo */}
         <div className="w-full h-full shrink-0 relative">
-          <img src={`/assets/${images[0]}`} className="w-full h-full object-cover" alt={rep} />
+          <img 
+            src={`/assets/${images[0]}`} 
+            className={`w-full h-full object-cover ${images[0].includes('nhat linh') ? 'scale-105' : ''}`} 
+            alt={rep} 
+          />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
           <div className="absolute bottom-6 left-6 right-6 text-left text-white">
             <p className="text-[10px] uppercase tracking-[0.3em] font-medium opacity-80 mb-1">{unit}</p>
@@ -409,7 +413,7 @@ export default function Home() {
       title: "CHECK IN",
       location: "Lobby Lounge",
       details: [],
-      coords: { x: 65, y: 45, scale: 2 }
+      coords: { x: 65, y: 41, scale: 2 }
     },
     {
       time: "14:30",
@@ -423,7 +427,7 @@ export default function Home() {
       title: "WELCOME + WORKSHOP",
       location: "Grand Ballroom",
       details: ["Khai mạc", "Workshop"],
-      coords: { x: 65, y: 45, scale: 2 }
+      coords: { x: 65, y: 41, scale: 2 }
     },
     {
       time: "16:30",
@@ -444,7 +448,7 @@ export default function Home() {
       title: "MIDNIGHT REVERIE",
       location: "Infinity Pool",
       details: ["Fireworks", "DJ", "Pool Party"],
-      coords: { x: 65, y: 45, scale: 2 }
+      coords: { x: 65, y: 41, scale: 2 }
     },
   ];
 
