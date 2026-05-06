@@ -642,6 +642,18 @@ export default function Home() {
         stagger: 0.2,
         ease: "back.out(1.7)",
       });
+
+      // Venue Image Animation
+      gsap.from(".venue-image", {
+        scrollTrigger: {
+          trigger: "#details-section",
+          start: "top 60%",
+        },
+        scale: 0.9,
+        opacity: 0,
+        duration: 1.8,
+        ease: "power2.out",
+      });
     }
   }, { scope: container, dependencies: [isLoading] });
 
@@ -920,7 +932,7 @@ export default function Home() {
                       <img
                         src="/assets/places.png"
                         alt="Wyndham Sky Lake Illustration"
-                        className="w-full h-full object-cover opacity-90"
+                        className="venue-image w-full h-full object-cover opacity-90"
                         style={{
                           mixBlendMode: 'multiply',
                           WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 10%, black 90%, transparent)',
