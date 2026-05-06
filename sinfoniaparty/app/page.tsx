@@ -629,6 +629,19 @@ export default function Home() {
           ease: "power3.out",
         });
       });
+
+      // Calendar Highlight Animation
+      gsap.from(".calendar-circle", {
+        scrollTrigger: {
+          trigger: "#details-section",
+          start: "top 70%",
+        },
+        scale: 0,
+        opacity: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: "back.out(1.7)",
+      });
     }
   }, { scope: container, dependencies: [isLoading] });
 
@@ -852,12 +865,12 @@ export default function Home() {
                       <span className="text-sm opacity-40">1</span>
 
                       <div className="relative flex items-center justify-center">
-                        <div className="absolute inset-0 bg-primary rounded-full w-7 h-7 mx-auto -translate-y-[1px]"></div>
+                        <div className="calendar-circle absolute inset-0 bg-primary rounded-full w-7 h-7 mx-auto -translate-y-[1px]"></div>
                         <span className="relative text-sm text-background font-medium">2</span>
                       </div>
 
                       <div className="relative flex items-center justify-center">
-                        <div className="absolute inset-0 bg-primary rounded-full w-7 h-7 mx-auto -translate-y-[1px]"></div>
+                        <div className="calendar-circle absolute inset-0 bg-primary rounded-full w-7 h-7 mx-auto -translate-y-[1px]"></div>
                         <span className="relative text-sm text-background font-medium">3</span>
                       </div>
 
