@@ -896,13 +896,13 @@ export default function Home() {
         {/* 4. Agendas — Clickable Map View */}
         <div ref={agendaTrigger} className="bg-background relative overflow-hidden">
           {/* Signature Olive Decorations — Corner Framing */}
-          <div className="absolute -top-24 -left-24 opacity-[0.05] pointer-events-none rotate-[45deg] hidden md:block">
+          <div className="absolute -top-24 -left-24 opacity-[0.1] pointer-events-none rotate-[45deg] hidden md:block">
             <img src="/assets/component/18.svg" className="w-[30rem] h-[30rem]" alt="" />
           </div>
-          <div className="absolute -bottom-32 -right-32 opacity-[0.05] pointer-events-none rotate-[225deg] hidden md:block">
+          <div className="absolute -bottom-32 -right-32 opacity-[0.1] pointer-events-none rotate-[225deg] hidden md:block">
             <img src="/assets/component/19.svg" className="w-[35rem] h-[35rem]" alt="" />
           </div>
-          <div className="absolute -top-12 -right-12 opacity-[0.03] pointer-events-none rotate-[135deg] md:hidden">
+          <div className="absolute -top-12 -right-12 opacity-[0.08] pointer-events-none rotate-[135deg] md:hidden">
             <img src="/assets/component/20.svg" className="w-64 h-64" alt="" />
           </div>
 
@@ -1264,13 +1264,13 @@ export default function Home() {
         {/* 6. Dresscode — Clickable Carousel View */}
         <div ref={dresscodeTrigger} className="bg-background relative overflow-hidden">
           {/* Signature Olive Decorations — Corner Framing */}
-          <div className="absolute -top-32 -right-32 opacity-[0.05] pointer-events-none rotate-[180deg] hidden md:block">
+          <div className="absolute -top-32 -right-32 opacity-[0.1] pointer-events-none rotate-[180deg] hidden md:block">
             <img src="/assets/component/20.svg" className="w-[32rem] h-[32rem]" alt="" />
           </div>
-          <div className="absolute -bottom-40 -left-40 opacity-[0.05] pointer-events-none rotate-[0deg] hidden md:block">
+          <div className="absolute -bottom-40 -left-40 opacity-[0.1] pointer-events-none rotate-[0deg] hidden md:block">
             <img src="/assets/component/18.svg" className="w-[40rem] h-[40rem]" alt="" />
           </div>
-          <div className="absolute -bottom-12 -right-12 opacity-[0.04] pointer-events-none rotate-[225deg] md:hidden">
+          <div className="absolute -bottom-12 -right-12 opacity-[0.08] pointer-events-none rotate-[225deg] md:hidden">
             <img src="/assets/component/19.svg" className="w-72 h-72" alt="" />
           </div>
 
@@ -1443,10 +1443,10 @@ export default function Home() {
         {/* 7. Contact Us — Interactive Person Collage */}
         <section className="min-h-screen py-20 md:py-32 flex items-center justify-center section-accent relative overflow-hidden" id="contact-section">
           {/* Signature Olive Decorations — Corner Framing */}
-          <div className="absolute -top-24 -left-24 opacity-[0.04] pointer-events-none rotate-[90deg]">
+          <div className="absolute -top-24 -left-24 opacity-[0.1] pointer-events-none rotate-[90deg]">
             <img src="/assets/component/19.svg" className="w-[28rem] h-[28rem]" alt="" />
           </div>
-          <div className="absolute -bottom-32 -right-32 opacity-[0.05] pointer-events-none rotate-[270deg]">
+          <div className="absolute -bottom-32 -right-32 opacity-[0.12] pointer-events-none rotate-[270deg]">
             <img src="/assets/component/20.svg" className="w-[32rem] h-[32rem]" alt="" />
           </div>
           <div className="w-full max-w-6xl mx-auto px-4 md:px-12 reveal-on-scroll">
