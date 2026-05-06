@@ -981,7 +981,7 @@ export default function Home() {
               </div>
 
               {/* Selected Activity Details — Mobile only (hidden on desktop to save space) */}
-              <div className={`mt-10 mb-12 text-center transition-all duration-700 min-h-[220px] md:hidden flex flex-col justify-center ${activeAgenda !== null ? 'opacity-100 translate-y-0' : 'opacity-100 translate-y-0'}`}>
+              <div className={`mt-6 mb-6 text-center transition-all duration-700 min-h-[150px] md:hidden flex flex-col justify-center ${activeAgenda !== null ? 'opacity-100 translate-y-0' : 'opacity-100 translate-y-0'}`}>
                 {activeAgenda !== null ? (
                   <div className="space-y-3 animate-fade-in">
                     <div className="flex items-center justify-center gap-4">
