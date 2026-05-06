@@ -694,12 +694,12 @@ export default function Home() {
 
         {/* Bridge Section — A cinematic transition */}
         <section ref={bridgeRef} className="py-32 md:py-48 bg-background flex flex-col items-center justify-center text-center relative overflow-hidden">
-          {/* Signature Olive Decorations — Corner Framing */}
+          {/* Signature Olive Decorations — Top Corners only */}
+          <div className="absolute -top-10 -left-10 opacity-[0.18] pointer-events-none rotate-[15deg] hidden md:block">
+            <img src="/assets/component/19.svg" className="w-[22rem] h-[22rem]" alt="" />
+          </div>
           <div className="absolute -top-10 -right-10 opacity-[0.18] pointer-events-none rotate-[165deg] hidden md:block">
             <img src="/assets/component/18.svg" className="w-[22rem] h-[22rem]" alt="" />
-          </div>
-          <div className="absolute -bottom-10 -left-10 opacity-[0.18] pointer-events-none rotate-[-15deg] hidden md:block">
-            <img src="/assets/component/20.svg" className="w-[22rem] h-[22rem]" alt="" />
           </div>
           <div className="absolute -top-8 -right-8 opacity-[0.15] pointer-events-none rotate-[150deg] md:hidden">
             <img src="/assets/component/18.svg" className="w-40 h-40" alt="" />
@@ -717,7 +717,7 @@ export default function Home() {
         {/* 2.5 Atmosphere Gallery — A cinematic journey through the day */}
         <section className="p-[1px] md:p-[4px] bg-background relative overflow-hidden reveal-on-scroll" id="gallery-section">
           {/* Signature Olive Decorations — Corner Framing */}
-          <div className="absolute -top-32 -left-32 opacity-[0.18] pointer-events-none rotate-[45deg] hidden md:block">
+          <div className="absolute top-24 -left-32 opacity-[0.18] pointer-events-none rotate-[45deg] hidden md:block">
             <img src="/assets/component/19.svg" className="w-[32rem] h-[32rem]" alt="" />
           </div>
           <div className="absolute -bottom-40 -right-40 opacity-[0.2] pointer-events-none rotate-[225deg] hidden md:block">
