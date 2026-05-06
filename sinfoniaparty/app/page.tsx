@@ -695,14 +695,14 @@ export default function Home() {
         {/* Bridge Section — A cinematic transition */}
         <section ref={bridgeRef} className="py-32 md:py-48 bg-background flex flex-col items-center justify-center text-center relative overflow-hidden">
           {/* Signature Olive Decorations — Corner Framing */}
-          <div className="absolute top-0 -right-24 opacity-[0.1] pointer-events-none rotate-[135deg] hidden md:block">
-            <img src="/assets/component/18.svg" className="w-[28rem] h-[28rem]" alt="" />
+          <div className="absolute -top-10 -right-10 opacity-[0.18] pointer-events-none rotate-[165deg] hidden md:block">
+            <img src="/assets/component/18.svg" className="w-[22rem] h-[22rem]" alt="" />
           </div>
-          <div className="absolute -bottom-24 -left-24 opacity-[0.1] pointer-events-none rotate-[315deg] hidden md:block">
-            <img src="/assets/component/20.svg" className="w-[30rem] h-[30rem]" alt="" />
+          <div className="absolute -bottom-10 -left-10 opacity-[0.18] pointer-events-none rotate-[-15deg] hidden md:block">
+            <img src="/assets/component/20.svg" className="w-[22rem] h-[22rem]" alt="" />
           </div>
-          <div className="absolute top-0 right-0 opacity-[0.08] pointer-events-none rotate-[135deg] md:hidden">
-            <img src="/assets/component/18.svg" className="w-48 h-48" alt="" />
+          <div className="absolute -top-8 -right-8 opacity-[0.15] pointer-events-none rotate-[150deg] md:hidden">
+            <img src="/assets/component/18.svg" className="w-40 h-40" alt="" />
           </div>
           <p
             className="text-elegant uppercase tracking-[0.5em] text-xl md:text-3xl lg:text-4xl text-primary/80 max-w-[90%] leading-relaxed flex flex-wrap justify-center gap-y-4"
@@ -717,13 +717,13 @@ export default function Home() {
         {/* 2.5 Atmosphere Gallery — A cinematic journey through the day */}
         <section className="p-[1px] md:p-[4px] bg-background relative overflow-hidden reveal-on-scroll" id="gallery-section">
           {/* Signature Olive Decorations — Corner Framing */}
-          <div className="absolute -top-32 -left-32 opacity-[0.1] pointer-events-none rotate-[45deg] hidden md:block">
+          <div className="absolute -top-32 -left-32 opacity-[0.18] pointer-events-none rotate-[45deg] hidden md:block">
             <img src="/assets/component/19.svg" className="w-[32rem] h-[32rem]" alt="" />
           </div>
-          <div className="absolute -bottom-40 -right-40 opacity-[0.12] pointer-events-none rotate-[225deg] hidden md:block">
+          <div className="absolute -bottom-40 -right-40 opacity-[0.2] pointer-events-none rotate-[225deg] hidden md:block">
             <img src="/assets/component/20.svg" className="w-[38rem] h-[38rem]" alt="" />
           </div>
-          <div className="absolute bottom-0 right-0 opacity-[0.08] pointer-events-none rotate-[225deg] md:hidden">
+          <div className="absolute bottom-0 right-0 opacity-[0.15] pointer-events-none rotate-[225deg] md:hidden">
             <img src="/assets/component/20.svg" className="w-56 h-56" alt="" />
           </div>
           <div className="w-full">
@@ -916,13 +916,13 @@ export default function Home() {
         {/* 4. Agendas — Clickable Map View */}
         <div ref={agendaTrigger} className="bg-background relative overflow-hidden">
           {/* Signature Olive Decorations — Corner Framing */}
-          <div className="absolute -top-24 -left-24 opacity-[0.1] pointer-events-none rotate-[45deg] hidden md:block">
+          <div className="absolute -top-24 -left-24 opacity-[0.18] pointer-events-none rotate-[45deg] hidden md:block">
             <img src="/assets/component/18.svg" className="w-[30rem] h-[30rem]" alt="" />
           </div>
-          <div className="absolute -bottom-32 -right-32 opacity-[0.1] pointer-events-none rotate-[225deg] hidden md:block">
+          <div className="absolute -bottom-32 -right-32 opacity-[0.18] pointer-events-none rotate-[225deg] hidden md:block">
             <img src="/assets/component/19.svg" className="w-[35rem] h-[35rem]" alt="" />
           </div>
-          <div className="absolute -top-12 -right-12 opacity-[0.08] pointer-events-none rotate-[135deg] md:hidden">
+          <div className="absolute -top-12 -right-12 opacity-[0.15] pointer-events-none rotate-[135deg] md:hidden">
             <img src="/assets/component/20.svg" className="w-64 h-64" alt="" />
           </div>
 
@@ -1137,7 +1137,17 @@ export default function Home() {
         </div>
 
         {/* 5. RSVP */}
-        <section className="min-h-screen flex items-center justify-center py-24 px-6 bg-[#4b5006] text-[#fff8eb] relative z-10" id="rsvp-section">
+        <section className="min-h-screen flex items-center justify-center py-24 px-6 bg-[#4b5006] text-[#fff8eb] relative z-10 overflow-hidden" id="rsvp-section">
+          {/* Signature Olive Decorations — White Overlay for RSVP */}
+          <div className="absolute -top-32 -left-32 opacity-[0.1] pointer-events-none rotate-[45deg] hidden md:block grayscale brightness-0 invert">
+            <img src="/assets/component/18.svg" className="w-[35rem] h-[35rem]" alt="" />
+          </div>
+          <div className="absolute -bottom-40 -right-40 opacity-[0.12] pointer-events-none rotate-[225deg] hidden md:block grayscale brightness-0 invert">
+            <img src="/assets/component/20.svg" className="w-[40rem] h-[40rem]" alt="" />
+          </div>
+          <div className="absolute top-0 right-0 opacity-[0.08] pointer-events-none rotate-[135deg] md:hidden grayscale brightness-0 invert">
+            <img src="/assets/component/19.svg" className="w-56 h-56" alt="" />
+          </div>
           <div className="content-wrapper max-w-2xl opacity-100">
             <div className="mb-16 space-y-4">
               <h2 className="heading-lg !text-[#fff8eb]">RSVP</h2>
@@ -1284,13 +1294,13 @@ export default function Home() {
         {/* 6. Dresscode — Clickable Carousel View */}
         <div ref={dresscodeTrigger} className="bg-background relative overflow-hidden">
           {/* Signature Olive Decorations — Corner Framing */}
-          <div className="absolute -top-32 -right-32 opacity-[0.1] pointer-events-none rotate-[180deg] hidden md:block">
+          <div className="absolute -top-32 -right-32 opacity-[0.18] pointer-events-none rotate-[180deg] hidden md:block">
             <img src="/assets/component/20.svg" className="w-[32rem] h-[32rem]" alt="" />
           </div>
-          <div className="absolute -bottom-40 -left-40 opacity-[0.1] pointer-events-none rotate-[0deg] hidden md:block">
+          <div className="absolute -bottom-40 -left-40 opacity-[0.18] pointer-events-none rotate-[0deg] hidden md:block">
             <img src="/assets/component/18.svg" className="w-[40rem] h-[40rem]" alt="" />
           </div>
-          <div className="absolute -bottom-12 -right-12 opacity-[0.08] pointer-events-none rotate-[225deg] md:hidden">
+          <div className="absolute -bottom-12 -right-12 opacity-[0.15] pointer-events-none rotate-[225deg] md:hidden">
             <img src="/assets/component/19.svg" className="w-72 h-72" alt="" />
           </div>
 
@@ -1463,10 +1473,10 @@ export default function Home() {
         {/* 7. Contact Us — Interactive Person Collage */}
         <section className="min-h-screen py-20 md:py-32 flex items-center justify-center section-accent relative overflow-hidden" id="contact-section">
           {/* Signature Olive Decorations — Corner Framing */}
-          <div className="absolute -top-24 -left-24 opacity-[0.1] pointer-events-none rotate-[90deg]">
+          <div className="absolute -top-24 -left-24 opacity-[0.18] pointer-events-none rotate-[90deg]">
             <img src="/assets/component/19.svg" className="w-[28rem] h-[28rem]" alt="" />
           </div>
-          <div className="absolute -bottom-32 -right-32 opacity-[0.12] pointer-events-none rotate-[270deg]">
+          <div className="absolute -bottom-32 -right-32 opacity-[0.2] pointer-events-none rotate-[270deg]">
             <img src="/assets/component/20.svg" className="w-[32rem] h-[32rem]" alt="" />
           </div>
           <div className="w-full max-w-6xl mx-auto px-4 md:px-12 reveal-on-scroll">
