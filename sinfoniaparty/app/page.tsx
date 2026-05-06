@@ -895,15 +895,15 @@ export default function Home() {
 
         {/* 4. Agendas — Clickable Map View */}
         <div ref={agendaTrigger} className="bg-background relative overflow-hidden">
-          {/* Signature Olive Decorations */}
-          <div className="absolute top-20 -right-12 opacity-[0.05] pointer-events-none rotate-[15deg] hidden md:block">
-            <img src="/assets/component/18.svg" className="w-64 h-64" alt="" />
+          {/* Signature Olive Decorations — Corner Framing */}
+          <div className="absolute -top-24 -left-24 opacity-[0.05] pointer-events-none rotate-[45deg] hidden md:block">
+            <img src="/assets/component/18.svg" className="w-[30rem] h-[30rem]" alt="" />
           </div>
-          <div className="absolute -bottom-12 -left-12 opacity-[0.05] pointer-events-none rotate-[-45deg] hidden md:block">
-            <img src="/assets/component/19.svg" className="w-80 h-80" alt="" />
+          <div className="absolute -bottom-32 -right-32 opacity-[0.05] pointer-events-none rotate-[225deg] hidden md:block">
+            <img src="/assets/component/19.svg" className="w-[35rem] h-[35rem]" alt="" />
           </div>
-          <div className="absolute top-1/2 -left-10 opacity-[0.03] pointer-events-none rotate-[190deg] md:hidden">
-            <img src="/assets/component/20.svg" className="w-40 h-40" alt="" />
+          <div className="absolute -top-12 -right-12 opacity-[0.03] pointer-events-none rotate-[135deg] md:hidden">
+            <img src="/assets/component/20.svg" className="w-64 h-64" alt="" />
           </div>
 
           <section className="py-24 md:py-32 w-full flex flex-col justify-center overflow-hidden" id="agenda-section">
@@ -1263,15 +1263,15 @@ export default function Home() {
 
         {/* 6. Dresscode — Clickable Carousel View */}
         <div ref={dresscodeTrigger} className="bg-background relative overflow-hidden">
-          {/* Signature Olive Decorations */}
-          <div className="absolute -top-10 left-1/4 opacity-[0.05] pointer-events-none rotate-[75deg] hidden md:block">
-            <img src="/assets/component/20.svg" className="w-72 h-72" alt="" />
+          {/* Signature Olive Decorations — Corner Framing */}
+          <div className="absolute -top-32 -right-32 opacity-[0.05] pointer-events-none rotate-[180deg] hidden md:block">
+            <img src="/assets/component/20.svg" className="w-[32rem] h-[32rem]" alt="" />
           </div>
-          <div className="absolute bottom-20 -right-20 opacity-[0.05] pointer-events-none rotate-[-15deg] hidden md:block">
-            <img src="/assets/component/18.svg" className="w-96 h-96" alt="" />
+          <div className="absolute -bottom-40 -left-40 opacity-[0.05] pointer-events-none rotate-[0deg] hidden md:block">
+            <img src="/assets/component/18.svg" className="w-[40rem] h-[40rem]" alt="" />
           </div>
-          <div className="absolute bottom-0 -right-10 opacity-[0.04] pointer-events-none rotate-[45deg] md:hidden">
-            <img src="/assets/component/19.svg" className="w-48 h-48" alt="" />
+          <div className="absolute -bottom-12 -right-12 opacity-[0.04] pointer-events-none rotate-[225deg] md:hidden">
+            <img src="/assets/component/19.svg" className="w-72 h-72" alt="" />
           </div>
 
           <section className="py-24 md:py-32 w-full flex flex-col justify-center overflow-hidden" id="dresscode-section">
@@ -1442,12 +1442,12 @@ export default function Home() {
 
         {/* 7. Contact Us — Interactive Person Collage */}
         <section className="min-h-screen py-20 md:py-32 flex items-center justify-center section-accent relative overflow-hidden" id="contact-section">
-          {/* Signature Olive Decorations */}
-          <div className="absolute top-0 right-1/4 opacity-[0.04] pointer-events-none rotate-[210deg]">
-            <img src="/assets/component/19.svg" className="w-64 h-64" alt="" />
+          {/* Signature Olive Decorations — Corner Framing */}
+          <div className="absolute -top-24 -left-24 opacity-[0.04] pointer-events-none rotate-[90deg]">
+            <img src="/assets/component/19.svg" className="w-[28rem] h-[28rem]" alt="" />
           </div>
-          <div className="absolute -bottom-20 left-10 opacity-[0.05] pointer-events-none rotate-[10deg]">
-            <img src="/assets/component/20.svg" className="w-72 h-72" alt="" />
+          <div className="absolute -bottom-32 -right-32 opacity-[0.05] pointer-events-none rotate-[270deg]">
+            <img src="/assets/component/20.svg" className="w-[32rem] h-[32rem]" alt="" />
           </div>
           <div className="w-full max-w-6xl mx-auto px-4 md:px-12 reveal-on-scroll">
             <div className="mb-12 space-y-4 text-center">
