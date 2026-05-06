@@ -427,7 +427,7 @@ export default function Home() {
       title: "WELCOME + WORKSHOP",
       location: "Grand Ballroom",
       details: ["Khai mạc", "Workshop"],
-      coords: { x: 65, y: 38.5, scale: 2 }
+      coords: { x: 65, y: 43, scale: 2 }
     },
     {
       time: "16:30",
@@ -448,7 +448,7 @@ export default function Home() {
       title: "MIDNIGHT REVERIE",
       location: "Infinity Pool",
       details: ["Fireworks", "DJ", "Pool Party"],
-      coords: { x: 65, y: 38.5, scale: 2 }
+      coords: { x: 65, y: 43, scale: 2 }
     },
   ];
 
