@@ -43,6 +43,7 @@ export default function Entrance({ onComplete, onInteraction }: { onComplete: ()
   const [activeLogo, setActiveLogo] = useState<string | null>(null);
   const [showFinalGrid, setShowFinalGrid] = useState(false);
   const [currentMessage, setCurrentMessage] = useState("");
+  const [isAssetsLoaded, setIsAssetsLoaded] = useState(false);
   
   const containerRef = useRef<HTMLDivElement>(null);
   const cameraRef = useRef<HTMLDivElement>(null);
@@ -187,11 +188,41 @@ export default function Entrance({ onComplete, onInteraction }: { onComplete: ()
   };
 
   useEffect(() => {
-    gsap.fromTo(cameraRef.current,
-      { opacity: 0, scale: 0.8, y: 20 },
-      { opacity: 1, scale: 1, y: 0, duration: 1.2, ease: "power3.out" }
-    );
+    // Preload all critical assets
+    const assetsToPreload = [...IMAGES, ...LOGOS, "/assets/camera.webp", "/assets/places.png"];
+    let loadedCount = 0;
+
+    assetsToPreload.forEach(src => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        loadedCount++;
+        if (loadedCount === assetsToPreload.length) {
+          setIsAssetsLoaded(true);
+        }
+      };
+      img.onerror = () => {
+        loadedCount++; // Count as loaded even on error to avoid blocking
+        if (loadedCount === assetsToPreload.length) {
+          setIsAssetsLoaded(true);
+        }
+      };
+    });
+
+    // Fallback if loading takes too long
+    const timeout = setTimeout(() => setIsAssetsLoaded(true), 3000);
+
+    return () => clearTimeout(timeout);
   }, []);
+
+  useEffect(() => {
+    if (isAssetsLoaded && cameraRef.current) {
+      gsap.fromTo(cameraRef.current,
+        { opacity: 0, scale: 0.8, y: 20 },
+        { opacity: 1, scale: 1, y: 0, duration: 1.2, ease: "power3.out" }
+      );
+    }
+  }, [isAssetsLoaded]);
 
   return (
     <div
@@ -209,7 +240,7 @@ export default function Entrance({ onComplete, onInteraction }: { onComplete: ()
         <img src="/assets/component/20.svg" className="w-64 h-64" alt="" />
       </div>
       {/* Interactive Camera Section */}
-      {!isCaptured && (
+      {isAssetsLoaded && !isCaptured && (
         <div
           ref={cameraRef}
           onMouseDown={() => onInteraction?.()}
@@ -317,6 +348,15 @@ export default function Entrance({ onComplete, onInteraction }: { onComplete: ()
       {/* Brand Name */}
       <div className={`absolute top-12 left-12 md:top-auto md:bottom-12 pointer-events-none transition-opacity duration-500 ${isCaptured ? 'opacity-20' : 'opacity-0'}`}>
         <h1 className={`${purgatory.className} font-brand text-3xl md:text-4xl text-primary lowercase`}>The Sunset Sinfonia</h1>
+      </div>
+      {/* Hidden pre-render for logos to ensure instant swap during fast sequence */}
+      <div className="hidden opacity-0 pointer-events-none" aria-hidden="true">
+        {LOGOS.map((src, i) => (
+          <img key={`preload-logo-${i}`} src={src} alt="" />
+        ))}
+        {IMAGES.map((src, i) => (
+          <img key={`preload-photo-${i}`} src={src} alt="" />
+        ))}
       </div>
     </div>
   );
