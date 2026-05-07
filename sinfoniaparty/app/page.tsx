@@ -1597,7 +1597,7 @@ export default function Home() {
                   role="0889010399"
                   phone="Hỗ trợ địa điểm & Tiệc"
                   intro="Tận hưởng không gian nghỉ dưỡng tuyệt mỹ và dịch vụ đẳng cấp tại Wyndham Sky Lake, nơi khởi đầu cho những hành trình hạnh phúc."
-                  link="https://www.facebook.com/WynhamSkyLake.ResortVillas"
+                  link="https://www.facebook.com/wyndhamskylake/"
                 />
               </div>
             </div>
