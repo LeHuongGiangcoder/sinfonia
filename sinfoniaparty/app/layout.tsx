@@ -27,6 +27,7 @@ export const metadata: Metadata = {
     description: "An exclusive event for the wedding industry in Vietnam.",
     images: ["https://thesunsetsinfonia.gloweb.site/assets/thumbnail.jpg"],
   },
+  robots: "all",
 };
 
 export default function RootLayout({
