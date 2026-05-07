@@ -357,8 +357,8 @@ function Navbar({ scrolled }: { scrolled: boolean }) {
 
           {/* Brand Logo - Centered */}
           <div className={`flex-none transition-all duration-700 ${scrolled || menuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"}`}>
-            <a href="#" className="flex items-center justify-center">
-              <img src="/assets/camera.png" alt="Sinfonia Logo" className="h-10 w-auto" />
+            <a href="#" className={`${purgatory.className} text-2xl md:text-3xl text-primary`}>
+              The Sunset Sinfonia
             </a>
           </div>
 
