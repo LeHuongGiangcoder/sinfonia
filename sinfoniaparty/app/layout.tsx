@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     description: "An exclusive event for the wedding industry in Vietnam.",
     images: [
       {
-        url: "/assets/hero%20background.png",
+        url: "https://thesunsetsinfonia.gloweb.site/assets/hero-background.png",
         width: 1672,
         height: 941,
         alt: "The Sunset Sinfonia Hero Background",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "The Sunset Sinfonia",
     description: "An exclusive event for the wedding industry in Vietnam.",
-    images: ["/assets/hero%20background.png"],
+    images: ["https://thesunsetsinfonia.gloweb.site/assets/hero-background.png"],
   },
 };
 
