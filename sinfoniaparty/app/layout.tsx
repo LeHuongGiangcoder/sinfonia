@@ -3,7 +3,7 @@ import { montserrat, playfair, purgatory } from "@/lib/fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://sinfonia.party"), // Replace with your actual domain
+  metadataBase: new URL("https://thesunsetsinfonia.gloweb.site"),
   title: "The Sunset Sinfonia",
   description: "An exclusive event for the wedding industry in Vietnam.",
   openGraph: {
@@ -17,6 +17,8 @@ export const metadata: Metadata = {
         alt: "The Sunset Sinfonia Hero Background",
       },
     ],
+    url: "https://thesunsetsinfonia.gloweb.site",
+    siteName: "The Sunset Sinfonia",
     type: "website",
   },
   twitter: {
