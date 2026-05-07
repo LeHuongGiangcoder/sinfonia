@@ -358,7 +358,7 @@ function Navbar({ scrolled }: { scrolled: boolean }) {
           {/* Brand Logo - Centered */}
           <div className={`flex-none transition-all duration-700 ${scrolled || menuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"}`}>
             <a href="#" className="flex items-center justify-center">
-              <img src="/assets/component/18.svg" alt="Sinfonia Logo" className="h-12 w-auto" />
+              <img src="/assets/camera.png" alt="Sinfonia Logo" className="h-10 w-auto" />
             </a>
           </div>
 
