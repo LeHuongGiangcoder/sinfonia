@@ -347,7 +347,7 @@ export default function Entrance({ onComplete, onInteraction }: { onComplete: ()
 
       {/* Brand Name */}
       <div className={`absolute top-12 left-12 md:top-auto md:bottom-12 pointer-events-none transition-opacity duration-500 ${isCaptured ? 'opacity-20' : 'opacity-0'}`}>
-        <h1 className={`${purgatory.className} font-brand text-3xl md:text-4xl text-primary lowercase`}>The Sunset Sinfonia</h1>
+        <img src="/assets/component/18.svg" alt="Sinfonia Logo" className="h-16 w-auto" />
       </div>
       {/* Hidden pre-render for logos to ensure instant swap during fast sequence */}
       <div className="hidden opacity-0 pointer-events-none" aria-hidden="true">
