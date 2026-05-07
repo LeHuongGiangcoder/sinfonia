@@ -591,14 +591,14 @@ export default function Home() {
         duration: 1.8,
         ease: "power3.out",
       })
-      // 3. Animate title
-      .to(".hero-content", {
-        y: 0,
-        opacity: 1,
-        duration: 1.5,
-        ease: "power3.out",
-        stagger: 0.2,
-      }, "-=0.8");
+        // 3. Animate title
+        .to(".hero-content", {
+          y: 0,
+          opacity: 1,
+          duration: 1.5,
+          ease: "power3.out",
+          stagger: 0.2,
+        }, "-=0.8");
 
       // Bridge Section — Word by word reveal
       const bridgeWords = gsap.utils.toArray(".bridge-word");
@@ -1060,7 +1060,7 @@ export default function Home() {
               </div>
 
               {/* Map Overview — Auto-zooming Map */}
-              <div 
+              <div
                 className="relative aspect-video md:aspect-[16/9] w-full overflow-hidden rounded-sm border border-primary/10 bg-[#e5e1d8] shadow-2xl group/map cursor-pointer"
                 onClick={() => {
                   if (activeAgenda === null) setActiveAgenda(0);
@@ -1070,9 +1070,9 @@ export default function Home() {
               >
                 {/* Interaction Hint */}
                 <NavigationHint text="Click to view more" isVisible={showAgendaHint} />
-                
+
                 {/* Dark Overlay for Hint Visibility */}
-                <div 
+                <div
                   className={`absolute inset-0 bg-black/60 z-40 transition-opacity duration-1000 pointer-events-none ${showAgendaHint ? 'opacity-100' : 'opacity-0'}`}
                 ></div>
                 {/* Desktop Detail Overlay — The "Note" style per user request */}
@@ -1218,8 +1218,11 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <h3 className="heading-md !text-[#fff8eb]">Cảm ơn bạn đã phản hồi</h3>
-                  <p className="text-elegant !text-[#fff8eb]">Chúng tôi đã nhận được thông tin và rất mong được đón tiếp bạn.</p>
+                  <h3 className="heading-md !text-[#fff8eb]">Trân trọng cảm ơn bạn</h3>
+                  <p className="text-elegant !text-[#fff8eb]/90 leading-relaxed px-8">
+                    Thông tin của bạn đã được ghi nhận thành công. <br />
+                    Một tấm thiệp mời bản cứng sẽ sớm được gửi đến bạn để hoàn tất thủ tục check-in lưu trú.
+                  </p>
                 </div>
                 <button
                   onClick={() => setFormStatus("idle")}
@@ -1421,7 +1424,7 @@ export default function Home() {
                 </div>
 
                 {/* Main Content Area with Arrows */}
-                <div 
+                <div
                   className="relative w-full cursor-pointer"
                   onClick={() => {
                     if (activeDresscode < dresscodeData.length - 1) setActiveDresscode(prev => prev + 1);
