@@ -15,7 +15,7 @@ const IMAGES = [
 ];
 
 const LOGOS = [
-  "/assets/logo webp/wyndham logo.webp",
+  "/assets/logo webp/kav logo.webp",
   "/assets/logo webp/fancy_logo.webp",
   "/assets/logo webp/glow_logo.webp",
   "/assets/logo webp/tada_logo.webp",
@@ -27,7 +27,7 @@ const LOGOS = [
   "/assets/logo webp/hanoi_trap_logo.webp",
   "/assets/logo webp/mc logo.webp",
   "/assets/logo webp/en_bridal.webp",
-  "/assets/logo webp/kav logo.webp",
+  "/assets/logo webp/wyndham logo.webp",
 ];
 
 interface PhotoItem {

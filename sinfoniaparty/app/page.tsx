@@ -535,7 +535,7 @@ export default function Home() {
       menImg: "/assets/dresscode%20webp/men%204.webp",
       palette: {
         women: ["#B2EBF2", "#FFF9C4", "#FFCCBC", "#FFFFFF"],
-        men: ["#E0F7FA", "#CFD8DC", "#FFAB91", "#FFFFFF"]
+        men: ["#FFFFFF", "#F5F5DC", "#FDF5E6", "#1A1A1A"]
       }
     }
   ];
