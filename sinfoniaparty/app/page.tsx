@@ -840,8 +840,7 @@ export default function Home() {
             <div className="space-y-8 text-primary/80 font-light leading-relaxed text-justify">
               <div className="space-y-12">
                 <p className="text-lg reveal-on-scroll">
-                  Chúng ta đã cùng nhau tạo nên rất nhiều khoảnh khắc hoàn hảo cho các cặp đôi… <br className="hidden md:block" />
-                  Nhưng đã bao lâu chúng ta chưa có một khoảnh khắc dành riêng cho mình?
+                  Chúng ta đã cùng nhau tạo nên rất nhiều khoảnh khắc hoàn hảo cho các cặp đôi… Nhưng đã bao lâu chúng ta chưa có một khoảnh khắc dành riêng cho mình?
                 </p>
 
                 <p className="text-lg reveal-on-scroll">
