@@ -112,9 +112,10 @@ function InstagramPost({ images }: { images: string[] }) {
 }
 
 // --- Sub-component: NavigationHint ---
-function NavigationHint({ text, isVisible }: { text: string; isVisible: boolean }) {
+function NavigationHint({ text, isVisible, variant = "white" }: { text: string; isVisible: boolean; variant?: "white" | "primary" }) {
   const handRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const isPrimary = variant === "primary";
 
   useGSAP(() => {
     if (!containerRef.current || !handRef.current || !isVisible) return;
@@ -140,7 +141,7 @@ function NavigationHint({ text, isVisible }: { text: string; isVisible: boolean 
     <div ref={containerRef} className="absolute inset-0 pointer-events-none z-50 flex items-center justify-center">
       <div ref={handRef} className="flex flex-col items-center gap-3">
         <div className="relative">
-          <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" className="w-16 h-16">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className={`w-16 h-16 ${isPrimary ? "text-primary" : "text-white"}`}>
             <path d="M12 10V4a2 2 0 0 0-2-2h0a2 2 0 0 0-2 2v7" />
             <path d="M12 10a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v4" />
             <path d="M16 12a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v4" />
@@ -148,9 +149,9 @@ function NavigationHint({ text, isVisible }: { text: string; isVisible: boolean 
             <path d="M12 22h4a8 8 0 0 0 8-8v-2" />
             <path d="M6 10l-3 3a2 2 0 0 0 0 2.8l4 4a8 8 0 0 0 5 2.2" />
           </svg>
-          <div className="absolute top-0 right-0 w-6 h-6 border-2 border-white rounded-full animate-ping opacity-75"></div>
+          <div className={`absolute top-0 right-0 w-6 h-6 border-2 ${isPrimary ? "border-primary" : "border-white"} rounded-full animate-ping opacity-75`}></div>
         </div>
-        <p className="text-[11px] text-white font-medium uppercase tracking-[0.25em] bg-black/40 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/20">
+        <p className={`text-[11px] font-medium uppercase tracking-[0.25em] backdrop-blur-md px-4 py-1.5 rounded-full border ${isPrimary ? "text-primary bg-primary/5 border-primary/20" : "text-white bg-black/40 border-white/20"}`}>
           {text}
         </p>
       </div>
@@ -1114,7 +1115,7 @@ export default function Home() {
                 }}
               >
                 {/* Interaction Hint */}
-                <NavigationHint text="Click to view more" isVisible={showAgendaHint} />
+                <NavigationHint text="Click to view more" isVisible={showAgendaHint} variant="white" />
 
                 {/* Dark Overlay for Hint Visibility */}
                 <div
@@ -1477,7 +1478,7 @@ export default function Home() {
                   }}
                 >
                   {/* Interaction Hint */}
-                  <NavigationHint text="Click to view more" isVisible={showDresscodeHint} />
+                  <NavigationHint text="Click to view more" isVisible={showDresscodeHint} variant="primary" />
                   {/* Navigation Arrows */}
                   <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between z-30 pointer-events-none px-4 md:-mx-12">
                     <button
