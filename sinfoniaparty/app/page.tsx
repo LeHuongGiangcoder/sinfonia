@@ -833,13 +833,11 @@ export default function Home() {
 
           <div className="content-wrapper max-w-3xl px-6">
             <div className="mb-12 space-y-4 reveal-on-scroll">
-              <h2 className={`${purgatory.className} text-4xl md:text-5xl text-primary lowercase`}>Lời mở đầu</h2>
+              <h2 className={`${purgatory.className} text-4xl md:text-5xl text-primary lowercase`}>Dear friends,</h2>
               <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
             </div>
 
-            <div className="space-y-8 text-primary/80 font-light leading-relaxed text-center">
-              <p className="text-xl md:text-2xl font-display italic text-primary/90 reveal-on-scroll">Dear friends,</p>
-
+            <div className="space-y-8 text-primary/80 font-light leading-relaxed text-justify">
               <div className="space-y-12">
                 <p className="text-lg reveal-on-scroll">
                   Chúng ta đã cùng nhau tạo nên rất nhiều khoảnh khắc hoàn hảo cho các cặp đôi… <br className="hidden md:block" />
@@ -851,7 +849,7 @@ export default function Home() {
                 </p>
 
                 <div className="reveal-on-scroll">
-                  <p className="text-xl font-display italic text-primary/90 border-y border-primary/5 py-6 my-8">
+                  <p className="text-xl font-display italic text-primary/90 border-y border-primary/5 py-6 my-8 text-center">
                     Một không gian mang tinh thần Intimate Party: ít khoảng cách hơn, nhiều cảm xúc hơn.
                   </p>
                 </div>
@@ -861,7 +859,7 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="pt-8 reveal-on-scroll">
+              <div className="pt-8 reveal-on-scroll text-center">
                 <p className={`${purgatory.className} text-4xl md:text-5xl text-primary animate-pulse-slow`}>Enjoy!!!</p>
               </div>
             </div>
