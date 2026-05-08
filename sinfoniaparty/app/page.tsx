@@ -860,7 +860,7 @@ export default function Home() {
               </div>
 
               <div className="pt-8 reveal-on-scroll text-center">
-                <p className={`${purgatory.className} text-4xl md:text-5xl text-primary animate-pulse-slow`}>Enjoy!!!</p>
+                <p className={`${purgatory.className} text-4xl md:text-5xl text-primary animate-pulse-slow`}>enjoy!!!</p>
               </div>
             </div>
           </div>
