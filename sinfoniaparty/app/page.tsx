@@ -329,9 +329,10 @@ function ContactCard({ images, unit, rep, role, phone, intro, link }: {
 function Navbar({ scrolled }: { scrolled: boolean }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const navItems = [
+    { name: "Gallery", href: "#gallery-section" },
+    { name: "Intro", href: "#intro-section" },
     { name: "Venue", href: "#details-section" },
     { name: "Agenda", href: "#agenda-section" },
-    { name: "Gallery", href: "#gallery-section" },
     { name: "Dress Code", href: "#dresscode-section" },
     { name: "RSVP", href: "#rsvp-section" },
   ];
@@ -816,6 +817,53 @@ export default function Home() {
               ].map((images, idx) => (
                 <InstagramPost key={`row3-${idx}`} images={images} />
               ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Intro Message Section */}
+        <section className="py-24 md:py-32 bg-background relative overflow-hidden" id="intro-section">
+          {/* Signature Olive Decoration */}
+          <div className="absolute top-1/2 left-0 -translate-y-1/2 opacity-[0.05] pointer-events-none -rotate-12 hidden md:block">
+            <img src="/assets/component/18.svg" className="w-[30rem] h-[30rem]" alt="" />
+          </div>
+          <div className="absolute top-1/2 right-0 -translate-y-1/2 opacity-[0.05] pointer-events-none rotate-12 hidden md:block">
+            <img src="/assets/component/19.svg" className="w-[30rem] h-[30rem]" alt="" />
+          </div>
+
+          <div className="content-wrapper max-w-3xl px-6">
+            <div className="mb-12 space-y-4 reveal-on-scroll">
+              <h2 className={`${purgatory.className} text-4xl md:text-5xl text-primary lowercase`}>Lời mở đầu</h2>
+              <div className="w-24 h-[1px] bg-primary/20 mx-auto"></div>
+            </div>
+
+            <div className="space-y-8 text-primary/80 font-light leading-relaxed text-center">
+              <p className="text-xl md:text-2xl font-display italic text-primary/90 reveal-on-scroll">Dear friends,</p>
+
+              <div className="space-y-12">
+                <p className="text-lg reveal-on-scroll">
+                  Chúng ta đã cùng nhau tạo nên rất nhiều khoảnh khắc hoàn hảo cho các cặp đôi… <br className="hidden md:block" />
+                  Nhưng đã bao lâu chúng ta chưa có một khoảnh khắc dành riêng cho mình?
+                </p>
+
+                <p className="text-lg reveal-on-scroll">
+                  <span className="font-semibold text-primary/90">The Sunset Sinfonia</span> tại Wyndham Sky Lake Resort & Villas, dịp để chúng ta cùng nhau tổ chức một bữa tiệc tạo nên một trải nghiệm mới, nơi được thổi hồn bằng cảm xúc, sự sáng tạo và những kết nối chân thành.
+                </p>
+
+                <div className="reveal-on-scroll">
+                  <p className="text-xl font-display italic text-primary/90 border-y border-primary/5 py-6 my-8">
+                    Một không gian mang tinh thần Intimate Party: ít khoảng cách hơn, nhiều cảm xúc hơn.
+                  </p>
+                </div>
+
+                <p className="text-lg reveal-on-scroll">
+                  Nơi mỗi cuộc gặp gỡ đều tự nhiên như một buổi reunion giữa những người cùng làm nghề, cùng đam mê và cùng tạo nên những khoảnh khắc ý nghĩa.
+                </p>
+              </div>
+
+              <div className="pt-8 reveal-on-scroll">
+                <p className={`${purgatory.className} text-4xl md:text-5xl text-primary animate-pulse-slow`}>Enjoy!!!</p>
+              </div>
             </div>
           </div>
         </section>
