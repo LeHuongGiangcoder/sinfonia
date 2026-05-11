@@ -253,7 +253,7 @@ function ContactCard({ images, unit, rep, role, phone, intro, link }: {
       {/* Slides */}
       <div className="absolute inset-0 flex transition-transform duration-500 ease-out" style={{ transform: `translateX(-${index * 100}%)` }}>
         {/* Slide 1: Rep Photo */}
-        <div className="w-full h-full shrink-0 relative">
+        <div className="w-full h-full shrink-0 relative overflow-hidden">
           <img
             src={`/assets/${images[0]}`}
             className={`w-full h-full object-cover ${images[0].includes('nhat linh') ? 'scale-105' : ''}`}
