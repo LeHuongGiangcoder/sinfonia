@@ -189,7 +189,13 @@ export default function Entrance({ onComplete, onInteraction }: { onComplete: ()
 
   useEffect(() => {
     // Preload all critical assets
-    const assetsToPreload = [...IMAGES, ...LOGOS, "/assets/camera.webp", "/assets/places.png"];
+    const assetsToPreload = [
+      ...IMAGES, 
+      ...LOGOS, 
+      "/assets/camera.webp", 
+      "/assets/places.png",
+      "/assets/Lady Gaga, Bruno Mars - Die With A Smile (Official Music Video).mp3"
+    ];
     let loadedCount = 0;
 
     assetsToPreload.forEach(src => {

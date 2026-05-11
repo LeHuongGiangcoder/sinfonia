@@ -457,6 +457,13 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Force audio preload
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.load();
+    }
+  }, []);
+
 
 
   const agendaData = [
@@ -675,7 +682,7 @@ export default function Home() {
       {/* Audio Source — Moved outside and preloaded for immediate playback */}
       <audio
         ref={audioRef}
-        src="/assets/Lady Gaga, Bruno Mars - Die With A Smile (Official Music Video).mp4"
+        src="/assets/Lady Gaga, Bruno Mars - Die With A Smile (Official Music Video).mp3"
         loop
         preload="auto"
       />

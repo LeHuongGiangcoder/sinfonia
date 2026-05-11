@@ -41,6 +41,9 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${montserrat.variable} ${playfair.variable} ${purgatory.variable} h-full antialiased`}
     >
+      <head>
+        <link rel="preload" href="/assets/Lady Gaga, Bruno Mars - Die With A Smile (Official Music Video).mp3" as="audio" />
+      </head>
       <body className="min-h-full flex flex-col font-sans text-foreground bg-background" suppressHydrationWarning>
         {/* Cinematic Grain Overlay */}
         <div className="grain-overlay" />
