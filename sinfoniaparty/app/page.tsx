@@ -327,7 +327,7 @@ function ContactCard({ images, unit, rep, role, phone, intro, link }: {
 }
 
 // --- Sub-component: Navbar ---
-function Navbar({ scrolled }: { scrolled: boolean }) {
+function Navbar({ scrolled, isGallery }: { scrolled: boolean; isGallery?: boolean }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const navItems = [
     { name: "Gallery", href: "#gallery-section" },
@@ -342,7 +342,7 @@ function Navbar({ scrolled }: { scrolled: boolean }) {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 w-full z-[100] transition-all duration-700 ${scrolled || menuOpen ? "bg-background/90 backdrop-blur-lg py-4 shadow-sm" : "bg-transparent py-8"}`}>
+      <nav className={`fixed top-0 left-0 w-full z-[100] transition-all duration-700 ${(scrolled || menuOpen) ? (isGallery ? "md:bg-transparent bg-background/90 md:backdrop-blur-none backdrop-blur-lg py-4 shadow-sm md:shadow-none" : "bg-background/90 backdrop-blur-lg py-4 shadow-sm") : "bg-transparent py-8"}`}>
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           {/* Desktop Navigation Left */}
           <div className="hidden md:flex items-center gap-8 flex-1">
@@ -438,6 +438,7 @@ export default function Home() {
   const [showDresscodeHint, setShowDresscodeHint] = useState(true);
   const [showContactHint, setShowContactHint] = useState(true);
   const [scrolled, setScrolled] = useState(false);
+  const [isGalleryActive, setIsGalleryActive] = useState(false);
   const [formStatus, setFormStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [formData, setFormData] = useState({
     name: "",
@@ -658,6 +659,14 @@ export default function Home() {
         duration: 1.6,
         ease: "power3.out",
       });
+
+      // Gallery Navbar State
+      ScrollTrigger.create({
+        trigger: "#gallery-section",
+        start: "top 80px",
+        end: "bottom 80px",
+        onToggle: (self) => setIsGalleryActive(self.isActive),
+      });
     }
   }, { scope: container, dependencies: [isLoading] });
 
@@ -681,7 +690,7 @@ export default function Home() {
           }}
         />
       )}
-      {!isLoading && <Navbar scrolled={scrolled} />}
+      {!isLoading && <Navbar scrolled={scrolled} isGallery={isGalleryActive} />}
       <div ref={container} className={`min-h-screen ${isLoading ? "opacity-0" : "opacity-100"} transition-opacity duration-1000`}>
         {/* 1 & 2. Hero Section — Full Bleed */}
         <section className="relative h-screen w-full overflow-hidden bg-[#0a0a0a]">
