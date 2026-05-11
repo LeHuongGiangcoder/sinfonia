@@ -1611,7 +1611,7 @@ export default function Home() {
                   role="0857086906"
                   phone="Hỗ trợ kỹ thuật Website"
                   intro="Glow mang đến giải pháp kỹ thuật và thẩm mỹ số hóa, biến những ý tưởng bay bổng thành trải nghiệm tương tác mượt mà cho website của bạn."
-                  link="https://zalo.me/0857086906"
+                  link="https://www.facebook.com/profile.php?id=61560901527827"
                 />
 
                 {/* Interaction Hint — Contact Bubble (Mobile Only) */}
