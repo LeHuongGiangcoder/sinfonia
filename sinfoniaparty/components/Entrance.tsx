@@ -26,7 +26,8 @@ const LOGOS = [
   "/assets/logo webp/light_wedding_logo.webp",
   "/assets/logo webp/hanoi_trap_logo.webp",
   "/assets/logo webp/mc logo.webp",
-  "/assets/logo webp/en_bridal.webp",
+  "/assets/logo webp/Én Bridal.webp",
+  "/assets/logo webp/Éveil Accessories Bridal.webp",
   "/assets/logo webp/wyndham logo.webp",
 ];
 
@@ -158,7 +159,7 @@ export default function Entrance({ onComplete, onInteraction }: { onComplete: ()
 
     // Phase 3: Logos (80 -> 99%)
     const logoSequenceStartTime = tl.duration();
-    const logoInterval = 0.18; // Adjusted for 13 logos to keep timing tight
+    const logoInterval = 0.17; // Adjusted for 14 logos to keep timing tight
 
     tl.to(progressProxy, {
       value: 99,
