@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { purgatory } from "@/lib/fonts";
 import Entrance from "@/components/Entrance";
+import confetti from "canvas-confetti";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -608,6 +609,33 @@ export default function Home() {
           duration: 1.5,
           ease: "power3.out",
           stagger: 0.2,
+          onStart: () => {
+            const end = Date.now() + 2.5 * 1000;
+            const colors = ['#4b5006', '#f3ede1', '#ffffff'];
+
+            (function frame() {
+              confetti({
+                particleCount: 4,
+                angle: 60,
+                spread: 55,
+                origin: { x: 0, y: 0.6 },
+                colors: colors,
+                zIndex: 100
+              });
+              confetti({
+                particleCount: 4,
+                angle: 120,
+                spread: 55,
+                origin: { x: 1, y: 0.6 },
+                colors: colors,
+                zIndex: 100
+              });
+
+              if (Date.now() < end) {
+                requestAnimationFrame(frame);
+              }
+            }());
+          }
         }, "-=0.8");
 
       // Bridge Section — Word by word reveal
