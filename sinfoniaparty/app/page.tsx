@@ -610,23 +610,26 @@ export default function Home() {
           ease: "power3.out",
           stagger: 0.2,
           onStart: () => {
-            const end = Date.now() + 2.5 * 1000;
+            const isMobile = window.innerWidth < 768;
+            const duration = isMobile ? 1.2 * 1000 : 2.5 * 1000;
+            const particleCount = isMobile ? 1 : 4;
+            const end = Date.now() + duration;
             const colors = ['#4b5006', '#f3ede1', '#ffffff'];
 
             (function frame() {
               confetti({
-                particleCount: 4,
+                particleCount: particleCount,
                 angle: 60,
-                spread: 55,
-                origin: { x: 0, y: 0.6 },
+                spread: isMobile ? 45 : 55,
+                origin: { x: 0, y: isMobile ? 0.7 : 0.6 },
                 colors: colors,
                 zIndex: 100
               });
               confetti({
-                particleCount: 4,
+                particleCount: particleCount,
                 angle: 120,
-                spread: 55,
-                origin: { x: 1, y: 0.6 },
+                spread: isMobile ? 45 : 55,
+                origin: { x: 1, y: isMobile ? 0.7 : 0.6 },
                 colors: colors,
                 zIndex: 100
               });
