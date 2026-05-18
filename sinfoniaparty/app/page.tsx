@@ -614,7 +614,7 @@ export default function Home() {
             const duration = isMobile ? 1.2 * 1000 : 2.5 * 1000;
             const particleCount = isMobile ? 1 : 4;
             const end = Date.now() + duration;
-            const colors = ['#4b5006', '#f3ede1', '#ffffff'];
+            const colors = ['#dfba73', '#f3ede1', '#ffffff']; // Champagne gold, warm beige, and white
 
             (function frame() {
               confetti({
