@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { montserrat, playfair, purgatory } from "@/lib/fonts";
 import "./globals.css";
 
@@ -48,6 +49,7 @@ export default function RootLayout({
         {/* Cinematic Grain Overlay */}
         <div className="grain-overlay" />
         {children}
+        <Analytics />
       </body>
     </html>
   );
