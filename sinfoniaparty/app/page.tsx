@@ -485,9 +485,9 @@ export default function Home() {
     {
       time: "15:30",
       title: "OUR FIRST TRIP AS MR & MRS",
-      location: "Grand Ballroom",
+      location: "Khu Villa",
       details: ["Sitecheck rooms for Honeymoon"],
-      coords: { x: 63, y: 56, scale: 2 }
+      coords: { x: 76, y: 48, scale: 2 }
     },
     {
       time: "16:30",
