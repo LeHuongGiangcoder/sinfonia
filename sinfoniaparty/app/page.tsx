@@ -478,9 +478,9 @@ export default function Home() {
     {
       time: "14:30",
       title: "TEA BREAK",
-      location: "Sinfonia Garden",
+      location: "Resort clubhouse",
       details: [],
-      coords: { x: 75, y: 15, scale: 2.2 }
+      coords: { x: 63, y: 56, scale: 2 }
     },
     {
       time: "15:30",
