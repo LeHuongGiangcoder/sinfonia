@@ -483,10 +483,10 @@ export default function Home() {
       coords: { x: 75, y: 15, scale: 2.2 }
     },
     {
-      time: "15:00",
-      title: "WELCOME + WORKSHOP",
+      time: "15:30",
+      title: "OUR FIRST TRIP AS MR & MRS",
       location: "Grand Ballroom",
-      details: ["Khai mạc", "Workshop"],
+      details: ["Sitecheck rooms for Honeymoon"],
       coords: { x: 63, y: 56, scale: 2 }
     },
     {
