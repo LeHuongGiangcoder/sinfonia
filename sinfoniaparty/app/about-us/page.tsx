@@ -423,6 +423,66 @@ export default function AboutUs() {
             quote="See you when Sky Lake transforms into one of the most unforgettable nightlife-inspired wedding experiences of the summer."
           />
 
+          <VendorCard 
+            delay={4}
+            role="Dessert Experience Partner"
+            title="Marslow Taste"
+            logo="marslow_logo.webp"
+            link="https://www.facebook.com/tiembanhmarslow.taste"
+            description={
+              <>
+                <p className="mb-4">
+                  THE SUNSET SINFONIA tin rằng một trải nghiệm đáng nhớ không chỉ được cảm nhận bằng âm nhạc hay ánh sáng, mà còn qua cả vị giác.
+                </p>
+                <p className="mb-4">
+                  Và đó là lý do Marslow Taste trở thành một phần của hành trình này.
+                </p>
+                <p className="mb-4">
+                  Không đơn thuần là dessert, mỗi creation của Marslow Taste được chăm chút như một tác phẩm thủ công tinh tế, nơi texture, hương vị và thẩm mỹ cùng hòa vào một trải nghiệm đầy cảm xúc.
+                </p>
+                <p className="mb-4">
+                  Những lớp bánh mềm mịn, vị ngọt vừa đủ và hậu vị thanh nhẹ tạo nên cảm giác tinh tế nhưng khó quên, như một dư âm còn đọng lại rất lâu sau bữa tiệc.
+                </p>
+                <p className="mb-4">
+                  Khi hoàng hôn dần chuyển sang nightlife mood, Marslow Taste cũng mang đến một dessert menu riêng dành cho afterparty, sâu vị hơn, quyến rũ hơn và được tạo ra để đồng điệu cùng không khí của đêm tiệc.
+                </p>
+                <p>
+                  Giữa âm nhạc, ánh đèn và những cuộc trò chuyện kéo dài bất tận, Marslow Taste sẽ là mảnh ghép hoàn thiện trải nghiệm của THE SUNSET SINFONIA theo cách nhẹ nhàng nhưng đầy dấu ấn.
+                </p>
+              </>
+            }
+          />
+
+          <VendorCard 
+            delay={5}
+            role="Storytelling Partner"
+            title="Tada Wedding Film"
+            logo="tada_logo.webp"
+            link="https://www.facebook.com/tadaweddingfilm"
+            description={
+              <>
+                <p className="mb-4">
+                  Có những khoảnh khắc trong wedding không cần quá nhiều lời để kể.
+                </p>
+                <p className="mb-4">
+                  Đó có thể là một ánh nhìn rất khẽ, chuyển động của ánh nắng cuối chiều, hay cách hai người đứng cạnh nhau giữa âm nhạc và cảm xúc đang chạm đến cao trào.
+                </p>
+                <p className="mb-4">
+                  Và Tada Wedding Film là đơn vị lưu giữ những khoảnh khắc ấy theo cách rất điện ảnh.
+                </p>
+                <p className="mb-4">
+                  Không chỉ ghi lại một wedding, Tada kể lại câu chuyện bằng ánh sáng, nhịp chuyển động và những frame hình giàu cảm xúc, nơi mỗi thước phim đều mang màu sắc và “hơi thở” rất riêng của cô dâu chú rể.
+                </p>
+                <p className="mb-4">
+                  Tại THE SUNSET SINFONIA, Tada Wedding Film sẽ cùng tạo nên một không gian nơi mọi khoảnh khắc không chỉ được nhìn thấy, mà còn được cảm nhận như đang bước vào một bộ phim đầy cảm xúc.
+                </p>
+                <p>
+                  Một bản giao hưởng của hoàng hôn, nghệ thuật và những ký ức được lưu giữ mãi về sau.
+                </p>
+              </>
+            }
+          />
+
         </div>
       </section>
       
