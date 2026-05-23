@@ -331,12 +331,13 @@ function ContactCard({ images, unit, rep, role, phone, intro, link }: {
 function Navbar({ scrolled, isGallery }: { scrolled: boolean; isGallery?: boolean }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const navItems = [
-    { name: "Gallery", href: "#gallery-section" },
-    { name: "Intro", href: "#intro-section" },
-    { name: "Venue", href: "#details-section" },
-    { name: "Agenda", href: "#agenda-section" },
-    { name: "Dress Code", href: "#dresscode-section" },
-    { name: "RSVP", href: "#rsvp-section" },
+    { name: "Gallery", href: "/#gallery-section" },
+    { name: "Intro", href: "/#intro-section" },
+    { name: "Venue", href: "/#details-section" },
+    { name: "Agenda", href: "/#agenda-section" },
+    { name: "Dress Code", href: "/#dresscode-section" },
+    { name: "RSVP", href: "/#rsvp-section" },
+    { name: "About Us", href: "/about-us" },
   ];
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
@@ -347,7 +348,7 @@ function Navbar({ scrolled, isGallery }: { scrolled: boolean; isGallery?: boolea
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           {/* Desktop Navigation Left */}
           <div className="hidden md:flex items-center gap-8 flex-1">
-            {navItems.slice(0, 2).map((item) => (
+            {navItems.slice(0, 3).map((item) => (
               <a
                 key={item.name}
                 href={item.href}
@@ -367,7 +368,7 @@ function Navbar({ scrolled, isGallery }: { scrolled: boolean; isGallery?: boolea
 
           {/* Desktop Navigation Right */}
           <div className="hidden md:flex items-center justify-end gap-8 flex-1">
-            {navItems.slice(2).map((item) => (
+            {navItems.slice(3).map((item) => (
               <a
                 key={item.name}
                 href={item.href}
@@ -456,6 +457,35 @@ export default function Home() {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Check for skipEntrance parameter/session storage to bypass the intro animation
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const skipParam = params.get("skipEntrance") === "true";
+      const skipSession = window.sessionStorage?.getItem("skipEntrance") === "true";
+
+      if (skipParam || skipSession) {
+        setIsLoading(false);
+        
+        // Remove from session storage to prevent skipping on later fresh page refreshes
+        window.sessionStorage?.removeItem("skipEntrance");
+
+        // Handle scrolling to hash element
+        const hash = window.location.hash;
+        if (hash) {
+          // A tiny timeout allows the DOM to render and settle before scrolling
+          setTimeout(() => {
+            const id = hash.replace("#", "");
+            const element = document.getElementById(id);
+            if (element) {
+              element.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          }, 150);
+        }
+      }
+    }
   }, []);
 
   // Force audio preload
@@ -1717,6 +1747,17 @@ export default function Home() {
                 <span>thank</span>
                 <span>you</span>
               </h2>
+            </div>
+            
+            <div className="mt-20">
+              <a href="/about-us" className="group flex flex-col items-center gap-3">
+                <p className="text-[11px] font-medium uppercase tracking-[0.25em] backdrop-blur-md px-6 py-2.5 rounded-full border text-[#f3ede1] bg-white/15 border-[#f3ede1]/35 group-hover:bg-[#f3ede1] group-hover:text-primary transition-all duration-500 shadow-[0_0_20px_rgba(243,237,225,0.15)] group-hover:shadow-[0_0_30px_rgba(243,237,225,0.35)]">
+                  Meet the magicians behind
+                </p>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5 text-white/50 group-hover:text-white transition-colors duration-500 group-hover:translate-y-1">
+                  <path d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              </a>
             </div>
           </div>
         </section>
