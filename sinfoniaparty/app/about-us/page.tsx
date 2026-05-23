@@ -109,6 +109,21 @@ const VendorCard = ({ role, title, logo, description, quote, link, delay = 0, is
   const cardRef = useRef<HTMLDivElement>(null);
   const [isExpanded, setIsExpanded] = useState(false);
 
+  useGSAP(() => {
+    gsap.from(cardRef.current, {
+      scrollTrigger: {
+        trigger: cardRef.current,
+        start: "top 95%",
+        toggleActions: "play none none reverse",
+      },
+      y: 15,
+      opacity: 0,
+      duration: 0.5,
+      delay: delay * 0.12,
+      ease: "power2.out",
+    });
+  }, { scope: cardRef });
+
   const handleCardClick = (e: React.MouseEvent) => {
     // Prevent toggle if the user clicks the external link or any of its children
     if ((e.target as HTMLElement).closest('a')) {
@@ -138,13 +153,13 @@ const VendorCard = ({ role, title, logo, description, quote, link, delay = 0, is
               target="_blank" 
               rel="noopener noreferrer" 
               onClick={(e) => e.stopPropagation()}
-              className="w-full aspect-square bg-primary/5 border border-primary/10 rounded-sm flex items-center justify-center p-4 hover:border-primary/40 group-hover:border-primary/30 transition-colors duration-500 shadow-[inset_0_0_20px_rgba(75,80,6,0.02)] cursor-pointer"
+              className="w-full max-w-[180px] md:max-w-[200px] aspect-square bg-primary/5 border border-primary/10 rounded-sm flex items-center justify-center p-4 hover:border-primary/40 group-hover:border-primary/30 transition-colors duration-500 shadow-[inset_0_0_20px_rgba(75,80,6,0.02)] cursor-pointer shrink-0"
             >
-              <img src={`/assets/logo webp/${logo}`} alt={title} className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105" />
+              <img src={`/assets/logo%20webp/${logo}`} alt={title} className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105" />
             </a>
           ) : (
-            <div className="w-full aspect-square bg-primary/5 border border-primary/10 rounded-sm flex items-center justify-center p-4 group-hover:border-primary/30 transition-colors duration-500 shadow-[inset_0_0_20px_rgba(75,80,6,0.02)]">
-              <img src={`/assets/logo webp/${logo}`} alt={title} className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105" />
+            <div className="w-full max-w-[180px] md:max-w-[200px] aspect-square bg-primary/5 border border-primary/10 rounded-sm flex items-center justify-center p-4 group-hover:border-primary/30 transition-colors duration-500 shadow-[inset_0_0_20px_rgba(75,80,6,0.02)] shrink-0">
+              <img src={`/assets/logo%20webp/${logo}`} alt={title} className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105" />
             </div>
           )}
           <h3 className="text-xl md:text-2xl font-display text-primary text-center h-14 md:h-16 flex items-center justify-center w-full">
@@ -258,18 +273,6 @@ export default function AboutUs() {
       ease: "power3.out",
     });
 
-    gsap.from(".vendor-card", {
-      scrollTrigger: {
-        trigger: ".vendors-grid-container",
-        start: "top 92%",
-        toggleActions: "play none none reverse",
-      },
-      y: 20,
-      opacity: 0,
-      duration: 0.65,
-      stagger: 0.12,
-      ease: "power2.out",
-    });
   }, { scope: container });
 
   return (

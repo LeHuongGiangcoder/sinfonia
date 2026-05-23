@@ -15,20 +15,20 @@ const IMAGES = [
 ];
 
 const LOGOS = [
-  "/assets/logo webp/kav logo.webp",
-  "/assets/logo webp/fancy_logo.webp",
-  "/assets/logo webp/glow_logo.webp",
-  "/assets/logo webp/tada_logo.webp",
-  "/assets/logo webp/entropy_logo.webp",
-  "/assets/logo webp/marslow_logo.webp",
-  "/assets/logo webp/win_booth_logo.webp",
-  "/assets/logo webp/nguyenlieubonphuong_logo.webp",
-  "/assets/logo webp/light_wedding_logo.webp",
-  "/assets/logo webp/hanoi_trap_logo.webp",
-  "/assets/logo webp/mc logo.webp",
-  "/assets/logo webp/Én Bridal.webp",
-  "/assets/logo webp/Éveil Accessories Bridal.webp",
-  "/assets/logo webp/wyndham logo.webp",
+  "/assets/logo%20webp/kav%20logo.webp",
+  "/assets/logo%20webp/fancy_logo.webp",
+  "/assets/logo%20webp/glow_logo.webp",
+  "/assets/logo%20webp/tada_logo.webp",
+  "/assets/logo%20webp/entropy_logo.webp",
+  "/assets/logo%20webp/marslow_logo.webp",
+  "/assets/logo%20webp/win_booth_logo.webp",
+  "/assets/logo%20webp/nguyenlieubonphuong_logo.webp",
+  "/assets/logo%20webp/light_wedding_logo.webp",
+  "/assets/logo%20webp/hanoi_trap_logo.webp",
+  "/assets/logo%20webp/mc%20logo.webp",
+  "/assets/logo%20webp/Én%20Bridal.webp",
+  "/assets/logo%20webp/Éveil%20Accessories%20Bridal.webp",
+  "/assets/logo%20webp/wyndham%20logo.webp",
 ];
 
 interface PhotoItem {
