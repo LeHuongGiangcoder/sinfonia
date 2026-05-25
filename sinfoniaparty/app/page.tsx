@@ -1751,9 +1751,28 @@ export default function Home() {
             
             <div className="mt-20">
               <a href="/about-us" className="group flex flex-col items-center gap-3">
-                <p className="text-[11px] font-medium uppercase tracking-[0.25em] backdrop-blur-md px-6 py-2.5 rounded-full border text-[#f3ede1] bg-white/15 border-[#f3ede1]/35 group-hover:bg-[#f3ede1] group-hover:text-primary transition-all duration-500 shadow-[0_0_20px_rgba(243,237,225,0.15)] group-hover:shadow-[0_0_30px_rgba(243,237,225,0.35)]">
-                  Meet the magicians behind
-                </p>
+                <div className="relative">
+                  <p className="text-[11px] font-medium uppercase tracking-[0.25em] backdrop-blur-md px-6 py-2.5 rounded-full border text-[#f3ede1] bg-white/15 border-[#f3ede1]/35 group-hover:bg-[#f3ede1] group-hover:text-primary transition-all duration-500 shadow-[0_0_20px_rgba(243,237,225,0.15)] group-hover:shadow-[0_0_30px_rgba(243,237,225,0.35)] animate-button-glow">
+                    Meet the magicians behind
+                  </p>
+
+                  {/* Micro-animated clicking hand hint to draw attention */}
+                  <div className="absolute -bottom-3 right-4 pointer-events-none z-10 flex flex-col items-center group-hover:scale-110 transition-transform duration-500">
+                    {/* Elegant click ripple precisely centered on the index finger tip */}
+                    <div className="absolute top-[-10px] left-[1px] w-6 h-6 border border-[#f3ede1]/80 rounded-full animate-hand-ripple"></div>
+
+                    {/* Hand pointing up-left */}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-8 h-8 text-[#f3ede1] drop-shadow-[0_0_8px_rgba(243,237,225,0.4)] animate-pointing-hand">
+                      <path d="M12 10V4a2 2 0 0 0-2-2h0a2 2 0 0 0-2 2v7" />
+                      <path d="M12 10a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v4" />
+                      <path d="M16 12a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v4" />
+                      <path d="M20 14a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v4" />
+                      <path d="M12 22h4a8 8 0 0 0 8-8v-2" />
+                      <path d="M6 10l-3 3a2 2 0 0 0 0 2.8l4 4a8 8 0 0 0 5 2.2" />
+                    </svg>
+                  </div>
+                </div>
+
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5 text-white/50 group-hover:text-white transition-colors duration-500 group-hover:translate-y-1">
                   <path d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                 </svg>

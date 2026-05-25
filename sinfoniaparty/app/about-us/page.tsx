@@ -483,6 +483,37 @@ export default function AboutUs() {
             }
           />
 
+          <VendorCard 
+            delay={6}
+            role="HOST & STORYTELLING EXPERIENCE"
+            title="MC Sơn Tùng"
+            logo="mc logo.webp"
+            link="https://www.instagram.com/mcwedding.sontung/"
+            description={
+              <>
+                <p className="mb-4">
+                  Một buổi tiệc có thể được tạo nên bởi âm thanh, ánh sáng hay concept.
+                  Nhưng cảm xúc của buổi tiệc luôn được dẫn dắt bởi người cầm mic.
+                </p>
+                <p className="mb-4">
+                  Và đó là lý do THE SUNSET SINFONIA lựa chọn đồng hành cùng MC Sơn Tùng.
+                </p>
+                <p className="mb-4">
+                  Không đơn thuần là một host, anh mang đến cách dẫn dắt giàu cảm xúc, tinh tế và vừa đủ để kết nối toàn bộ không gian của buổi tiệc.
+                </p>
+                <p className="mb-4">
+                  Chất giọng trầm ấm, khả năng kể chuyện tự nhiên cùng cách giữ nhịp cảm xúc đầy duyên dáng giúp mỗi khoảnh khắc trong chương trình trở nên gần gũi nhưng vẫn đầy chiều sâu.
+                </p>
+                <p className="mb-4">
+                  Không cần sự phô trương, MC Sơn Tùng tạo dấu ấn bằng cách kể chuyện rất riêng, điện ảnh, cảm xúc và giàu kết nối.
+                </p>
+                <p>
+                  Tại THE SUNSET SINFONIA, anh sẽ không chỉ dẫn dắt chương trình, mà còn trở thành cầu nối cảm xúc giữa âm nhạc, không gian và những khoảnh khắc đáng nhớ của đêm tiệc.
+                </p>
+              </>
+            }
+          />
+
         </div>
       </section>
       
