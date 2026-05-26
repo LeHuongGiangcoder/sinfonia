@@ -514,6 +514,32 @@ export default function AboutUs() {
             }
           />
 
+          <VendorCard 
+            delay={7}
+            role="STAGE, LIGHTING & AUDIO PARTNER"
+            title="KAV"
+            logo="kav logo.webp"
+            description={
+              <>
+                <p className="mb-4 text-primary/90 italic font-medium">
+                  Một khoảnh khắc đẹp có thể trôi qua rất nhanh nếu âm thanh không đủ chạm và ánh sáng không đủ tạo nên cảm xúc.
+                </p>
+                <p className="mb-4">
+                  Tại <strong className="font-semibold text-primary/95">THE SUNSET SINFONIA</strong>, KAV không chỉ xây dựng một sân khấu, mà còn kiến tạo toàn bộ không gian trải nghiệm bằng âm thanh, ánh sáng và hiệu ứng sân khấu được tính toán đến từng chuyển động cảm xúc.
+                </p>
+                <p className="mb-4">
+                  Từ những gam ánh sáng dịu nhẹ của sunset bên mặt hồ, đến nhịp visual dần đẩy không khí pool party nóng lên theo từng beat nhạc, rồi bùng nổ trong afterparty với hiệu ứng ánh sáng phủ kín toàn bộ không gian, mỗi phân đoạn của đêm tiệc đều được thiết kế như một “mood” riêng biệt.
+                </p>
+                <p className="mb-4">
+                  Không đơn thuần là vận hành kỹ thuật, KAV mang đến cách âm nhạc, ánh sáng và không gian hòa vào nhau để tạo nên một trải nghiệm thật sự sống động và giàu cảm xúc.
+                </p>
+                <p>
+                  Tại <strong className="font-semibold text-primary/95">THE SUNSET SINFONIA</strong>, mọi cảm xúc sẽ không chỉ được nhìn thấy, mà còn được cảm nhận bằng mọi giác quan.
+                </p>
+              </>
+            }
+          />
+
         </div>
       </section>
       
