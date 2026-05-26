@@ -329,10 +329,28 @@ export default function Entrance({ onComplete, onInteraction }: { onComplete: ()
       {/* Final Logo Grid */}
       {showFinalGrid && (
         <div className="absolute inset-0 flex items-center justify-center animate-fade-in">
-          <div className="flex flex-col items-center gap-16 max-w-3xl px-8">
-            <div className="flex flex-wrap justify-center gap-x-6 md:gap-x-10 gap-y-6 md:gap-y-8 items-center max-w-[280px] md:max-w-xl">
-              {LOGOS.map((src, i) => (
-                <div key={i} className="w-12 h-12 md:w-20 md:h-20 bg-white/10 rounded-sm overflow-hidden flex items-center justify-center">
+          <div className="flex flex-col items-center gap-8 md:gap-10 max-w-3xl px-8 w-full">
+            {/* Highlighted Main Vendor / Venue */}
+            <div className="flex flex-col items-center gap-2">
+              <span className="text-[10px] md:text-xs tracking-[0.3em] uppercase text-primary/60 font-semibold">
+                Venue & Sponsor
+              </span>
+              <div className="w-20 h-20 md:w-32 md:h-32 bg-white/20 rounded-md overflow-hidden flex items-center justify-center p-2 shadow-lg border border-primary/10 backdrop-blur-sm transform hover:scale-105 transition-all duration-300">
+                <img 
+                  src="/assets/logo%20webp/wyndham%20logo.webp" 
+                  className="w-full h-full object-contain" 
+                  alt="Main Vendor - Wyndham" 
+                />
+              </div>
+            </div>
+
+            {/* Subtle Divider */}
+            <div className="w-16 h-[1px] bg-primary/10"></div>
+
+            {/* Other Partner Logos */}
+            <div className="flex flex-wrap justify-center gap-x-4 md:gap-x-6 gap-y-3 md:gap-y-4 items-center max-w-[280px] md:max-w-xl">
+              {LOGOS.filter(src => !src.includes("wyndham")).map((src, i) => (
+                <div key={i} className="w-10 h-10 md:w-16 md:h-16 bg-white/10 rounded-sm overflow-hidden flex items-center justify-center p-1 border border-primary/5 hover:scale-105 transition-transform duration-200">
                   <img 
                     src={src} 
                     className={`w-full h-full object-contain ${src.includes('hanoi') ? 'scale-[1.4]' : 'scale-100'}`} 
@@ -341,7 +359,8 @@ export default function Entrance({ onComplete, onInteraction }: { onComplete: ()
                 </div>
               ))}
             </div>
-            <p className="subheading !opacity-100 text-primary tracking-[0.4em] uppercase text-sm">Để cùng mang đến</p>
+            
+            <p className="subheading !opacity-100 text-primary tracking-[0.4em] uppercase text-sm mt-2">Để cùng mang đến</p>
           </div>
         </div>
       )}
