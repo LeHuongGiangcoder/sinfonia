@@ -136,30 +136,30 @@ const VendorCard = ({ role, title, logo, description, quote, link, delay = 0, is
     <div 
       ref={cardRef} 
       onClick={handleCardClick}
-      className={`vendor-card group relative bg-white/60 backdrop-blur-md border border-primary/10 p-6 md:p-8 hover:bg-white/90 hover:border-primary/20 transition-all duration-500 ease-out rounded-sm shadow-xs hover:shadow-md cursor-pointer select-none w-full ${isExpanded ? 'md:col-span-4 max-w-none' : 'md:col-span-1 max-w-md'}`}
+      className={`vendor-card group relative bg-white/60 backdrop-blur-md border border-primary/10 hover:bg-white/90 hover:border-primary/20 transition-all duration-500 ease-out rounded-sm shadow-xs hover:shadow-md cursor-pointer select-none w-full ${isExpanded ? 'md:col-span-4 max-w-none p-6 md:p-8 h-auto' : 'md:col-span-1 max-w-md h-[440px] md:h-[460px] p-6 pb-8'}`}
     >
       <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none">
         <img src="/assets/component/18.svg" className="w-24 h-24 rotate-45" alt="" />
       </div>
       
-      <div className={`flex items-center relative z-10 gap-6 md:gap-12 transition-all duration-500 ease-out ${isExpanded ? 'flex-col md:flex-row' : 'flex-col'}`}>
-        <div className={`w-full flex flex-col items-center justify-center space-y-6 transition-all duration-500 ease-out ${isExpanded ? 'md:w-1/3' : 'md:w-full'}`}>
-          <p className="text-[9px] uppercase tracking-[0.3em] text-primary/60 font-medium whitespace-nowrap text-center">
+      <div className={`flex items-center relative z-10 gap-6 md:gap-12 transition-all duration-500 ease-out ${isExpanded ? 'flex-col md:flex-row' : 'flex-col h-full'}`}>
+        <div className={`w-full flex flex-col items-center transition-all duration-500 ease-out ${isExpanded ? 'md:w-1/3 justify-center space-y-6' : 'md:w-full h-full justify-between'}`}>
+          <p className="text-[9px] uppercase tracking-[0.25em] text-primary/60 font-medium text-center leading-relaxed max-w-full px-2 break-words">
             {role}
           </p>
-          {link ? (
+            {link ? (
             <a 
               href={link} 
               target="_blank" 
               rel="noopener noreferrer" 
               onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-[180px] md:max-w-[200px] aspect-square bg-primary/5 border border-primary/10 rounded-sm flex items-center justify-center p-4 hover:border-primary/40 group-hover:border-primary/30 transition-colors duration-500 shadow-[inset_0_0_20px_rgba(75,80,6,0.02)] cursor-pointer shrink-0"
+              className="w-full max-w-[180px] md:max-w-[200px] aspect-square bg-primary/5 border border-primary/10 rounded-sm flex items-center justify-center p-0 hover:border-primary/40 group-hover:border-primary/30 transition-colors duration-500 shadow-[inset_0_0_20px_rgba(75,80,6,0.02)] cursor-pointer shrink-0 overflow-hidden"
             >
-              <img src={`/assets/logo%20webp/${logo}`} alt={title} className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105" />
+              <img src={`/assets/logo%20webp/${logo}`} alt={title} className={`w-full h-full transition-transform duration-700 object-cover ${logo.includes('hanoi') ? 'scale-[1.08] group-hover:scale-[1.15]' : 'scale-100 group-hover:scale-105'}`} />
             </a>
           ) : (
-            <div className="w-full max-w-[180px] md:max-w-[200px] aspect-square bg-primary/5 border border-primary/10 rounded-sm flex items-center justify-center p-4 group-hover:border-primary/30 transition-colors duration-500 shadow-[inset_0_0_20px_rgba(75,80,6,0.02)] shrink-0">
-              <img src={`/assets/logo%20webp/${logo}`} alt={title} className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105" />
+            <div className="w-full max-w-[180px] md:max-w-[200px] aspect-square bg-primary/5 border border-primary/10 rounded-sm flex items-center justify-center p-0 group-hover:border-primary/30 transition-colors duration-500 shadow-[inset_0_0_20px_rgba(75,80,6,0.02)] shrink-0 overflow-hidden">
+              <img src={`/assets/logo%20webp/${logo}`} alt={title} className={`w-full h-full transition-transform duration-700 object-cover ${logo.includes('hanoi') ? 'scale-[1.08] group-hover:scale-[1.15]' : 'scale-100 group-hover:scale-105'}`} />
             </div>
           )}
           <h3 className="text-xl md:text-2xl font-display text-primary text-center h-14 md:h-16 flex items-center justify-center w-full">
@@ -538,6 +538,91 @@ export default function AboutUs() {
                 </p>
               </>
             }
+          />
+
+          <VendorCard 
+            delay={8}
+            role="CREATIVE EXPERIENCE & CONCEPT PARTNER"
+            title="Fancy"
+            logo="fancy_logo.webp"
+            link="https://www.facebook.com/fancywedding2015"
+            description={
+              <>
+                <p className="mb-4">
+                  THE SUNSET SINFONIA được tạo ra như một kỳ nghỉ cảm xúc, nơi khách mời không chỉ tham dự một wedding fair, mà thật sự bước vào một hành trình trải nghiệm kéo dài suốt hai ngày giữa hoàng hôn, âm nhạc, pool party và afterparty bên hồ.
+                </p>
+                <p className="mb-4">
+                  Đồng hành cùng hành trình ấy, Fancy đóng vai trò xây dựng concept tổng thể và định hình toàn bộ trải nghiệm cảm xúc cho chương trình.
+                </p>
+                <p className="mb-4">
+                  Từ cách không gian chuyển mình theo từng thời khắc trong ngày, nhịp cảm xúc của khách mời xuyên suốt sự kiện, cho đến những khoảnh khắc bùng nổ của nightlife và âm nhạc, mọi chi tiết đều được kết nối thành một tổng thể mang tính nghệ thuật và cá nhân hóa rõ nét.
+                </p>
+                <p className="mb-4">
+                  Không chỉ là đơn vị tổ chức, Fancy còn là cầu nối giữa những thương hiệu và đối tác uy tín trong ngành cưới để cùng nhau tạo nên một trải nghiệm vừa điện ảnh, vừa giàu cảm xúc và tính kết nối.
+                </p>
+                <p>
+                  Với Fancy, THE SUNSET SINFONIA không đơn thuần là một sự kiện để tham dự, mà là nơi mọi người thật sự được sống trong trải nghiệm, được tận hưởng và hòa mình vào một không gian mang tinh thần mùa hè đầy cảm hứng.
+                </p>
+              </>
+            }
+            quote="Not just a wedding fair. A whole summer state of mind."
+          />
+
+          <VendorCard 
+            delay={9}
+            role="WEDDING GIFT ARTISTRY PARTNER"
+            title="Hanoi Trápital"
+            logo="hanoi_trap_logo.webp"
+            description={
+              <>
+                <p className="mb-4">
+                  Lấy cảm hứng từ vẻ đẹp của hoàng hôn Địa Trung Hải và tinh thần lãng mạn của những buổi tiệc ngoài trời, Hanoi Trápital mang đến THE SUNSET SINFONIA một bộ sưu tập tráp cưới mang đậm tính nghệ thuật và dấu ấn thẩm mỹ riêng biệt.
+                </p>
+                <p className="mb-4">
+                  “The Sunset Sinfonia” được phát triển như một bản giao hưởng thị giác, nơi màu sắc, chất liệu và bố cục cùng hòa quyện để tạo nên cảm giác sang trọng nhưng vẫn đầy cảm xúc.
+                </p>
+                <p className="mb-4">
+                  Sắc tím gợi nhớ ánh chiều hoàng hôn, xanh lá mang tinh thần tự do của vùng Địa Trung Hải, trong khi gam trắng pastel tạo nên sự mềm mại và tinh khôi cho toàn bộ thiết kế.
+                </p>
+                <p className="mb-4">
+                  Bộ sưu tập gồm năm thiết kế tráp được chăm chút như những “nốt nhạc” trong cùng một bản hòa thanh, từ tráp rượu thượng hạng, tráp hoa quả nghệ thuật đến những món quà mang ý nghĩa kết nối và chúc phúc cho hành trình hôn nhân.
+                </p>
+                <p className="mb-4">
+                  Điểm nhấn đặc biệt nằm ở phần chân kệ được thiết kế riêng với hình khối lấy cảm hứng từ mặt trời và đường chân trời, tạo nên tổng thể vừa hiện đại, vừa mang tính biểu tượng cho sự viên mãn và trọn vẹn.
+                </p>
+                <p>
+                  Không chỉ là sính lễ, Hanoi Trápital mang đến một trải nghiệm thẩm mỹ nơi nghệ thuật, cảm xúc và phong cách sống được đặt vào từng chi tiết của ngày trọng đại.
+                </p>
+              </>
+            }
+          />
+
+          <VendorCard 
+            delay={10}
+            role="ARTISAN ACCESSORY WORKSHOP PARTNER"
+            title="Én Bridal"
+            logo="Én Bridal.webp"
+            link="https://www.facebook.com/enbridal.vn"
+            description={
+              <>
+                <p className="mb-4">
+                  Có những món phụ kiện không chỉ để hoàn thiện một outfit, mà được tạo ra để lưu giữ cảm xúc của một khoảnh khắc.
+                </p>
+                <p className="mb-4">
+                  Tại THE SUNSET SINFONIA, Én Bridal mang đến một workshop trải nghiệm đặc biệt, nơi khách mời có thể tự tay hoàn thiện những chiếc hoa cài áo từ xà cừ với dấu ấn cá nhân của riêng mình.
+                </p>
+                <p className="mb-4">
+                  Mỗi cánh hoa ánh ngọc mang một sắc độ khác nhau dưới ánh hoàng hôn, giống như cách mỗi câu chuyện tình yêu đều có vẻ đẹp rất riêng và không thể lặp lại.
+                </p>
+                <p className="mb-4">
+                  Giữa không gian sunset, âm nhạc và những cuộc trò chuyện đầy cảm hứng, workshop của Én Bridal mang đến một khoảng lặng nhẹ nhàng để khách mời chậm lại, sáng tạo và kết nối với chính trải nghiệm của mình.
+                </p>
+                <p>
+                  Không chỉ là một hoạt động thủ công, đây là một trải nghiệm mang tính nghệ thuật và cá nhân hóa, nơi những chi tiết nhỏ trở thành một phần ký ức đẹp của THE SUNSET SINFONIA.
+                </p>
+              </>
+            }
+            quote="Where sunset, art & celebration become one."
           />
 
         </div>

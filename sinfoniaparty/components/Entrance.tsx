@@ -318,7 +318,7 @@ export default function Entrance({ onComplete, onInteraction }: { onComplete: ()
           <div className="w-40 h-40 md:w-64 md:h-64 bg-white/10 rounded-sm overflow-hidden flex items-center justify-center">
             <img 
               src={activeLogo} 
-              className={`w-full h-full object-contain ${activeLogo.includes('hanoi') ? 'scale-[1.4]' : 'scale-100'}`} 
+              className={`w-full h-full object-cover ${activeLogo.includes('hanoi') ? 'scale-[1.08]' : 'scale-100'}`} 
               alt="Active Partner" 
             />
           </div>
@@ -350,10 +350,10 @@ export default function Entrance({ onComplete, onInteraction }: { onComplete: ()
             {/* Other Partner Logos */}
             <div className="flex flex-wrap justify-center gap-x-4 md:gap-x-6 gap-y-3 md:gap-y-4 items-center max-w-[280px] md:max-w-xl">
               {LOGOS.filter(src => !src.includes("wyndham")).map((src, i) => (
-                <div key={i} className="w-10 h-10 md:w-16 md:h-16 bg-white/10 rounded-sm overflow-hidden flex items-center justify-center p-1 border border-primary/5 hover:scale-105 transition-transform duration-200">
+                <div key={i} className="w-10 h-10 md:w-16 md:h-16 bg-white/10 rounded-sm overflow-hidden flex items-center justify-center p-0 border border-primary/5 hover:scale-105 transition-transform duration-200">
                   <img 
                     src={src} 
-                    className={`w-full h-full object-contain ${src.includes('hanoi') ? 'scale-[1.4]' : 'scale-100'}`} 
+                    className={`w-full h-full object-cover ${src.includes('hanoi') ? 'scale-[1.08]' : 'scale-100'}`} 
                     alt="Partner Logo" 
                   />
                 </div>
