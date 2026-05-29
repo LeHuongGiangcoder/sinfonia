@@ -570,7 +570,7 @@ export default function Home() {
     {
       title: "After Party",
       subtitle: "Tiệc hồ bơi",
-      women: "Trang phục hồ bơi / Bikini",
+      women: "Trang phục hồ bơi / Bling bling",
       men: "Quần short / Trang phục bơi",
       womenImg: "/assets/dresscode%20webp/women%204.webp",
       menImg: "/assets/dresscode%20webp/men%204.webp",
