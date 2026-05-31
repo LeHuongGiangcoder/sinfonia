@@ -625,6 +625,36 @@ export default function AboutUs() {
             quote="Where sunset, art & celebration become one."
           />
 
+          <VendorCard 
+            delay={11}
+            role="PHOTO PARTNER"
+            title="The Win Booth"
+            logo="win_booth_logo.webp"
+            description={
+              <>
+                <p className="mb-4">
+                  Có những khoảnh khắc đẹp không cần được lưu giữ bằng lời.
+                </p>
+                <p className="mb-4">
+                  Đó có thể là ánh nắng cuối ngày khẽ chạm lên vai áo, một giai điệu vang lên đúng lúc, hay một ánh nhìn vô tình bắt gặp giữa không gian đầy cảm xúc.
+                </p>
+                <p className="mb-4">
+                  Tại THE SUNSET SINFONIA, chúng tôi tin rằng những ký ức đáng nhớ nhất thường được tạo nên từ những khoảnh khắc rất nhỏ. Và đó cũng là cách The Win Booth đồng hành cùng hành trình này.
+                </p>
+                <p className="mb-4">
+                  Không đơn thuần là một photobooth, The Win Booth mang đến một không gian nơi mỗi khung hình trở thành một lát cắt cảm xúc của buổi chiều hoàng hôn, của âm nhạc, của những cuộc gặp gỡ và những khoảnh khắc đáng nhớ bên hồ.
+                </p>
+                <p className="mb-4">
+                  Mỗi lần bấm máy không chỉ lưu lại hình ảnh, mà còn lưu giữ cảm giác của một khoảnh khắc đã từng hiện diện.
+                </p>
+                <p>
+                  Để nhiều năm sau khi nhìn lại, điều còn đọng lại không chỉ là nơi bạn đã đi qua, mà còn là những cảm xúc bạn đã từng trải nghiệm tại THE SUNSET SINFONIA.
+                </p>
+              </>
+            }
+            quote="Because the best memories deserve to be remembered beautifully."
+          />
+
         </div>
       </section>
       
