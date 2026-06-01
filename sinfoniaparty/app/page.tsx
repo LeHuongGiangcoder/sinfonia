@@ -338,6 +338,7 @@ function Navbar({ scrolled, isGallery }: { scrolled: boolean; isGallery?: boolea
     { name: "Dress Code", href: "/#dresscode-section" },
     { name: "RSVP", href: "/#rsvp-section" },
     { name: "About Us", href: "/about-us" },
+    { name: "Quiz", href: "/quiz" },
   ];
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
