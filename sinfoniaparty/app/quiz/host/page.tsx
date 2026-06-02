@@ -60,8 +60,10 @@ export default function QuizHostPage() {
   >({});
   const [timeLeft, setTimeLeft] = useState(0);
   const [prevQuestion, setPrevQuestion] = useState(-1);
+  const [revealStep, setRevealStep] = useState(0);
 
   const confettiFired = useRef(false);
+  const countdownAudioRef = useRef<HTMLAudioElement | null>(null);
 
   // ── Derived View ──────────────────────────────────────────────────────────
   const view: HostView = useMemo(() => {
@@ -109,35 +111,9 @@ export default function QuizHostPage() {
     };
   }, [gamePin, gameState?.currentQuestion, gameState?.state]);
 
-  // Reset answers when question changes
+  // ── Confetti on Champion Reveal ────────────────────────────────────────
   useEffect(() => {
-    if (
-      gameState?.currentQuestion !== undefined &&
-      gameState.currentQuestion !== prevQuestion
-    ) {
-      setCurrentAnswers({});
-      setPrevQuestion(gameState.currentQuestion);
-    }
-  }, [gameState?.currentQuestion, prevQuestion]);
-
-  // ── Timer Countdown ───────────────────────────────────────────────────────
-  useEffect(() => {
-    if (gameState?.state !== "question" || !gameState.questionStartedAt) return;
-
-    const totalMs = getTimerSeconds(gameState.currentQuestion) * 1000;
-
-    const interval = setInterval(() => {
-      const elapsed = Date.now() - gameState.questionStartedAt;
-      const remaining = Math.max(0, totalMs - elapsed);
-      setTimeLeft(remaining);
-    }, 50);
-
-    return () => clearInterval(interval);
-  }, [gameState?.state, gameState?.questionStartedAt, gameState?.currentQuestion]);
-
-  // ── Confetti on Final ─────────────────────────────────────────────────────
-  useEffect(() => {
-    if (view === "finished" && !confettiFired.current) {
+    if (revealStep === 3 && !confettiFired.current) {
       confettiFired.current = true;
       const duration = 5000;
       const end = Date.now() + duration;
@@ -163,7 +139,58 @@ export default function QuizHostPage() {
         if (Date.now() < end) requestAnimationFrame(frame);
       })();
     }
+  }, [revealStep]);
+
+  // ── Reset reveal state on finish ──────────────────────────────────────
+  useEffect(() => {
+    if (view === "finished") {
+      setRevealStep(0);
+      confettiFired.current = false;
+    }
   }, [view]);
+
+  // ── Countdown Music ───────────────────────────────────────────────────
+  useEffect(() => {
+    const audio = countdownAudioRef.current;
+    if (!audio) return;
+
+    if (view === "question") {
+      audio.currentTime = 0;
+      audio.volume = 0.45;
+      audio.play().catch(() => {});
+    } else {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  }, [view]);
+
+  // Reset answers when question changes
+  useEffect(() => {
+    if (
+      gameState?.currentQuestion !== undefined &&
+      gameState.currentQuestion !== prevQuestion
+    ) {
+      setCurrentAnswers({});
+      setPrevQuestion(gameState.currentQuestion);
+      setRevealStep(0);
+    }
+  }, [gameState?.currentQuestion, prevQuestion]);
+
+  // ── Timer Countdown ───────────────────────────────────────────────────────
+  useEffect(() => {
+    if (gameState?.state !== "question" || !gameState.questionStartedAt) return;
+
+    const totalMs = getTimerSeconds(gameState.currentQuestion) * 1000;
+
+    const interval = setInterval(() => {
+      const elapsed = Date.now() - gameState.questionStartedAt;
+      const remaining = Math.max(0, totalMs - elapsed);
+      setTimeLeft(remaining);
+    }, 50);
+
+    return () => clearInterval(interval);
+  }, [gameState?.state, gameState?.questionStartedAt, gameState?.currentQuestion]);
+
 
   // ── Handlers ──────────────────────────────────────────────────────────────
 
@@ -509,12 +536,30 @@ export default function QuizHostPage() {
 
           {/* Bottom Controls */}
           <div className="px-8 py-4 border-t border-primary/5 flex items-center justify-end gap-4">
-            <button
-              onClick={handleShowLeaderboard}
-              className="px-8 py-3 bg-primary text-background text-xs uppercase tracking-[0.2em] font-bold hover:bg-[#dfba73] transition-all duration-300"
-            >
-              Bảng xếp hạng
-            </button>
+            {gameState.currentQuestion >= QUESTIONS.length - 2 ? (
+              gameState.currentQuestion < QUESTIONS.length - 1 ? (
+                <button
+                  onClick={handleNextQuestion}
+                  className="px-8 py-3 bg-primary text-background text-xs uppercase tracking-[0.2em] font-bold hover:bg-[#dfba73] transition-all duration-300"
+                >
+                  Câu tiếp theo →
+                </button>
+              ) : (
+                <button
+                  onClick={handleFinishGame}
+                  className="px-8 py-3 bg-[#dfba73] text-background text-xs uppercase tracking-[0.2em] font-bold hover:bg-amber-400 transition-all duration-300"
+                >
+                  Kết quả cuối cùng ★
+                </button>
+              )
+            ) : (
+              <button
+                onClick={handleShowLeaderboard}
+                className="px-8 py-3 bg-primary text-background text-xs uppercase tracking-[0.2em] font-bold hover:bg-[#dfba73] transition-all duration-300"
+              >
+                Bảng xếp hạng
+              </button>
+            )}
           </div>
         </div>
       )}
@@ -623,102 +668,145 @@ export default function QuizHostPage() {
 
       {/* ── FINAL RANKING (Big Screen) ───────────────────────────────── */}
       {view === "finished" && (
-        <div className="flex-1 flex flex-col items-center justify-center px-8 py-8 quiz-fade-in relative z-10">
+        <div className="flex-1 flex flex-col items-center justify-center px-8 py-8 relative z-10">
           <div className="w-full max-w-4xl text-center">
             {/* Title */}
-            <div className="mb-10">
+            <div className="mb-10 quiz-fade-in">
               <h2
                 className={`${purgatory.className} text-6xl md:text-8xl text-primary lowercase mb-3`}
               >
-                Champion
+                {revealStep < 3 ? "The Result" : "Champion"}
               </h2>
               <div className="w-20 h-[1px] bg-primary/20 mx-auto" />
             </div>
 
-            {/* Podium */}
-            <div className="flex items-end justify-center gap-4 md:gap-6 mb-12 h-64">
-              {/* 2nd Place */}
-              {leaderboard[1] && (
-                <div
-                  className="flex flex-col items-center quiz-slide-up"
-                  style={{ animationDelay: "0.4s" }}
+            {/* Step 0: Pre-reveal */}
+            {revealStep === 0 && (
+              <div className="quiz-fade-in space-y-8">
+                <p className="text-xl md:text-2xl font-display italic text-primary/60">
+                  Ai sẽ là nhà vô địch?
+                </p>
+                <button
+                  onClick={() => setRevealStep(1)}
+                  className="px-16 py-6 border-2 border-[#dfba73] text-[#dfba73] uppercase tracking-[0.25em] text-lg font-bold hover:bg-[#dfba73] hover:text-background active:scale-[0.97] transition-all duration-500 quiz-pulse-glow"
                 >
-                  <p className="text-base md:text-lg font-medium text-primary/80 mb-2 truncate max-w-[120px]">
-                    {leaderboard[1].nickname}
-                  </p>
-                  <div className="w-28 md:w-36 bg-gray-300/10 border border-gray-300/20 rounded-t-sm flex flex-col items-center justify-end py-5 h-36">
-                    <span className="text-4xl font-bold text-gray-300">2</span>
-                    <span className="text-sm text-gray-400 tabular-nums mt-1">
-                      {leaderboard[1].score.toLocaleString()}
+                  🏆 Công bố kết quả
+                </button>
+              </div>
+            )}
+
+            {/* Step 1: 3rd Place */}
+            {revealStep === 1 && (
+              <div className="quiz-scale-in space-y-6">
+                <p className="text-sm uppercase tracking-[0.3em] text-orange-400/80 font-semibold">
+                  🥉 Hạng Ba
+                </p>
+                {leaderboard[2] ? (
+                  <div className="w-44 md:w-56 mx-auto bg-orange-400/10 border border-orange-400/25 rounded-sm py-10 shadow-[0_0_40px_rgba(251,146,60,0.1)]">
+                    <span className="text-6xl font-bold text-orange-400 block mb-3">3</span>
+                    <p className="text-2xl md:text-3xl font-bold text-primary mb-2">
+                      {leaderboard[2].nickname}
+                    </p>
+                    <span className="text-base text-orange-300 tabular-nums">
+                      {leaderboard[2].score.toLocaleString()} điểm
                     </span>
                   </div>
-                </div>
-              )}
-
-              {/* 1st Place */}
-              {leaderboard[0] && (
-                <div
-                  className="flex flex-col items-center quiz-slide-up"
-                  style={{ animationDelay: "0.2s" }}
+                ) : (
+                  <p className="text-primary/40 italic">—</p>
+                )}
+                <button
+                  onClick={() => setRevealStep(2)}
+                  className="mt-2 px-12 py-4 bg-primary text-background uppercase tracking-[0.25em] text-sm font-bold hover:bg-[#dfba73] active:scale-[0.97] transition-all duration-300"
                 >
-                  <div className="text-amber-400 mb-2">
-                    <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2Z" />
-                    </svg>
-                  </div>
-                  <p className="text-xl md:text-2xl font-bold text-primary mb-2 truncate max-w-[150px]">
-                    {leaderboard[0].nickname}
-                  </p>
-                  <div className="w-36 md:w-44 bg-amber-400/10 border border-amber-400/30 rounded-t-sm flex flex-col items-center justify-end py-6 h-48 shadow-[0_0_40px_rgba(251,191,36,0.1)]">
-                    <span className="text-5xl font-bold text-amber-400">1</span>
-                    <span className="text-base text-amber-300 tabular-nums mt-1 font-medium">
-                      {leaderboard[0].score.toLocaleString()}
+                  Tiếp theo →
+                </button>
+              </div>
+            )}
+
+            {/* Step 2: 2nd Place */}
+            {revealStep === 2 && (
+              <div className="quiz-scale-in space-y-6">
+                <p className="text-sm uppercase tracking-[0.3em] text-gray-400/80 font-semibold">
+                  🥈 Hạng Nhì
+                </p>
+                {leaderboard[1] ? (
+                  <div className="w-44 md:w-56 mx-auto bg-gray-300/10 border border-gray-300/25 rounded-sm py-10 shadow-[0_0_40px_rgba(200,200,200,0.1)]">
+                    <span className="text-6xl font-bold text-gray-300 block mb-3">2</span>
+                    <p className="text-2xl md:text-3xl font-bold text-primary mb-2">
+                      {leaderboard[1].nickname}
+                    </p>
+                    <span className="text-base text-gray-400 tabular-nums">
+                      {leaderboard[1].score.toLocaleString()} điểm
                     </span>
                   </div>
-                </div>
-              )}
-
-              {/* 3rd Place */}
-              {leaderboard[2] && (
-                <div
-                  className="flex flex-col items-center quiz-slide-up"
-                  style={{ animationDelay: "0.6s" }}
+                ) : (
+                  <p className="text-primary/40 italic">—</p>
+                )}
+                <button
+                  onClick={() => setRevealStep(3)}
+                  className="mt-2 px-14 py-5 bg-[#dfba73] text-background uppercase tracking-[0.25em] text-base font-bold hover:bg-amber-400 active:scale-[0.97] transition-all duration-300 quiz-pulse-glow"
                 >
-                  <p className="text-base md:text-lg font-medium text-primary/80 mb-2 truncate max-w-[120px]">
-                    {leaderboard[2].nickname}
-                  </p>
-                  <div className="w-28 md:w-36 bg-orange-400/10 border border-orange-400/20 rounded-t-sm flex flex-col items-center justify-end py-5 h-28">
-                    <span className="text-4xl font-bold text-orange-400">3</span>
-                    <span className="text-sm text-orange-300 tabular-nums mt-1">
-                      {leaderboard[2].score.toLocaleString()}
-                    </span>
+                  🏆 Công bố Quán quân
+                </button>
+              </div>
+            )}
+
+            {/* Step 3: Champion! */}
+            {revealStep === 3 && (
+              <div className="quiz-scale-in">
+                {leaderboard[0] ? (
+                  <div className="space-y-6">
+                    <div className="text-amber-400 mb-2">
+                      <svg className="w-16 h-16 mx-auto drop-shadow-[0_0_20px_rgba(251,191,36,0.4)]" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2Z" />
+                      </svg>
+                    </div>
+                    <div className="w-52 md:w-64 mx-auto bg-amber-400/10 border-2 border-amber-400/30 rounded-sm py-12 shadow-[0_0_60px_rgba(251,191,36,0.15)]">
+                      <span className="text-7xl font-bold text-amber-400 block mb-4">1</span>
+                      <p className="text-3xl md:text-4xl font-bold text-primary mb-3">
+                        {leaderboard[0].nickname}
+                      </p>
+                      <span className="text-lg text-amber-300 tabular-nums font-medium">
+                        {leaderboard[0].score.toLocaleString()} điểm
+                      </span>
+                    </div>
+
+                    {/* Full Ranking */}
+                    <div className="max-h-48 overflow-y-auto space-y-1 max-w-lg mx-auto mt-6 pt-6 border-t border-primary/10">
+                      {leaderboard.slice(1).map((player) => (
+                        <div
+                          key={player.id}
+                          className="flex items-center gap-3 py-2 px-4 text-sm"
+                        >
+                          <span className="w-6 text-center text-primary/30 tabular-nums">
+                            {player.rank === 2 ? "🥈" : player.rank === 3 ? "🥉" : player.rank}
+                          </span>
+                          <span className="flex-1 text-primary/50 truncate text-left">
+                            {player.nickname}
+                          </span>
+                          <span className="text-primary/30 tabular-nums">
+                            {player.score.toLocaleString()}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )}
-            </div>
-
-            {/* Full Ranking (scrollable) */}
-            <div className="max-h-48 overflow-y-auto space-y-1 max-w-lg mx-auto">
-              {leaderboard.slice(3).map((player) => (
-                <div
-                  key={player.id}
-                  className="flex items-center gap-3 py-2 px-4 text-sm"
-                >
-                  <span className="w-6 text-center text-primary/30 tabular-nums">
-                    {player.rank}
-                  </span>
-                  <span className="flex-1 text-primary/50 truncate text-left">
-                    {player.nickname}
-                  </span>
-                  <span className="text-primary/30 tabular-nums">
-                    {player.score.toLocaleString()}
-                  </span>
-                </div>
-              ))}
-            </div>
+                ) : (
+                  <p className="text-primary/40 italic">Không có người chơi</p>
+                )}
+              </div>
+            )}
           </div>
         </div>
       )}
+
+      {/* Countdown Music */}
+      <audio
+        ref={countdownAudioRef}
+        src="/assets/Nhạc Xổ số Kiến thiết miền Bắc Bản kinh điển - KHÔNG QUẢNG CÁO.mp4"
+        loop
+        preload="auto"
+      />
     </div>
   );
 }

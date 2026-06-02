@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useMemo, useCallback, useRef } from "react";
 import { purgatory } from "@/lib/fonts";
-import confetti from "canvas-confetti";
+
 import {
   QUESTIONS,
   OPTION_COLORS,
@@ -70,7 +70,7 @@ export default function QuizPlayerPage() {
   const [timeLeft, setTimeLeft] = useState(0);
   const [prevQuestion, setPrevQuestion] = useState(-1);
 
-  const confettiFired = useRef(false);
+
 
   // ── Derived View ──────────────────────────────────────────────────────────
   const view: PlayerView = useMemo(() => {
@@ -143,35 +143,7 @@ export default function QuizPlayerPage() {
     return () => clearInterval(interval);
   }, [gameState?.state, gameState?.questionStartedAt, gameState?.currentQuestion]);
 
-  // ── Confetti on Final Ranking ─────────────────────────────────────────────
-  useEffect(() => {
-    if (view === "finished" && !confettiFired.current) {
-      confettiFired.current = true;
-      const duration = 3000;
-      const end = Date.now() + duration;
-      const colors = ["#dfba73", "#f3ede1", "#4b5006", "#ffffff"];
 
-      (function frame() {
-        confetti({
-          particleCount: 3,
-          angle: 60,
-          spread: 55,
-          origin: { x: 0, y: 0.7 },
-          colors,
-          zIndex: 1000,
-        });
-        confetti({
-          particleCount: 3,
-          angle: 120,
-          spread: 55,
-          origin: { x: 1, y: 0.7 },
-          colors,
-          zIndex: 1000,
-        });
-        if (Date.now() < end) requestAnimationFrame(frame);
-      })();
-    }
-  }, [view]);
 
   // ── Join Game Handler ─────────────────────────────────────────────────────
   const handleJoin = useCallback(async () => {
@@ -596,185 +568,116 @@ export default function QuizPlayerPage() {
       )}
 
       {/* ── LEADERBOARD ──────────────────────────────────────────────── */}
-      {view === "leaderboard" && (
-        <div className="flex-1 flex flex-col px-6 py-8 quiz-fade-in">
-          <div className="text-center mb-6">
-            <p className="text-[10px] uppercase tracking-[0.3em] text-primary/40 font-semibold mb-1">
-              Bảng xếp hạng
-            </p>
-            <p className="text-xs text-primary/30">
-              Sau câu {(gameState?.currentQuestion ?? 0) + 1} / {QUESTIONS.length}
-            </p>
-          </div>
+      {view === "leaderboard" && (() => {
+        // Build neighborhood: 2 above + me + 2 below
+        const myIdx = leaderboard.findIndex((p) => p.id === playerId);
+        const startIdx = Math.max(0, myIdx - 2);
+        const endIdx = Math.min(leaderboard.length, myIdx + 3);
+        const neighborhood = leaderboard.slice(startIdx, endIdx);
+        const showTopDots = startIdx > 0;
+        const showBottomDots = endIdx < leaderboard.length;
 
-          <div className="flex-1 overflow-y-auto space-y-2 max-w-md mx-auto w-full">
-            {leaderboard.slice(0, 10).map((player) => {
-              const isMe = player.id === playerId;
-              return (
-                <div
-                  key={player.id}
-                  className={`flex items-center gap-3 py-3 px-4 rounded-sm transition-all ${
-                    isMe
-                      ? "bg-primary/10 border border-primary/20"
-                      : "bg-primary/[0.02] border border-transparent"
-                  }`}
-                >
-                  <span
-                    className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${
-                      player.rank === 1
-                        ? "bg-amber-400/20 text-amber-600"
-                        : player.rank === 2
-                        ? "bg-gray-300/30 text-gray-500"
-                        : player.rank === 3
-                        ? "bg-orange-400/20 text-orange-600"
-                        : "bg-primary/5 text-primary/40"
+        return (
+          <div className="flex-1 flex flex-col px-6 py-8 quiz-fade-in">
+            {/* My Rank Hero */}
+            <div className="text-center mb-6">
+              <p className="text-[10px] uppercase tracking-[0.3em] text-primary/40 font-semibold mb-1">
+                Your rank
+              </p>
+              <p className="text-5xl font-bold text-primary mb-1">
+                #{myRank}
+              </p>
+              <p className="text-sm text-primary/50">
+                {myScore.toLocaleString()} pts
+              </p>
+              <p className="text-[10px] text-primary/25 mt-2">
+                After Q{(gameState?.currentQuestion ?? 0) + 1} / {QUESTIONS.length}
+              </p>
+            </div>
+
+            <div className="w-12 h-[1px] bg-primary/10 mx-auto mb-4" />
+
+            {/* Neighborhood Ranking */}
+            <div className="flex-1 flex flex-col justify-center max-w-md mx-auto w-full space-y-2">
+              {showTopDots && (
+                <div className="flex items-center justify-center py-1">
+                  <span className="text-primary/15 text-xs">• • •</span>
+                </div>
+              )}
+
+              {neighborhood.map((player) => {
+                const isMe = player.id === playerId;
+                return (
+                  <div
+                    key={player.id}
+                    className={`flex items-center gap-3 py-3 px-4 rounded-sm transition-all ${
+                      isMe
+                        ? "bg-primary/10 border border-primary/20 scale-[1.02]"
+                        : "bg-primary/[0.02] border border-transparent"
                     }`}
                   >
-                    {player.rank}
-                  </span>
-                  <span
-                    className={`flex-1 text-sm truncate ${
-                      isMe ? "font-semibold text-primary" : "text-primary/70"
-                    }`}
-                  >
-                    {player.nickname}
-                    {isMe && (
-                      <span className="ml-1 text-[9px] text-primary/40">(bạn)</span>
-                    )}
-                  </span>
-                  <span className="text-sm font-semibold text-primary/60 tabular-nums">
-                    {player.score.toLocaleString()}
-                  </span>
-                </div>
-              );
-            })}
+                    <span
+                      className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${
+                        player.rank === 1
+                          ? "bg-amber-400/20 text-amber-600"
+                          : player.rank === 2
+                          ? "bg-gray-300/30 text-gray-500"
+                          : player.rank === 3
+                          ? "bg-orange-400/20 text-orange-600"
+                          : "bg-primary/5 text-primary/40"
+                      }`}
+                    >
+                      {player.rank}
+                    </span>
+                    <span
+                      className={`flex-1 text-sm truncate ${
+                        isMe ? "font-semibold text-primary" : "text-primary/60"
+                      }`}
+                    >
+                      {player.nickname}
+                      {isMe && (
+                        <span className="ml-1 text-[9px] text-primary/40">(you)</span>
+                      )}
+                    </span>
+                    <span className={`text-sm tabular-nums ${isMe ? "font-bold text-primary/80" : "font-semibold text-primary/40"}`}>
+                      {player.score.toLocaleString()}
+                    </span>
+                  </div>
+                );
+              })}
 
-            {/* Show my position if not in top 10 */}
-            {myRank > 10 && (
-              <>
-                <div className="flex items-center justify-center py-2">
-                  <span className="text-primary/20">• • •</span>
+              {showBottomDots && (
+                <div className="flex items-center justify-center py-1">
+                  <span className="text-primary/15 text-xs">• • •</span>
                 </div>
-                <div className="flex items-center gap-3 py-3 px-4 rounded-sm bg-primary/10 border border-primary/20">
-                  <span className="w-7 h-7 rounded-full bg-primary/5 flex items-center justify-center text-xs font-bold text-primary/40">
-                    {myRank}
-                  </span>
-                  <span className="flex-1 text-sm font-semibold text-primary truncate">
-                    {players[playerId]?.nickname}
-                    <span className="ml-1 text-[9px] text-primary/40">(bạn)</span>
-                  </span>
-                  <span className="text-sm font-semibold text-primary/60 tabular-nums">
-                    {myScore.toLocaleString()}
-                  </span>
-                </div>
-              </>
-            )}
+              )}
+            </div>
           </div>
-        </div>
-      )}
+        );
+      })()}
 
       {/* ── FINAL RANKING ────────────────────────────────────────────── */}
       {view === "finished" && (
-        <div className="flex-1 flex flex-col px-6 py-8 quiz-fade-in">
-          {/* Header */}
-          <div className="text-center mb-8">
-            <h2 className={`${purgatory.className} text-4xl text-primary lowercase mb-2`}>
-              Kết quả
-            </h2>
-            <div className="w-12 h-[1px] bg-primary/20 mx-auto" />
-          </div>
-
-          {/* Podium (Top 3) */}
-          <div className="flex items-end justify-center gap-3 mb-8 h-40">
-            {/* 2nd Place */}
-            {leaderboard[1] && (
-              <div className="flex flex-col items-center quiz-slide-up" style={{ animationDelay: "0.3s" }}>
-                <p className="text-xs font-medium text-primary/60 truncate max-w-[80px] mb-1">
-                  {leaderboard[1].nickname}
-                </p>
-                <div className="w-20 bg-gray-300/30 rounded-t-sm flex flex-col items-center justify-end py-3 h-24">
-                  <span className="text-lg font-bold text-gray-500">2</span>
-                  <span className="text-[10px] text-gray-400 tabular-nums">
-                    {leaderboard[1].score.toLocaleString()}
-                  </span>
-                </div>
-              </div>
-            )}
-
-            {/* 1st Place */}
-            {leaderboard[0] && (
-              <div className="flex flex-col items-center quiz-slide-up" style={{ animationDelay: "0.1s" }}>
-                <div className="text-amber-500 mb-1">
-                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2Z" />
-                  </svg>
-                </div>
-                <p className="text-sm font-semibold text-primary truncate max-w-[90px] mb-1">
-                  {leaderboard[0].nickname}
-                </p>
-                <div className="w-24 bg-amber-400/20 rounded-t-sm flex flex-col items-center justify-end py-3 h-32">
-                  <span className="text-2xl font-bold text-amber-600">1</span>
-                  <span className="text-xs text-amber-500 tabular-nums font-medium">
-                    {leaderboard[0].score.toLocaleString()}
-                  </span>
-                </div>
-              </div>
-            )}
-
-            {/* 3rd Place */}
-            {leaderboard[2] && (
-              <div className="flex flex-col items-center quiz-slide-up" style={{ animationDelay: "0.5s" }}>
-                <p className="text-xs font-medium text-primary/60 truncate max-w-[80px] mb-1">
-                  {leaderboard[2].nickname}
-                </p>
-                <div className="w-20 bg-orange-400/15 rounded-t-sm flex flex-col items-center justify-end py-3 h-20">
-                  <span className="text-lg font-bold text-orange-500">3</span>
-                  <span className="text-[10px] text-orange-400 tabular-nums">
-                    {leaderboard[2].score.toLocaleString()}
-                  </span>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* My Result */}
-          <div className="text-center py-4 border-y border-primary/5 mb-6">
-            <p className="text-xs text-primary/40 uppercase tracking-[0.2em] mb-1">
-              Hạng của bạn
-            </p>
-            <p className="text-3xl font-bold text-primary">
-              #{myRank}
-            </p>
-            <p className="text-sm text-primary/50 mt-1">
-              {myScore.toLocaleString()} điểm
-            </p>
-          </div>
-
-          {/* Full Ranking List */}
-          <div className="flex-1 overflow-y-auto space-y-1.5 max-w-md mx-auto w-full">
-            {leaderboard.map((player) => {
-              const isMe = player.id === playerId;
-              return (
-                <div
-                  key={player.id}
-                  className={`flex items-center gap-3 py-2.5 px-3 rounded-sm text-sm ${
-                    isMe
-                      ? "bg-primary/10 font-semibold"
-                      : "bg-transparent"
-                  }`}
-                >
-                  <span className="w-6 text-center text-primary/40 text-xs tabular-nums">
-                    {player.rank}
-                  </span>
-                  <span className={`flex-1 truncate ${isMe ? "text-primary" : "text-primary/60"}`}>
-                    {player.nickname}
-                  </span>
-                  <span className="text-primary/50 tabular-nums text-xs">
-                    {player.score.toLocaleString()}
-                  </span>
-                </div>
-              );
-            })}
+        <div className="flex-1 flex flex-col items-center justify-center px-6 py-12 quiz-fade-in">
+          <div className="text-center space-y-6">
+            <div className="w-20 h-20 mx-auto rounded-full border border-amber-400/20 bg-amber-400/5 flex items-center justify-center">
+              <svg className="w-8 h-8 text-amber-400" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2L9.19 8.63L2 9.24L7.46 13.97L5.82 21L12 17.27L18.18 21L16.54 13.97L22 9.24L14.81 8.63L12 2Z" />
+              </svg>
+            </div>
+            <div>
+              <p className="text-lg font-display italic text-primary/80 mb-2">
+                Kết quả đang được công bố!
+              </p>
+              <p className="text-sm text-primary/40">
+                Nhìn lên màn hình chính để biết kết quả
+              </p>
+            </div>
+            <div className="flex gap-1 items-center justify-center">
+              <div className="w-1.5 h-1.5 rounded-full bg-amber-400/60 quiz-dot-pulse" style={{ animationDelay: "0s" }} />
+              <div className="w-1.5 h-1.5 rounded-full bg-amber-400/60 quiz-dot-pulse" style={{ animationDelay: "0.2s" }} />
+              <div className="w-1.5 h-1.5 rounded-full bg-amber-400/60 quiz-dot-pulse" style={{ animationDelay: "0.4s" }} />
+            </div>
           </div>
         </div>
       )}
