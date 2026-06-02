@@ -36,7 +36,7 @@ export const QUESTIONS: Question[] = [
     id: 1,
     question:
       "Wyndham Sky Lake Resort & Villas cách trung tâm Hà Nội khoảng bao lâu di chuyển?",
-    options: ["20 phút", "30 phút", "45 phút", "60 phút"],
+    options: ["20 phút", "30 phút", "55 phút", "60 phút"],
     correctIndex: 2,
     category: "Venue",
   },
