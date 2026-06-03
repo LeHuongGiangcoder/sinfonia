@@ -339,6 +339,7 @@ function Navbar({ scrolled, isGallery }: { scrolled: boolean; isGallery?: boolea
     { name: "RSVP", href: "/#rsvp-section" },
     { name: "About Us", href: "/about-us" },
     { name: "Quiz", href: "/quiz" },
+    { name: "Win Booth", href: "/winbooth" },
   ];
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
