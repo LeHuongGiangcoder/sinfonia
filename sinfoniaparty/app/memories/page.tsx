@@ -276,7 +276,7 @@ export default function Memories() {
       {/* Envelope Section */}
       <section
         ref={envelopeSectionRef}
-        className="relative bg-background flex flex-col items-center justify-center overflow-hidden min-h-screen py-20"
+        className="relative bg-background flex flex-col items-center justify-center overflow-hidden min-h-screen py-20 md:py-64"
       >
         <div className="absolute -top-10 -right-10 opacity-[0.18] pointer-events-none rotate-[165deg] hidden md:block">
           <img src="/assets/component/18.svg" className="w-[22rem] h-[22rem]" alt="" />
