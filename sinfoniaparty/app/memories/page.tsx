@@ -149,7 +149,7 @@ export default function Memories() {
     // Step 1: Flap opens
     tl.to(flapRef.current, {
       rotateX: 180,
-      duration: 0.5,
+      duration: 0.8, // Slower, more elegant flap open
       ease: "power2.inOut",
     })
     // Step 2: Envelope falls away, letter pops to front, centers, and scales up
@@ -163,24 +163,24 @@ export default function Memories() {
     .to(letterRef.current, {
       y: -110, // Move up to keep the unfolded A4 letter centered
       scale: 1.15,
-      duration: 0.6,
-      ease: "power2.out",
+      duration: 1.0, // Slower scale and position
+      ease: "power3.out",
     }, "<")
     // Step 3: Letter unfolds downwards!
     .to(letterFoldRef.current, {
       rotateX: 0,
-      duration: 0.8,
-      ease: "back.out(1.2)", 
-    }, "-=0.2")
+      duration: 1.4, // Much slower, elegant unfold
+      ease: "back.out(1.0)", // Reduced the bounce slightly for elegance
+    }, "-=0.3")
     // Step 4: CTA fades in and moves down enough to clear the massive A4 letter
     .fromTo(ctaRef.current, 
       { opacity: 0, y: 0 },
       {
         opacity: 1,
         y: 180, // Push it down below the expanded letter
-        duration: 0.5,
+        duration: 0.8, // Slower CTA fade in
         ease: "power3.out",
-      }, "-=0.4"
+      }, "-=0.6"
     );
 
     // Hero title entrance
