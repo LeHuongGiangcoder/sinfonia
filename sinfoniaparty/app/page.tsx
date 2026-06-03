@@ -338,6 +338,7 @@ function Navbar({ scrolled, isGallery }: { scrolled: boolean; isGallery?: boolea
     { name: "Dress Code", href: "/#dresscode-section" },
     { name: "RSVP", href: "/#rsvp-section" },
     { name: "About Us", href: "/about-us" },
+    { name: "Memories", href: "/memories" },
     { name: "Quiz", href: "/quiz" },
     { name: "Win Booth", href: "/winbooth" },
   ];
@@ -800,6 +801,30 @@ export default function Home() {
               <span className="hero-content overflow-visible px-4">The Sunset</span>
               <span className="hero-content overflow-visible px-4">Sinfonia</span>
             </h1>
+
+            {/* Our Memories Button */}
+            <div className="hero-content mt-10 md:mt-14">
+              <a href="/memories" className="group flex flex-col items-center gap-3">
+                <div className="relative">
+                  <p className="text-[11px] font-medium uppercase tracking-[0.25em] backdrop-blur-md px-6 py-2.5 rounded-full border text-[#f3ede1] bg-white/15 border-[#f3ede1]/35 group-hover:bg-[#f3ede1] group-hover:text-primary transition-all duration-500 shadow-[0_0_20px_rgba(243,237,225,0.15)] group-hover:shadow-[0_0_30px_rgba(243,237,225,0.35)] animate-button-glow">
+                      Our memories
+                  </p>
+
+                  {/* Micro-animated clicking hand hint */}
+                  <div className="absolute -bottom-3 right-4 pointer-events-none z-10 flex flex-col items-center group-hover:scale-110 transition-transform duration-500">
+                    <div className="absolute top-[-10px] left-[1px] w-6 h-6 border border-[#f3ede1]/80 rounded-full animate-hand-ripple"></div>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-8 h-8 text-[#f3ede1] drop-shadow-[0_0_8px_rgba(243,237,225,0.4)] animate-pointing-hand">
+                      <path d="M12 10V4a2 2 0 0 0-2-2h0a2 2 0 0 0-2 2v7" />
+                      <path d="M12 10a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v4" />
+                      <path d="M16 12a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v4" />
+                      <path d="M20 14a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v4" />
+                      <path d="M12 22h4a8 8 0 0 0 8-8v-2" />
+                      <path d="M6 10l-3 3a2 2 0 0 0 0 2.8l4 4a8 8 0 0 0 5 2.2" />
+                    </svg>
+                  </div>
+                </div>
+              </a>
+            </div>
           </div>
 
           {/* Subtle bottom blend into next section */}
