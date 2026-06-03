@@ -243,8 +243,6 @@ export default function Memories() {
           className="absolute inset-0 w-full h-full object-cover"
         />
 
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent pointer-events-none z-10"></div>
-
         <div className="relative z-20 max-w-4xl mx-auto text-center space-y-6">
           <p className="memories-hero-title text-[10px] uppercase tracking-[0.5em] font-medium !text-white/80">
             The Sunset Sinfonia
